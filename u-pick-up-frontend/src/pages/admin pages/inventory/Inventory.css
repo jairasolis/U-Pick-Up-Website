@@ -1,0 +1,57 @@
+.inventory-page {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .inventory-wrapper {
+    display: ;
+} */
+
+.main-inventory-icon {
+    width: 30px;
+    height: auto;
+    color: #7C7C7C;
+}
+
+h2 {
+    color: #7C7C7C;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.main-inventory-header hr {
+    width: 580px;
+    height: 2px;
+}
+
+.main-inventory-items {
+    display: flex;
+    gap: 30px;
+    justify-content: left;
+    padding: 100px 0;
+
+}
+
+.main-inventory-item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 200px;
+    height: 150px;
+    color: #CBCBCC;
+    background-color: #454545;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash-icon {
+    width: 40px;
+    height: auto;
+}
+

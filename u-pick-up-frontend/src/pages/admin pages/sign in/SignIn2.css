@@ -1,0 +1,88 @@
+:root {
+    --text-color: #3B5534;
+} 
+
+.sign-in-wrap {
+    margin: 70px 100px;
+
+}
+
+.sign-in-header img {
+    width: 150px;
+    height: auto;
+    
+}
+
+.sign-in-header p {
+    font-size: 14px;
+    color: #3B5534;
+
+}
+
+.sign-in-header h3 {
+    color: var(--text-color);
+    font-weight: 700;
+    padding: 30px 0 5px 0;
+}
+
+.sign-in-wrap .form-wrapper-two {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin-top: 40px;
+}
+
+
+
+.input-field-two {
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+    margin: 10px 20px 10px 0;
+}
+
+.input-field-two label {
+    color: var(--text-color);
+    padding: 7px 0;
+}
+
+.input-field-two input {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #9c9c9c;
+    background: #D5D5D5;
+    padding-left: 10px;
+}
+
+.sign-up-btn {
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    color: #f2f2f2;
+    background-color: #516E53;
+    border-radius: 10px;
+    margin: 30px 0 20px 0;
+    transition: .3s;
+    border: none;
+}
+
+.sign-up-btn:hover {
+    border: 1px solid #516E53;
+    background: #D9D9D9;
+    color: #516E53;
+}
+
+.dhave-account-two {
+    margin: 10px 0;
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+.dhave-account-two span {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.dhave-account-two span:hover {
+    text-decoration: underline;
+}

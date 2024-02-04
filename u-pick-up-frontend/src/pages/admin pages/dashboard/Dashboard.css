@@ -1,0 +1,77 @@
+.dashboard {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    height: 1000px;
+    /* background-color: rgb(221, 221, 221); */
+}
+
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-top: 80px;
+    padding-left: 100px;
+}
+
+.dash-header,
+.inventory-header {
+    display: flex;
+    gap: 20px;
+}
+
+.inventory-header {
+    padding-top: 20px;
+}
+
+.dashboard-icon,
+.inventory-icon {
+    width: 30px;
+    height: auto;
+    color: #7C7C7C;
+}
+
+h2 {
+    color: #7C7C7C;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.dash-header hr,
+.inventory-header hr {
+    width: 580px;
+    height: 2px;
+}
+
+.dashboard-items,
+.inventory-items {
+    display: flex;
+    gap: 30px;
+    justify-content: left;
+}
+
+.dashboard-item,
+.inventory-item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 150px;
+    height: 150px;
+    color: #CBCBCC;
+    background-color: #516E53;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash-icon {
+    width: 40px;
+    height: auto;
+}
+
+.inventory-items {
+    padding-bottom: 100px;
+}

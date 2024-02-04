@@ -1,0 +1,216 @@
+:root{
+    --text-color: #354b30;
+    --button-color: #516E53;
+}
+
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+body {
+    background-color: #CBCBCC;
+}
+
+/* 
+.upang-bg{
+    background: lightgray 50% / cover no-repeat;
+    background-blend-mode: plus-darker;
+} */
+
+
+.box {
+    padding: 200px 0 0 100px;
+}
+
+.container-1, 
+.container-2, 
+.container-3, 
+.container-4 {
+    display: flex;
+}
+
+.line-1 {
+    height: 300px;
+    width: 4px;
+    background-color: #354b30a1;
+    margin: 30px;
+}
+
+.line-2 .line, 
+.line-3 .line, 
+.line-4 .line {
+    height: 200px;
+    width: 4px;
+    background-color: #354b30a1;
+    margin: 30px;
+}
+
+.line-4 .icon {
+    margin: 30px;
+}
+
+.text-1, 
+.text-2, 
+.text-3, 
+.text-4 {
+    color: var(--text-color);
+    padding-bottom: 150px;
+}
+
+
+.text-1 h3, 
+.text-2 h3, 
+.text-3 h3, 
+.text-4 h3 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    padding-bottom: 20px;
+}
+
+.container {
+    color: var(--text-color);
+    width: 400px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.container img {
+    width: 200px;
+    margin: 30px 0 100px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.buttons .get-started-btn,
+.buttons .sign-up-bt {
+    width: 200px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.get-started-btn p,
+.sign-up-bt p {
+    margin-top: 7px;
+}
+
+.get-started-btn {
+    background-color: #516E53;
+    color: #D9D9D9;
+    border: none;
+}
+
+.sign-up-bt {
+    border: 1px solid #516E53;
+    background: #D9D9D9;
+    color: #516E53;
+}
+
+.get-started-btn:hover,
+.sign-up-bt:hover {
+    box-shadow: 0 0 10px #a1a1a3;
+    transition: transform 250ms;
+}
+
+
+/* shapes */
+
+/* .shape-1,
+.shape-2,
+.shape-3,
+.shape-4,
+.shape-5,
+.shape-6,
+.shape-7,
+.shape-8 {
+    position: absolute;
+} */
+
+
+.rectangle {
+    right: -39;
+}
+
+/* rectangles on right */
+
+.shape-1 {
+    width: 671px;
+    height: 374px;
+    transform: rotate(-7deg);
+    flex-shrink: 0;
+    border-radius: 32px;
+    border: 0px solid #516E53;
+    background: rgba(81, 110, 83, 0.70);
+}
+
+.shape-2 {
+    width: 487px;
+    height: 255.878px;
+    transform: rotate(11deg);
+    flex-shrink: 0;
+    border-radius: 32px;
+    border: 0px solid #516E53;
+    background: rgba(147, 162, 148, 0.65);
+}
+
+.shape-3 {
+    width: 694.941px;
+    height: 359px;
+    transform: rotate(-2deg);
+    flex-shrink: 0;
+    border-radius: 32px;
+    border: 0px solid #516E53;
+    background: rgba(81, 110, 83, 0.70);
+}
+
+/* bottom shapes */
+
+.shape-4 {
+    width: 101.738px;
+    height: 596px;
+    flex-shrink: 0;
+    border-radius: 81px;
+    background: rgba(81, 110, 83, 0.70);
+}
+
+.shape-5 {
+    width: 59px;
+    height: 389px;
+    flex-shrink: 0;
+    border-radius: 81px;
+    background: rgba(81, 110, 83, 0.70);
+}
+
+.shape-6 {
+    width: 50px;
+    height: 375px;
+    flex-shrink: 0;
+    border-radius: 81px;
+    background: rgba(81, 110, 83, 0.70);
+}
+
+/* round shapes */
+
+.shape-7 {
+    width: 227px;
+    height: 215px;
+    border-radius: 50%;
+    background: rgba(81, 110, 83, 0.60);
+}
+
+.shape-8 {
+    width: 167px;
+    height: 167px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(81, 110, 83, 0.60);
+}
+

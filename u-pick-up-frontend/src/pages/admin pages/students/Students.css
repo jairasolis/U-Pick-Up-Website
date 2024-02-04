@@ -1,0 +1,75 @@
+.students-page {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+.students-container {
+    width: 80%;
+    height: 500px;
+    border-radius: 5px;
+    background: #618363;
+    justify-content: center;
+    align-self: center;
+    margin-top: 30px;
+}
+
+.students-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: #CBCBCB;
+    margin: 20px;
+}
+
+.students-header {
+    display: flex;
+    /* background-color: #dfdfdf6f; */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.building-icon {
+    width: 30px;
+    height: auto;
+}
+
+.students-header h3 {
+    margin-left: 15px;
+    font-size: 33px;
+}
+
+.students-content {
+    display: flex;
+    margin: 30px 10px;
+
+}
+
+.students-content hr {
+    width: 2px;
+    color: #CBCBCB;
+}
+
+.students-content .left {
+    width: 20%;
+    /* border-right:2px solid #CBCBCB; */
+}
+
+
+.program p{
+    font-size: 14px;
+}
+
+.student-stats {
+    display: flex;
+    gap: 300px;
+
+}
+
+.student-stats img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.student-stats img:hover {
+    transform: scale(6); /* You can adjust the scale factor as needed */
+}

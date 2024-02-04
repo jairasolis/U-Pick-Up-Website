@@ -1,0 +1,114 @@
+:root{
+    --text-color: #3f4f3c;
+    --color : #6d8d6f8d;
+}
+
+.wrapper {
+    margin: 120px auto;
+    position: relative;
+    width: 380px;
+    height: 400px;
+    background: #CBCBCC;
+    border-radius: 15px;
+    border: 1px solid #a1a4a3;
+    box-shadow: 0 0 20px #a1a1a3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.wrapper .left-box {
+    background: var(--text-color);
+}
+
+.wrapper form-box {
+    width: 100%;
+    padding: 20px 40px;
+    align-items: center;
+}
+
+.wrapper .form-box h2 {
+    text-align: center;
+    color: var(--text-color);
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.input-field {
+    position: relative;
+    width: 250px;
+    height: 50px;
+    border-bottom: 1px solid var(--color);
+    margin: 30px 0; 
+}
+
+
+.input-field label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: var(--text-color);
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-field input:focus~label,
+.input-field input:valid~label {
+    top: -5px;
+    font-size: 10px;
+}
+
+.input-field input:focus {
+    border-bottom: 2px solid var(--color);
+}
+
+.input-field .idNum,
+.input-field .password {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: 600;
+    padding: 0 20px 0 5px;
+}
+
+.btn {
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    color: #f2f2f2;
+    background: var(--color);
+    border-radius: 10px;
+    margin: 15px;
+    transition: .3s;
+    border: none;
+}
+
+.btn:hover {
+    font-weight: 400;
+    color: var(--text-color);
+    background: #CBCBCC;
+    border: 1px solid var(--text-color);
+}
+
+.dhave-account {
+    margin-top: 120px;
+    font-size: 12px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.dhave-account span {
+    font-weight: bold;
+}
+
+.dhave-account span:hover {
+    text-decoration: underline;
+}

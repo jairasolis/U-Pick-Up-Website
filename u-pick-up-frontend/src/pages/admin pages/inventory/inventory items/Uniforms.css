@@ -1,0 +1,11 @@
+.uniforms-page {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    background-color: #8c8c8c50;
+    align-items: center;
+    padding-top: 120px;
+    height: 800px;
+}
+

@@ -1,0 +1,80 @@
+:root {
+    --text-color: #3B5534;
+} 
+
+.sign-up-wrap {
+    margin: 70px 100px;
+
+}
+
+.sign-up-header img {
+    width: 150px;
+    height: auto;
+    
+}
+
+.sign-up-header p {
+    font-size: 14px;
+    color: #3B5534;
+
+}
+
+.sign-up-header h3 {
+    color: var(--text-color);
+    font-weight: 700;
+    padding: 30px 0 5px 0;
+}
+
+.form-wrapper-two {
+    display: flex;
+    flex-wrap: wrap;
+    width: 800px;
+    margin-top: 40px;
+}
+
+.sign-up-wrap .input-field-two {
+    display: flex;
+    flex-direction: column;
+    flex: 40%;
+    width: 370px;
+    margin: 10px 20px 10px 0;
+}
+
+.input-field-two label {
+    color: var(--text-color);
+    padding: 7px 0;
+}
+
+.input-field-two input {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #9c9c9c;
+    background: #D5D5D5;
+    padding-left: 10px;
+}
+
+.sign-up-btn {
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    color: #f2f2f2;
+    border-radius: 10px;
+    margin: 30px 0 20px 0;
+    transition: .3s;
+    border: none;
+}
+
+.have-account-two {
+    margin: 10px 0;
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+.have-account-two span {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.have-account-two span:hover {
+    text-decoration: underline;
+}
