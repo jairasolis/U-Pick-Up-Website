@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('email_ad');
-            $table->date('username');
-            $table->date('department');
-            $table->date('password');
+            $table->string('username');
+            $table->string('department');
+            $table->string('password');
 
             $table->timestamps();
         });
