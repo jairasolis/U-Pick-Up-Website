@@ -1,17 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Admin;
 
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    protected $admin;
+
+    public function __construct(){
+        $this->admin = new Admin();
+    }
+
     public function index()
     {
-        //
+        return $this->admin->all();
     }
 
     /**
@@ -19,7 +24,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->admin->create($request->all());
     }
 
     /**
@@ -27,7 +32,7 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return $admin = $this->admin->find($id);
     }
 
     /**
@@ -35,7 +40,9 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $admin = $this->admin->find($id);
+        $admin->update($request->all());
+        return $admin;    
     }
 
     /**
@@ -43,6 +50,6 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
+        $admin = $this->admin->find($id);
+        return $admin->delete();    }
 }
