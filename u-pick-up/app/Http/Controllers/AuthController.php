@@ -26,7 +26,7 @@ class AuthController extends Controller
             'department' => 'required',
             'age' => 'required',
             'gender' => 'required',
-            'email_ad' => 'required|email|unique:users',
+            'email_ad' => 'required|email|unique',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|same:password'
         ]);
@@ -98,7 +98,7 @@ class AuthController extends Controller
     // admin registration and login
     public function adminRegistration(Request $request){
         $validator = Validator::make($request->all(),[
-            'email_ad' => 'required|email|unique:admins',
+            'email_ad' => 'required|email|unique',
             'username' => 'required|unique:admins',
             'department' => 'required',
             'password' => 'required|min:6|confirmed',
