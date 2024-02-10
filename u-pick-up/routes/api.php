@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -27,3 +28,11 @@ Route::apiResource('/student', StudentController::class);
 
 Route::apiResource('/admin', AdminController::class);
 Route::apiResource('/post', PostController::class);
+
+// student registration and login route
+Route::post('/student-registration', [AuthController::class, 'studentRegistration']);
+Route::post('/student-login', [AuthController::class, 'studentLogin']);
+
+// admin registration and login route
+Route::post('/admin-registration', [AuthController::class, 'adminRegistration']);
+Route::post('/admin-login', [AuthController::class, 'adminLogin']);
