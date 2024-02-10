@@ -12,9 +12,9 @@ class BookController extends Controller
     {
         try {
             // Query the 'books' table based on year_level and course
-            $books = Books::where('year_level', $yearLevel)
-                         ->where('course', $course)
-                         ->get();
+            $books = Books::where('course', $course)
+                        ->where('year_level', $yearLevel)
+                        ->get();
             return response()->json($books);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to retrieve books.', 'error' => $e->getMessage()], 500);

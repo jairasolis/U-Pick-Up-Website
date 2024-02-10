@@ -12,9 +12,9 @@ class UniformController extends Controller
     {
         try {
             // Query the 'books' table based on year_level and course
-            $uniforms = Uniforms::where('year_level', $yearLevel)
-                         ->where('course', $course)
-                         ->get();
+            $uniforms = Uniforms::where('course', $course)
+                        ->where('year_level', $yearLevel)
+                        ->get();
 
             // Return the retrieved books as a JSON response
             return response()->json($uniforms);
