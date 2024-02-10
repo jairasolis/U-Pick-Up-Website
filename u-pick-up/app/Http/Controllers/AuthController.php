@@ -159,20 +159,28 @@ class AuthController extends Controller
 
     //student logout
     public function studentLogout(Request $request){
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'message' => 'Logout successful',
-        ], 200);
+        if($request->user()->currentAccessToken()->delete()){
+            return response()->json([
+                'message' => 'Logout successful',
+            ], 200);
+        }else{
+            return response()->json([
+                'message' => 'Unauthorized logout attempt'
+            ], 401);
+        }
     }
 
     //admin logout
     public function adminLogout(Request $request){
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'message' => 'Logout successful',
-        ], 200);
+        if($request->user()->currentAccessToken()->delete()){
+            return response()->json([
+                'message' => 'Logout successful',
+            ], 200);
+        }else{
+            return response()->json([
+                'message' => 'Unauthorized logout attempt'
+            ], 401);
+        }
     }
 
 }
