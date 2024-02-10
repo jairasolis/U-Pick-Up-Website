@@ -45,4 +45,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 Route::apiResource('/modules', ModulesController::class);
 Route::apiResource('/uniforms', UniformController::class);
-Route::apiResource('/books', BookController::class);
+// Route::apiResource('/books', BookController::class);
+
+Route::middleware('auth:sanctum')->get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);

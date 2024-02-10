@@ -8,50 +8,66 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
 
-    protected $book;
-    public function __construct(){
-        $this->book = new Books();
-    }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function getBooksForYearLevelAndCourse(Request $request, $yearLevel, $course)
     {
-        return $this->book->all();
+        try {
+            // Query the 'books' table based on year_level and course
+            $books = Books::where('year_level', $yearLevel)
+                         ->where('course', $course)
+                         ->get();
+
+            // Return the retrieved books as a JSON response
+            return response()->json($books);
+        } catch (\Exception $e) {
+            // Handle any exceptions and return an error response
+            return response()->json(['message' => 'Failed to retrieve books.', 'error' => $e->getMessage()], 500);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        return $this->book->create($request->all());
-    }
+    // protected $book;
+    // public function __construct(){
+    //     $this->book = new Books();
+    // }
+    // /**
+    //  * Display a listing of the resource.
+    //  */
+    // public function index()
+    // {
+    //     return $this->book->all();
+    // }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return $student = $this->book->find($id);
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(Request $request)
+    // {
+    //     return $this->book->create($request->all());
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $student = $this->book->find($id);
-        $student->update($request->all());
-        return $student;
-    }
+    // /**
+    //  * Display the specified resource.
+    //  */
+    // public function show(string $id)
+    // {
+    //     return $student = $this->book->find($id);
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $student = $this->book->find($id);
-        return $student->delete();
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function update(Request $request, string $id)
+    // {
+    //     $student = $this->book->find($id);
+    //     $student->update($request->all());
+    //     return $student;
+    // }
+
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    // public function destroy(string $id)
+    // {
+    //     $student = $this->book->find($id);
+    //     return $student->delete();
+    // }
 }
