@@ -47,4 +47,5 @@ Route::apiResource('/modules', ModulesController::class);
 Route::apiResource('/uniforms', UniformController::class);
 // Route::apiResource('/books', BookController::class);
 
-Route::middleware('auth:sanctum')->get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);
+// Route::middleware('auth:sanctum')->get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);
+Route::get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);
