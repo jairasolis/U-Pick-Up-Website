@@ -15,11 +15,19 @@ class BookController extends Controller
             $books = Books::where('year_level', $yearLevel)
                          ->where('course', $course)
                          ->get();
-
-            // Return the retrieved books as a JSON response
             return response()->json($books);
         } catch (\Exception $e) {
-            // Handle any exceptions and return an error response
+            return response()->json(['message' => 'Failed to retrieve books.', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getBooksForCourse(Request $request, $course)
+    {
+        try {
+            // Query the 'books' table based on course
+            $books = Books::where('course', $course)->get();
+            return response()->json($books);
+        } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to retrieve books.', 'error' => $e->getMessage()], 500);
         }
     }

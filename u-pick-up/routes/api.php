@@ -43,9 +43,17 @@ Route::post('/admin-login', [AuthController::class, 'adminLogin']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 
-Route::apiResource('/modules', ModulesController::class);
-Route::apiResource('/uniforms', UniformController::class);
+// Route::apiResource('/modules', ModulesController::class);
+// Route::apiResource('/uniforms', UniformController::class);
 // Route::apiResource('/books', BookController::class);
 
 // Route::middleware('auth:sanctum')->get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);
-Route::get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);
+Route::get('/uniforms/{course}/{yearLevel}', [UniformController::class, 'getUniformsForYearLevelAndCourse']);
+Route::get('/modules/{course}/{yearLevel}', [ModulesController::class, 'getModulesForYearLevelAndCourse']);
+Route::get('/books/{course}/{yearLevel}', [BookController::class, 'getBooksForYearLevelAndCourse']);
+
+
+Route::get('/uniforms/{course}', [UniformController::class, 'getUniformsForCourse']);
+Route::get('/modules/{course}', [ModulesController::class, 'getModulessForCourse']);
+Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
+
