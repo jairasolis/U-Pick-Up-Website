@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Student extends Model
+class Student extends Authenticatable
 {
     protected $table = 'students';
     protected $primaryKey = 'id';
@@ -23,5 +25,5 @@ class Student extends Model
 
     ];
 
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 }
