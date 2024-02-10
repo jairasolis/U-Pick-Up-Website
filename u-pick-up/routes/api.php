@@ -6,7 +6,9 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\ModulesController;
+use App\Http\Controllers\UniformController;
+use App\Http\Controllers\BookController;
 
 
 /*
@@ -36,3 +38,8 @@ Route::post('/student-login', [AuthController::class, 'studentLogin']);
 // admin registration and login route
 Route::post('/admin-registration', [AuthController::class, 'adminRegistration']);
 Route::post('/admin-login', [AuthController::class, 'adminLogin']);
+
+
+Route::apiResource('/modules', ModulesController::class);
+Route::apiResource('/uniforms', UniformController::class);
+Route::apiResource('/books', BookController::class);
