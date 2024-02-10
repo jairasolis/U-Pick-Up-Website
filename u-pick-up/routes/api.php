@@ -39,11 +39,9 @@ Route::post('/student-login', [AuthController::class, 'studentLogin']);
 Route::post('/admin-registration', [AuthController::class, 'adminRegistration']);
 Route::post('/admin-login', [AuthController::class, 'adminLogin']);
 
-// student logout
-Route::post('/student-logout', [AuthController::class, 'studentLogout'])->middleware('auth:sanctum');
+// logout student or admin
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-// admin logout
-Route::post('/admin-logout', [AuthController::class, 'adminLogout'])->middleware('auth:sanctum');
 
 Route::apiResource('/modules', ModulesController::class);
 Route::apiResource('/uniforms', UniformController::class);
