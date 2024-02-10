@@ -11,6 +11,8 @@ class Books extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'subject_name',
+        'year_level',
+        'course',
         'available',
         'quantity',
     ];

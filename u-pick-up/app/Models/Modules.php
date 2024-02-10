@@ -12,6 +12,8 @@ class Modules extends Model
     protected $fillable = [
         'subject_code',
         'subject_name',
+        'year_level',
+        'course',
         'available',
         'quantity',
     ];

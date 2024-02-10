@@ -11,6 +11,8 @@ class Uniforms extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'uniform_type',
+        'year_level',
+        'course',
         'available',
         'quantity',
     ];

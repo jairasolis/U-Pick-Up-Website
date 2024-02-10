@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->text('subject_name');
-            $table->integer('year_level');
-            $table->text('course');
-            $table->integer('available');
-            $table->integer('quantity');
-            $table->timestamps();
+        Schema::table('modules', function (Blueprint $table) {
+            $table->string('year_level')->nullable()->after('subject_name');
+            $table->string('course')->nullable()->after('year_level');
         });
     }
 
@@ -27,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::table('modules', function (Blueprint $table) {
+            //
+        });
     }
 };
