@@ -23,7 +23,7 @@ class BookStoreRequest extends FormRequest
             'subject_name' => 'required|string|max:255',
             'year_level' => 'required|integer|min:1',
             'course' => 'required|string|max:255',
-            'available' => 'required|boolean',
+            'available' => 'required|integer|min:0',
             'quantity' => 'required|integer|min:0',
         ];
     }
