@@ -108,8 +108,8 @@ class BookController extends Controller
     {
         try {
             // Query the 'books' table based on year_level and course
-            $books = Books::where('course', $course)
-                        ->where('year_level', $yearLevel)
+            $books = Books::where('year_level', $yearLevel)
+                        ->where('course', $course)
                         ->get();
             return response()->json($books);
         } catch (\Exception $e) {
