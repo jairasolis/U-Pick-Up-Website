@@ -111,7 +111,7 @@ class UniformController extends Controller
         ],200);
     }
 
-    public function getUniformsForYearLevelAndCourse(Request $request, $year_level, $course)
+    public function getUniformsForYearLevelAndCourse(Request $request,$course, $year_level)
     {
         try {
             // Query the 'books' table based on year_level and course

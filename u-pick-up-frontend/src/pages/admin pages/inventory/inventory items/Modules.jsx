@@ -41,7 +41,7 @@ const Modules = () => {
 
   const fetchData = async () => {
       try {
-          const result = await axios("https://u-pick-up-y7qnw.ondigitalocean.app/api/books");
+          const result = await axios("https://u-pick-up-y7qnw.ondigitalocean.app/api/modules");
           console.log(result.data.results);
           setModulesData(result.data.results)
       } catch (err) {
@@ -51,7 +51,7 @@ const Modules = () => {
 
   const fetchSelectedData = async (course, yearLevel) => {
     try {
-      const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books/${course}/${yearLevel}`);
+      const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules/${course}/${yearLevel}`);
       console.log(result.data);
       setModulesData(result.data);
     } catch (err) {
