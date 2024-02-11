@@ -24,7 +24,7 @@ class ModulesController extends Controller
         try {
             // Create User
             Modules::create([
-                'subject_code' => $request->subject_name,
+                'subject_code' => $request->subject_code,
                 'subject_name' => $request->subject_name,
                 'year_level' => $request->year_level,
                 'course' => $request->course,
