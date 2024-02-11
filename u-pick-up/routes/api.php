@@ -48,17 +48,31 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 // Route::apiResource('/books', BookController::class);
 
 // Route::middleware('auth:sanctum')->get('/books/{yearLevel}/{course}', [BookController::class, 'getBooksForYearLevelAndCourse']);
-Route::get('/uniforms/{course}/{yearLevel}', [UniformController::class, 'getUniformsForYearLevelAndCourse']);
+
+// modules
+Route::get('modules', [ModulesController::class, 'index']); 
+Route::get('module/{id}', [ModulesController::class, 'show']); 
+Route::post('addnew-modules', [ModulesController::class, 'store']); 
+Route::put('modules-update/{id}', [ModulesController::class, 'update']); 
+Route::delete('modules-delete/{id}', [ModulesController::class, 'destroy']); 
+Route::get('/modules/{course}', [ModulesController::class, 'getModulessForCourse']);
 Route::get('/modules/{course}/{yearLevel}', [ModulesController::class, 'getModulesForYearLevelAndCourse']);
+
+// uniforms
+Route::get('uniforms', [UniformController::class, 'index']); 
+Route::get('uniform/{id}', [UniformController::class, 'show']); 
+Route::post('addnew-uniforms', [UniformController::class, 'store']); 
+Route::put('uniform-update/{id}', [UniformController::class, 'update']); 
+Route::delete('uniform-delete/{id}', [UniformController::class, 'destroy']); 
+Route::get('/uniform/{course}', [UniformController::class, 'getBooksForCourse']);
+Route::get('/uniform/{course}/{yearLevel}', [UniformController::class, 'getBooksForYearLevelAndCourse']);
+
+// books
+Route::get('books', [BookController::class, 'index']); 
+Route::get('book/{id}', [BookController::class, 'show']); 
+Route::post('addnew-books', [BookController::class, 'store']); 
+Route::put('books-update/{id}', [BookController::class, 'update']); 
+Route::delete('booksdelete/{id}', [BookController::class, 'destroy']); 
+Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
 Route::get('/books/{course}/{yearLevel}', [BookController::class, 'getBooksForYearLevelAndCourse']);
 
-
-Route::get('/uniforms/{course}', [UniformController::class, 'getUniformsForCourse']);
-Route::get('/modules/{course}', [ModulesController::class, 'getModulessForCourse']);
-Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
-
-Route::get('books', [BookController::class, 'index']); //working
-Route::get('showbooks/{id}', [BookController::class, 'show']); 
-Route::post('addnew-books', [BookController::class, 'store']); //working
-Route::put('booksupdate/{id}', [BookController::class, 'update']); //working
-Route::delete('booksdelete/{id}', [BookController::class, 'destroy']); //working
