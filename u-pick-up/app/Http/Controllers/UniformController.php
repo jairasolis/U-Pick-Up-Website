@@ -111,12 +111,12 @@ class UniformController extends Controller
         ],200);
     }
 
-    public function getUniformsForYearLevelAndCourse(Request $request, $yearLevel, $course)
+    public function getUniformsForYearLevelAndCourse(Request $request, $year_level, $course)
     {
         try {
             // Query the 'books' table based on year_level and course
             $uniforms = Uniforms::where('course', $course)
-                        ->where('year_level', $yearLevel)
+                        ->where('year_level', $year_level)
                         ->get();
 
             // Return the retrieved books as a JSON response

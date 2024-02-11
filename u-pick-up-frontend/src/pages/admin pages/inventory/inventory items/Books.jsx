@@ -53,8 +53,8 @@ const Books = () => {
   const fetchSelectedData = async (course, yearLevel) => {
     try {
       const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books/${course}/${yearLevel}`);
-      console.log(result.data.results);
-      setBookData(result.data.results);
+      console.log(result.data);
+      setBookData(result.data);
     } catch (err) {
       console.log("Something went wrong while fetching selected data:", err);
     }
