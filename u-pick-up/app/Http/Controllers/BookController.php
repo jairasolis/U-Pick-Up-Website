@@ -44,19 +44,18 @@ class BookController extends Controller
 
     public function show($id)
     {
-       // User Detail 
-       $books = Books::find($id);
-       if(!$books){
-         return response()->json([
-            'message'=>'Book Not Found.'
-         ],404);
-       }
-       
-       // Return Json Response
-       return response()->json([
-          'books' => $books
-       ],200);
+        try {
+            // Find the book by ID
+            $books = Books::findOrFail($id);
+
+            // Return the book data as JSON response
+            return response()->json(['book' => $books], 200);
+        } catch (\Exception $e) {
+            // Handle the exception and return an error response
+            return response()->json(['message' => 'Book not found.'], 404);
+        }
     }
+
 
     public function update(BookStoreRequest $request, $id)
     {
