@@ -109,11 +109,11 @@ class BookController extends Controller
         ],200);
     }
 
-    public function getBooksForYearLevelAndCourse(Request $request, $yearLevel, $course)
+    public function getBooksForYearLevelAndCourse(Request $request, $year_level, $course)
     {
         try {
             // Query the 'books' table based on year_level and course
-            $books = Books::where('year_level', $yearLevel)
+            $books = Books::where('year_level', $year_level)
                         ->where('course', $course)
                         ->get();
             return response()->json($books);

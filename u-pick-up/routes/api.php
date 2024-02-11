@@ -56,7 +56,7 @@ Route::post('addnew-modules', [ModulesController::class, 'store']);
 Route::put('modules-update/{id}', [ModulesController::class, 'update']); 
 Route::delete('modules-delete/{id}', [ModulesController::class, 'destroy']); 
 Route::get('/modules/{course}', [ModulesController::class, 'getModulessForCourse']);
-Route::get('/modules/{course}/{yearLevel}', [ModulesController::class, 'getModulesForYearLevelAndCourse']);
+Route::get('/modules/{course}/{year_level}', [ModulesController::class, 'getModulesForYearLevelAndCourse']);
 
 // uniforms
 Route::get('uniforms', [UniformController::class, 'index']); 
@@ -65,7 +65,7 @@ Route::post('addnew-uniforms', [UniformController::class, 'store']);
 Route::put('uniform-update/{id}', [UniformController::class, 'update']); 
 Route::delete('uniform-delete/{id}', [UniformController::class, 'destroy']); 
 Route::get('/uniforms/{course}', [UniformController::class, 'getUniformsForCourse']);
-Route::get('/uniforms/{course}/{yearLevel}', [UniformController::class, 'getUniformsForYearLevelAndCourse']);
+Route::get('/uniforms/{course}/{year_level}', [UniformController::class, 'getUniformsForYearLevelAndCourse']);
 
 // books
 Route::get('books', [BookController::class, 'index']); 
@@ -74,5 +74,5 @@ Route::post('addnew-books', [BookController::class, 'store']);
 Route::put('books-update/{id}', [BookController::class, 'update']); 
 Route::delete('booksdelete/{id}', [BookController::class, 'destroy']); 
 Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
-Route::get('/books/{course}/{yearLevel}', [BookController::class, 'getBooksForYearLevelAndCourse']);
+Route::get('/books/{course}/{year_level}', [BookController::class, 'getBooksForYearLevelAndCourse']);
 

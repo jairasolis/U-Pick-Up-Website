@@ -3,14 +3,42 @@ import './Books.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 const Books = () => {
 
   const [bookData, setBookData] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [yearLevels, setYearLevels] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [selectedYearLevel, setSelectedYearLevel] = useState('');
+  
   useEffect(() => {
       fetchData();
+      fetchCourses();
+      fetchYearLevels();
   }, [])
+
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get('/courses.json');
+      setCourses(response.data);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+
+  const fetchYearLevels = async () => {
+    try {
+      const response = await axios.get('/year_level.json');
+      setYearLevels(response.data);
+    } catch (error) {
+      console.error('Error fetching year levels:', error);
+    }
+  };
 
   const fetchData = async () => {
       try {
@@ -18,8 +46,26 @@ const Books = () => {
           console.log(result.data.results);
           setBookData(result.data.results)
       } catch (err) {
-          console.log("somthing Wrong");
+          console.log("something Wrong");
       }
+  }
+
+  const fetchSelectedData = async (course, yearLevel) => {
+    try {
+      const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books/${course}/${yearLevel}`);
+      console.log(result.data.results);
+      setBookData(result.data.results);
+    } catch (err) {
+      console.log("Something went wrong while fetching selected data:", err);
+    }
+  }  
+    
+  const handleSubmit = () => {
+    if (selectedCourse && selectedYearLevel) {
+      fetchSelectedData(selectedCourse, selectedYearLevel);
+    } else {
+      console.log("Please select both course and year level.");
+    }
   }
 
   const handleDelete=async(id)=>{
@@ -35,6 +81,36 @@ const Books = () => {
 
   return (
     <div className='books-page'>
+        <Container>
+          <Row>
+            <Col> 
+              <label htmlFor="courseSelect">Choose a course:</label>
+              <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
+                <option value="">Select a course</option>
+                {courses.map(course => (
+                  <option key={course} value={course}>{course}</option>
+                ))}
+              </select>
+            </Col>
+            <Col>
+              {selectedCourse && (
+                <div>
+                  <label htmlFor="yearLevelSelect">Choose a year level:</label>
+                  <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                    <option value="">Select a year level</option>
+                    {yearLevels[selectedCourse]?.map(yearLevel => (
+                      <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </Col>
+            <Col>
+              <button type="submit" className="btn btn-primary" onClick={handleSubmit}> Display </button>            
+            </Col>
+          </Row>
+        </Container>
+
       <div className="books-container">
         <table>
           <thead>
@@ -50,7 +126,9 @@ const Books = () => {
           </thead>
           <tbody className='books'>
             {
+              
               bookData.map((book, i) => {
+                console.log("Book data:", bookData);
                 return (
                     <tr key={i}>
                         <td>{i + 1}</td>
@@ -74,28 +152,8 @@ const Books = () => {
               <td> 100 </td>
               <td> 100 </td>
               <td> <FontAwesomeIcon icon={ faPenToSquare } className='action-icon'/> <FontAwesomeIcon icon={ faTrash } className='del-icon'/>  </td>
-            </tr>
-            <tr>
-              <td> ITE 400 </td>
-              <td> System Integration Architecture </td>
-              <td> 100 </td>
-              <td> 100 </td>
-              <td> <FontAwesomeIcon icon={ faPenToSquare } className='action-icon'/> <FontAwesomeIcon icon={ faTrash } className='del-icon'/>  </td>
-            </tr>
-            <tr>
-              <td> ITE 308 </td>
-              <td> Web System and Technologies </td>
-              <td> 100 </td>
-              <td> 100 </td>
-              <td> <FontAwesomeIcon icon={ faPenToSquare } className='action-icon'/> <FontAwesomeIcon icon={ faTrash } className='del-icon'/>  </td>
-            </tr>
-            <tr>
-              <td> ITE 380 </td>
-              <td> Human Computer Interaction 2 </td>
-              <td> 100 </td>
-              <td> 100 </td>
-              <td> <FontAwesomeIcon icon={ faPenToSquare } className='action-icon'/> <FontAwesomeIcon icon={ faTrash } className='del-icon'/>  </td>
-            </tr> */}
+            </tr>*/}
+
           </tbody>
         </table>
       </div>
