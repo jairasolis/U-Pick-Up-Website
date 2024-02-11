@@ -1,12 +1,108 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\BookStoreRequest;
 use App\Models\Books;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    public function index()
+    {
+       $books = Books::all(); 
+          
+       // Return Json Response
+       return response()->json([
+            'results' => $books
+       ],200);
+    }
+
+    public function store(BookStoreRequest $request)
+    {
+        try {
+            // Create User
+            Books::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password
+            ]);
+ 
+            // Return Json Response
+            return response()->json([
+                'message' => "Item successfully created."
+            ],200);
+        } catch (\Exception $e) {
+            // Return Json Response
+            return response()->json([
+                'message' => "Something went really wrong!"
+            ],500);
+        }
+    }
+
+    public function show($id)
+    {
+       // User Detail 
+       $books = Books::find($id);
+       if(!$books){
+         return response()->json([
+            'message'=>'Book Not Found.'
+         ],404);
+       }
+       
+       // Return Json Response
+       return response()->json([
+          'books' => $books
+       ],200);
+    }
+
+    public function update(BookStoreRequest $request, $id)
+    {
+        try {
+            // Find User
+            $books = Books::find($id);
+            if(!$books){
+              return $books()->json([
+                'message'=>'Book Not Found.'
+              ],404);
+            }
+       
+            //echo "request : $request->image";
+            $books->name = $request->name;
+            $books->email = $request->email;
+       
+            // Update User
+            $books->save();
+       
+            // Return Json Response
+            return response()->json([
+                'message' => "Book successfully updated."
+            ],200);
+        } catch (\Exception $e) {
+            // Return Json Response
+            return response()->json([
+                'message' => "Something went really wrong!"
+            ],500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        // Detail 
+        $books = Books::find($id);
+        if(!$books){
+          return response()->json([
+             'message'=>'Book Not Found.'
+          ],404);
+        }
+         
+        // Delete User
+        $books->delete();
+       
+        // Return Json Response
+        return response()->json([
+            'message' => "Book successfully deleted."
+        ],200);
+    }
 
     public function getBooksForYearLevelAndCourse(Request $request, $yearLevel, $course)
     {
@@ -31,51 +127,4 @@ class BookController extends Controller
             return response()->json(['message' => 'Failed to retrieve books.', 'error' => $e->getMessage()], 500);
         }
     }
-
-    // protected $book;
-    // public function __construct(){
-    //     $this->book = new Books();
-    // }
-    // /**
-    //  * Display a listing of the resource.
-    //  */
-    // public function index()
-    // {
-    //     return $this->book->all();
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     return $this->book->create($request->all());
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     return $student = $this->book->find($id);
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-    //     $student = $this->book->find($id);
-    //     $student->update($request->all());
-    //     return $student;
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(string $id)
-    // {
-    //     $student = $this->book->find($id);
-    //     return $student->delete();
-    // }
 }

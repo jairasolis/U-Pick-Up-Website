@@ -57,3 +57,8 @@ Route::get('/uniforms/{course}', [UniformController::class, 'getUniformsForCours
 Route::get('/modules/{course}', [ModulesController::class, 'getModulessForCourse']);
 Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
 
+Route::get('books', [BookController::class, 'index']);
+Route::get('books/{id}', [BookController::class, 'show']); 
+Route::post('addnew-books', [BookController::class, 'store']); 
+Route::put('booksupdate/{id}', [BookController::class, 'update']);
+Route::delete('booksdelete/{id}', [BookController::class, 'destroy']);
