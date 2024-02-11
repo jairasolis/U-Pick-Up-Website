@@ -64,8 +64,8 @@ Route::get('uniform/{id}', [UniformController::class, 'show']);
 Route::post('addnew-uniforms', [UniformController::class, 'store']); 
 Route::put('uniform-update/{id}', [UniformController::class, 'update']); 
 Route::delete('uniform-delete/{id}', [UniformController::class, 'destroy']); 
-Route::get('/uniform/{course}', [UniformController::class, 'getBooksForCourse']);
-Route::get('/uniform/{course}/{yearLevel}', [UniformController::class, 'getBooksForYearLevelAndCourse']);
+Route::get('/uniforms/{course}', [UniformController::class, 'getBooksForCourse']);
+Route::get('/uniforms/{course}/{yearLevel}', [UniformController::class, 'getBooksForYearLevelAndCourse']);
 
 // books
 Route::get('books', [BookController::class, 'index']); 
