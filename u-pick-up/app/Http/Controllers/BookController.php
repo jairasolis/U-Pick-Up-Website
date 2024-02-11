@@ -11,7 +11,6 @@ class BookController extends Controller
     {
        $books = Books::all(); 
           
-       // Return Json Response
        return response()->json([
             'results' => $books
        ],200);
@@ -20,7 +19,7 @@ class BookController extends Controller
     public function store(BookStoreRequest $request)
     {
         try {
-            // Create User
+            // Create book
             Books::create([
                 'subject_name' => $request->subject_name,
                 'year_level' => $request->year_level,
@@ -30,12 +29,10 @@ class BookController extends Controller
                 
             ]);
  
-            // Return Json Response
             return response()->json([
                 'message' => "Item successfully created."
             ],200);
         } catch (\Exception $e) {
-            // Return Json Response
             return response()->json([
                 'message' => "Something went really wrong!"
             ],500);
@@ -48,10 +45,8 @@ class BookController extends Controller
             // Find the book by ID
             $books = Books::findOrFail($id);
 
-            // Return the book data as JSON response
             return response()->json(['book' => $books], 200);
         } catch (\Exception $e) {
-            // Handle the exception and return an error response
             return response()->json(['message' => 'Book not found.'], 404);
         }
     }
@@ -60,7 +55,7 @@ class BookController extends Controller
     public function update(BookStoreRequest $request, $id)
     {
         try {
-            // Find User
+            // Find book
             $books = Books::find($id);
             if(!$books){
               return $books()->json([
@@ -75,15 +70,13 @@ class BookController extends Controller
             $books->available = $request->available;
             $books->quantity = $request->quantity;
        
-            // Update User
+            // Update book
             $books->save();
        
-            // Return Json Response
             return response()->json([
                 'message' => "Book successfully updated."
             ],200);
         } catch (\Exception $e) {
-            // Return Json Response
             return response()->json([
                 'message' => "Something went really wrong!"
             ],500);
@@ -92,7 +85,6 @@ class BookController extends Controller
 
     public function destroy($id)
     {
-        // Detail 
         $books = Books::find($id);
         if(!$books){
           return response()->json([
@@ -100,10 +92,9 @@ class BookController extends Controller
           ],404);
         }
          
-        // Delete User
+        // Delete book
         $books->delete();
        
-        // Return Json Response
         return response()->json([
             'message' => "Book successfully deleted."
         ],200);

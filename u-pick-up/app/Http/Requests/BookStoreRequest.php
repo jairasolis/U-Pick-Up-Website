@@ -6,17 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BookStoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     */
     public function rules(): array
     {
         return [
@@ -39,7 +34,6 @@ class BookStoreRequest extends FormRequest
             'course.required' => 'The course field is required.',
             'available.required' => 'The available field is required.',
             'quantity.required' => 'The quantity field is required.',
-            // Add custom error messages for other validation rules if necessary
         ];
     }
 }
