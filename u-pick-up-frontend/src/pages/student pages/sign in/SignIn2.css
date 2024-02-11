@@ -54,6 +54,11 @@
     padding-left: 10px;
 }
 
+.input-field-two input:focus {
+    outline: none;
+}
+
+
 .sign-up-btn {
     width: 200px;
     height: 40px;
@@ -78,4 +83,17 @@
 
 .dhave-account-two span:hover {
     text-decoration: underline;
+}
+
+/* style for the error fields */
+
+.error-message {
+    color: #dd3535;
+    font-size: .8rem;
+    position: absolute;
+    margin-top: 80px;
+}
+
+.input-field-two.error input {
+    border: 1px solid #dd3535;
 }

@@ -1,6 +1,6 @@
 :root {
     --text-color: #3B5534;
-} 
+}
 
 .sign-up-wrap {
     margin: 70px 100px;
@@ -10,7 +10,7 @@
 .sign-up-header img {
     width: 150px;
     height: auto;
-    
+
 }
 
 .sign-up-header p {
@@ -53,6 +53,10 @@
     padding-left: 10px;
 }
 
+.input-field-two input:focus {
+    outline: none;
+}
+
 .sign-up-btn {
     width: 200px;
     height: 40px;
@@ -77,4 +81,18 @@
 
 .have-account-two span:hover {
     text-decoration: underline;
+}
+
+
+/* style for the error fields */
+
+.error-message {
+    color: #dd3535;
+    font-size: .8rem;
+    position: absolute;
+    margin-top: 80px;
+}
+
+.input-field-two.error input {
+    border: 1px solid #dd3535;
 }

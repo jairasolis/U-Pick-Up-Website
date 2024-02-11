@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 // import './Navbar.css';
 import './Navbar2.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,13 +18,45 @@ const Navbar = () => {
   useEffect(()=>{
     document.addEventListener("mousedown", ()=>{
       setIsMenuOpen(false);
-    })
-  })
+    });
+    setIsLoggedIn(true);
+  },[]);
+
+  const handleSignOut = async () => {
+    try {
+      const authToken = localStorage.getItem('authToken');
+  
+      if (!authToken) {
+        console.error('Authentication token not found');
+        navigate('/');
+        return;
+      }
+  
+      const response = await axios.post(
+        'https://u-pick-up-y7qnw.ondigitalocean.app/api/logout',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+  
+      console.log('Logout API response:', response.data);
+  
+      localStorage.removeItem('authToken');
+  
+      navigate('/');
+    } catch (error) {
+      console.error('Error occurred while logging out:', error);
+    }
+  };
+
 
   return (
     <div className='navbar-2'>
       <nav>
-        <Link to="/">
+        <Link to={isLoggedIn ? "/student/home" : "/"}>
           <div className="logo">
             <img src="../images/logo.png" alt="" />
           </div>
@@ -44,7 +79,7 @@ const Navbar = () => {
 
               <hr />
 
-              <Link to="/" className="sub-menu-link">
+              <Link onClick={handleSignOut} className="sub-menu-link">
                 <h3> Sign Out </h3>
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>
