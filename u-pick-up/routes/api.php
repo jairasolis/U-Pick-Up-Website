@@ -58,7 +58,7 @@ Route::get('/modules/{course}', [ModulesController::class, 'getModulessForCourse
 Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
 
 Route::get('books', [BookController::class, 'index']); //working
-Route::get('books/{id}', [BookController::class, 'show']); 
+Route::get('showbooks/{id}', [BookController::class, 'show']); 
 Route::post('addnew-books', [BookController::class, 'store']); //working
 Route::put('booksupdate/{id}', [BookController::class, 'update']); //working
 Route::delete('booksdelete/{id}', [BookController::class, 'destroy']); //working
