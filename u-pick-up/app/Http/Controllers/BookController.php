@@ -22,9 +22,12 @@ class BookController extends Controller
         try {
             // Create User
             Books::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password
+                'subject_name' => $request->subject_name,
+                'year_level' => $request->year_level,
+                'course' => $request->course,
+                'available' => $request->available,
+                'quantity' => $request->quantity,
+                
             ]);
  
             // Return Json Response
@@ -67,8 +70,11 @@ class BookController extends Controller
             }
        
             //echo "request : $request->image";
-            $books->name = $request->name;
-            $books->email = $request->email;
+            $books->subject_name = $request->subject_name;
+            $books->year_level = $request->year_level;
+            $books->course = $request->course;
+            $books->available = $request->available;
+            $books->quantity = $request->quantity;
        
             // Update User
             $books->save();
