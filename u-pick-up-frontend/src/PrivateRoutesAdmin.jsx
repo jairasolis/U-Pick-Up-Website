@@ -2,13 +2,13 @@ import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import useAuth from './auth/useAuth';
 
-const PrivateRoutes = () => {
+const PrivateRoutesAdmin = () => {
   const { auth, role } = useAuth();
 
-  const isStudent = role === 'student';
+  const isAdmin = role === 'admin';
 
   if (auth) {
-    if (isStudent) {
+    if (isAdmin) {
       return <Outlet />;
     } else {
       return <Navigate to="/" />;
@@ -18,4 +18,4 @@ const PrivateRoutes = () => {
   }
 };
 
-export default PrivateRoutes;
+export default PrivateRoutesAdmin;
