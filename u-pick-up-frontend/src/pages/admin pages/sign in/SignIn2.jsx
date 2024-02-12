@@ -1,9 +1,55 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './SignIn2.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 
 const SignIn2 = () => {
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  const initialValues = {
+    username: '',
+    password: ''
+  };
+
+  const validate = Yup.object({
+    username: Yup.string()
+      .required('Username is required'),
+    password: Yup.string()
+      .required('Password is required')
+  });
+
+  const onSubmit = async (values, { setSubmitting, setFieldError }) => {
+    try {
+      const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-login', {
+        username: values.username,
+        password: values.password
+      });
+  
+      console.log('Response:', response.data);
+  
+      if (response.status === 200) {
+        const { token } = response.data;
+        localStorage.setItem('authToken', token);
+        navigate('/admin/dashboard');
+      } else {
+        setErrorMessage('An error occurred');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setErrorMessage('These credentials do not match our records');
+      } else {
+        setErrorMessage('An error occurred');
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+
   return (
     <div className='sign-in-two'>
       <div className="sign-in-wrap">
@@ -12,19 +58,41 @@ const SignIn2 = () => {
           <p> receive on ease </p>
           <h3> Welcome back! </h3>
         </div>
-        <div className="form-wrapper-two">
-          <div className="input-field-two">
-            <label htmlFor="username"> Username </label>
-            <input type="text" className="username" placeholder='your username' id="username" required />     
-          </div>
-          <div className="input-field-two">
-            <label htmlFor="password"> Password </label>
-            <input type="password" className="password" placeholder='enter password' id="password" required />
-          </div>
-        </div>
-        <Link to="/admin/dashboard">
-          <button type="submit" className="sign-up-btn"> Sign In </button>
-        </Link>
+        <Formik 
+          initialValues={initialValues} 
+          validationSchema={validate} 
+          onSubmit={onSubmit}>
+          {({ isSubmitting, errors, touched }) => (
+            <Form className="form-wrapper-two">
+              <div className={`input-field-two ${errors.username && touched.username ? 'error' : ''}`}>
+                <label htmlFor="username"> Username </label>
+                <Field 
+                  type="text" 
+                  className="username" 
+                  placeholder='Your username' 
+                  id="username" 
+                  name="username" 
+                  required />
+                <ErrorMessage name="username" component="p" className="error-message" />
+              </div>
+              <div className={`input-field-two ${errors.password && touched.password ? 'error' : ''}`}>
+                <label htmlFor="password"> Password </label>
+                <Field 
+                  type="password" 
+                  className="password" 
+                  placeholder='Enter password' 
+                  id="password" 
+                  name="password" 
+                  required />
+                <ErrorMessage name="password" component="p" className="error-message" />
+              </div>
+              <button type="submit" className="sign-up-btn" disabled={isSubmitting}> Sign In </button>
+            </Form>
+          )}
+        </Formik>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+
         <div className="dhave-account-two">
           <p>Don’t have an account?<Link to="/admin/sign-up"> <span> SIGN UP! </span> </Link> </p>
         </div>
