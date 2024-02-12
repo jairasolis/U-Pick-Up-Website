@@ -63,7 +63,7 @@ const App = () => {
           <Route path="/student/sign-in" element={<StudentSignIn2 />} />
 
           {/*  private routes */}
-          <Route
+          {/* <Route
             element={
               auth ? (
                 <PrivateRoutes roleRequired="student" />
@@ -71,7 +71,7 @@ const App = () => {
                 <Navigate to="/" />
               )
             }
-          >
+          > */}
             <Route element={<HomeLayout />}>
               <Route path="/student/home" element={<Home />} />
               <Route path="/student/profile" element={<Profile />} />
@@ -80,7 +80,7 @@ const App = () => {
               <Route path="/student/chat-support" element={<Chat />} />
               <Route path="/student/help" element={<Faq />} />
             </Route>
-          </Route>
+          {/* </Route> */}
 
           {/* admin pages */}
           {/*  public routes */}
@@ -88,7 +88,7 @@ const App = () => {
           <Route path="/admin/sign-in" element={<AdminSignIn2 />} />
 
           {/*  private routes */}
-          <Route
+          {/* <Route
             element={
               auth && role === "admin" ? (
                 <PrivateRoutesAdmin roleRequired="admin" />
@@ -96,7 +96,7 @@ const App = () => {
                 <Navigate to="/" />
               )
             }
-          >
+          > */}
             <Route element={<DashboardLayout />}>
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/add-post" element={<AddPost />} />
@@ -108,7 +108,7 @@ const App = () => {
               <Route path="/admin/students" element={<Students />} />
               <Route path="/admin/profile" element={<AdminProfile />} />
             </Route>
-          </Route>
+          {/* </Route> */}
         </Routes>
       </Router>
     </div>
