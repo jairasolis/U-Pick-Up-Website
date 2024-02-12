@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AdminLeftBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChalkboardUser, faCaretDown, faSquarePen, faCalendarDays, faBook, faUser, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { faChalkboardUser, faCaretDown, faSquarePen, faCalendarDays, faBook, faUser, faCaretRight, faBookOpen, faShirt, faChartColumn } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const AdminLeftBar = () => {
@@ -15,8 +15,7 @@ const AdminLeftBar = () => {
     <div className="leftBar">
       <div className="leftbar-container">
         <div className="menu">
-          <div className="dashboard-dropdown">
-            {/* <Link to="/admin/dashboard" className="dashboard-menu" onClick={toggleDropdown}> */}
+          {/* <div className="dashboard-dropdown">
             <div className="dashboard-menu" onClick={toggleDropdown}>
             <FontAwesomeIcon icon={faCaretRight} className={`dropdown-icon ${isDropdownOpen ? 'rotate-90' : ''}`} />              
             <FontAwesomeIcon icon={faChalkboardUser} className='icon' />
@@ -50,7 +49,47 @@ const AdminLeftBar = () => {
                 </Link>
               </div>
             )}
-          </div>
+          </div> */}
+          <Link to="/admin/dashboard">
+            <div className="profile-left">
+              <FontAwesomeIcon icon={faChartColumn} className='icon' />
+              <h4> Dashboard </h4>
+            </div>
+          </Link>
+          <Link to="/admin/add-post">
+            <div className="profile-left">
+              <FontAwesomeIcon icon={faSquarePen} className='icon' />
+              <h4> Create Post </h4>
+            </div>
+          </Link>
+          <Link to="/admin/add-event">
+            <div className="profile-left">
+              <FontAwesomeIcon icon={faCalendarDays} className='icon' />
+              <h4> Add event </h4>
+            </div>
+          </Link>
+          <hr />
+          <h4> Inventory </h4>
+          <hr />
+          <Link to="/admin/inventory-books">
+            <div className="profile-left">
+              <FontAwesomeIcon icon={faBook} className='icon' />
+              <h4> Books </h4>
+            </div>
+          </Link>
+          <Link to="/admin/inventory-modules">
+            <div className="profile-left">
+              <FontAwesomeIcon icon={faBookOpen} className='icon' />
+              <h4> Modules </h4>
+            </div>
+          </Link>
+          <Link to="/admin/inventory-uniforms">
+            <div className="profile-left">
+              <FontAwesomeIcon icon={faShirt} className='icon' />
+              <h4> Uniforms </h4>
+            </div>
+          </Link>
+          <hr />
           <Link to="/admin/profile">
             <div className="profile-left">
               <FontAwesomeIcon icon={faUser} className='icon' />
