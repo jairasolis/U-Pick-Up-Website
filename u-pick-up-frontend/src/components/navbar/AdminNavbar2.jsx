@@ -16,10 +16,12 @@ const AdminNavbar = () => {
   };
 
   useEffect(()=>{
+    const authToken = localStorage.getItem('authToken');
+    setIsLoggedIn(!!authToken);
+    
     document.addEventListener("mousedown", ()=>{
       setIsMenuOpen(false);
     })
-    setIsLoggedIn(true);
   },[])
 
   const handleSignOut = async () => {
