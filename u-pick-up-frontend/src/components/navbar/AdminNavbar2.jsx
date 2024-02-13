@@ -5,10 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import useAuth from '../../auth/useAuth';
 
 const AdminNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { auth, logout } = useAuth();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -16,9 +17,6 @@ const AdminNavbar = () => {
   };
 
   useEffect(()=>{
-    const authToken = localStorage.getItem('authToken');
-    setIsLoggedIn(!!authToken);
-    
     document.addEventListener("mousedown", ()=>{
       setIsMenuOpen(false);
     })
@@ -26,14 +24,14 @@ const AdminNavbar = () => {
 
   const handleSignOut = async () => {
     try {
-      const authToken = localStorage.getItem('authToken');
-  
-      if (!authToken) {
+      if (!auth) {
         console.error('Authentication token not found');
-        navigate('/');
         return;
       }
-  
+
+      const authToken = localStorage.getItem('authToken');
+      await logout();
+
       const response = await axios.post(
         'https://u-pick-up-y7qnw.ondigitalocean.app/api/logout',
         {},
@@ -48,7 +46,7 @@ const AdminNavbar = () => {
   
       localStorage.removeItem('authToken');
   
-      navigate('/');
+      navigate('/', { replace: true });
     } catch (error) {
       console.error('Error occurred while logging out:', error);
     }
@@ -57,7 +55,7 @@ const AdminNavbar = () => {
   return (
     <div className='navbar-2'>
       <nav>
-        <Link to={isLoggedIn ? "/admin/dashboard" : "/"}>
+        <Link to={auth ? "/admin/dashboard" : "/"}>
           <div className="logo">
             <img src="../images/logo.png" alt="" />
           </div>

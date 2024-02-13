@@ -7,7 +7,7 @@ const useAuth = () => {
 
     if (_user) {
         user = JSON.parse(_user);
-        console.log('user', user);
+        // console.log('user', user);
     }
 
     const logout = () => {
