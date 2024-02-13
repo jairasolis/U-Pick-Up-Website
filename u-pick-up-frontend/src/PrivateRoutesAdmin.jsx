@@ -1,14 +1,14 @@
+// PrivateRoutes.js
 import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import useAuth from './auth/useAuth';
 
-const PrivateRoutesAdmin = ({ roleRequired }) => {
+const PrivateRoutesAdmin = ({ roleRequiredAdmin }) => {
   const { auth, role } = useAuth();
 
-  if (auth) {
-    if (role === roleRequired) {
-      return <Outlet />;
-    } else {
+  if (auth && role === roleRequiredAdmin) {
+    return <Outlet />;
+    if (role === "student") {
       return <Navigate to="/admin/dashboard" />;
     }
   } else {

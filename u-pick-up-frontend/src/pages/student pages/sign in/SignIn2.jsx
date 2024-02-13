@@ -10,6 +10,7 @@ const SignIn2 = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const { token, auth } = useAuth();
+  const [loading, setLoading] = useState(false); 
 
   const initialValues = {
     student_id: "",
@@ -23,6 +24,7 @@ const SignIn2 = () => {
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://u-pick-up-y7qnw.ondigitalocean.app/api/student-login",
         {
@@ -38,7 +40,6 @@ const SignIn2 = () => {
         localStorage.setItem("authToken", token);
         localStorage.setItem("user", JSON.stringify({ role: "student" }));
         auth(true);
-        // console.log("authhhhhh:", auth);
 
       } else {
         setErrorMessage("An error occurred");
@@ -50,11 +51,14 @@ const SignIn2 = () => {
         setErrorMessage("An error occurred");
       }
     } finally {
+      setLoading(false); 
       setSubmitting(false);
     }
   };
 
   useEffect(() => {
+    console.log("authhhhhh:", auth);
+
     if (auth) {
       navigate("/student/home");
     }
@@ -114,10 +118,9 @@ const SignIn2 = () => {
               <button
                 type="submit"
                 className="sign-up-btn"
-                disabled={isSubmitting}
-              >
-                {" "}
-                Sign In{" "}
+                disabled={isSubmitting || loading} 
+              >{loading ? 'Loading...' : 'Sign In'}
+
               </button>
             </Form>
           )}

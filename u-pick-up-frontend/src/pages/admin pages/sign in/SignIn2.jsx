@@ -10,6 +10,7 @@ import useAuth from "../../../auth/useAuth";
 const SignIn2 = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false); 
   const { token, auth } = useAuth();
 
   const initialValues = {
@@ -26,6 +27,7 @@ const SignIn2 = () => {
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
+      setLoading(true); 
       const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-login', {
         username: values.username,
         password: values.password
@@ -38,7 +40,8 @@ const SignIn2 = () => {
         localStorage.setItem('authToken', token);
         localStorage.setItem("user", JSON.stringify({ role: "admin" }));
         auth(true);
-        // console.log("authhhhhh:", auth);
+
+        console.log("authhhhhh:", auth);
       } else {
         setErrorMessage('An error occurred');
       }
@@ -49,6 +52,7 @@ const SignIn2 = () => {
         setErrorMessage('An error occurred');
       }
     } finally {
+      setLoading(false); 
       setSubmitting(false);
     }
   };
@@ -96,19 +100,20 @@ const SignIn2 = () => {
                   required />
                 <ErrorMessage name="password" component="p" className="error-message" />
               </div>
-              <button type="submit" className="sign-up-btn" disabled={isSubmitting}> Sign In </button>
+              <button type="submit" className="sign-up-btn" disabled={isSubmitting || loading}>
+                {loading ? 'Loading...' : 'Sign In'}
+              </button>
             </Form>
           )}
         </Formik>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-
 
         <div className="dhave-account-two">
           <p>Don’t have an account?<Link to="/admin/sign-up"> <span> SIGN UP! </span> </Link> </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignIn2
+export default SignIn2;

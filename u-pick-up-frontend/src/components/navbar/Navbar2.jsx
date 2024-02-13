@@ -43,8 +43,9 @@ const Navbar = () => {
       );
   
       console.log('Logout API response:', response.data);
-  
-      navigate('/', { replace: true });
+      localStorage.removeItem('authToken');
+
+      navigate('/');
     } catch (error) {
       console.error('Error occurred while logging out:', error);
     }

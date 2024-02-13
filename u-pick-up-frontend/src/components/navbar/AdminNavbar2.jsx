@@ -28,9 +28,7 @@ const AdminNavbar = () => {
         console.error('Authentication token not found');
         return;
       }
-
       const authToken = localStorage.getItem('authToken');
-      await logout();
 
       const response = await axios.post(
         'https://u-pick-up-y7qnw.ondigitalocean.app/api/logout',
@@ -41,12 +39,11 @@ const AdminNavbar = () => {
           },
         }
       );
-  
-      console.log('Logout API response:', response.data);
-  
       localStorage.removeItem('authToken');
-  
-      navigate('/', { replace: true });
+
+      await logout();
+      console.log('Logout API response:', response.data);
+      navigate('/');
     } catch (error) {
       console.error('Error occurred while logging out:', error);
     }
