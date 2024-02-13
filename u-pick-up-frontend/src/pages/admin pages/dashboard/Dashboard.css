@@ -11,3 +11,13 @@
     padding-left: 100px;
 }
 
+.totalStudents {
+    height: 200px;
+    padding: 20px; 
+    display: flex;
+    justify-content: center;
+}
+
+.data-text {
+    text-align: left;
+} 

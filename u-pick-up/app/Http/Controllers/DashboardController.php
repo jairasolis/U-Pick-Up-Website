@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function registeredStudentsCount()
@@ -39,5 +39,15 @@ class DashboardController extends Controller
             'above35Count' => $above35Count
         ]);
     }
+
+    // public function loginPerDay(){
+    //     $loginActivityPerDay = LoginActivity::select(
+    //         DB::raw('DATE(timestamp) as login_date'),
+    //         DB::raw('COUNT(*) as login_count')
+    //     )
+    //     ->groupBy('login_date')
+    //     ->orderBy('login_date', 'desc')
+    //     ->get();
+    // }
 }
 

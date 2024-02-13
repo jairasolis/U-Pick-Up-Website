@@ -64,7 +64,6 @@ const Dashboard = () => {
             setAge18to25Count(response.data.age18to25Count);
             setAge26to35Count(response.data.age26to35Count);
             setAbove35Count(response.data.above35Count);
-            console.log(response.data)
         } catch (error) {
             console.error('Error fetching students age counts:', error);
         }
@@ -72,6 +71,7 @@ const Dashboard = () => {
 
       fetchRegisteredStudentsCount();
       fetchStudentGenderCounts();
+      fetchStudentAgeCounts();
     }, []);
 
   return (
@@ -80,18 +80,18 @@ const Dashboard = () => {
         <Container>
           <Row>
             <Col>
-              <Card style={{ height: '200px', padding: '20px' }}>
-                <div className="dataCard">
+              <Card className='totalStudents' style={{ height: '200px', padding: '20px', display: 'flex' }}>
+                <Col>
                   <FontAwesomeIcon icon={faUser} className='dash-icon' />
-                  <div className="data-text">
-                    <p> {registeredStudentsCount} </p>
-                    <p> Total Students </p>
-                  </div>
-                </div>
+                </Col>
+                <Col className='data-text'>
+                  <p> {registeredStudentsCount} </p>
+                  <p> Total Students Registered </p>
+                </Col>
               </Card>
             </Col>
             <Col> 
-              <Card style={{ height: '200px', padding: '20px' }}>
+              <Card style={{ height: '200px', padding: '20px', display: 'flex' }}>
                 <Doughnut 
                   data={{
                     labels: ["Under 18", "19-25", "26-35", "36 and over"],
@@ -102,20 +102,39 @@ const Dashboard = () => {
                       },
                     ],
                   }}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: "right", // Set legend position
+                      },
+                      
+                    },
+                    maintainAspectRatio: false,
+                    
+                  }}
                 />
               </Card>
             </Col>
             <Col>
-              <Card style={{ height: '200px', padding: '20px' }}>
-                <Doughnut 
-                  data={{
-                    labels: ["Male", "Female", "Others"],
-                    datasets: [
+              <Card style={{ height: '200px', padding: '20px', display: 'flex'  }}>
+              <Doughnut
+                data={{
+                  labels: ["Male", "Female", "Others"],
+                  datasets: [
                     {
                       label: "Students",
                       data: [maleCount, femaleCount, 1],
+                      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors
                     },
                   ],
+                }}
+                options={{
+                  plugins: {
+                    legend: {
+                      position: "right", // Set legend position
+                    },
+                  },
+                  maintainAspectRatio: false,
                 }}
               />
               </Card>
@@ -141,9 +160,7 @@ const Dashboard = () => {
               </Card >
             </Col>
             <Col>
-                <Card style={{ height: '300px', marginTop: '20px', padding: '20px 40px'}}>
 
-                </Card>
             </Col>
           </Row>
         </Container>
