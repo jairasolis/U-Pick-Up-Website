@@ -80,4 +80,4 @@ Route::get('/books/{course}/{year_level}', [BookController::class, 'getBooksForY
 // dashboard
 Route::get('/dashboard/registered-students-count', [DashboardController::class, 'registeredStudentsCount']);
 Route::get('/dashboard/gender-students-count', [DashboardController::class, 'gender']);
-Route::get('/dashboard/gender-age-count', [DashboardController::class, 'age']);
+Route::get('/dashboard/age-students-count', [DashboardController::class, 'age']);

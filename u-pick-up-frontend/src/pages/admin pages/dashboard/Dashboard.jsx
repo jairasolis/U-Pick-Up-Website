@@ -53,19 +53,20 @@ const Dashboard = () => {
             console.log(response.data.femaleCount)
             console.log(response.data.maleCount)
         } catch (error) {
-            console.error('Error fetching student counts:', error);
+            console.error('Error fetching student gender counts:', error);
         }
       };
 
       const fetchStudentAgeCounts = async () => {
         try {
             const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/age-students-count');
-            setMaleCount(response.data.maleCount);
-            setFemaleCount(response.data.femaleCount);
-            console.log(response.data.femaleCount)
-            console.log(response.data.maleCount)
+            setUnder18Count(response.data.under18Count);
+            setAge18to25Count(response.data.age18to25Count);
+            setAge26to35Count(response.data.age26to35Count);
+            setAbove35Count(response.data.above35Count);
+            console.log(response.data)
         } catch (error) {
-            console.error('Error fetching student counts:', error);
+            console.error('Error fetching students age counts:', error);
         }
       };
 
