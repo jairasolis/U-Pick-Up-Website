@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('login_students', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')
+            ->constrained('students')
+            ->onDelete('cascade');
+            $table->timestamp('login_date')->useCurrent();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Student;
+use App\Models\LoginActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
@@ -40,14 +41,16 @@ class DashboardController extends Controller
         ]);
     }
 
-    // public function loginPerDay(){
-    //     $loginActivityPerDay = LoginActivity::select(
-    //         DB::raw('DATE(timestamp) as login_date'),
-    //         DB::raw('COUNT(*) as login_count')
-    //     )
-    //     ->groupBy('login_date')
-    //     ->orderBy('login_date', 'desc')
-    //     ->get();
-    // }
+    public function loginPerDay(){
+        $loginActivityPerDay = LoginActivity::select(
+            DB::raw('DATE(login_date) as login_date'),
+            DB::raw('COUNT(*) as login_count')
+        )
+        ->groupBy('login_date')
+        ->orderBy('login_date', 'desc')
+        ->get();
+    
+        return response()->json(['loginCounts' => $loginActivityPerDay]);
+    }
 }
 

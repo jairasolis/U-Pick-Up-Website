@@ -11,13 +11,13 @@
     padding-left: 100px;
 }
 
+.dash-icon, h4, p {
+    color: #454545;
+}
+
 .totalStudents {
     height: 200px;
     padding: 20px; 
     display: flex;
-    justify-content: center;
+    align-items: center;
 }
-
-.data-text {
-    text-align: left;
-} 

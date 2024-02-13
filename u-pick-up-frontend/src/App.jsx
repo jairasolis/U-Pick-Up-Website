@@ -68,7 +68,7 @@ const App = () => {
           />
 
           {/*  private routes */}
-          <Route element={auth && role!=="student" ? <PrivateRoutes roleRequiredStudent="student" /> : null}>
+          <Route element={ <PrivateRoutes roleRequiredStudent="student" /> }>
             <Route element={<HomeLayout />}>
               <Route path="/student/home" element={<Home />} />
               <Route path="/student/profile" element={<Profile />} />
@@ -85,7 +85,7 @@ const App = () => {
           <Route path="/admin/sign-in" element={<AdminSignIn2 />} />
 
           {/*  private routes */}
-          <Route element={auth && role!=="admin" ?<PrivateRoutesAdmin roleRequiredAdmin="admin" /> : null}>
+          <Route element={<PrivateRoutesAdmin roleRequiredAdmin="admin" />}>
             <Route element={<DashboardLayout />}>
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/add-post" element={<AddPost />} />

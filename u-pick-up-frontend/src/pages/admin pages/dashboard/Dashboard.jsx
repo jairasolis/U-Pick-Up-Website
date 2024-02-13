@@ -85,7 +85,7 @@ const Dashboard = () => {
                   <FontAwesomeIcon icon={faUser} className='dash-icon' />
                 </Col>
                 <Col className='data-text'>
-                  <p> {registeredStudentsCount} </p>
+                  <h4> {registeredStudentsCount} </h4>
                   <p> Total Students Registered </p>
                 </Col>
               </Card>
@@ -124,7 +124,7 @@ const Dashboard = () => {
                     {
                       label: "Students",
                       data: [maleCount, femaleCount, 1],
-                      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Example colors
+                      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], 
                     },
                   ],
                 }}
