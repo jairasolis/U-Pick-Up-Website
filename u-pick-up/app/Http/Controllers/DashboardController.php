@@ -11,4 +11,20 @@ class DashboardController extends Controller
         $count = Student::count();
         return response()->json(['count' => $count]);
     }
+    
+    public function gender()
+    {
+        $maleCount = Student::where('gender', 'male')->count();
+        $femaleCount = Student::where('gender', 'female')->count();
+        return response()->json([
+            'maleCount' => $maleCount,
+            'femaleCount' => $femaleCount
+        ]);
+    }
+
+    public function age()
+    {
+
+    }
 }
+

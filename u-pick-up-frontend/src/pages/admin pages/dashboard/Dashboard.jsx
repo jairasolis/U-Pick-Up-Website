@@ -27,6 +27,7 @@ const Dashboard = () => {
 
   // to get the total number registered
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
+  
 
   useEffect(() => {
       const fetchRegisteredStudentsCount = async () => {
@@ -39,7 +40,19 @@ const Dashboard = () => {
           }
       };
 
+      const fetchStudentCounts = async () => {
+        try {
+            const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/gender-students-count');
+            setMaleCount(response.data.maleCount);
+            setFemaleCount(response.data.femaleCount);
+            console.log(response.data.maleCount)
+        } catch (error) {
+            console.error('Error fetching student counts:', error);
+        }
+      };
+
       fetchRegisteredStudentsCount();
+      fetchStudentCounts();
     }, []);
 
   return (
