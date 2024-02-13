@@ -1,15 +1,17 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import './SignIn2.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import useAuth from "../../../auth/useAuth";
 
 
 const SignIn2 = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
-  
+  const { token, auth } = useAuth();
+
   const initialValues = {
     username: '',
     password: ''
@@ -34,7 +36,9 @@ const SignIn2 = () => {
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem('authToken', token);
-        navigate('/admin/dashboard');
+        localStorage.setItem("user", JSON.stringify({ role: "admin" }));
+        auth(true);
+        // console.log("authhhhhh:", auth);
       } else {
         setErrorMessage('An error occurred');
       }
@@ -48,6 +52,12 @@ const SignIn2 = () => {
       setSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (auth) {
+      navigate("/admin/dashboard");
+    }
+  }, [auth, navigate]);
 
 
   return (
