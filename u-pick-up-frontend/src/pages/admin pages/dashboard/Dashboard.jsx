@@ -45,7 +45,7 @@ const Dashboard = () => {
             const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/gender-students-count');
             setMaleCount(response.data.maleCount);
             setFemaleCount(response.data.femaleCount);
-            console.log(response.data.maleCount)
+            console.log(response.data.femaleCount)
         } catch (error) {
             console.error('Error fetching student counts:', error);
         }
