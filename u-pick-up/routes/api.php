@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
@@ -76,3 +77,5 @@ Route::delete('booksdelete/{id}', [BookController::class, 'destroy']);
 Route::get('/books/{course}', [BookController::class, 'getBooksForCourse']);
 Route::get('/books/{course}/{year_level}', [BookController::class, 'getBooksForYearLevelAndCourse']);
 
+// dashboard
+Route::get('/dashboard/registered-students-count', [DashboardController::class, 'registeredStudentsCount']);

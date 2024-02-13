@@ -1,15 +1,11 @@
 .dashboard {
     flex: 5;
     top: 70px;
-    display: flex;
-    flex-direction: column;
     height: 1000px;
     /* background-color: rgb(221, 221, 221); */
 }
 
 .dashboard-wrapper {
-    display: flex;
-    flex-direction: column;
     gap: 50px;
     padding-top: 80px;
     padding-left: 100px;
