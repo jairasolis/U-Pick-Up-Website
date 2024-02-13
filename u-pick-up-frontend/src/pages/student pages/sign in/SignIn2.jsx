@@ -37,7 +37,9 @@ const SignIn2 = () => {
         const { token } = response.data;
         localStorage.setItem("authToken", token);
         localStorage.setItem("user", JSON.stringify({ role: "student" }));
-        navigate("/student/home"); 
+        auth(true);
+        // console.log("authhhhhh:", auth);
+
       } else {
         setErrorMessage("An error occurred");
       }
@@ -52,11 +54,11 @@ const SignIn2 = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (auth) {
-  //     navigate("/student/home");
-  //   }
-  // }, [auth, navigate]);
+  useEffect(() => {
+    if (auth) {
+      navigate("/student/home");
+    }
+  }, [auth, navigate]);
 
   return (
     <div className="sign-in-two">

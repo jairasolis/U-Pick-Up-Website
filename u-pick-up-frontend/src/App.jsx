@@ -59,8 +59,8 @@ const App = () => {
 
           {/* student pages */}
           {/*  public routes */}
-          <Route path="/student/sign-up" element={<StudentSignUp2 />} />
-          <Route path="/student/sign-in" element={<StudentSignIn2 />} />
+          <Route path="/student/sign-up" element={auth ? <Navigate to="/student/home" /> : <StudentSignUp2 />} />
+          <Route path="/student/sign-in" element={auth ? <Navigate to="/student/home" /> : <StudentSignIn2 />} />
 
           {/*  private routes */}
           {/* <Route
