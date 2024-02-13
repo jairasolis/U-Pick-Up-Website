@@ -27,7 +27,12 @@ const Dashboard = () => {
 
   // to get the total number registered
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
-  
+  const [maleCount, setMaleCount] = useState(0);
+  const [femaleCount, setFemaleCount] = useState(0);
+  const [under18Count, setUnder18Count] = useState(0);
+  const [age18to25Count, setAge18to25Count] = useState(0);
+  const [age26to35Count, setAge26to35Count] = useState(0);
+  const [above35Count, setAbove35Count] = useState(0);
 
   useEffect(() => {
       const fetchRegisteredStudentsCount = async () => {
@@ -40,19 +45,32 @@ const Dashboard = () => {
           }
       };
 
-      const fetchStudentCounts = async () => {
+      const fetchStudentGenderCounts = async () => {
         try {
             const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/gender-students-count');
             setMaleCount(response.data.maleCount);
             setFemaleCount(response.data.femaleCount);
             console.log(response.data.femaleCount)
+            console.log(response.data.maleCount)
+        } catch (error) {
+            console.error('Error fetching student counts:', error);
+        }
+      };
+
+      const fetchStudentAgeCounts = async () => {
+        try {
+            const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/age-students-count');
+            setMaleCount(response.data.maleCount);
+            setFemaleCount(response.data.femaleCount);
+            console.log(response.data.femaleCount)
+            console.log(response.data.maleCount)
         } catch (error) {
             console.error('Error fetching student counts:', error);
         }
       };
 
       fetchRegisteredStudentsCount();
-      fetchStudentCounts();
+      fetchStudentGenderCounts();
     }, []);
 
   return (
@@ -79,7 +97,7 @@ const Dashboard = () => {
                     datasets: [
                       {
                         label: "Age",
-                        data: [400, 600, 100, 400],
+                        data: [under18Count, age18to25Count, age26to35Count, above35Count],
                       },
                     ],
                   }}
@@ -94,7 +112,7 @@ const Dashboard = () => {
                     datasets: [
                     {
                       label: "Students",
-                      data: [400, 600, 100],
+                      data: [maleCount, femaleCount, 1],
                     },
                   ],
                 }}
