@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Chart from 'chart.js/auto';
 
 // import dailyLoginChart from '../../../components/variables/chart.js'
 
@@ -27,17 +28,18 @@ const Dashboard = () => {
   // to get the total number registered
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
 
-    useEffect(() => {
-        const fetchRegisteredStudentsCount = async () => {
-            try {
-                const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/registered-students-count');
-                setRegisteredStudentsCount(response.data.count);
-            } catch (error) {
-                console.error('Error fetching registered students count:', error);
-            }
-        };
+  useEffect(() => {
+      const fetchRegisteredStudentsCount = async () => {
+          try {
+              const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/registered-students-count');
+              console.log(response.data.count)
+              setRegisteredStudentsCount(response.data.count);
+          } catch (error) {
+              console.error('Error fetching registered students count:', error);
+          }
+      };
 
-        fetchRegisteredStudentsCount();
+      fetchRegisteredStudentsCount();
     }, []);
 
   return (
