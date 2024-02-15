@@ -10,7 +10,7 @@ const SignIn2 = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const { token, auth } = useAuth();
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const initialValues = {
     student_id: "",
@@ -18,8 +18,13 @@ const SignIn2 = () => {
   };
 
   const validate = Yup.object({
-    student_id: Yup.string().required("Student ID is required"),
-    password: Yup.string().required("Password is required"),
+    student_id: Yup.string()
+      .required("Student ID Number is required.")
+      .matches(
+        /^\d{2}-\d{4}-\d{6}$/,
+        "ID Number must be in the format XX-XXXX-XXXXXX."
+      ),
+    password: Yup.string().required("Password is required."),
   });
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
@@ -40,18 +45,17 @@ const SignIn2 = () => {
         localStorage.setItem("authToken", token);
         localStorage.setItem("user", JSON.stringify({ role: "student" }));
         auth(true);
-
       } else {
         setErrorMessage("An error occurred");
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setErrorMessage("Invalid student ID or password");
+      if (error.response && error.response.status === 401) {
+        setErrorMessage("These credentials do not match our records.");
       } else {
         setErrorMessage("An error occurred");
       }
     } finally {
-      setLoading(false); 
+      setLoading(false);
       setSubmitting(false);
     }
   };
@@ -84,10 +88,10 @@ const SignIn2 = () => {
                   errors.student_id && touched.student_id ? "error" : ""
                 }`}
               >
-                <label htmlFor="idNum"> ID Number </label>
+                <label htmlFor="idNum"> Student ID Number </label>
                 <Field
                   type="text"
-                  placeholder="Your student number"
+                  placeholder="Your Student ID Number"
                   id="idNum"
                   name="student_id"
                 />
@@ -105,7 +109,7 @@ const SignIn2 = () => {
                 <label htmlFor="password"> Password </label>
                 <Field
                   type="password"
-                  placeholder="Enter password"
+                  placeholder="Enter Your Password"
                   id="password"
                   name="password"
                 />
@@ -118,9 +122,9 @@ const SignIn2 = () => {
               <button
                 type="submit"
                 className="sign-up-btn"
-                disabled={isSubmitting || loading} 
-              >{loading ? 'Loading...' : 'Sign In'}
-
+                disabled={isSubmitting || loading}
+              >
+                {loading ? "Loading..." : "Sign In"}
               </button>
             </Form>
           )}
