@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import {SignUpStudentValidation} from '../../../yup validation/SignUpStudentValidation';
-
+import { checkEmailAvailability } from "../../../api/checkStudentEmail";
+import { checkIdAvailability } from "../../../api/checkStudentId";
+import { registerStudent } from "../../../api/registerStudent";
 
 const SignUp2 = () => {
   const navigate = useNavigate();
@@ -21,60 +23,33 @@ const SignUp2 = () => {
 
   const handleSubmit = async (
     values,
-    { setSubmitting, setFieldError, resetForm }
+    { setSubmitting, setFieldError }
   ) => {
     try {
-      const emailCheck = await axios.get(
-        `https://u-pick-up-y7qnw.ondigitalocean.app/api/student-registration/${values.email}`
-      );
-      const idCheckResponse = await axios.get(
-        `https://u-pick-up-y7qnw.ondigitalocean.app/api/student-registration/${values.idNumber}`
-      );
-      setIdAvailable(true);
-      setEmailAvailable(true);
-
-      console.log("ID Check Response:", idCheckResponse.data);
-      console.log("Email Check Response:", emailCheck.data);
-
-      if (idCheckResponse.status && emailCheck.status === 200) {
-        const isIdAvailable = idCheckResponse.data;
-        const isEmailAvailable = emailCheck.data;
-
-        console.log("ID Available:", isIdAvailable);
-        console.log("Email Available:", isEmailAvailable);
-
-        if (isIdAvailable && isEmailAvailable) {
-          setIdAvailable(true);
-          setEmailAvailable(true);
-
-          const response = await axios.post(
-            "https://u-pick-up-y7qnw.ondigitalocean.app/api/student-registration",
-            {
-              first_name: "test",
-              middle_name: "test",
-              last_name: "test",
-              student_id: values.idNumber,
-              program: "it",
-              department: "cite",
-              age: 21,
-              gender: "df",
-              email_ad: values.email,
-              password: values.password,
-              password_confirmation: values.confirmPassword,
-            }
-          );
-
-          console.log("Response:", response.data);
-
-          if (response.status === 200) {
-            navigate("/student/sign-in");
-          } else {
-            setFieldError("submit", "An error occurred");
-          }
+      const isEmailAvailable = await checkEmailAvailability(values.email);
+      const isIdAvailable = await checkIdAvailability(values.idNumber);
+  
+      if (isIdAvailable && isEmailAvailable) {
+        const response = await registerStudent({
+          first_name: "test",
+          middle_name: "test",
+          last_name: "test",
+          student_id: values.idNumber,
+          program: "it",
+          department: "cite",
+          age: 21,
+          gender: "df",
+          email_ad: values.email,
+          password: values.password,
+          password_confirmation: values.confirmPassword
+        });
+            
+        console.log("Response:", response.data);
+  
+        if (response.status === 200) {
+          navigate("/student/sign-in");
         } else {
-          setIdAvailable(false);
-          setEmailAvailable(false);
-          console.log("error1");
+          setFieldError("submit", "An error occurred");
         }
       } else if (idCheckResponse.status && emailCheck.status === 409) {
         setIdAvailable(false);
@@ -87,8 +62,10 @@ const SignUp2 = () => {
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setIdAvailable(false);
+        setEmailAvailable(false);
         console.log("error4");
       } else {
+        setIdAvailable(false);
         setEmailAvailable(false);
         setFieldError("submit", "An error occurred");
         console.log("error5");
