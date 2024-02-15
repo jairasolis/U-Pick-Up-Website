@@ -61,13 +61,14 @@ class AuthController extends Controller
     }
 
     public function studentCheckId($student_id){
-        $studentIdExists = Student::where('student_id', $request->student_id)->exists();
+        $studentIdExists = Student::where('student_id', $student_id)->exists();
         if ($studentIdExists) {
             return response()->json([
                 'message' => 'Student ID not available'
             ], 422);
         }
     }
+    
 
 
     public function studentLogin(Request $request){
