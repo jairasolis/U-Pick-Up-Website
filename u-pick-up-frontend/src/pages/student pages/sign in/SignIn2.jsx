@@ -3,8 +3,9 @@ import "./SignIn2.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import useAuth from "../../../auth/useAuth";
+import {SignInStudentValidation} from '../../../yup validation/SignInStudentValidation';
+
 
 const SignIn2 = () => {
   const navigate = useNavigate();
@@ -17,15 +18,6 @@ const SignIn2 = () => {
     password: "",
   };
 
-  const validate = Yup.object({
-    student_id: Yup.string()
-      .required("Student ID Number is required.")
-      .matches(
-        /^\d{2}-\d{4}-\d{6}$/,
-        "ID Number must be in the format XX-XXXX-XXXXXX."
-      ),
-    password: Yup.string().required("Password is required."),
-  });
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
@@ -78,7 +70,7 @@ const SignIn2 = () => {
         </div>
         <Formik
           initialValues={initialValues}
-          validationSchema={validate}
+          validationSchema={SignInStudentValidation}
           onSubmit={onSubmit}
         >
           {({ isSubmitting, errors, touched }) => (

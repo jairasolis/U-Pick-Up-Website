@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import useAuth from "../../../auth/useAuth";
+import {SignInAdminValidation} from '../../../yup validation/SignInAdminValidation';
 
 
 const SignIn2 = () => {
@@ -18,12 +19,6 @@ const SignIn2 = () => {
     password: ''
   };
 
-  const validate = Yup.object({
-    username: Yup.string()
-      .required('Username is required.'),
-    password: Yup.string()
-      .required('Password is required.')
-  });
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
@@ -74,7 +69,7 @@ const SignIn2 = () => {
         </div>
         <Formik 
           initialValues={initialValues} 
-          validationSchema={validate} 
+          validationSchema={SignInAdminValidation} 
           onSubmit={onSubmit}>
           {({ isSubmitting, errors, touched }) => (
             <Form className="form-wrapper-two">
