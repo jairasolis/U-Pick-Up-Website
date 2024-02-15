@@ -65,7 +65,11 @@ class AuthController extends Controller
         if ($studentIdExists) {
             return response()->json([
                 'message' => 'Student ID not available'
-            ], 422);
+            ], 409);
+        } else {
+            return response()->json([
+                'message' => 'Student ID available'
+            ], 200);
         }
     }
     
