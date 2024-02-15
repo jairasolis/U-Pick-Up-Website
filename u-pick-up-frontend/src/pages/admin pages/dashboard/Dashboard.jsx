@@ -80,15 +80,17 @@ const Dashboard = () => {
         <Container>
           <Row>
             <Col>
-              <Card className='totalStudents' style={{ height: '200px', padding: '20px', display: 'flex' }}>
-                <Col>
-                  <FontAwesomeIcon icon={faUser} className='dash-icon' />
-                </Col>
-                <Col className='data-text'>
-                  <h4> {registeredStudentsCount} </h4>
-                  <p> Total Students Registered </p>
-                </Col>
-              </Card>
+              <Link to="/admin/dashboard-department"> 
+                <Card className='totalStudents' style={{ height: '200px', padding: '20px', display: 'flex' }}>
+                  <Col>
+                    <FontAwesomeIcon icon={faUser} className='dash-icon' />
+                  </Col>
+                  <Col className='data-text'>
+                    <h4> {registeredStudentsCount} </h4>
+                    <p> Total Students Registered </p>
+                  </Col>
+                </Card>
+              </Link>
             </Col>
             <Col> 
               <Card style={{ height: '200px', padding: '20px', display: 'flex' }}>
