@@ -13,3 +13,5 @@ export const registerStudent = async (userData) => {
     throw error;
   }
 };
+
+export default registerStudent;

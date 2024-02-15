@@ -13,3 +13,5 @@ export const registerAdmin = async (userData) => {
     throw error;
   }
 };
+
+export default registerAdmin;
