@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './SignUp2.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 
 const SignIn2 = () => {
   const navigate = useNavigate();
+  const [idAvailable, setIdAvailable] = useState(true);
 
   const initialValues = {
     email: '',
@@ -31,30 +32,59 @@ const SignIn2 = () => {
 
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
-      const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/student-registration', {
-        first_name: 'test',
-        middle_name: 'test',
-        last_name: 'test',
-        student_id: values.idNumber,
-        program: 'it',
-        department: 'cite',
-        age: 21,
-        gender: 'df',
-        email_ad: values.email,
-        password: values.password,
-        password_confirmation: values.confirmPassword
-      });
+      const idCheckResponse = await axios.get(
+        `https://u-pick-up-y7qnw.ondigitalocean.app/api/student-registration/${values.idNumber}`
+      );
+      setIdAvailable(true);
 
-      console.log('Response:', response.data);
+      console.log('ID Check Response:', idCheckResponse.data);
 
-      if (response.status === 200) {
-        navigate('/student/sign-in');
+      if (idCheckResponse.status === 200) {
+        const isAvailable = idCheckResponse.data;
+        console.log('ID Available:', isAvailable);
+
+        if (isAvailable) {
+          setIdAvailable(true);
+
+          const response = await axios.post(
+            'https://u-pick-up-y7qnw.ondigitalocean.app/api/student-registration',
+            {
+              first_name: 'test',
+              middle_name: 'test',
+              last_name: 'test',
+              student_id: values.idNumber,
+              program: 'it',
+              department: 'cite',
+              age: 21,
+              gender: 'df',
+              email_ad: values.email,
+              password: values.password,
+              password_confirmation: values.confirmPassword
+            });
+
+          console.log('Response:', response.data);
+
+          if (response.status === 200) {
+            navigate('/student/sign-in');
+          } else {
+            setFieldError('submit', 'An error occurred');
+          }
+        } else {
+          setIdAvailable(false);
+          console.log('error');
+        }
+      } else if (idCheckResponse.status === 409) {
+        setIdAvailable(false);
       } else {
         setFieldError('submit', 'An error occurred');
       }
     } catch (error) {
-      console.error('Error:', error);
-      setFieldError('submit', 'An error occurred');
+      if (error.response && error.response.status === 409) {
+        setIdAvailable(false);
+      } else {
+        console.error('Error:', error);
+        setFieldError('submit', 'An error occurred');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -76,67 +106,100 @@ const SignIn2 = () => {
           onSubmit={handleSubmit}>
           {({ isSubmitting, errors, touched }) => (
             <Form className="form-wrapper-two">
-              <div className={`input-field-two ${errors.email && touched.email ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.email && touched.email ? 'error' : ''
+                }`}
+              >
                 <label htmlFor="email"> Email Address </label>
-                <Field 
-                  type="text" 
-                  name="email" 
-                  id="email" 
+                <Field
+                  type="text"
+                  name="email"
+                  id="email"
                   placeholder='abc.up@phinmaed.com'/>
-                <ErrorMessage 
-                  name="email" 
-                  component="p" 
-                  className="error-message" />
+                <ErrorMessage
+                  name="email"
+                  component="p"
+                  className='error-message'/>
               </div>
-              <div className={`input-field-two ${errors.idNumber && touched.idNumber ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.idNumber && touched.idNumber ? 'error' : ''
+                }`}
+              >
                 <label htmlFor="idNumber"> ID Number </label>
-                <Field 
-                  type="text" 
-                  name="idNumber" 
+                <Field
+                  type="text"
+                  name="idNumber"
                   id="idNumber"
                   placeholder='Your student number' />
-                <ErrorMessage 
-                  name="idNumber" 
-                  component="p" 
+                <ErrorMessage
+                  name="idNumber"
+                  component="p"
                   className="error-message" />
+                {!idAvailable && !(errors.idNumber && touched.idNumber) && (
+                  <p className="error-message">
+                    This student ID is not available.
+                  </p>
+                )}
               </div>
-              <div className={`input-field-two ${errors.password && touched.password ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.password && touched.password ? 'error' : ''
+                }`}
+              >
                 <label htmlFor="password"> Password </label>
-                <Field 
-                  type="password"  
-                  name="password" 
+                <Field
+                  type="password"
+                  name="password"
                   id="password"
                   placeholder='Enter password' />
-                <ErrorMessage 
-                  name="password" 
-                  component="p" 
+                <ErrorMessage
+                  name="password"
+                  component="p"
                   className="error-message" />
               </div>
-              <div className={`input-field-two ${errors.confirmPassword && touched.confirmPassword ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.confirmPassword && touched.confirmPassword
+                    ? 'error'
+                    : ''
+                }`}
+              >
                 <label htmlFor="confirmPassword"> Confirm Password </label>
-                <Field 
-                  type="password" 
-                  name="confirmPassword" 
-                  id="confirmPassword" 
+                <Field
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
                   placeholder='Confirm password' />
-                <ErrorMessage 
-                  name="confirmPassword" 
-                  component="p" 
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="p"
                   className="error-message" />
               </div>
-              <button type="submit" className="sign-up-btn" disabled={isSubmitting}>Sign Up</button>
-              <ErrorMessage 
-                name="submit" 
-                component="p" 
+              <button
+                type="submit"
+                className="sign-up-btn"
+                disabled={isSubmitting}
+              >
+                Sign Up
+              </button>
+              <ErrorMessage
+                name="submit"
+                component="p"
                 className="error-message" />
             </Form>
           )}
         </Formik>
-
         <div className="have-account-two">
-          <p>Already have an account? <Link to="/student/sign-in"> <span> SIGN IN! </span> </Link> </p>
+          <p>
+            Already have an account?{' '}
+            <Link to="/student/sign-in">
+              {' '}
+              <span> SIGN IN! </span>{' '}
+            </Link>{' '}
+          </p>
         </div>
-        
       </div>
     </div>
   )
