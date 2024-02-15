@@ -5,6 +5,7 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import useAuth from "../../../auth/useAuth";
 import {SignInStudentValidation} from '../../../yup validation/SignInStudentValidation';
+import { loginStudent } from "../../../api/loginStudent";
 
 
 const SignIn2 = () => {
@@ -19,18 +20,13 @@ const SignIn2 = () => {
   };
 
 
-  const onSubmit = async (values, { setSubmitting, setFieldError }) => {
+  const onSubmit = async (values, { setSubmitting }) => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        "https://u-pick-up-y7qnw.ondigitalocean.app/api/student-login",
-        {
-          student_id: values.student_id,
-          password: values.password,
-        }
-      );
-
-      console.log("Response:", response.data);
+      const response = await loginStudent({
+        student_id: values.student_id,
+        password: values.password,
+      });
 
       if (response.status === 200) {
         const { token } = response.data;
@@ -53,7 +49,7 @@ const SignIn2 = () => {
   };
 
   useEffect(() => {
-    console.log("authhhhhh:", auth);
+    console.log("auth:", auth);
 
     if (auth) {
       navigate("/student/home");
