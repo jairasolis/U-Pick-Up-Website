@@ -43,8 +43,11 @@ const StudentsByDepartment = () => {
           {departments.map((dept, index) => (
             <Col key={index}>
               <Link to="/admin/dashboard-program">
-                <Card border="secondary">
-                  <Card.Header>{dept}</Card.Header>
+                <Card>
+                    <Card.Header>
+                        <img src={`/images/${dept}.png`} alt="" style={{width: "35px", height: "auto"}}/>
+                        {dept}
+                    </Card.Header>
                   <Card.Body>
                     <Card.Text>
                         {regStudentsPerDeptCount[dept]}
