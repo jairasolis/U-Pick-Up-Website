@@ -15,12 +15,17 @@ class DashboardController extends Controller
 
     public function registeredStudentsPerDepartment()
     {
-        $departments = ['CITE', 'CELA', 'CEA', 'CMA'];
+        $departments = ['CAS', 'CAHS', 'CEA', 'CELA', 'CCJE', 'CITE', 'CMA'];
+        $counts = array_fill_keys($departments, 0);
 
-        $counts = Student::select('department', DB::raw('COUNT(*) as count'))
+        $studentsCounts = Student::select('department', DB::raw('COUNT(*) as count'))
                         ->whereIn('department', $departments)
                         ->groupBy('department')
                         ->get();
+
+        foreach ($studentsCounts as $count) {
+            $counts[$count->department] = $count->count;
+        }
                         
         return response()->json(['counts' => $counts]);
     }
