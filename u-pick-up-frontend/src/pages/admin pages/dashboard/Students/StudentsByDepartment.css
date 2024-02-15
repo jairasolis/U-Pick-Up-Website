@@ -1,0 +1,21 @@
+.by-department {
+    flex: 5;
+    top: 70px;
+    padding-top: 100px;
+}
+
+.dash-nav {
+    margin-bottom: 20px;
+}
+
+.dash-nav ul{
+    display: flex;
+    gap: 20px;
+}
+
+.divider {
+    width: 1px;
+    height: 100%;
+    background-color: black; /* or any other color */
+    margin: 0 10px; /* Adjust margin as needed */
+}

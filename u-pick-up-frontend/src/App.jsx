@@ -28,6 +28,8 @@ import Faq from "./pages/student pages/help/Faq";
 import AdminSignUp2 from "./pages/admin pages/sign up/SignUp2";
 import AdminSignIn2 from "./pages/admin pages/sign in/SignIn2";
 import Dashboard from "./pages/admin pages/dashboard/Dashboard";
+import StudentsByDepartment from "./pages/admin pages/dashboard/Students/StudentsByDepartment";
+import StudentsByProgram from "./pages/admin pages/dashboard/Students/StudentsByProgram";
 import AddPost from "./pages/admin pages/add post/AddPost";
 import AddEvent from "./pages/admin pages/add event/AddEvent";
 import AdminProfile from "./pages/admin pages/profile/Profile";
@@ -40,6 +42,7 @@ import Modules from "./pages/admin pages/inventory/inventory items/Modules";
 // import layout
 import HomeLayout from "./layout/HomeLayout";
 import DashboardLayout from "./layout/DashboardLayout";
+
 
 const App = () => {
   const { auth, role } = useAuth();
@@ -88,6 +91,8 @@ const App = () => {
           <Route element={<PrivateRoutesAdmin roleRequiredAdmin="admin" />}>
             <Route element={<DashboardLayout />}>
               <Route path="/admin/dashboard" element={<Dashboard />} />
+              <Route path="/admin/dashboard-department" element={<StudentsByDepartment />} />
+              <Route path="/admin/dashboard-program" element={<StudentsByProgram />} />
               <Route path="/admin/add-post" element={<AddPost />} />
               <Route path="/admin/add-event" element={<AddEvent />} />
               <Route path="/admin/inventory" element={<Inventory />} />
