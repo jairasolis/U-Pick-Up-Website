@@ -80,7 +80,7 @@ const Dashboard = () => {
         <Container>
           <Row>
             <Col>
-              <Link to="/admin/dashboard-department"> 
+              <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> 
                 <Card className='totalStudents' style={{ height: '200px', padding: '20px', display: 'flex' }}>
                   <Col>
                     <FontAwesomeIcon icon={faUser} className='dash-icon' />

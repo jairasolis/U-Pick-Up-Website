@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <div className='navbar-2'>
       <nav>
-        <Link to={auth ? "/student/home" : "/"}>
+        <Link to={auth ? "/student/home" : "/"} style={{ textDecoration: 'none' }}>
           <div className="logo">
             <img src="../images/logo.png" alt="" />
           </div>
@@ -71,14 +71,14 @@ const Navbar = () => {
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link> */}
 
-              <Link to="/student/help" className="sub-menu-link">
+              <Link to="/student/help" className="sub-menu-link" style={{ textDecoration: 'none' }}>
                 <h3> FAQs </h3>
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>
 
               <hr />
 
-              <Link onClick={handleSignOut} className="sub-menu-link">
+              <Link onClick={handleSignOut} className="sub-menu-link" style={{ textDecoration: 'none' }}>
                 <h3> Sign Out </h3>
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>

@@ -9,19 +9,19 @@ const LeftBar = () => {
     <div className="leftBar">
       <div className="leftbar-container">
           <div className="menu"> 
-            <Link to="/student/home">
+            <Link to="/student/home" style={{ textDecoration: 'none' }}>
               <div className="house">
                 <FontAwesomeIcon icon={ faHouse } className='icon'/>
                 <p> Home </p>
               </div>
             </Link>
-            <Link to="/student/calendar">
+            <Link to="/student/calendar" style={{ textDecoration: 'none' }}>
               <div className="calendar">
                 <FontAwesomeIcon icon={faCalendar} className='icon'/>
                 <p> Calendar </p> 
               </div>
             </Link>
-            <Link to="/student/profile">
+            <Link to="/student/profile" style={{ textDecoration: 'none' }}>
               <div className="profile-left">
                 <FontAwesomeIcon icon={faUser} className='icon'/>
                 <p> Profile </p> 

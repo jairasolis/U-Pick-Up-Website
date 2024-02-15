@@ -50,19 +50,19 @@ const AdminLeftBar = () => {
               </div>
             )}
           </div> */}
-          <Link to="/admin/dashboard">
+          <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faChartColumn} className='icon' />
               <p> Dashboard </p>
             </div>
           </Link>
-          <Link to="/admin/add-post">
+          <Link to="/admin/add-post" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faSquarePen} className='icon' />
               <p> Create Post </p>
             </div>
           </Link>
-          <Link to="/admin/add-event">
+          <Link to="/admin/add-event" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faCalendarDays} className='icon' />
               <p> Add event </p>
@@ -70,26 +70,26 @@ const AdminLeftBar = () => {
           </Link>
           <hr />
           <p> Inventory </p>
-          <Link to="/admin/inventory-books">
+          <Link to="/admin/inventory-books" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faBook} className='icon' />
               <p> Books </p>
             </div>
           </Link>
-          <Link to="/admin/inventory-modules">
+          <Link to="/admin/inventory-modules" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faBookOpen} className='icon' />
               <p> Modules </p>
             </div>
           </Link>
-          <Link to="/admin/inventory-uniforms">
+          <Link to="/admin/inventory-uniforms" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faShirt} className='icon' />
               <p> Uniforms </p>
             </div>
           </Link>
           <hr />
-          <Link to="/admin/profile">
+          <Link to="/admin/profile" style={{ textDecoration: 'none' }}>
             <div className="profile-left">
               <FontAwesomeIcon icon={faUser} className='icon' />
               <p> Profile </p>

@@ -1,3 +1,7 @@
+* {
+    text-decoration: none;
+}
+
 .by-department {
     flex: 5;
     top: 70px;

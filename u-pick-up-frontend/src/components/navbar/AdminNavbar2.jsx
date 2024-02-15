@@ -52,7 +52,7 @@ const AdminNavbar = () => {
   return (
     <div className='navbar-2'>
       <nav>
-        <Link to={auth ? "/admin/dashboard" : "/"}>
+        <Link to={auth ? "/admin/dashboard" : "/"} style={{ textDecoration: 'none' }}>
           <div className="logo">
             <img src="../images/logo.png" alt="" />
           </div>
@@ -68,7 +68,7 @@ const AdminNavbar = () => {
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link> */}
 
-              <Link onClick={handleSignOut} className="sub-menu-link">
+              <Link onClick={handleSignOut} className="sub-menu-link" style={{ textDecoration: 'none' }}>
                 <h3> Sign Out </h3>
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>

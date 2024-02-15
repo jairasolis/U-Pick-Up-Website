@@ -34,26 +34,24 @@ const StudentsByProgram = () => {
       <div className='by-program'>
         <Row className='dash-nav'>
           <ul>
-            <Link to="/admin/dashboard"> <li> Dashboard </li> </Link>
+            <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}> <li> Dashboard </li> </Link>
             <div className="divider"></div>
-            <Link to="/admin/dashboard-department"> <li> Students Per Department </li> </Link>
+            <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> <li> Students Per Department </li> </Link>
             <div className="divider"></div>
-            <Link to="/admin/dashboard-program"> <li> Students Per Program </li> </Link>
+            <Link to="/admin/dashboard-program" style={{ textDecoration: 'none' }}> <li> Students Per Program </li> </Link>
           </ul>
         </Row>
         <Row xs={1} md={4} className="g-4">
           {programs.map((program, index) => (
             <Col key={index}>
-              <Link to="/admin/dashboard-program">
-                <Card border="secondary">
-                  <Card.Header>{program}</Card.Header>
-                  <Card.Body>
-                    <Card.Text>
-                        {regStudentsPerProgCount[program]}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Link>
+              <Card border="secondary">
+                <Card.Header>{program}</Card.Header>
+                <Card.Body>
+                  <Card.Text>
+                      {regStudentsPerProgCount[program]}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
             </Col>
           ))}
         </Row>

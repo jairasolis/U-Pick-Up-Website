@@ -17,8 +17,8 @@ const login = () => {
           </div>
           {/* <div className="login-text"> Log in as</div> */}
           <div className="login-items">
-            <Link to="/student/sign-in" className="login-item"> <p> Student </p> </Link>
-            <Link to="/admin/sign-in" className="login-item"> <p> Admin </p> </Link>
+            <Link to="/student/sign-in" className="login-item" style={{ textDecoration: 'none' }}> <p> Student </p> </Link>
+            <Link to="/admin/sign-in" className="login-item" style={{ textDecoration: 'none' }}> <p> Admin </p> </Link>
           </div>
         </div>
       </div>

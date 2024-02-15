@@ -32,17 +32,17 @@ const StudentsByDepartment = () => {
       <div className='by-department'>
         <Row className='dash-nav'>
           <ul>
-            <Link to="/admin/dashboard"> <li> Dashboard </li> </Link>
+            <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}> <li> Dashboard </li> </Link>
             <div className="divider"></div>
-            <Link to="/admin/dashboard-department"> <li> Students Per Department </li> </Link>
+            <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> <li> Students Per Department </li> </Link>
             <div className="divider"></div>
-            <Link to="/admin/dashboard-program"> <li> Students Per Program </li> </Link>
+            <Link to="/admin/dashboard-program" style={{ textDecoration: 'none' }}> <li> Students Per Program </li> </Link>
           </ul>
         </Row>
         <Row xs={1} md={4} className="g-4">
           {departments.map((dept, index) => (
             <Col key={index}>
-              <Link to="/admin/dashboard-program">
+              <Link to="/admin/dashboard-program"  style={{ textDecoration: 'none' }}>
                 <Card>
                     <Card.Header>
                         <img src={`/images/departments/${dept}.png`} alt="" style={{width: "35px", height: "auto"}}/>
