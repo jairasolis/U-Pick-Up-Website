@@ -53,47 +53,46 @@ const AdminLeftBar = () => {
           <Link to="/admin/dashboard">
             <div className="profile-left">
               <FontAwesomeIcon icon={faChartColumn} className='icon' />
-              <h4> Dashboard </h4>
+              <p> Dashboard </p>
             </div>
           </Link>
           <Link to="/admin/add-post">
             <div className="profile-left">
               <FontAwesomeIcon icon={faSquarePen} className='icon' />
-              <h4> Create Post </h4>
+              <p> Create Post </p>
             </div>
           </Link>
           <Link to="/admin/add-event">
             <div className="profile-left">
               <FontAwesomeIcon icon={faCalendarDays} className='icon' />
-              <h4> Add event </h4>
+              <p> Add event </p>
             </div>
           </Link>
           <hr />
-          <h4> Inventory </h4>
-          <hr />
+          <p> Inventory </p>
           <Link to="/admin/inventory-books">
             <div className="profile-left">
               <FontAwesomeIcon icon={faBook} className='icon' />
-              <h4> Books </h4>
+              <p> Books </p>
             </div>
           </Link>
           <Link to="/admin/inventory-modules">
             <div className="profile-left">
               <FontAwesomeIcon icon={faBookOpen} className='icon' />
-              <h4> Modules </h4>
+              <p> Modules </p>
             </div>
           </Link>
           <Link to="/admin/inventory-uniforms">
             <div className="profile-left">
               <FontAwesomeIcon icon={faShirt} className='icon' />
-              <h4> Uniforms </h4>
+              <p> Uniforms </p>
             </div>
           </Link>
           <hr />
           <Link to="/admin/profile">
             <div className="profile-left">
               <FontAwesomeIcon icon={faUser} className='icon' />
-              <h4> Profile </h4>
+              <p> Profile </p>
             </div>
           </Link>
           <hr />

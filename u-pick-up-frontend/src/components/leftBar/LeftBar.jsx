@@ -12,19 +12,19 @@ const LeftBar = () => {
             <Link to="/student/home">
               <div className="house">
                 <FontAwesomeIcon icon={ faHouse } className='icon'/>
-                <h4> Home </h4>
+                <p> Home </p>
               </div>
             </Link>
             <Link to="/student/calendar">
               <div className="calendar">
                 <FontAwesomeIcon icon={faCalendar} className='icon'/>
-                <h4> Calendar </h4> 
+                <p> Calendar </p> 
               </div>
             </Link>
             <Link to="/student/profile">
               <div className="profile-left">
                 <FontAwesomeIcon icon={faUser} className='icon'/>
-                <h4> Profile </h4> 
+                <p> Profile </p> 
               </div>
             </Link>
             <hr />

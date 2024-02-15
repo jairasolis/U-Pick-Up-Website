@@ -30,6 +30,27 @@ class DashboardController extends Controller
         return response()->json(['counts' => $counts]);
     }
     
+
+    public function registeredStudentsPerProgram()
+    {
+        $courses = ['BSN', 'BSMLS', 'BSPSYCH', 'BSPHARMA', 'BSCE', 'BSCPE', 'BSEE', 'BSECE', 'BSME', 'BSARCH', 
+        'AB COMM', 'AB POLSCI', 'BSED - English', 'BSED - Math', 'BSED - Science', 'BSED - Social Studies',
+        'BSCRIM', 'BSIT', 'BSA', 'BSAIS', 'BSHM', 'BSMA', 'BSTM', 'BSBA - FM', 'BSBA - MM'];
+
+        $counts = array_fill_keys($courses, 0);
+
+        $studentsCounts = Student::select('course', DB::raw('COUNT(*) as count'))
+                        ->whereIn('course', $courses)
+                        ->groupBy('course')
+                        ->get();
+
+        foreach ($studentsCounts as $count) {
+            $counts[$count->course] = $count->count;
+        }
+                        
+        return response()->json(['counts' => $counts]);
+    }
+
     public function gender()
     {
         $maleCount = 0;
