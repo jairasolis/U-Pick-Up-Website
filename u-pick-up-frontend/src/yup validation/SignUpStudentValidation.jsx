@@ -11,7 +11,7 @@ export const SignUpStudentValidation = Yup.object({
   idNumber: Yup.string()
     .required("Student ID Number is required.")
     .matches(
-      /^\d{2}-\d{4}-\d{6}$/,
+      /^\d{2}-\d{4}-\d{5,6}$/,
       "Student ID Number must be in the format XX-XXXX-XXXXXX."
     ),
   password: Yup.string()

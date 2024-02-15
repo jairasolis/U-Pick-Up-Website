@@ -5,6 +5,9 @@ import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {SignUpAdminValidation} from '../../../yup validation/SignUpAdminValidation';
+import { checkEmailAvailability } from "../../../api/checkAdminEmail";
+import { checkUsernameAvailability } from "../../../api/checkAdminUsername";
+import { registerAdmin } from "../../../api/registerAdmin";
 
 const SignUp2 = () => {
   const navigate = useNavigate();
@@ -20,53 +23,31 @@ const SignUp2 = () => {
   };
 
  
-  const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
+  const handleSubmit = async (
+    values,
+    { setSubmitting, setFieldError }
+  ) => {
     try {
-      const emailCheck = await axios.get(
-        `https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration/${values.email}`
-      );
-      const usernameCheck = await axios.get(
-        `https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration/${values.username}`
-      );
-      setUsernameAvailable(true);
-      setEmailAvailable(true);
-      
-      console.log("Username Check Response:", usernameCheck.data);
-      console.log("Email Check Response:", emailCheck.data);
-
-
-      if (usernameCheck.status && emailCheck.status === 200){
-        const isUsernameAvailable = usernameCheck.data;
-        const isEmailAvailable = emailCheck.data; 
-
-        console.log("ID Available:", isUsernameAvailable);
-        console.log("Email Available:", isEmailAvailable);
-
-        if (isUsernameAvailable && isEmailAvailable) {
-          setUsernameAvailable(true);
-          setEmailAvailable(true);
-
-          const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration', {
-            email_ad: values.email,
-            username: values.username,
-            department: values.department,
-            password: values.password,
-            password_confirmation: values.confirmPassword
-          });
-
-          console.log("Response:", response.data);
-
-          if (response.status === 200) {
-            navigate("/admin/sign-in");
-          } else {
-            setFieldError("submit", "An error occurred");
-          }
+      const isEmailAvailable = await checkEmailAvailability(values.email);
+      const isUsernameAvailable = await checkUsernameAvailability(values.username);
+  
+      if (isUsernameAvailable && isEmailAvailable) {
+        const response = await registerAdmin({
+          email_ad: values.email,
+          username: values.username,
+          department: values.department,
+          password: values.password,
+          password_confirmation: values.confirmPassword
+        });
+            
+        console.log("Response:", response.data);
+  
+        if (response.status === 200) {
+          navigate("/admin/sign-in");
         } else {
-          setUsernameAvailable(false);
-          setEmailAvailable(false);
-          console.log("error1");
+          setFieldError("submit", "An error occurred");
         }
-      } else if (usernameCheck.status && emailCheck.status === 409) {
+      } else if (idCheckResponse.status && emailCheck.status === 409) {
         setUsernameAvailable(false);
         setEmailAvailable(false);
         console.log("error2");
@@ -77,8 +58,10 @@ const SignUp2 = () => {
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setUsernameAvailable(false);
+        setEmailAvailable(false);
         console.log("error4");
       } else {
+        setUsernameAvailable(false);
         setEmailAvailable(false);
         setFieldError("submit", "An error occurred");
         console.log("error5");
@@ -88,6 +71,7 @@ const SignUp2 = () => {
       console.log("error6");
     }
   };
+
 
   return (
     <div className='sign-up-two'>
