@@ -38,13 +38,6 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $studentIdExists = Student::where('student_id', $request->student_id)->exists();
-        if ($studentIdExists) {
-            return response()->json([
-                'message' => 'Student ID not available'
-            ], 422);
-        }
-
         $student = DB::transaction(function () use ($request) {
             return Student::create([
                 'first_name'=> $request->first_name,
@@ -66,6 +59,16 @@ class AuthController extends Controller
         ], 200);
 
     }
+
+    public function studentCheckId($student_id){
+        $studentIdExists = Student::where('student_id', $request->student_id)->exists();
+        if ($studentIdExists) {
+            return response()->json([
+                'message' => 'Student ID not available'
+            ], 422);
+        }
+    }
+
 
     public function studentLogin(Request $request){
         $validator = Validator::make($request->all(),[

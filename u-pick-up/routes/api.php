@@ -35,6 +35,7 @@ Route::apiResource('/post', PostController::class);
 // student registration and login route
 Route::post('/student-registration', [AuthController::class, 'studentRegistration']);
 Route::post('/student-login', [AuthController::class, 'studentLogin']);
+Route::get('/student-registration/{student_id}', [AuthController::class, 'studentCheckId']);
 
 // admin registration and login route
 Route::post('/admin-registration', [AuthController::class, 'adminRegistration']);
