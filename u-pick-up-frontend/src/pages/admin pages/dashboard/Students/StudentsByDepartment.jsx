@@ -45,7 +45,7 @@ const StudentsByDepartment = () => {
               <Link to="/admin/dashboard-program">
                 <Card>
                     <Card.Header>
-                        <img src={`/images/${dept}.png`} alt="" style={{width: "35px", height: "auto"}}/>
+                        <img src={`/images/departments/${dept}.png`} alt="" style={{width: "35px", height: "auto"}}/>
                         {dept}
                     </Card.Header>
                   <Card.Body>
