@@ -1,10 +1,16 @@
-.faq-content {
+.faq {
     flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(221, 221, 221); */
+    align-items: center;
 }
 
 .header {
     background-color: #516E53;
     height: 300px;
+    width: 100%;
 }
 
 .faq-header h1 {
