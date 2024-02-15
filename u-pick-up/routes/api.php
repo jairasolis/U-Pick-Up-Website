@@ -41,6 +41,8 @@ Route::get('/student-registration/{email_ad}', [AuthController::class, 'studentE
 // admin registration and login route
 Route::post('/admin-registration', [AuthController::class, 'adminRegistration']);
 Route::post('/admin-login', [AuthController::class, 'adminLogin']);
+Route::get('/admin-registration/{username}', [AuthController::class, 'adminUsernameCheck']);
+Route::get('/admin-registration/{email_ad}', [AuthController::class, 'adminEmailCheck']);
 
 // logout student or admin
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

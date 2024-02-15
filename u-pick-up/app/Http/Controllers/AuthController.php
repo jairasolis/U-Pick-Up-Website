@@ -74,7 +74,7 @@ class AuthController extends Controller
     }
     public function studentEmailCheck($email_ad){
         $emailExists = Student::where('email_ad', $email_ad)->exists();
-        if ($email_ad) {
+        if ($emailExists) {
             return response()->json([
                 'message' => 'Email not available'
             ], 409);
@@ -155,6 +155,31 @@ class AuthController extends Controller
 
     }
 
+    public function adminUsernameCheck($username){
+        $adminUsernameExists = Admin::where('username', $username)->exists();
+        if ($adminUsernameExists) {
+            return response()->json([
+                'message' => 'Username not available'
+            ], 409);
+        } else {
+            return response()->json([
+                'message' => 'Username ID available'
+            ], 200);
+        }
+    }
+    public function adminEmailCheck($email_ad){
+        $adminEmailExists = Admin::where('email_ad', $email_ad)->exists();
+        if ($adminEmailExists) {
+            return response()->json([
+                'message' => 'Email not available'
+            ], 409);
+        } else {
+            return response()->json([
+                'message' => 'Email available'
+            ], 200);
+        }
+    }
+
     public function adminLogin(Request $request){
         $validator = Validator::make($request->all(),[
             'username' => 'required',
@@ -180,7 +205,7 @@ class AuthController extends Controller
         }else{
             return response()->json([
                 'message' => 'Invalid credentials'
-            ], 400);
+            ], 401);
         }
     }
 
