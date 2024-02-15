@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './SignUp2.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-const SignIn2 = () => {
+const SignUp2 = () => {
   const navigate = useNavigate();
+  const [usernameAvailable, setUsernameAvailable] = useState(true);
+  const [emailAvailable, setEmailAvailable] = useState(true);
 
   const initialValues = {
     email: '',
@@ -18,42 +20,93 @@ const SignIn2 = () => {
 
   const validate = Yup.object({
     email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
+      .matches(/^[a-zA-Z0-9._%+-]+up@phinmaed\.com$/, 
+      'Email must be in the format abc.up@phinmaed.com.')
+      .email('Invalid email address.')
+      .required('Email is required.'),
     username: Yup.string()
-      .required('Username is required'),
+      .min(3, 'Username must be at least 3 characters.')
+      .max(10, 'Username cannot exceed 10 characters.')
+      .required('Username is required.'),
     department:Yup.string()
-      .required('Department is required'),
+      .required('Department is required.'),
     password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
+      .required('Password is required.')
+      .min(6, 'Password must be at least 6 characters.')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/,
+        'Password must have uppercase, lowercase, symbol, and number.'),
     confirmPassword: Yup.string()
-      .required('Confirm Password is required')
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm Password is required.')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match.')
   });
 
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
-      const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration', {
-        email_ad: values.email,
-        username: values.username,
-        department: values.department,
-        password: values.password,
-        password_confirmation: values.confirmPassword
-      });
+      const emailCheck = await axios.get(
+        `https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration/${values.email}`
+      );
+      const usernameCheck = await axios.get(
+        `https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration/${values.username}`
+      );
+      setUsernameAvailable(true);
+      setEmailAvailable(true);
+      
+      console.log("Username Check Response:", usernameCheck.data);
+      console.log("Email Check Response:", emailCheck.data);
 
-      console.log('Response:', response.data);
 
-      if (response.status === 200) {
-        navigate('/admin/sign-in');
+      if (usernameCheck.status && emailCheck.status === 200){
+        const isUsernameAvailable = usernameCheck.data;
+        const isEmailAvailable = emailCheck.data; 
+
+        console.log("ID Available:", isUsernameAvailable);
+        console.log("Email Available:", isEmailAvailable);
+
+        if (isUsernameAvailable && isEmailAvailable) {
+          setUsernameAvailable(true);
+          setEmailAvailable(true);
+
+          const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-registration', {
+            email_ad: values.email,
+            username: values.username,
+            department: values.department,
+            password: values.password,
+            password_confirmation: values.confirmPassword
+          });
+
+          console.log("Response:", response.data);
+
+          if (response.status === 200) {
+            navigate("/admin/sign-in");
+          } else {
+            setFieldError("submit", "An error occurred");
+          }
+        } else {
+          setUsernameAvailable(false);
+          setEmailAvailable(false);
+          console.log("error1");
+        }
+      } else if (usernameCheck.status && emailCheck.status === 409) {
+        setUsernameAvailable(false);
+        setEmailAvailable(false);
+        console.log("error2");
       } else {
-        setFieldError('submit', 'An error occurred');
+        setFieldError("submit", "An error occurred");
+        console.log("error3");
       }
     } catch (error) {
-      console.error('Error:', error);
-      setFieldError('submit', 'An error occurred');
+      if (error.response && error.response.status === 409) {
+        setUsernameAvailable(false);
+        console.log("error4");
+      } else {
+        setEmailAvailable(false);
+        setFieldError("submit", "An error occurred");
+        console.log("error5");
+      }
     } finally {
       setSubmitting(false);
+      console.log("error6");
     }
   };
 
@@ -78,28 +131,42 @@ const SignIn2 = () => {
                 <Field 
                   type="text" 
                   name="email" 
+                  id="email"
                   placeholder='abc.up@phinmaed.com'/>
-                <ErrorMessage 
-                  name="email" 
-                  component="p" 
-                  className="error-message" />
+                <ErrorMessage
+                  name="email"
+                  component="p"
+                  className="error-message"
+                />
+                {!emailAvailable && !(errors.email && touched.email) && (
+                  <p className="error-message">
+                    This email address is not available.
+                  </p>
+                )}
               </div>
               <div className={`input-field-two ${errors.username && touched.username ? 'error' : ''}`}>
                 <label htmlFor="username"> Username </label>
                 <Field 
                   type="text" 
                   name="username" 
+                  id="username"
                   placeholder='Username' />
                 <ErrorMessage 
                   name="username" 
                   component="p" 
                   className="error-message" />
+                {!usernameAvailable && !(errors.username && touched.username) && (
+                  <p className="error-message">
+                    This Username is not available.
+                  </p>
+                )}
               </div>
               <div className={`input-field-two ${errors.department && touched.department ? 'error' : ''}`}>
-                <label htmlFor="password"> Department </label>
+                <label htmlFor="department"> Department </label>
                 <Field 
                   type="text"  
                   name="department" 
+                  id="department"
                   placeholder='Department' />
                 <ErrorMessage 
                   name="department" 
@@ -111,6 +178,7 @@ const SignIn2 = () => {
                 <Field 
                   type="password"  
                   name="password" 
+                  id="password"
                   placeholder='Enter password' />
                 <ErrorMessage 
                   name="password" 
@@ -122,6 +190,7 @@ const SignIn2 = () => {
                 <Field 
                   type="password" 
                   name="confirmPassword" 
+                  id="confirmPassword"
                   placeholder='Confirm password' />
                 <ErrorMessage 
                   name="confirmPassword" 
@@ -145,4 +214,4 @@ const SignIn2 = () => {
   )
 }
 
-export default SignIn2
+export default SignUp2
