@@ -72,6 +72,18 @@ class AuthController extends Controller
             ], 200);
         }
     }
+    public function studentEmailCheck($email_ad){
+        $emailExists = Student::where('email_ad', $email_ad)->exists();
+        if ($email_ad) {
+            return response()->json([
+                'message' => 'Email not available'
+            ], 409);
+        } else {
+            return response()->json([
+                'message' => 'Email available'
+            ], 200);
+        }
+    }
     
 
 
