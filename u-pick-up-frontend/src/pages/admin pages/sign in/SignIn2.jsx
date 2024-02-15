@@ -20,9 +20,9 @@ const SignIn2 = () => {
 
   const validate = Yup.object({
     username: Yup.string()
-      .required('Username is required'),
+      .required('Username is required.'),
     password: Yup.string()
-      .required('Password is required')
+      .required('Password is required.')
   });
 
   const onSubmit = async (values, { setSubmitting, setFieldError }) => {
@@ -46,7 +46,7 @@ const SignIn2 = () => {
         setErrorMessage('An error occurred');
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (error.response && error.response.status === 401) {
         setErrorMessage('These credentials do not match our records');
       } else {
         setErrorMessage('An error occurred');
@@ -83,7 +83,7 @@ const SignIn2 = () => {
                 <Field 
                   type="text" 
                   className="username" 
-                  placeholder='Your username' 
+                  placeholder='Your Username' 
                   id="username" 
                   name="username" 
                   required />
@@ -94,7 +94,7 @@ const SignIn2 = () => {
                 <Field 
                   type="password" 
                   className="password" 
-                  placeholder='Enter password' 
+                  placeholder='Enter Your Password' 
                   id="password" 
                   name="password" 
                   required />
