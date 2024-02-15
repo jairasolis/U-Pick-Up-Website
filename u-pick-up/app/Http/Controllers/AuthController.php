@@ -21,7 +21,7 @@ class AuthController extends Controller
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
-            'student_id' => 'required',
+            'student_id' => 'required|unique:students',
             'program' => 'required',
             'department' => 'required',
             'age' => 'required',
@@ -37,7 +37,14 @@ class AuthController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }
-        
+
+        $studentIdExists = Student::where('student_id', $request->student_id)->exists();
+        if ($studentIdExists) {
+            return response()->json([
+                'message' => 'Student ID not available'
+            ], 422);
+        }
+
         $student = DB::transaction(function () use ($request) {
             return Student::create([
                 'first_name'=> $request->first_name,
