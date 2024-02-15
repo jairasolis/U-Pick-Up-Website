@@ -3,9 +3,9 @@ import './SignIn2.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import useAuth from "../../../auth/useAuth";
 import {SignInAdminValidation} from '../../../yup validation/SignInAdminValidation';
+import { loginAdmin } from "../../../api/loginAdmin";
 
 
 const SignIn2 = () => {
@@ -20,15 +20,13 @@ const SignIn2 = () => {
   };
 
 
-  const onSubmit = async (values, { setSubmitting, setFieldError }) => {
+  const onSubmit = async (values, { setSubmitting }) => {
     try {
-      setLoading(true); 
-      const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/admin-login', {
+      setLoading(true);
+      const response = await loginAdmin({
         username: values.username,
-        password: values.password
+        password: values.password,
       });
-  
-      console.log('Response:', response.data);
   
       if (response.status === 200) {
         const { token } = response.data;
