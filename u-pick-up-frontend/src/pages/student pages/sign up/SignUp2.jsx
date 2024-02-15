@@ -81,6 +81,7 @@ const SignIn2 = () => {
                 <Field 
                   type="text" 
                   name="email" 
+                  id="email" 
                   placeholder='abc.up@phinmaed.com'/>
                 <ErrorMessage 
                   name="email" 
@@ -92,6 +93,7 @@ const SignIn2 = () => {
                 <Field 
                   type="text" 
                   name="idNumber" 
+                  id="idNumber"
                   placeholder='Your student number' />
                 <ErrorMessage 
                   name="idNumber" 
@@ -103,6 +105,7 @@ const SignIn2 = () => {
                 <Field 
                   type="password"  
                   name="password" 
+                  id="password"
                   placeholder='Enter password' />
                 <ErrorMessage 
                   name="password" 
@@ -114,6 +117,7 @@ const SignIn2 = () => {
                 <Field 
                   type="password" 
                   name="confirmPassword" 
+                  id="confirmPassword" 
                   placeholder='Confirm password' />
                 <ErrorMessage 
                   name="confirmPassword" 
