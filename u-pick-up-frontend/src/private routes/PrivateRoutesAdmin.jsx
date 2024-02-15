@@ -1,7 +1,7 @@
 // PrivateRoutes.js
 import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import useAuth from './auth/useAuth';
+import useAuth from './../auth/useAuth';
 
 const PrivateRoutesAdmin = ({ roleRequiredAdmin }) => {
   const { auth, role } = useAuth();

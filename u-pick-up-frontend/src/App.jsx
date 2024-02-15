@@ -7,8 +7,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
-import PrivateRoutes from './PrivateRoutes';
-import PrivateRoutesAdmin from "./PrivateRoutesAdmin";
+import PrivateRoutes from './private routes/PrivateRoutes';
+import PrivateRoutesAdmin from "./private routes/PrivateRoutesAdmin";
 import useAuth from "./auth/useAuth";
 
 ////////// import pages
