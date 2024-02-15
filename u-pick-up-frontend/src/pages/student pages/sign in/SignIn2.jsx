@@ -49,7 +49,7 @@ const SignIn2 = () => {
   };
 
   useEffect(() => {
-    console.log("authhhhhh:", auth);
+    console.log("auth:", auth);
 
     if (auth) {
       navigate("/student/home");
