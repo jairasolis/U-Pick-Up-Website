@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './AdminNavbar2.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faBars } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import useAuth from '../../auth/useAuth';
 
@@ -51,7 +51,7 @@ const AdminNavbar = () => {
 
   return (
     <div className='navbar-2'>
-      <nav>
+      <nav className='navbar-admin'>
         <Link to={auth ? "/admin/dashboard" : "/"} style={{ textDecoration: 'none' }}>
           <div className="logo">
             <img src="../images/logo.png" alt="" />
@@ -59,7 +59,7 @@ const AdminNavbar = () => {
         </Link>
 
         <div className='right-side'>
-          <div className="profile" onClick={toggleMenu}></div>
+          <FontAwesomeIcon icon={faBars} className='menu-icon' onClick={toggleMenu}/>
           <div className={`sub-menu-wrap ${isMenuOpen ? 'open-menu' : ''}`} id="subMenu">
             <div className="sub-menu">
 
@@ -69,8 +69,8 @@ const AdminNavbar = () => {
               </Link> */}
 
               <Link onClick={handleSignOut} className="sub-menu-link" style={{ textDecoration: 'none' }}>
-                <h3> Sign Out </h3>
-                <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+                <p> Sign Out </p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>
 
             </div>
