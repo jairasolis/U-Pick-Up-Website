@@ -38,6 +38,9 @@ import Students from "./pages/admin pages/students/Students";
 import Uniforms from "./pages/admin pages/inventory/inventory items/Uniforms";
 import Books from "./pages/admin pages/inventory/inventory items/Books";
 import Modules from "./pages/admin pages/inventory/inventory items/Modules";
+// reset forms
+import ForgotPass from "./pages/forgotpass/ForgotPass";
+import ResetPass from "./pages/forgotpass/ResetPass";
 
 // import layout
 import HomeLayout from "./layout/HomeLayout";
@@ -69,6 +72,8 @@ const App = () => {
             path="/student/sign-in"
             element={auth ? <Navigate to="/student/home" /> : <StudentSignIn2 />}
           />
+          <Route path="/forgot-password" element={<ForgotPass />} />
+          <Route path="/reset-password" element={<ResetPass />} />
 
           {/*  private routes */}
           <Route element={ <PrivateRoutes roleRequiredStudent="student" /> }>
