@@ -26,14 +26,19 @@ class LoginStudentController extends Controller
 
     public function insertLoginData(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        try {
+            $userId = $request->input('user_id');
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            $user = Auth::user();
-            return response()->json(['user_id' => $user->id], 200);
+            // Insert login data into the login_students table
+            LoginStudent::create([
+                'student_id' => $userId,
+                'login_date' => now()
+            ]);
+
+            return response()->json(['message' => 'Login data inserted successfully'], 200);
+        } catch (\Exception $e) {
+            // Handle any errors gracefully
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        return response()->json(['message' => 'Unauthorized'], 401);
     }
 }

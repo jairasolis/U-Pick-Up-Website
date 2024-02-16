@@ -53,7 +53,7 @@ const SignIn2 = () => {
   };
 
   const insertLoginData = (userId) => {
-    axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data', { user_id: userId })
+    axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/insert-login-data', { user_id: userId })
       .then(response => {
           // Handle success if needed
           console.log('Login data inserted successfully');
