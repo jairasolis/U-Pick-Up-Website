@@ -17,13 +17,13 @@ import Chart from 'chart.js/auto';
 
 const Dashboard = () => {
   // to get the one week label
-  var labels = [];
-  var today = new Date();
-  for (var i = 6; i >= 0; i--) { // Start from 6 and decrement to 0
-      // Generate the date for each label by subtracting the number of days from the current date
-      var date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-      labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
-  }
+  // var dateLabels = [];
+  // var today = new Date();
+  // for (var i = 6; i >= 0; i--) { // Start from 6 and decrement to 0
+  //     // Generate the date for each label by subtracting the number of days from the current date
+  //     var date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
+  //     dateLabels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+  // }
 
   // to get the total number registered
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
@@ -33,6 +33,7 @@ const Dashboard = () => {
   const [age18to25Count, setAge18to25Count] = useState(0);
   const [age26to35Count, setAge26to35Count] = useState(0);
   const [above35Count, setAbove35Count] = useState(0);
+  const [loginData, setLoginData] = useState([]);
 
   useEffect(() => {
       const fetchRegisteredStudentsCount = async () => {
@@ -69,10 +70,23 @@ const Dashboard = () => {
         }
       };
 
+      const fetchLoginData = async () => {
+        try {
+          const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data');
+          setLoginData(response.data);
+        } catch (error) {
+          console.error('Error fetching login data:', error);
+        }
+      };
+
       fetchRegisteredStudentsCount();
       fetchStudentGenderCounts();
       fetchStudentAgeCounts();
+      fetchLoginData();
     }, []);
+
+  const dateLabels = loginData.map(data => data.date);
+  const loginCounts = loginData.map(data => data.count);
 
   return (
     <div className='dashboard'>
@@ -148,13 +162,13 @@ const Dashboard = () => {
               <Card style={{ height: '300px', marginTop: '20px', padding: '20px 40px'}}>
                 <Line
                   data={{
-                    labels: labels,
+                    labels: dateLabels,
                     datasets: [
                       {
                         label: 'Login Per Day',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: [0, 10, 5, 2, 20, 30, 45]
+                        data: loginCounts
                     },
                   ],
                   }}

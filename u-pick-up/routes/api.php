@@ -10,7 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModulesController;
 use App\Http\Controllers\UniformController;
 use App\Http\Controllers\BookController;
-
+use App\Http\Controllers\LoginStudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,3 +89,4 @@ Route::get('/dashboard/registered-students-per-department-count', [DashboardCont
 Route::get('/dashboard/registered-students-per-program-count', [DashboardController::class, 'registeredStudentsPerProgram']);
 Route::get('/dashboard/gender-students-count', [DashboardController::class, 'gender']);
 Route::get('/dashboard/age-students-count', [DashboardController::class, 'age']);
+Route::get('/dashboard/login-data', [LoginStudentController::class, 'getLoginData']);

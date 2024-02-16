@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\LoginStudent;
+
+class LoginStudentController extends Controller
+{
+    public function getLoginData()
+    {
+        try {
+            // Fetch login data for the past 7 days
+            $loginData = LoginStudent::selectRaw('DATE(login_date) as date, COUNT(*) as count')
+                ->where('login_date', '>=', now()->subDays(7)->toDateString())
+                ->groupBy('date')
+                ->get();
+
+            return response()->json($loginData);
+        } catch (\Exception $e) {
+            // Handle any errors gracefully
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+}
