@@ -122,6 +122,73 @@ class AuthController extends Controller
         }
     }
 
+    //
+    public function sendResetLinkEmail(Request $request){
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(['message' => 'Password reset link sent to email'], 200);
+        } else {
+            return response()->json(['message' => 'Unable to send reset link'], 400);
+        }
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6|confirmed',
+            'token' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password', 'password_confirmation', 'token');
+
+        $guard = null;
+        $user = null;
+
+        // check if the email belongs to a student
+        $student = Student::where('email', $credentials['email'])->first();
+        if ($student) {
+            $guard = 'students';
+            $user = $student;
+        }
+
+        // ff not a student, check if the email belongs to an admin
+        if (!$user) {
+            $admin = Admin::where('email', $credentials['email'])->first();
+            if ($admin) {
+                $guard = 'admins';
+                $user = $admin;
+            }
+        }
+
+        // if no user found, return error
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        // attempt to reset password
+        $status = Password::broker($guard)->reset(
+            $credentials,
+            function ($user, $password) {
+                $user->password = bcrypt($password);
+                $user->save();
+            }
+        );
+
+        // check the status of password reset
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json(['message' => 'Password reset successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Unable to reset password'], 400);
+        }
+    }
+
+
     // admin registration and login
     public function adminRegistration(Request $request){
         $validator = Validator::make($request->all(),[

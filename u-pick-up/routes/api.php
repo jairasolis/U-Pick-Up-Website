@@ -47,6 +47,8 @@ Route::get('/admin-registration/{email_ad}', [AuthController::class, 'adminEmail
 // logout student or admin
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+Route::post('/forgot-password', [AuthController::class, 'sendResetLinkEmail']); 
+Route::post('/reset-password', [AuthController::class, 'resetPassword']); 
 
 // Route::apiResource('/modules', ModulesController::class);
 // Route::apiResource('/uniforms', UniformController::class);
