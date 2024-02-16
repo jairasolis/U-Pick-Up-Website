@@ -44,9 +44,9 @@ const StudentsByDepartment = () => {
             <Col key={index}>
               <Link to="/admin/dashboard-program"  style={{ textDecoration: 'none' }}>
                 <Card>
-                    <Card.Header>
-                        <img src={`/images/departments/${dept}.png`} alt="" style={{width: "35px", height: "auto"}}/>
-                        {dept}
+                    <Card.Header className='card-header'>
+                        <img src={`/images/departments/${dept}.png`} alt="" style={{width: "35px", height: "35px"}} className='department-image'/>
+                        <p className='dept-name'>{dept}</p>
                     </Card.Header>
                   <Card.Body>
                     <Card.Text>

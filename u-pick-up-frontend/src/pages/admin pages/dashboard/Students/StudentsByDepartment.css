@@ -23,3 +23,11 @@
     background-color: black; /* or any other color */
     margin: 0 10px; /* Adjust margin as needed */
 }
+
+.card-header {
+    display: flex;
+}
+
+.dept-name {
+    padding-left: 10px;
+}
