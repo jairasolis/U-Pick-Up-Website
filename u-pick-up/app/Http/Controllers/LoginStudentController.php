@@ -27,11 +27,11 @@ class LoginStudentController extends Controller
     public function insertLoginData(Request $request)
     {
         try {
-            $userId = $request->input('user_id');
+            $Id = $request->input('id');
 
             // Insert login data into the login_students table
             LoginStudent::create([
-                'student_id' => $userId,
+                'student_id' => $Id,
                 'login_date' => now()
             ]);
 

@@ -28,15 +28,16 @@ const SignIn2 = () => {
       });
 
       if (response.status === 200) {
-        const { token, user_id } = response.data; // Assuming the backend sends the user ID along with the token
+        const { token, id } = response.data; // Assuming the backend sends the user ID along with the token
         localStorage.setItem('authToken', token);
         localStorage.setItem("user", JSON.stringify({ role: "admin" }));
         auth(true);
 
         // Insert login data
-        insertLoginData(user_id);
+        insertLoginData(id);
 
         console.log("authhhhhh:", auth);
+
       } else {
         setErrorMessage('An error occurred');
       }
@@ -47,13 +48,15 @@ const SignIn2 = () => {
         setErrorMessage('An error occurred');
       }
     } finally {
+      
       setLoading(false);
       setSubmitting(false);
+
     }
   };
 
-  const insertLoginData = (userId) => {
-    axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/insert-login-data', { user_id: userId })
+  const insertLoginData = (Id) => {
+    axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/insert-login-data', { id: Id })
       .then(response => {
           // Handle success if needed
           console.log('Login data inserted successfully');
