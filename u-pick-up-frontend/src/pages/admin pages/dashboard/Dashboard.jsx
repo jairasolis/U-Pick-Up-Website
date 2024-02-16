@@ -74,6 +74,7 @@ const Dashboard = () => {
         try {
           const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data');
           setLoginData(response.data);
+          console.log(response.data)
         } catch (error) {
           console.error('Error fetching login data:', error);
         }
