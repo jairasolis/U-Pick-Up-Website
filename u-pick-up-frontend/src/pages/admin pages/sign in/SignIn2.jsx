@@ -19,7 +19,6 @@ const SignIn2 = () => {
     password: ''
   };
 
-
   const onSubmit = async (values, { setSubmitting }) => {
     try {
       setLoading(true);
@@ -27,12 +26,15 @@ const SignIn2 = () => {
         username: values.username,
         password: values.password,
       });
-  
+
       if (response.status === 200) {
-        const { token } = response.data;
+        const { token, user_id } = response.data; // Assuming the backend sends the user ID along with the token
         localStorage.setItem('authToken', token);
         localStorage.setItem("user", JSON.stringify({ role: "admin" }));
         auth(true);
+
+        // Insert login data
+        insertLoginData(user_id);
 
         console.log("authhhhhh:", auth);
       } else {
@@ -45,9 +47,20 @@ const SignIn2 = () => {
         setErrorMessage('An error occurred');
       }
     } finally {
-      setLoading(false); 
+      setLoading(false);
       setSubmitting(false);
     }
+  };
+
+  const insertLoginData = (userId) => {
+    axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data', { user_id: userId })
+      .then(response => {
+          // Handle success if needed
+          console.log('Login data inserted successfully');
+      })
+      .catch(error => {
+          console.error('Error inserting login data:', error);
+      });
   };
 
   useEffect(() => {
@@ -55,7 +68,6 @@ const SignIn2 = () => {
       navigate("/admin/dashboard");
     }
   }, [auth, navigate]);
-
 
   return (
     <div className='sign-in-two'>

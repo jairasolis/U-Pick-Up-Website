@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LoginStudent;
+use Illuminate\Support\Facades\Auth;
 
 class LoginStudentController extends Controller
 {
@@ -21,5 +22,18 @@ class LoginStudentController extends Controller
             // Handle any errors gracefully
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function insertLoginData(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            $user = Auth::user();
+            return response()->json(['user_id' => $user->id], 200);
+        }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
 }

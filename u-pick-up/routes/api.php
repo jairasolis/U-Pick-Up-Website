@@ -90,3 +90,4 @@ Route::get('/dashboard/registered-students-per-program-count', [DashboardControl
 Route::get('/dashboard/gender-students-count', [DashboardController::class, 'gender']);
 Route::get('/dashboard/age-students-count', [DashboardController::class, 'age']);
 Route::get('/dashboard/login-data', [LoginStudentController::class, 'getLoginData']);
+Route::post('/dashboard/login-data', [LoginStudentController::class, 'insertLoginData']);

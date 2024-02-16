@@ -16,5 +16,4 @@ class LoginStudent extends Model
         'login_date'
     ];
 
-    // Define any relationships or additional logic here
 }
