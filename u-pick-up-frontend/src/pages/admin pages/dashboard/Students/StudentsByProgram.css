@@ -3,3 +3,21 @@
     top: 70px;
     padding-top: 100px;
 }
+
+.dash-navig {
+    color: #454545;
+    text-decoration: none;
+}
+
+.dash-navig:hover {
+    color: #516E53;
+    text-decoration: underline;
+}
+
+.student-card {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.card-header p{
+    font-weight: 600;
+}

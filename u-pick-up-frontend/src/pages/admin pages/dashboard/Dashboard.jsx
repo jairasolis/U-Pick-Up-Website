@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Bar, Doughnut, Line } from "react-chartjs-2"
 import './Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBook, faBookOpen, faCalendar, faPlus, faShirt, faUser, faUserTie, faBox } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -25,7 +25,6 @@ const Dashboard = () => {
   //     dateLabels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
   // }
 
-  // to get the total number registered
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
@@ -126,7 +125,7 @@ const Dashboard = () => {
                       },
                       
                     },
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: false, // for aligning
                     
                   }}
                 />
@@ -140,7 +139,7 @@ const Dashboard = () => {
                   datasets: [
                     {
                       label: "Students",
-                      data: [maleCount, femaleCount, 1],
+                      data: [maleCount, femaleCount, 0],
                       backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], 
                     },
                   ],
@@ -148,7 +147,7 @@ const Dashboard = () => {
                 options={{
                   plugins: {
                     legend: {
-                      position: "right", // Set legend position
+                      position: "right", 
                     },
                   },
                   maintainAspectRatio: false,
@@ -170,54 +169,17 @@ const Dashboard = () => {
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
                         data: loginCounts
-                    },
-                  ],
+                      },
+                    ],
                   }}
                 />
               </Card >
             </Col>
-            {/* <Col>
+            <Col>
 
-            </Col> */}
+            </Col>
           </Row>
         </Container>
-        {/* <div className="dataCard revenueCard">
-
-        </div>
-        <div className="dataCard revenueCard">
-          <Bar 
-            data={{
-                labels: ["A", "B", "C"],
-                datasets: [
-                  {
-                    label: "Revenue",
-                    data: [100, 600, 300],
-                  },
-                  {
-                    label: "Revener",
-                    data: [50, 20, 170],
-                  },
-                  {
-                    label: "Venerue",
-                    data: [300, 55, 135],
-                  },
-                ],
-              }}
-          />
-        </div>
-        <div className="dataCard revenueCard">
-        <Doughnut 
-            data={{
-                labels: ["A", "B", "C"],
-                datasets: [
-                  {
-                    label: "Revenue",
-                    data: [100, 600, 300],
-                  },
-                ],
-              }}
-          />
-        </div> */}
       </div>
     </div>
   )
