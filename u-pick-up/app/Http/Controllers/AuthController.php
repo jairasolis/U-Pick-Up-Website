@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\PasswordReset;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -125,7 +127,7 @@ class AuthController extends Controller
     //
     public function sendResetLinkEmail(Request $request){
         $request->validate(['email' => 'required|email']);
-    
+        
         $student = Student::where('email_ad', $request->email)->first();
         $admin = Admin::where('email_ad', $request->email)->first();
     
@@ -133,14 +135,18 @@ class AuthController extends Controller
             return response()->json(['message' => 'Email address not found'], 404);
         }
         
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $user = $student ?: $admin;
     
-        if ($status === Password::RESET_LINK_SENT) {
-            return response()->json(['message' => 'Password reset link sent to email'], 200);
-        } else {
+        $token = Password::getRepository()->create($user);
+    
+        $resetUrl = 'https://u-pick-up-y7qnw.ondigitalocean.app/api/reset-password?token=' . $token;
+        
+        Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
+        
+        if (count(Mail::failures()) > 0) {
             return response()->json(['message' => 'Unable to send reset link'], 400);
+        } else {
+            return response()->json(['message' => 'Password reset link sent to email'], 200);
         }
     }
 
