@@ -125,7 +125,14 @@ class AuthController extends Controller
     //
     public function sendResetLinkEmail(Request $request){
         $request->validate(['email' => 'required|email']);
-
+    
+        $student = Student::where('email', $request->email)->first(); 
+        $admin = Admin::where('email', $request->email)->first(); 
+    
+        if (!$student && !$admin) {
+            return response()->json(['message' => 'Email address not found'], 404);
+        }
+        
         $status = Password::sendResetLink(
             $request->only('email')
         );
