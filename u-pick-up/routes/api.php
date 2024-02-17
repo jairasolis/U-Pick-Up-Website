@@ -91,3 +91,11 @@ Route::get('/dashboard/gender-students-count', [DashboardController::class, 'gen
 Route::get('/dashboard/age-students-count', [DashboardController::class, 'age']);
 Route::get('/dashboard/login-data', [LoginStudentController::class, 'getLoginData']);
 Route::post('/dashboard/insert-login-data', [LoginStudentController::class, 'insertLoginData']);
+
+// test mail
+Route::get('/test-email', function () {
+    \Illuminate\Support\Facades\Mail::raw('Test email content', function ($message) {
+        $message->to('vllnv.monica@gmail.com')->subject('Test email');
+    });
+    return 'Test email sent';
+});
