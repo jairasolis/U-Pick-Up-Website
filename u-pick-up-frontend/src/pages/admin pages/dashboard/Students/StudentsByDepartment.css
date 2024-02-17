@@ -28,6 +28,10 @@
     display: flex;
 }
 
+.card-header p{
+    font-weight: 600;
+}
+
 .dept-name {
     padding-left: 10px;
 }

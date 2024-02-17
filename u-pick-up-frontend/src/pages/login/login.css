@@ -74,7 +74,7 @@
 .login-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    /* gap: 5px; */
     align-items: center;
     width: 380px;
     height: 380px;
@@ -106,7 +106,8 @@
 .login-item {
     width: 200px;
     height: 40px;
-    color: #ffffff;
+    /* color: #ffffff; */
+    /* background-color: #96BAB3; */
     background-color: #516E53;
     border-radius: 5px;
     align-items: center;
@@ -115,7 +116,9 @@
     margin: 0;
     transition: .3s;
 }
-
+.login-item p{
+    color: #eeeeee;
+}
 .login-item:hover {
     background: #36483729;
     color: #374938;

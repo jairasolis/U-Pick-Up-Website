@@ -4,6 +4,7 @@ const useAuth = () => {
     let user;
     const _user = localStorage.getItem('user');
     const token = localStorage.getItem('authToken');
+    const id = localStorage.getItem('studentId');
 
     if (_user) {
         user = JSON.parse(_user);
@@ -13,6 +14,7 @@ const useAuth = () => {
     const logout = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('authToken');
+        localStorage.removeItem('studentId');
     };
 
     if (user) {
@@ -20,6 +22,7 @@ const useAuth = () => {
             auth: true,
             role: user.role,
             token: token,
+            id: id,
             logout: logout
         };
     } else {
@@ -27,6 +30,7 @@ const useAuth = () => {
             auth: false,
             role: null,
             token: null,
+            id: null,
             logout: logout
         };
     }

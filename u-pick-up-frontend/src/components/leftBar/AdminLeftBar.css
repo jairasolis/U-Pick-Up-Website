@@ -17,7 +17,6 @@
 
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
 .menu h4 {
@@ -25,7 +24,7 @@
 }
 
 hr {
-    margin: 20px 0px;
+    margin: 10px 0px;
     border: none;
     height: 0.5px;
     background-color: #3b55343b;
