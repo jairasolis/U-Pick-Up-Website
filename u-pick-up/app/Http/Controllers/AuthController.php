@@ -164,7 +164,7 @@ class AuthController extends Controller
             'token' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password', 'password_confirmation', 'token');
+        $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
 
         $guard = null;
         $user = null;
