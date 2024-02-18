@@ -163,12 +163,12 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
             'token' => 'required',
         ]);
-    
+
         $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
-    
+
         $guard = null;
         $user = null;
-    
+
         // check if the email belongs to a student
         $student = Student::where('email_ad', $credentials['email_ad'])->first();
         if ($student) {
@@ -190,18 +190,15 @@ class AuthController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
         
-        // decode the token
-        $token = Hash::make($credentials['token']);
-        
         // attempt to reset password
         $status = Password::broker($guard)->reset(
-            ['email_ad' => $credentials['email_ad'], 'password' => $credentials['password'], 'password_confirmation' => $credentials['password_confirmation'], 'token' => $token],
+            $credentials,
             function ($user, $password) {
                 $user->password = bcrypt($password);
                 $user->save();
             }
         );
-    
+        
         // check the status of password reset
         if ($status === Password::PASSWORD_RESET) {
             return response()->json(['message' => 'Password reset successfully'], 200);

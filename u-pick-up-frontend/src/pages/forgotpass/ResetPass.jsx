@@ -1,19 +1,36 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ResetPassValidation } from '../../yup validation/ResetPassValidation';
+import { useNavigate, useParams } from 'react-router-dom';
 import './ResetPass.css';
+import resetPassword from '../../api/resetPassword'; 
 
 const ResetPassword = ({ email }) => {
+    const navigate = useNavigate();
+    const { token } = useParams();
+
     const initialValues = {
         email: email || '',
         password: '',
         confirmPassword: ''
     };
 
-    const handleSubmit = (values, { setSubmitting }) => {
-        //api call
-        console.log('Submitting form:', values);
-        setSubmitting(false);
+    const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+        try {
+            await resetPassword({ 
+                email_ad: values.email,
+                password: values.password,
+                password_confirmation: values.confirmPassword,
+                token: token 
+            });
+            console.log('Password reset successful');
+            navigate('/');
+        } catch (error) {
+            console.error('Password reset failed', error);
+            setErrors({ password: 'Password reset failed' });
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
