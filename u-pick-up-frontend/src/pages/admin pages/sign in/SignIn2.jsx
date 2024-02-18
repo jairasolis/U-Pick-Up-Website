@@ -29,7 +29,10 @@ const SignIn2 = () => {
       });
   
       if (response.status === 200) {
-        const { token } = response.data;
+        const { token, data } = response.data;
+        const id = data.id;
+
+        localStorage.setItem("adminId", id);
         localStorage.setItem('authToken', token);
         localStorage.setItem("user", JSON.stringify({ role: "admin" }));
         auth(true);

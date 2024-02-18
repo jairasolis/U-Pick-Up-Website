@@ -102,3 +102,4 @@ Route::get('/test-email', function () {
 
 // profile
 Route::get('/students/{id}', [StudentController::class, 'fetchStudentDetails']); 
+Route::get('/admins/{id}', [AdminController::class, 'fetchAdminDetails']); 

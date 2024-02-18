@@ -19,6 +19,19 @@ class AdminController extends Controller
         return $this->admin->all();
     }
 
+    
+    public function fetchAdminDetails($id)
+    {
+        try {
+            // Find the book by ID
+            $admin = Admin::findOrFail($id);
+
+            return response()->json(['admin' => $admin], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'admin not found.'], 404);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */
