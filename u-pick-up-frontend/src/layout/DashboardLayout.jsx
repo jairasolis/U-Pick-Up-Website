@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 // import components
 import AdminNavbar from '../components/navbar/AdminNavbar2'
-import AdminLeftBar from '../components/leftBar/AdminLeftbar'
+import AdminLeftBar from '../components/leftBar/AdminLeftBar'
 
 const DashboardLayout = () => {
   return (

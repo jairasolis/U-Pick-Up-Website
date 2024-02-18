@@ -60,7 +60,7 @@ const App = () => {
 
   return (
     <div>
-      <Router>
+      <Router basename="/">
         <Routes>
         <Route path="/student/signup-second" element={<StudentSignUpSecond />} />
         <Route path="/" element={<Login />} />

@@ -3,13 +3,15 @@
     top: 70px;
     display: flex;
     flex-direction: column;
-    /* background-color: rgb(221, 221, 221); */
+    background-color: rgb(221, 221, 221); 
     align-items: center;
-    padding-top: 80px;
+    padding-top: 30px;
     gap: 30px;
 }
 
-.calendar-container {
+
+
+/* .calendar-container {
     display: flex;
 }
 
@@ -81,7 +83,7 @@
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-}
+} 
 
 .event-post{
     width: 94%;
@@ -89,15 +91,15 @@
     margin: 10px;
     padding: 10px 0 0 15px;
     border-radius: 10px;
-    background: #9bb29f;
-    /* color: rgb(27, 37, 32); */
+    background: #9bb29f; 
+    color: rgb(27, 37, 32); 
     color: #646464;
     border-color: none;
     outline: none;
     resize: none;
     margin-top: 50px;
-}
+} 
 
 .event-post:is(:focus, :valid){
     border-color: #cacaca;
-}
+}  */
