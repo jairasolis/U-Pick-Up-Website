@@ -99,3 +99,6 @@ Route::get('/test-email', function () {
     });
     return 'Test email sent';
 });
+
+// profile
+Route::get('/students/{id}', [StudentController::class, 'fetchStudentDetails']); 

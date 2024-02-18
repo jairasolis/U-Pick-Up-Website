@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './Profile.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 const Profile = () => {
+
+  const [studentsData, setStudentsData] = useState([]);
+
+  const fetchStudentData = async () => {
+    try {
+        const result = await axios.get("https://u-pick-up-y7qnw.ondigitalocean.app/api/students/31");
+        console.log(result.data.results);
+        setStudentsData(result.data.results)
+    } catch (err) {
+        console.log("something Wrong");
+    }
+  }
+
+  useEffect (() => {
+    fetchStudentData();
+}, [])
+
   return (
     <div className='profile-page'>
       <div className="profile-container">
