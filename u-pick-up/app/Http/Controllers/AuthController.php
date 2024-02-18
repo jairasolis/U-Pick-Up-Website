@@ -233,9 +233,10 @@ class AuthController extends Controller
             }
     
             // Validate the token - assuming you have a PasswordReset model with a 'token' column
-            $passwordReset = PasswordReset::where('email', $credentials['email_ad'])
-                ->where('token', $credentials['token'])
-                ->first();
+            $passwordReset = PasswordReset::firstWhere([
+                'email' => $credentials['email_ad'],
+                'token' => $credentials['token']
+            ]);
     
             if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(60)->isPast()) {
                 return response()->json(['message' => 'Invalid or expired token'], 400);
