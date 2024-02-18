@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements CanResetPassword
 {
     protected $table = 'admin';
     protected $primaryKey = 'id';
@@ -17,5 +19,5 @@ class Admin extends Authenticatable
         'department',
         'password',
     ];
-    use HasApiTokens, HasFactory;
+    use HasApiTokens, HasFactory, CanResetPasswordTrait;
 }

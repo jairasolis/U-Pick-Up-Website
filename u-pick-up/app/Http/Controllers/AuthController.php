@@ -133,6 +133,8 @@ class AuthController extends Controller
         //debugggg
         // dd($student, $admin);
 
+        $email = trim($request->email);
+
         if (!$student && !$admin) {
             return response()->json(['message' => 'Email address not found'], 404);
         }
