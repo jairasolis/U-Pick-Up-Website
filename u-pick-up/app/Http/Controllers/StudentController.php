@@ -20,6 +20,18 @@ class StudentController extends Controller
         return $this->student->all();
     }
 
+    public function fetchStudentDetails($id)
+    {
+        try {
+            // Find the book by ID
+            $student = Student::findOrFail($id);
+
+            return response()->json(['student' => $student], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'student not found.'], 404);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */
