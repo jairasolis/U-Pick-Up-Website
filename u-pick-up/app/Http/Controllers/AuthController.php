@@ -142,8 +142,8 @@ class AuthController extends Controller
         $user = $student !== null ? $student : $admin;
     
         $token = Password::broker()->createToken($user);
-    
-        $resetUrl = 'https://u-pick-up-y7qnw.ondigitalocean.app/api/reset-password?token=' . $token;
+        // testt 
+        $resetUrl = 'http://localhost:3000/reset-password/reset-password?token=' . $token;
         
         try {
             Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
