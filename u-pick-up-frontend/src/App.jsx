@@ -73,7 +73,7 @@ const App = () => {
             element={auth ? <Navigate to="/student/home" /> : <StudentSignIn2 />}
           />
           <Route path="/forgot-password" element={<ForgotPass />} />
-          <Route path="/reset-password" element={<ResetPass />} />
+          <Route path="/reset-password/:token" element={<ResetPass />} />
 
           {/*  private routes */}
           <Route element={ <PrivateRoutes roleRequiredStudent="student" /> }>
