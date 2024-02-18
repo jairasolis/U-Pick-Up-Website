@@ -130,20 +130,22 @@ class AuthController extends Controller
         
         $student = Student::where('email_ad', $request->email)->first();
         $admin = Admin::where('email_ad', $request->email)->first();
-        //debugggg
-        // dd($student, $admin);
-
+    
         $email = trim($request->email);
-
+    
         if (!$student && !$admin) {
             return response()->json(['message' => 'Email address not found'], 404);
         }
         
         $user = $student !== null ? $student : $admin;
     
+        // generate the token
         $token = Password::broker()->createToken($user);
-        // testt 
-        $resetUrl = 'http://localhost:3000/reset-password/reset-password?token=' . $token;
+    
+        // hash the token for extra layer of sec
+        $hashedToken = Hash::make($token);
+    
+        $resetUrl = 'http://localhost:3000/reset-password/reset-password?token=' . $hashedToken;
         
         try {
             Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
@@ -152,7 +154,6 @@ class AuthController extends Controller
         }
         
         return response()->json(['message' => 'Password reset link sent to email'], 200);
-        
     }
 
     public function resetPassword(Request $request)
