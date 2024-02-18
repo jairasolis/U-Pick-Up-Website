@@ -17,7 +17,6 @@ import Login from "./pages/login/login";
 // student pages
 import LandingPage from "./pages/student pages/landing page/LandingPage";
 import StudentSignUp2 from "./pages/student pages/sign up/SignUp2";
-import StudentSignUpSecond from "./pages/student pages/sign up/SignUpSecond";
 import StudentSignIn2 from "./pages/student pages/sign in/SignIn2";
 import Home from "./pages/student pages/home/Home";
 import Profile from "./pages/student pages/profile/Profile";
@@ -62,7 +61,6 @@ const App = () => {
     <div>
       <Router basename="/">
         <Routes>
-        <Route path="/student/signup-second" element={<StudentSignUpSecond />} />
         <Route path="/" element={<Login />} />
           {/* student pages */}
           {/*  public routes */}
