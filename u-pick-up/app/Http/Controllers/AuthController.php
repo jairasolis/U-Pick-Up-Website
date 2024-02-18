@@ -189,8 +189,6 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-        $token = $request->filled('token') ? $request->token : Str::random(60);
-
         
         // attempt to reset password
         $token = $request->filled('token') ? $request->token : Str::random(60);
