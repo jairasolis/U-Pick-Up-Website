@@ -144,9 +144,9 @@ class AuthController extends Controller
         $token = Password::broker()->createToken($user);
     
         // hash the token for extra layer of sec
-        $hashedToken = Hash::make($token);
+        // $hashedToken = Hash::make($token);
     
-        $resetUrl = 'http://localhost:3000/reset-password/reset-password?token=' . $hashedToken;
+        $resetUrl = 'http://localhost:3000/reset-password/reset-password?token=' . $token;
         
         try {
             Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
@@ -157,56 +157,7 @@ class AuthController extends Controller
         return response()->json(['message' => 'Password reset link sent to email'], 200);
     }
 
-    // public function resetPassword(Request $request)
-    // {
-    //     $request->validate([
-    //         'email_ad' => 'required|email',
-    //         'password' => 'required|min:6|confirmed',
-    //         'token' => 'required',
-    //     ]);
-
-    //     $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
-
-    //     $guard = null;
-    //     $user = null;
-
-    //     // check if the email belongs to a student
-    //     $student = Student::where('email_ad', $credentials['email_ad'])->first();
-    //     if ($student) {
-    //         $guard = 'students';
-    //         $user = $student;
-    //     }
-        
-    //     // if not a student, check if the email belongs to an admin
-    //     if (!$user) {
-    //         $admin = Admin::where('email_ad', $credentials['email_ad'])->first();
-    //         if ($admin) {
-    //             $guard = 'admins';
-    //             $user = $admin;
-    //         }
-    //     }
-        
-    //     // if no user found, return error
-    //     if (!$user) {
-    //         return response()->json(['message' => 'User not found'], 404);
-    //     }
-        
-    //     // attempt to reset password
-    //     $status = Password::broker($guard)->reset(
-    //         $credentials,
-    //         function ($user, $password) {
-    //             $user->password = bcrypt($password);
-    //             $user->save();
-    //         }
-    //     );
-        
-    //     // check the status of password reset
-    //     if ($status === Password::PASSWORD_RESET) {
-    //         return response()->json(['message' => 'Password reset successfully'], 200);
-    //     } else {
-    //         return response()->json(['message' => 'Unable to reset password'], 400);
-    //     }
-    // }
+    
     public function resetPassword(Request $request)
     {
         try {
