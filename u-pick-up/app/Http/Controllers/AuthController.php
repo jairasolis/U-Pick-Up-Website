@@ -145,13 +145,14 @@ class AuthController extends Controller
     
         $resetUrl = 'https://u-pick-up-y7qnw.ondigitalocean.app/api/reset-password?token=' . $token;
         
-        Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
-        
-        if (count(Mail::failures()) > 0) {
-            return response()->json(['message' => 'Unable to send reset link'], 400);
-        } else {
-            return response()->json(['message' => 'Password reset link sent to email'], 200);
+        try {
+            Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Unable to send reset link', 'error' => $e->getMessage()], 400);
         }
+        
+        return response()->json(['message' => 'Password reset link sent to email'], 200);
+        
     }
 
     public function resetPassword(Request $request)
