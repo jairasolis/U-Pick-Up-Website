@@ -9,7 +9,14 @@ const AddBookPage = ({ onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ subjectName, yearLevel, course, available, quantity });
+    const addBookData = {
+      subject_name: subjectName,
+      year_level: yearLevel,
+      course: course,
+      available: available,
+      quantity: quantity
+    };
+    onSubmit(addBookData);
   };
 
   return (
@@ -48,7 +55,7 @@ const AddBookPage = ({ onSubmit, onCancel }) => {
         </div>
         <div className="row mb-3">
           <div className="col-sm-9 offset-sm-3">
-            <button type="submit" className="btn btn-primary mr-2">Add Book</button>
+            <button type="submit" className="btn btn-primary m-2">Add Book</button>
             <button type="button" className="btn btn-secondary" onClick={onCancel}>Cancel</button>
           </div>
         </div>

@@ -3,14 +3,14 @@
     top: 70px;
     display: flex;
     flex-direction: column;
-    background-color: #8c8c8c50;
+    background-color: #eeeeee;
     align-items: center;
     padding-top: 120px;
-    height: 800px;
 }
 
 .custom-card {
   background-color: #CBCBCC;
+  margin-bottom: 70px;
 }
 
 .inventory-line {
@@ -78,5 +78,3 @@
 .btn-delete:hover {
   background-color: #702714;
 }
-
-  

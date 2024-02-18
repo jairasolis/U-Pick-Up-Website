@@ -88,7 +88,7 @@ const Books = () => {
   const handleEdit = async (id) => {
     try {
       // Fetch the details of the book to be edited
-      const response = await axios.get(`https://your-api.com/api/books-update/${id}`);
+      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${id}`);
       // Populate a form with the retrieved book details
       setEditFormData(response.data);
       // Set the ID of the book to be edited in state
@@ -111,9 +111,11 @@ const Books = () => {
     }
 };
 
-const handleAddBook = async (newBookData) => {
+const handleAddBook = async (addBookData) => {
   try {
-    const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-books", newBookData);
+    const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-books", addBookData);
+    console.log(addBookData)
+    fetchData();
     // Handle successful response
     console.log(response.data);
     // Close the add book page
@@ -157,11 +159,11 @@ return (
                 </select>
               </div>
             </Col>
-            <Col md={3}>
-              <button type="submit" className="btn display-button btn-lg" onClick={handleSubmit}> Display </button>
+            <Col md={2}>
+              <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
             </Col>
-            <Col md={3}>
-              <button type="button" className="btn reset-button btn-lg" onClick={handleReset}> Reset </button>
+            <Col md={2}>
+              <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
             </Col>
           </Row>
           <hr className='inventory-line' />
