@@ -137,7 +137,7 @@ class AuthController extends Controller
         
         $user = $student ?: $admin;
     
-        $token = Password::getRepository()->create($user);
+        $token = Password::getRepository()->create($user->email);
     
         $resetUrl = 'https://u-pick-up-y7qnw.ondigitalocean.app/api/reset-password?token=' . $token;
         
