@@ -20,4 +20,9 @@ class Admin extends Authenticatable implements CanResetPassword
         'password',
     ];
     use HasApiTokens, HasFactory, CanResetPasswordTrait;
+    
+    public function getEmailAttribute()
+    {
+        return $this->attributes['email_ad'];
+    }
 }
