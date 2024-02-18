@@ -156,8 +156,59 @@ class AuthController extends Controller
         return response()->json(['message' => 'Password reset link sent to email'], 200);
     }
 
+    // public function resetPassword(Request $request)
+    // {
+    //     $request->validate([
+    //         'email_ad' => 'required|email',
+    //         'password' => 'required|min:6|confirmed',
+    //         'token' => 'required',
+    //     ]);
+
+    //     $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
+
+    //     $guard = null;
+    //     $user = null;
+
+    //     // check if the email belongs to a student
+    //     $student = Student::where('email_ad', $credentials['email_ad'])->first();
+    //     if ($student) {
+    //         $guard = 'students';
+    //         $user = $student;
+    //     }
+        
+    //     // if not a student, check if the email belongs to an admin
+    //     if (!$user) {
+    //         $admin = Admin::where('email_ad', $credentials['email_ad'])->first();
+    //         if ($admin) {
+    //             $guard = 'admins';
+    //             $user = $admin;
+    //         }
+    //     }
+        
+    //     // if no user found, return error
+    //     if (!$user) {
+    //         return response()->json(['message' => 'User not found'], 404);
+    //     }
+        
+    //     // attempt to reset password
+    //     $status = Password::broker($guard)->reset(
+    //         $credentials,
+    //         function ($user, $password) {
+    //             $user->password = bcrypt($password);
+    //             $user->save();
+    //         }
+    //     );
+        
+    //     // check the status of password reset
+    //     if ($status === Password::PASSWORD_RESET) {
+    //         return response()->json(['message' => 'Password reset successfully'], 200);
+    //     } else {
+    //         return response()->json(['message' => 'Unable to reset password'], 400);
+    //     }
+    // }
     public function resetPassword(Request $request)
-    {
+{
+    try {
         $request->validate([
             'email_ad' => 'required|email',
             'password' => 'required|min:6|confirmed',
@@ -166,46 +217,42 @@ class AuthController extends Controller
 
         $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
 
-        $guard = null;
-        $user = null;
-
-        // check if the email belongs to a student
+        // Find the user by email in students table
         $student = Student::where('email_ad', $credentials['email_ad'])->first();
-        if ($student) {
-            $guard = 'students';
-            $user = $student;
-        }
-        
-        // if not a student, check if the email belongs to an admin
-        if (!$user) {
+
+        // If user not found in students, try finding in admins
+        if (!$student) {
             $admin = Admin::where('email_ad', $credentials['email_ad'])->first();
-            if ($admin) {
-                $guard = 'admins';
-                $user = $admin;
-            }
         }
-        
-        // if no user found, return error
+
+        // Choose the user based on availability
+        $user = $student ?? $admin;
+
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-        
-        // attempt to reset password
-        $status = Password::broker($guard)->reset(
-            $credentials,
-            function ($user, $password) {
-                $user->password = bcrypt($password);
-                $user->save();
-            }
-        );
-        
-        // check the status of password reset
-        if ($status === Password::PASSWORD_RESET) {
-            return response()->json(['message' => 'Password reset successfully'], 200);
-        } else {
-            return response()->json(['message' => 'Unable to reset password'], 400);
+
+        // Validate the token
+        $passwordReset = PasswordReset::where('email_ad', $credentials['email_ad'])
+            ->where('token', $credentials['token'])
+            ->first();
+
+        if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(60)->isPast()) {
+            return response()->json(['message' => 'Invalid or expired token'], 400);
         }
+
+        // Update the user's password
+        $user->password = bcrypt($credentials['password']);
+        $user->save();
+
+        // Delete the password reset token
+        $passwordReset->delete();
+
+        return response()->json(['message' => 'Password reset successfully'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'An error occurred: ' . $e->getMessage()], 500);
     }
+}
 
     // admin registration and login
     public function adminRegistration(Request $request){
