@@ -172,24 +172,24 @@ class AuthController extends Controller
         // check if the email belongs to a student
         $student = Student::where('email_ad', $credentials['email'])->first();
         if ($student) {
-            $guard = 'students';
+            $guard = 'student';
             $user = $student;
         }
-
+        
         // ff not a student, check if the email belongs to an admin
         if (!$user) {
             $admin = Admin::where('email_ad', $credentials['email'])->first();
             if ($admin) {
-                $guard = 'admins';
+                $guard = 'admin';
                 $user = $admin;
             }
         }
-
+        
         // if no user found, return error
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
+        
         // attempt to reset password
         $status = Password::broker($guard)->reset(
             $credentials,
