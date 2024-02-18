@@ -189,22 +189,24 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
+        $token = $request->filled('token') ? $request->token : Str::random(60);
+
         
         // attempt to reset password
-        $status = Password::broker($guard)->reset(
-            $credentials,
-            function ($user, $password) {
-                $user->password = bcrypt($password);
-                $user->save();
-            }
-        );
+        $token = $request->filled('token') ? $request->token : Str::random(60);
 
-        // check the status of password reset
-        if ($status === Password::PASSWORD_RESET) {
-            return response()->json(['message' => 'Password reset successfully'], 200);
-        } else {
-            return response()->json(['message' => 'Unable to reset password'], 400);
-        }
+        // update password and generate token
+        $user->password = Hash::make($request->password);
+        $user->save();
+    
+        DB::table('password_reset_tokens')->updateOrInsert(
+            ['email' => $request->email],
+            ['token' => $token, 'created_at' => now()]
+        );
+    
+        event(new PasswordReset($user));
+    
+        return response()->json(['message' => 'Password reset successful'], 200);
     }
 
 
