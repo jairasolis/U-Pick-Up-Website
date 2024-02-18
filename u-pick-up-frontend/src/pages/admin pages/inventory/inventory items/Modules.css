@@ -21,10 +21,9 @@ table {
     width: 1100px;
     height: auto;
     border-radius: 10px;
-    background: #CBCBCC;
     padding: 5px 10px;
     border-collapse: collapse;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    
 }
 
 .books tr td:nth-child(2),
@@ -56,3 +55,14 @@ th, td {
 /* thead {
     background-color: #4545453c;
 } */
+
+/* button color */
+.display-button {
+    background-color: #3B5534; /* Green color */
+    color: #fff; /* White text color */
+  }
+  
+  .reset-button {
+    background-color: #6D0606; /* Red color */
+    color: #fff; /* White text color */
+  }

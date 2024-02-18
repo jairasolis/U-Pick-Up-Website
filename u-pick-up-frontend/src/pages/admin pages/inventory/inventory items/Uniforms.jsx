@@ -92,7 +92,6 @@ const Uniforms = () => {
             </select>
           </Col>
           <Col>
-            {selectedCourse && (
               <div>
                 <label htmlFor="yearLevelSelect">Choose a year level:</label>
                 <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
@@ -102,11 +101,13 @@ const Uniforms = () => {
                   ))}
                 </select>
               </div>
-            )}
           </Col>
           <Col>
-            <button type="submit" className="btn btn-primary" onClick={handleSubmit}> Display </button>            
-          </Col>
+              <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+            </Col>
+            <Col>
+              <button type="button" className="btn reset-button" onClick={handleDelete}> Reset </button>
+            </Col>
         </Row>
       </Container>
       <div className="uniforms-container">
