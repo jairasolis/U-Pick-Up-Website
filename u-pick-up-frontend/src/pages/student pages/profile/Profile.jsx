@@ -3,8 +3,10 @@ import './Profile.css'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { fetchStudentData } from "../../../api/studentDetails";
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Profile = () => {
   const [studentsData, setStudentsData] = useState({
@@ -76,7 +78,7 @@ const Profile = () => {
 
   return (
     <div className='profile-page'>
-      <div className="profile-container">
+      <Container className="profile-container">
         <div className="profile-icon">
           <FontAwesomeIcon icon={ faUser } className='icon'/>
         </div>
@@ -84,29 +86,52 @@ const Profile = () => {
           {/* Conditional rendering based on whether studentsData has been set */}
           {studentsData.firstName && studentsData.middleName && studentsData.lastName ? (
             <>
-              <div className="name"> 
-                <h4>{studentsData.firstName} {studentsData.middleName} {studentsData.lastName}</h4>
-              </div>
+              <Row>
+                <div className="name"> 
+                  <h4>{studentsData.firstName} {studentsData.middleName} {studentsData.lastName}</h4>
+                </div>
+              </Row>
+              
               <hr className='profile-hr'/>
               <div className="personal-details">
-                <h4>Email: {studentsData.email_ad}</h4>
-                <h4>Student ID: {studentsData.student_id}</h4>
-                <h4>Gender: {studentsData.gender}</h4>
-                <h4>Age: {studentsData.age}</h4>
-                {/* You can add more details here */}
+                <Row>
+                  <Row>
+                    <Col> <h4 className='deets'>Email:</h4> </Col>
+                    <Col> <h4 className='deets'>{studentsData.email_ad}</h4></Col>
+                  </Row>
+                  <Row>
+                    <Col><h4 className='deets'>Student ID:</h4></Col>
+                    <Col><h4 className='deets'>{studentsData.student_id}</h4></Col>
+                  </Row>
+                  <Row>
+                    <Col><h4 className='deets'>Gender:</h4></Col>
+                    <Col><h4 className='deets'>{studentsData.gender}</h4></Col>
+                  </Row>
+                  <Row>
+                    <Col><h4 className='deets'>Age:</h4></Col>
+                    <Col><h4 className='deets'>{studentsData.age}</h4></Col>
+                  </Row>
+                </Row>
               </div>
               <hr className='profile-hr'/>
               <div className="class-details">
-                <h4>Program: {studentsData.program}</h4>
-                <h4>Department: {studentsData.department}</h4>
-                {/* You can add more details here */}
+                <Row>
+                  <Row>
+                    <Col><h4 className='deets'>Program:</h4></Col>
+                    <Col><h4 className='deets'>{studentsData.program}</h4></Col>
+                  </Row>
+                  <Row>
+                    <Col><h4 className='deets'>Department:</h4></Col>
+                    <Col><h4 className='deets'>{studentsData.department}</h4></Col>
+                  </Row>
+                </Row>
               </div>
             </>
           ) : (
             <p>Loading...</p>
           )}
         </div>
-      </div>
+      </Container>
     </div>
   );
   

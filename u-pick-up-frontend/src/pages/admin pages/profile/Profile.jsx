@@ -3,6 +3,10 @@ import './Profile.css'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Profile = () => {
 
@@ -49,21 +53,29 @@ const Profile = () => {
   
   return (
     <div className='profile-page'>
-      <div className="profile-container">
+      <Container className="profile-container">
         <div className="profile-icon">
           <FontAwesomeIcon icon={ faUser } className='icon'/>
         </div>
         <div className="profile-content">
-          <div className="name"> 
-            <h4> {adminData.username} </h4>
-          </div>
+          <Row className='name'>
+              <h4> {adminData.username}</h4>
+          </Row>
           <hr className='profile-hr'/>
-          <div className="class-details">
-            <h4>Email: {adminData.email_ad}</h4>
-            <h4>Department: {adminData.department}</h4>
-          </div>
+          <Row>
+            <div className="class-details">
+              <Row> 
+                <Col> <h4 className='deets'> Email: </h4> </Col>
+                <Col> <h4 className='deets'> {adminData.email_ad} </h4> </Col>
+              </Row>
+              <Row> 
+                <Col> <h4 className='deets'> Department: </h4> </Col>
+                <Col> <h4 className='deets'> {adminData.department} </h4> </Col>
+              </Row>
+            </div>
+          </Row>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }

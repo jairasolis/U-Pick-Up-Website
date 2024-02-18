@@ -9,7 +9,6 @@
     flex-direction: column;
     background-color: #eeeeee;
     align-items: center;
-    padding-top: 80px;
 }
 
 .profile-container {
@@ -69,4 +68,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.deets {
+    text-align: left;
 }
