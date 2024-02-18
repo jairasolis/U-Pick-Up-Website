@@ -59,7 +59,7 @@ const App = () => {
 
   return (
     <div>
-      <Router>
+      <Router basename="/">
         <Routes>
         <Route path="/" element={<Login />} />
           {/* student pages */}
