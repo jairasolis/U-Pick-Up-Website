@@ -149,7 +149,7 @@ class AuthController extends Controller
             ['token' => $token, 'created_at' => now()]
         );
     
-        $resetUrl = 'http://localhost:3000/reset-password/reset-password?token=' . $token;
+        $resetUrl = 'http://localhost:3000/reset-password?token=' . $token;
     
         try {
             Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
