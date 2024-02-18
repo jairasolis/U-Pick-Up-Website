@@ -207,52 +207,52 @@ class AuthController extends Controller
     //     }
     // }
     public function resetPassword(Request $request)
-{
-    try {
-        $request->validate([
-            'email_ad' => 'required|email',
-            'password' => 'required|min:6|confirmed',
-            'token' => 'required',
-        ]);
-
-        $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
-
-        // Find the user by email in students table
-        $student = Student::where('email_ad', $credentials['email_ad'])->first();
-
-        // If user not found in students, try finding in admins
-        if (!$student) {
-            $admin = Admin::where('email_ad', $credentials['email_ad'])->first();
+    {
+        try {
+            $request->validate([
+                'email_ad' => 'required|email',
+                'password' => 'required|min:6|confirmed',
+                'token' => 'required',
+            ]);
+    
+            $credentials = $request->only('email_ad', 'password', 'password_confirmation', 'token');
+    
+            // Find the user by email in students table
+            $student = Student::where('email_ad', $credentials['email_ad'])->first();
+    
+            // If user not found in students, try finding in admins
+            if (!$student) {
+                $admin = Admin::where('email_ad', $credentials['email_ad'])->first();
+            }
+    
+            // Choose the user based on availability
+            $user = $student ?? $admin;
+    
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+    
+            // Validate the token - assuming you have a PasswordReset model with a 'token' column
+            $passwordReset = PasswordReset::where('email', $credentials['email_ad'])
+                ->where('token', $credentials['token'])
+                ->first();
+    
+            if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(60)->isPast()) {
+                return response()->json(['message' => 'Invalid or expired token'], 400);
+            }
+    
+            // Update the user's password
+            $user->password = bcrypt($credentials['password']);
+            $user->save();
+    
+            // Delete the password reset token
+            $passwordReset->delete();
+    
+            return response()->json(['message' => 'Password reset successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred: ' . $e->getMessage()], 500);
         }
-
-        // Choose the user based on availability
-        $user = $student ?? $admin;
-
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-
-        // Validate the token
-        $passwordReset = PasswordReset::where('email_ad', $credentials['email_ad'])
-            ->where('token', $credentials['token'])
-            ->first();
-
-        if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(60)->isPast()) {
-            return response()->json(['message' => 'Invalid or expired token'], 400);
-        }
-
-        // Update the user's password
-        $user->password = bcrypt($credentials['password']);
-        $user->save();
-
-        // Delete the password reset token
-        $passwordReset->delete();
-
-        return response()->json(['message' => 'Password reset successfully'], 200);
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'An error occurred: ' . $e->getMessage()], 500);
     }
-}
 
     // admin registration and login
     public function adminRegistration(Request $request){
