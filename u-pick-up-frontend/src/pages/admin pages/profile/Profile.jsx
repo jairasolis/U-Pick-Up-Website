@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './Profile.css'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -55,12 +55,12 @@ const Profile = () => {
         </div>
         <div className="profile-content">
           <div className="name"> 
-            <h4> Admin </h4>
+            <h4> {adminData.username} </h4>
           </div>
           <hr className='profile-hr'/>
           <div className="class-details">
-            <h4>Email: </h4>
-            <h4>Department: </h4>
+            <h4>Email: {adminData.email_ad}</h4>
+            <h4>Department: {adminData.department}</h4>
           </div>
         </div>
       </div>
