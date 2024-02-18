@@ -135,7 +135,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Email address not found'], 404);
         }
         
-        $user = $student ?: $admin;
+        $user = $student !== null ? $student : $admin;
     
         $token = Password::getRepository()->create($user->email);
     
