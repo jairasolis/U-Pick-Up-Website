@@ -26,4 +26,9 @@ class Student extends Authenticatable
     ];
 
     use HasApiTokens, HasFactory;
+
+    public function getEmailAttribute()
+    {
+        return $this->attributes['email_ad'];
+    }
 }
