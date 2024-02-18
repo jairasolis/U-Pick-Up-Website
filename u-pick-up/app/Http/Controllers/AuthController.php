@@ -195,7 +195,7 @@ class AuthController extends Controller
         
         // attempt to reset password
         $status = Password::broker($guard)->reset(
-            ['email' => $credentials['email_ad'], 'password' => $credentials['password'], 'password_confirmation' => $credentials['password_confirmation'], 'token' => $token],
+            ['email_ad' => $credentials['email_ad'], 'password' => $credentials['password'], 'password_confirmation' => $credentials['password_confirmation'], 'token' => $token],
             function ($user, $password) {
                 $user->password = bcrypt($password);
                 $user->save();
