@@ -170,7 +170,7 @@ class AuthController extends Controller
         $user = null;
 
         // check if the email belongs to a student
-        $student = Student::where('email_ad', $credentials['email'])->first();
+        $student = Student::where('email_ad', $credentials['email_ad'])->first();
         if ($student) {
             $guard = 'students';
             $user = $student;
@@ -178,7 +178,7 @@ class AuthController extends Controller
         
         // ff not a student, check if the email belongs to an admin
         if (!$user) {
-            $admin = Admin::where('email_ad', $credentials['email'])->first();
+            $admin = Admin::where('email_ad', $credentials['email_ad'])->first();
             if ($admin) {
                 $guard = 'admins';
                 $user = $admin;
