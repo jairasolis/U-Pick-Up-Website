@@ -172,7 +172,7 @@ class AuthController extends Controller
         // check if the email belongs to a student
         $student = Student::where('email_ad', $credentials['email'])->first();
         if ($student) {
-            $guard = 'student';
+            $guard = 'students';
             $user = $student;
         }
         
@@ -180,7 +180,7 @@ class AuthController extends Controller
         if (!$user) {
             $admin = Admin::where('email_ad', $credentials['email'])->first();
             if ($admin) {
-                $guard = 'admin';
+                $guard = 'admins';
                 $user = $admin;
             }
         }
