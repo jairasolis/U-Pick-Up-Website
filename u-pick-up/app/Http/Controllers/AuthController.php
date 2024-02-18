@@ -130,7 +130,9 @@ class AuthController extends Controller
         
         $student = Student::where('email_ad', $request->email)->first();
         $admin = Admin::where('email_ad', $request->email)->first();
-    
+        //debugggg
+        dd($student, $admin);
+
         if (!$student && !$admin) {
             return response()->json(['message' => 'Email address not found'], 404);
         }
