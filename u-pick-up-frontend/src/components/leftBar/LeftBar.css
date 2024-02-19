@@ -33,6 +33,7 @@ hr {
 
 .house, 
 .calendar,
+.inventory-left,
 .profile-left {
     display: flex;
     padding: 10px;
@@ -46,6 +47,7 @@ hr {
 
 .house:hover,
 .calendar:hover,
+.inventory-left:hover,
 .profile-left:hover  {
     background-color: #516E53;
     border-radius: 10px;
@@ -55,6 +57,8 @@ hr {
 .house:hover h4,
 .calendar:hover .icon,
 .calendar:hover h4,
+.inventory-left:hover .icon,
+.inventory-left:hover h4,
 .profile-left:hover .icon,
 .profile-left:hover h4 {
     color: #D9D9D9;

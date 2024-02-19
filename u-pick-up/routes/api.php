@@ -111,3 +111,9 @@ Route::post('/events', [EventController::class, 'store']);
 Route::get('/events/{event}', [EventController::class, 'show']);
 Route::put('/events/{event}', [EventController::class, 'update']);
 Route::delete('/events/{event}', [EventController::class, 'destroy']);
+//create post
+Route::get('/posts', [PostController::class, 'show']);
+Route::post('/posts', [PostController::class, 'store']);
+Route::put('/posts/{id}', [PostController::class, 'update']);
+Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+Route::post('/posts/{id}/like', [PostController::class, 'like']);

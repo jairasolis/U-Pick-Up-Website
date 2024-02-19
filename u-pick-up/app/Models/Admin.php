@@ -25,4 +25,9 @@ class Admin extends Authenticatable implements CanResetPassword
     {
         return $this->attributes['email_ad'];
     }
+
+    public function posts() {
+        return $this->hasMany(post::class);
+        
+    }
 }

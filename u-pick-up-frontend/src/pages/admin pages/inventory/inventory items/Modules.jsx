@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Modules.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Card, CardBody } from 'react-bootstrap';
+import AddModulePage from './AddModulePage';
 
 const Modules = () => {
 
@@ -14,7 +17,8 @@ const Modules = () => {
   const [yearLevels, setYearLevels] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
-  
+  const [showAddModulePage, setShowAddModulePage] = useState(false);
+
   useEffect(() => {
       fetchData();
       fetchCourses();
@@ -67,67 +71,120 @@ const Modules = () => {
     }
   }
 
-  const handleDelete=async(id)=>{
-      console.log(id);
-      await axios.delete("https://u-pick-up-y7qnw.ondigitalocean.app/api/booksdelete"+id);
-      const newModulesData=bookData.filter((item)=>{
-          return(
-              item.id !==id
-          )
-      })
-      setModulesData(newModulesData);
-  }
+  const handleReset = () => {
+    
+    fetchData();
+    console.log("Module data reset");
+  };
+
+  const handleAdd = () => {
+    setShowAddModulePage(true);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddModulePage(false);
+  };
+
+  const handleEdit = async (id) => {
+    try {
+      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-update/${id}`);
+      setEditFormData(response.data);
+      setEditModuleId(id);
+      setShowAddModulePage(true);
+    } catch (error) {
+      console.error("Error fetching module details for edit:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-delete/${id}`);
+      const updatedModulesData = modulesData.filter(module => module.id !== id);
+      setModulesData(updatedModulesData);
+      console.log("Module deleted with id:", id);
+    } catch (error) {
+      console.error("Error deleting module:", error);
+    }
+  };  
+
+  const handleAddModule = async (addModuleData) => {
+    try {
+      const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-modules", addModuleData);
+      console.log("Module added successfully:", response.data);
+      fetchData();
+      setShowAddModulePage(false);
+    } catch (error) {
+      console.error("Error adding module:", error);
+    }
+  };
+  
+
 
   return (
     <div className='modules-page'>
-      <Container>
-        <Row>
-          <Col> 
-            <label htmlFor="courseSelect">Choose a course:</label>
-            <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
-              <option value="">Select a course</option>
-              {courses.map(course => (
-                <option key={course} value={course}>{course}</option>
-              ))}
-            </select>
-          </Col>
-          <Col>
-              <div>
-                <label htmlFor="yearLevelSelect">Choose a year level:</label>
-                <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
-                  <option value="">Select a year level</option>
-                  {yearLevels[selectedCourse]?.map(yearLevel => (
-                    <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
+      <Card className='custom-card'>
+        <CardBody>
+          {showAddModulePage && <AddModulePage onSubmit={handleAddModule} onCancel={handleCancelAdd} />}
+
+          <Container>
+            <Row className='align-items-center justify-content-center'>
+              <Col md={3} style={{ height: '65px', width: '300px'}}> 
+                <label htmlFor="courseSelect">Choose a course:</label>
+                <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
+                  <option value="">Select a course</option>
+                  {courses.map(course => (
+                    <option key={course} value={course}>{course}</option>
                   ))}
                 </select>
-              </div>
-          </Col>
-          <Col>
-              <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+              </Col>
+              <Col md={3} style={{ height: '65px', width: '250px'}}>
+                <div>
+                  <label htmlFor="yearLevelSelect">Choose a year level:</label>
+                  <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                    <option value="">Select a year level</option>
+                    {yearLevels[selectedCourse]?.map(yearLevel => (
+                      <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
+                    ))}
+                  </select>
+                </div>
+              </Col>
+              <Col md={2}>
+                <button type="submit" className="btn display-button btn-lg" onClick={handleSubmit} style={{ height: '60px', width: '200px' }}> Display </button>
+              </Col>
+              <Col md={2}>
+                <button type="button" className="btn reset-button btn-lg" onClick={handleReset} style={{ height: '60px', width: '150px' }}> Reset </button>
+              </Col>
+            </Row>
+            <hr className='inventory-line' />
+          </Container>
+
+
+          <Row className="justify-content-end mb-3">
+            <Col md={2} className='text-right'>
+              <button className="btn btn-add btn-lg" onClick={handleAdd}>
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
             </Col>
-            <Col>
-              <button type="button" className="btn reset-button" onClick={handleDelete}> Reset </button>
-            </Col>
-        </Row>
-      </Container>
-      <div className="modules-container">
-        <table>
-          <thead>
-            <tr>
-              <th> ID </th>
-              <th> Subject code </th>
-              <th> Subject name </th>
-              <th> Year Level </th>
-              <th> Course </th>
-              <th> Available </th>
-              <th> Quantity </th>
-              <th> Action </th>
-            </tr>
-          </thead>
-          <tbody className='modules'>
-            {
-              modulesData.map((modules, i) => {
-                return (
+          </Row>  
+
+          <div className="modules-container">
+            <table>
+              <thead>
+                <tr>
+                  <th> ID </th>
+                  <th> Subject code </th>
+                  <th> Subject name </th>
+                  <th> Year Level </th>
+                  <th> Course </th>
+                  <th> Available </th>
+                  <th> Quantity </th>
+                  <th> Action </th>
+                </tr>
+              </thead>
+              <tbody className='modules'>
+                {modulesData.map((modules, i) => {
+                  console.log("Module data:", modulesData);
+                  return (
                     <tr key={i}>
                         <td>{i + 1}</td>
                         <td>{modules.subject_code} </td>
@@ -140,16 +197,24 @@ const Modules = () => {
                             {/* <NavLink to={`/view/${book.id}`} className="btn btn-success mx-2">View</NavLink>
                             <NavLink to={`/edit/${book.id}`} className="btn btn-info mx-2">Edit</NavLink>
                             <button onClick={()=>handleDelete(user.id)} className="btn btn-danger">Delete</button> */}
+                          <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(modules.id)}>
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
+                          <span className="mx-2"></span> {/* Adds a wider space */}
+                          <button className="btn btn-delete btn-sm" onClick={() => handleDelete(modules.id)}>
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
                         </td>
-                    </tr>
-                )
-              })
-            }
-          </tbody>
-        </table>
-      </div>
+                      </tr>
+                    );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </CardBody>
+      </Card>
     </div>
-  )
+  );
 }
 
 export default Modules

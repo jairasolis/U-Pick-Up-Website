@@ -1,7 +1,7 @@
 import React from 'react'
 import './LeftBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faCalendar, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faCalendar, faUser, faBook } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
 const LeftBar = () => {
@@ -19,6 +19,12 @@ const LeftBar = () => {
               <div className="calendar">
                 <FontAwesomeIcon icon={faCalendar} className='icon'/>
                 <p> Calendar </p> 
+              </div>
+            </Link>
+            <Link to="/student/inventory" style={{ textDecoration: 'none' }}>
+              <div className="inventory-left">
+                <FontAwesomeIcon icon={faBook} className='icon' />
+                <p> Inventory </p>
               </div>
             </Link>
             <Link to="/student/profile" style={{ textDecoration: 'none' }}>
