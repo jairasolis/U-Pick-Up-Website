@@ -103,3 +103,10 @@ Route::get('/test-email', function () {
 // profile
 Route::get('/students/{id}', [StudentController::class, 'fetchStudentDetails']); 
 Route::get('/admins/{id}', [AdminController::class, 'fetchAdminDetails']); 
+
+//create post
+Route::get('/posts', [PostController::class, 'show']);
+Route::post('/posts', [PostController::class, 'store']);
+Route::put('/posts/{id}', [PostController::class, 'update']);
+Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+Route::post('/posts/{id}/like', [PostController::class, 'like']);
