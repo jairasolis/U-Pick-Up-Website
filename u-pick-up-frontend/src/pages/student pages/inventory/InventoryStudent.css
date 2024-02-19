@@ -1,0 +1,38 @@
+.inventory-page {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .inventory-wrapper {
+    display: ;
+} */
+
+.student-inventory-icon {
+    width: auto;
+    height: 40px;
+    color: #ffffff;
+    padding: 30px 0 10px;
+}
+
+.inv-text p {
+    color: #FFFFFF;
+}
+
+.student-inventory-item {
+    width: 200px;
+    height: 150px;
+    color: #ffffff;
+    background-color: #6a6a6a;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+
+} 
+
+.inventory-row {
+    justify-content: center;
+    padding-top: 100px;
+}

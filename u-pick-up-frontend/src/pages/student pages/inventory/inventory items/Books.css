@@ -1,0 +1,50 @@
+.books-page {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    background-color: #eeeeee;
+    align-items: center;
+    padding-top: 120px;
+}
+
+.custom-cards {
+  background-color: #FFFFFF;
+  margin-bottom: 70px;
+}
+
+.inventory-line {
+  width: 100%;
+  border-bottom: 1px solid #454545;
+}
+
+
+.table-header {
+  text-align: center;
+}
+
+.del-icon {
+    padding-left: 10px;
+    color: #6D0606;
+}
+
+/*buttons*/
+.display-button {
+  background-color: #3B5534; 
+  color: #fff; 
+  transition: background-color 0.3s ease;
+}
+  
+.display-button:hover {
+  background-color: #28a745;
+}
+
+.reset-button {
+  background-color: #6D0606; 
+  color: #fff; 
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #842d26;
+}

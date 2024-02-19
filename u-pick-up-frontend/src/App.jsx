@@ -23,6 +23,10 @@ import Profile from "./pages/student pages/profile/Profile";
 import Calendar from "./pages/student pages/calendar/Calendar";
 import Chat from "./pages/student pages/chat/Chat";
 import Faq from "./pages/student pages/help/Faq";
+import StudentInventory from "./pages/student pages/inventory/Inventory";
+import StudentUniforms from "./pages/student pages/inventory/inventory items/Uniforms";
+import StudentBooks from "./pages/student pages/inventory/inventory items/Books";
+import StudentModules from "./pages/student pages/inventory/inventory items/Modules";
 
 // admin pages
 import AdminSignUp2 from "./pages/admin pages/sign up/SignUp2";
@@ -81,6 +85,11 @@ const App = () => {
               <Route path="/student/home" element={<Home />} />
               <Route path="/student/profile" element={<Profile />} />
               <Route path="/student/calendar" element={<Calendar />} />
+
+              <Route path="/student/inventory" element={<StudentInventory />} />
+              <Route path="/student/inventory-books" element={<StudentBooks />} />
+              <Route path="/student/inventory-uniforms" element={<StudentUniforms />} />
+              <Route path="/student/inventory-modules" element={<StudentModules />} />
 
               <Route path="/student/chat-support" element={<Chat />} />
               <Route path="/student/help" element={<Faq />} />
