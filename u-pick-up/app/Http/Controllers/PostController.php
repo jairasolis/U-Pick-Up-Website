@@ -26,7 +26,7 @@ class PostController extends Controller
         $post = Post::create($validatedData);
         return response()->json($post, 201);
     }
-    public function show($id)
+    public function getPosts($id)
     {
         try {
             // Find the book by ID
