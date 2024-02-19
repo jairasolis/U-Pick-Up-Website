@@ -106,11 +106,11 @@ Route::get('/students/{id}', [StudentController::class, 'fetchStudentDetails']);
 Route::get('/admins/{id}', [AdminController::class, 'fetchAdminDetails']); 
 
 //add event
-Route::get('/events', [EventController::class, 'index']);
-Route::post('/events', [EventController::class, 'store']);
-Route::get('/events/{event}', [EventController::class, 'show']);
-Route::put('/events/{event}', [EventController::class, 'update']);
-Route::delete('/events/{event}', [EventController::class, 'destroy']);
+Route::get('/events', [AddEventController::class, 'index']);
+Route::post('/events', [AddEventController::class, 'store']);
+Route::get('/events/{event}', [AddEventController::class, 'show']);
+Route::put('/events/{event}', [AddEventController::class, 'update']);
+Route::delete('/events/{event}', [AddEventController::class, 'destroy']);
 //create post
 Route::get('/posts', [PostController::class, 'show']);
 Route::post('/posts', [PostController::class, 'store']);

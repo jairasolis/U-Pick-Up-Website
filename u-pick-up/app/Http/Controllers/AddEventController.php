@@ -38,12 +38,17 @@ class AddEventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        return $event;
-        //
-    }
+        try {
+            // Find the book by ID
+            $events = Event::findOrFail($id);
 
+            return response()->json(['event' => $events], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Event not found.'], 404);
+        }
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -66,10 +71,20 @@ class AddEventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $event->delete();
-        return response()->json(null, 204);
-        //
+        $books = Event::find($id);
+        if(!$books){
+          return response()->json([
+             'message'=>'Event Not Found.'
+          ],404);
+        }
+         
+        // Delete book
+        $books->delete();
+       
+        return response()->json([
+            'message' => "Event successfully deleted."
+        ],200);
     }
 }
