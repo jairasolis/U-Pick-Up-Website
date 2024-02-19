@@ -11,6 +11,7 @@ use App\Http\Controllers\ModulesController;
 use App\Http\Controllers\UniformController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoginStudentController;
+use App\Http\Controllers\AddEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,3 +104,10 @@ Route::get('/test-email', function () {
 // profile
 Route::get('/students/{id}', [StudentController::class, 'fetchStudentDetails']); 
 Route::get('/admins/{id}', [AdminController::class, 'fetchAdminDetails']); 
+
+//add event
+Route::get('/events', [EventController::class, 'index']);
+Route::post('/events', [EventController::class, 'store']);
+Route::get('/events/{event}', [EventController::class, 'show']);
+Route::put('/events/{event}', [EventController::class, 'update']);
+Route::delete('/events/{event}', [EventController::class, 'destroy']);
