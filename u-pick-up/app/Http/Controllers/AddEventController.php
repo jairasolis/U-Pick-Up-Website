@@ -55,12 +55,10 @@ class AddEventController extends Controller
     {
         $request->validate([
             'event_title' => 'required|string',
-            'event_date' => 'required|date',
         ]);
 
         $event->update([
             'event_title' => $request->input('event_title'),
-            'event_date' => $request->input('event_date'),
         ]);
 
         return response()->json($event, 200);
