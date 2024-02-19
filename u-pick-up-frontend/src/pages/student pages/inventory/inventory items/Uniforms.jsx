@@ -12,40 +12,53 @@ import { Card, CardBody } from 'react-bootstrap';
 const Uniforms = () => {
 
   const [uniformData, setUniformData] = useState([]);
-  const [courses, setCourses] = useState([]);
   const [yearLevels, setYearLevels] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
+  const [studentsData, setStudentsData] = useState('');
   
   useEffect(() => {
-      fetchData();
-      fetchCourses();
-      fetchYearLevels();
+    fetchYearLevels();
   }, [])
-
-  const fetchCourses = async () => {
-    try {
-      const response = await axios.get('/courses.json');
-      setCourses(response.data);
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-    }
-  };
 
   const fetchYearLevels = async () => {
     try {
       const response = await axios.get('/year_level.json');
+      console.log(response.data);
       setYearLevels(response.data);
     } catch (error) {
       console.error('Error fetching year levels:', error);
     }
   };
 
-  const fetchData = async () => {
+  const fetchStudentData = async (Id) => {
+    try {
+      const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/students/${Id}`);
+      console.log(result.data);
+
+      const program = result.data.student.program;
+      console.log(program);
+      fetchData(program);
+
+      setStudentsData(program);
+    } catch (err) {
+      console.error("Error fetching student's program:", err);
+    }
+  };
+
+  useEffect(() => {
+    const Id = localStorage.getItem('studentId');
+    console.log(Id);
+    if (Id) {
+      fetchStudentData(Id); 
+    }
+  }, [localStorage.getItem('studentId')]);
+
+
+  const fetchData = async (course) => {
       try {
-          const result = await axios("https://u-pick-up-y7qnw.ondigitalocean.app/api/uniforms");
-          console.log(result.data.results);
-          setUniformData(result.data.results)
+          const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniforms/${course}`);
+          console.log(result.data);
+          setUniformData(result.data)
       } catch (err) {
           console.log("something Wrong");
       }
@@ -62,8 +75,8 @@ const Uniforms = () => {
   }  
     
   const handleSubmit = () => {
-    if (selectedCourse && selectedYearLevel) {
-      fetchSelectedData(selectedCourse, selectedYearLevel);
+    if (studentsData && selectedYearLevel) {
+      fetchSelectedData(studentsData, selectedYearLevel);
     } else {
       console.log("Please select both course and year level.");
     }
@@ -71,36 +84,27 @@ const Uniforms = () => {
 
   const handleReset = () => {
     // Fetch all books again to reset the bookData state
-    fetchData();
-    console.log("Book data reset");
+    fetchData(studentsData);
+    console.log("Uniform data reset");
   };
-
 
   return (
     <div className='uniforms-page'>
       <Card className='custom-cards'>
         <Card.Body>
           <Container>
-            <Row>
-              <Col> 
-                <label htmlFor="courseSelect">Choose a course:</label>
-                <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
-                  <option value="">Select a course</option>
-                  {courses.map(course => (
-                    <option key={course} value={course}>{course}</option>
+            <Row className="align-items-center justify-content-center">
+              <Col md={3}>
+                <p>Program: {studentsData}</p>
+              </Col>
+              <Col md={3}>
+                <label htmlFor="yearLevelSelect">Choose a year level:</label>
+                <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                  <option value="">Select a year level</option>
+                  {yearLevels[studentsData]?.map(yearLevel => (
+                    <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
                   ))}
                 </select>
-              </Col>
-              <Col>
-                  <div>
-                    <label htmlFor="yearLevelSelect">Choose a year level:</label>
-                    <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
-                      <option value="">Select a year level</option>
-                      {yearLevels[selectedCourse]?.map(yearLevel => (
-                        <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
-                      ))}
-                    </select>
-                  </div>
               </Col>
               <Col>
                   <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
@@ -109,8 +113,7 @@ const Uniforms = () => {
                   <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
                 </Col>
             </Row>
-            <hr className='inventory-line' />
-
+            <hr className="inventory-line" />
           </Container>
           <div className="uniforms-container">
             <table>
@@ -125,20 +128,22 @@ const Uniforms = () => {
                 </tr>
               </thead>
               <tbody className='uniforms'>
-                {
-                  uniformData.map((uniform, i) => {
-                    return (
-                      <tr key={i}>
-                          <td>{i + 1}</td>
-                          <td className='align-left'>{uniform.uniform_type} </td>
-                          <td>{uniform.year_level} </td>
-                          <td>{uniform.course} </td>
-                          <td>{uniform.available} </td>
-                          <td>{uniform.quantity} </td>
-                      </tr>
-                    )
-                  })
-                }
+                {uniformData.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="text-center" style={{padding: "60px"}}>No uniforms available</td>
+                  </tr>
+                ) : (
+                  uniformData.map((uniform, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td className='align-left'>{uniform.uniform_type}</td>
+                      <td>{uniform.year_level}</td>
+                      <td>{uniform.course}</td>
+                      <td>{uniform.available}</td>
+                      <td>{uniform.quantity}</td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

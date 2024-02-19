@@ -12,40 +12,54 @@ import { Card, CardBody } from 'react-bootstrap';
 const Books = () => {
 
   const [bookData, setBookData] = useState([]);
-  const [courses, setCourses] = useState([]);
   const [yearLevels, setYearLevels] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
+  const [studentsData, setStudentsData] = useState('');
 
   useEffect(() => {
-      fetchData();
-      fetchCourses();
-      fetchYearLevels();
+    fetchYearLevels();
   }, [])
 
-  const fetchCourses = async () => {
-    try {
-      const response = await axios.get('/courses.json');
-      setCourses(response.data);
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-    }
-  };
 
   const fetchYearLevels = async () => {
     try {
       const response = await axios.get('/year_level.json');
+      console.log(response.data);
       setYearLevels(response.data);
     } catch (error) {
       console.error('Error fetching year levels:', error);
     }
   };
 
-  const fetchData = async () => {
+  const fetchStudentData = async (Id) => {
+    try {
+      const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/students/${Id}`);
+      console.log(result.data);
+
+      const program = result.data.student.program;
+      console.log(program);
+      fetchData(program);
+
+      setStudentsData(program);
+    } catch (err) {
+      console.error("Error fetching student's program:", err);
+    }
+  };
+
+  useEffect(() => {
+    const Id = localStorage.getItem('studentId');
+    console.log(Id);
+    if (Id) {
+      fetchStudentData(Id); 
+    }
+  }, [localStorage.getItem('studentId')]);
+
+
+  const fetchData = async (course) => {
       try {
-          const result = await axios("https://u-pick-up-y7qnw.ondigitalocean.app/api/books");
-          console.log(result.data.results);
-          setBookData(result.data.results)
+          const result = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books/${course}`);
+          console.log(result.data);
+          setBookData(result.data)
       } catch (err) {
           console.log("something Wrong");
       }
@@ -62,8 +76,8 @@ const Books = () => {
   }  
     
   const handleSubmit = () => {
-    if (selectedCourse && selectedYearLevel) {
-      fetchSelectedData(selectedCourse, selectedYearLevel);
+    if (studentsData && selectedYearLevel) {
+      fetchSelectedData(studentsData, selectedYearLevel);
     } else {
       console.log("Please select both course and year level.");
     }
@@ -71,73 +85,68 @@ const Books = () => {
 
   const handleReset = () => {
     // Fetch all books again to reset the bookData state
-    fetchData();
+    fetchData(studentsData);
     console.log("Book data reset");
   };
 
 
-return (
-  <div className='books-page'>
-    <Card className='custom-cards'>
-      <Card.Body>        
-        <Container>
-          <Row className='align-items-center justify-content-center'>
-            <Col md={3}> 
-              <label htmlFor="courseSelect">Choose a course:</label>
-              <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
-                <option value="">Select a course</option>
-                {courses.map(course => (
-                  <option key={course} value={course}>{course}</option>
-                ))}
-              </select>
-            </Col>
-            <Col md={3}>
-              <div>
+  return (
+    <div className="books-page">
+      <Card className="custom-cards">
+        <Card.Body>
+          <Container>
+            <Row className="align-items-center justify-content-center">
+              <Col md={3}>
+                <p>Program: {studentsData}</p>
+              </Col>
+              <Col md={3}>
                 <label htmlFor="yearLevelSelect">Choose a year level:</label>
                 <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
                   <option value="">Select a year level</option>
-                  {yearLevels[selectedCourse]?.map(yearLevel => (
+                  {yearLevels[studentsData]?.map(yearLevel => (
                     <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
                   ))}
                 </select>
-              </div>
-            </Col>
-            <Col md={2}>
-              <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
-            </Col>
-            <Col md={2}>
-              <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
-            </Col>
-          </Row>
-          <hr className='inventory-line' />
-        </Container>
+              </Col>
+              <Col>
+                  <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+                </Col>
+                <Col>
+                  <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
+                </Col>
+            </Row>
+            <hr className="inventory-line" />
+          </Container>
 
-        <div className="books-container">
-          <table>
-            <thead className='table-header'>
-              <tr>
-                <th> ID </th>
-                <th> Subject name </th>
-                <th> Year Level </th>
-                <th> Course </th>
-                <th> Available </th>
-                <th> Quantity </th>
-              </tr>
-            </thead>
-            <tbody className='books'>
-              {bookData.map((book, i) => {
-                console.log("Book data:", bookData);
-                return (
+          <div className="books-container">
+            <table>
+              <thead className="table-header">
+                <tr>
+                  <th>ID</th>
+                  <th>Subject name</th>
+                  <th>Year Level</th>
+                  <th>Program</th>
+                  <th>Available</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody className="books">
+                {bookData.length === 0 ? (
+                  <tr>
+                    <td colSpan="6">No stocks of books available</td>
+                  </tr>
+                ) : (
+                  bookData.map((book, i) => (
                     <tr key={i}>
                       <td>{i + 1}</td>
-                      <td>{book.subject_name} </td>
-                      <td>{book.year_level} </td>
-                      <td>{book.course} </td>
-                      <td>{book.available} </td>
-                      <td>{book.quantity} </td>
+                      <td>{book.subject_name}</td>
+                      <td>{book.year_level}</td>
+                      <td>{book.course}</td>
+                      <td>{book.available}</td>
+                      <td>{book.quantity}</td>
                     </tr>
-                  );
-                })}
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -145,7 +154,7 @@ return (
       </Card>
     </div>
   );
+};
 
-}
 
 export default Books
