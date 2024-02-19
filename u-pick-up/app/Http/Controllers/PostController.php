@@ -26,11 +26,16 @@ class PostController extends Controller
         $post = Post::create($validatedData);
         return response()->json($post, 201);
     }
-
-    public function show(string $id)
+    public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return response()->json($post);
+        try {
+            // Find the book by ID
+            $posts = Post::findOrFail($id);
+
+            return response()->json(['book' => $posts], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Post not found.'], 404);
+        }
     }
 
     public function update(Request $request, string $id)
