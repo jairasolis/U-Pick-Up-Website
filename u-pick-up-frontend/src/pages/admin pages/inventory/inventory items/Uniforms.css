@@ -9,14 +9,74 @@
     height: 800px;
 }
 
-/* Button Color */
+.custom-card {
+  background-color: #CBCBCC;
+  margin-bottom: 70px;
+}
+
+.inventory-line {
+  width: 100%;
+  border-bottom: 2px solid black; /* This creates a solid black line */
+}
+
+
+.table-header {
+  text-align: center;
+}
+
+.del-icon {
+    padding-left: 10px;
+    color: #6D0606;
+}
+
+/*buttons*/
 .display-button {
-    background-color: #3B5534; 
-    color: #fff; 
-  }
+  background-color: #3B5534; 
+  color: #fff; 
+  transition: background-color 0.3s ease;
+}
   
-  .reset-button {
-    background-color: #6D0606; 
-    color: #fff; 
-  }
+.display-button:hover {
+  background-color: #28a745;
+}
+
+.reset-button {
+  background-color: #6D0606; 
+  color: #fff; 
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #842d26;
+}
+
+.btn-add {
+  background-color: #020E2D; 
+  color: #fff; 
+  transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: #25127d;
+}
+
+.btn-edit {
+  background-color: #3B5534; 
+  color: #fff; 
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #28a745;
+}
+
+.btn-delete {
+  background-color: #6D0606; 
+  color: #fff;
+  transition: background-color 0.3s ease; 
+}
+
+.btn-delete:hover {
+  background-color: #702714;
+}
 

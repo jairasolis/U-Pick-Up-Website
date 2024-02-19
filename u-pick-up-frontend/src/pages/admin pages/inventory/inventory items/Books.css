@@ -15,9 +15,8 @@
 
 .inventory-line {
   width: 100%;
-  border-bottom: 2px solid black; /* This creates a solid black line */
+  border-bottom: 2px solid black; 
 }
-
 
 .table-header {
   text-align: center;
