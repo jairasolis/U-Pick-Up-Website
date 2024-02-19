@@ -112,7 +112,7 @@ Route::get('/events/{event}', [AddEventController::class, 'show']);
 Route::put('/events/{event}', [AddEventController::class, 'update']);
 Route::delete('/events/{event}', [AddEventController::class, 'destroy']);
 //create post
-Route::get('/posts', [PostController::class, 'getPosts']);
+Route::get('/posts', [PostController::class, 'index']);
 Route::post('/posts', [PostController::class, 'store']);
 Route::put('/posts/{id}', [PostController::class, 'update']);
 Route::delete('/posts/{id}', [PostController::class, 'destroy']);
