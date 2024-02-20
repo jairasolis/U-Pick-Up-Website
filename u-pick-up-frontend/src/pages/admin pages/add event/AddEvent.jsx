@@ -3,7 +3,7 @@ import './AddEvent.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 
 const localizer = momentLocalizer(moment);
 
@@ -15,14 +15,21 @@ export default function AddEvent() {
   const [selectEvent, setSelectEvent] = useState(null);
 
   useEffect(() => {
-    // Fetch events from your API when the component mounts
     fetchEvents();
   }, []);
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('/api/events'); // Assuming your API endpoint is '/api/events'
-      setEvents(response.data);
+      const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/events');
+      console.log(response.data);
+      // transform the fetched events para mag-matchy matchy sa react-big-calendar format
+      const transformedEvents = response.data.map(event => ({
+        id: event.id,
+        title: event.event_title,
+        start: new Date(event.event_date), 
+        end: new Date(event.event_date), 
+      }));
+      setEvents(transformedEvents);
     } catch (error) {
       console.error('Error fetching events:', error);
     }
@@ -33,7 +40,7 @@ export default function AddEvent() {
       if (eventTitle && selectedDate) {
         if (selectEvent) {
           const updatedEvent = { ...selectEvent, title: eventTitle };
-          await axios.put(`/api/events/${selectEvent.id}`, updatedEvent); // Assuming you have an API endpoint for updating events
+          await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/events/${selectEvent.id}`, updatedEvent);
           const updatedEvents = events.map((event) =>
             event === selectEvent ? updatedEvent : event
           );
@@ -44,10 +51,10 @@ export default function AddEvent() {
             start: selectedDate,
             end: moment(selectedDate).add(1, 'hours').toDate(),
           };
-          await axios.post('/api/events', newEvent); // Assuming you have an API endpoint for creating events
+          await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/events', newEvent);
           setEvents([...events, newEvent]);
         }
-        setShowModal(false);
+        setShowModal(true);
         setEventTitle('');
         setSelectEvent(null);
       }
@@ -59,7 +66,7 @@ export default function AddEvent() {
   const deleteEvent = async () => {
     try {
       if (selectEvent) {
-        await axios.delete(`/api/events/${selectEvent.id}`); // Assuming you have an API endpoint for deleting events
+        await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/events/${selectEvent.id}`);
         const updatedEvents = events.filter((event) => event !== selectEvent);
         setEvents(updatedEvents);
         setShowModal(false);
@@ -72,15 +79,24 @@ export default function AddEvent() {
   };
 
   const handleSelectedSlot = (slotInfo) => {
-    setShowModal(true);
-    setSelectedDate(slotInfo.start);
-    setSelectEvent(null);
-  };
+  setShowModal(prevShowModal => {
+    console.log(prevShowModal); // This will log the previous value of showModal
+    return true; // Set showModal to true
+  });
+  setSelectedDate(slotInfo.start);
+  setSelectEvent(null);
+};
 
   const handleSelectedEvent = (event) => {
     setShowModal(true);
     setSelectEvent(event);
     setEventTitle(event.title);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setEventTitle('');
+    setSelectEvent(null);
   };
 
   return (
@@ -98,20 +114,14 @@ export default function AddEvent() {
         />
 
         {showModal && (
-          <div className="modal" style={{display:'block', backgroundColor:'rgba(0,0,0,0,5', position:'fixed',top:0, bottom:0,left:0,right:0}}>  
-            <div className="modal-dialog">
+          <div className="modal" onClick={handleModalClose}>
+            <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">
                     {selectEvent ? 'Edit Event' : 'Add Event'}
                   </h5>
-                  <button type="button" className="btn-close" 
-                    onClick={() => {
-                      setShowModal(false);
-                      setEventTitle('');
-                      setSelectEvent(null);
-                    }}
-                  />
+                  <button type="button" className="btn-close" onClick={handleModalClose} />
                 </div>
                 <div className="modal-body">
                   <label htmlFor="eventTitle" className='form-label'>Event Title:</label>
