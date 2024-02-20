@@ -17,7 +17,7 @@ const AddPost = () => {
       const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts');
       const postsWithLikes = response.data.map(post => ({
         ...post,
-        likes: post.likes ||
+        likes: post.likes || 0,
       }));
       setPosts(postsWithLikes);
     } catch (error) {
