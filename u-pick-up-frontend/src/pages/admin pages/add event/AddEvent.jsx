@@ -38,23 +38,26 @@ export default function AddEvent() {
   const saveEvent = async () => {
     try {
       if (eventTitle && selectedDate) {
+        const formattedDate = moment(selectedDate).format("YYYY-MM-DD HH:mm:ss");
+  
         if (selectEvent) {
-          const updatedEvent = { ...selectEvent, title: eventTitle };
+          const updatedEvent = {
+            event_title: eventTitle,
+            event_date: formattedDate,
+          };
           await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/events/${selectEvent.id}`, updatedEvent);
-          const updatedEvents = events.map((event) =>
-            event === selectEvent ? updatedEvent : event
-          );
-          setEvents(updatedEvents);
         } else {
           const newEvent = {
-            title: eventTitle,
-            start: selectedDate,
-            end: moment(selectedDate).add(1, 'hours').toDate(),
+            event_title: eventTitle,
+            event_date: formattedDate,
           };
-          await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/events', newEvent);
-          setEvents([...events, newEvent]);
+          await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/events", newEvent);
         }
-        setShowModal(true);
+  
+        // Refetch events after saving/updating
+        fetchEvents();
+  
+        setShowModal(false);
         setEventTitle('');
         setSelectEvent(null);
       }
@@ -62,6 +65,27 @@ export default function AddEvent() {
       console.error('Error saving event:', error);
     }
   };
+
+  // const handleAddEvent = async () => {
+  //   try {
+
+  //     if (eventTitle && selectedDate) {
+  //       const formattedDate = moment(selectedDate).format("YYYY-MM-DD HH:mm:ss");
+
+  //       const newEvent = {
+  //         event_title: eventTitle,
+  //         event_date: formattedDate,
+  //       };
+  //       console.log(newEvent)
+
+  //       const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/events", newEvent);
+  //       setEvents([...events, newEvent]);
+  //       console.log(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding event:", error);
+  //   }
+  // };
 
   const deleteEvent = async () => {
     try {
@@ -79,13 +103,10 @@ export default function AddEvent() {
   };
 
   const handleSelectedSlot = (slotInfo) => {
-  setShowModal(prevShowModal => {
-    console.log(prevShowModal); // This will log the previous value of showModal
-    return true; // Set showModal to true
-  });
-  setSelectedDate(slotInfo.start);
-  setSelectEvent(null);
-};
+    setShowModal(true);
+    setSelectedDate(slotInfo.start);
+    setSelectEvent(null);
+  };
 
   const handleSelectedEvent = (event) => {
     setShowModal(true);
@@ -113,15 +134,21 @@ export default function AddEvent() {
           onSelectEvent={handleSelectedEvent}
         />
 
-        {showModal && (
-          <div className="modal" onClick={handleModalClose}>
-            <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+{showModal && (
+          <div className="modal" style={{display:'block', backgroundColor:'rgba(0,0,0,0,5', position:'fixed',top:0, bottom:0,left:0,right:0}}>  
+            <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">
                     {selectEvent ? 'Edit Event' : 'Add Event'}
                   </h5>
-                  <button type="button" className="btn-close" onClick={handleModalClose} />
+                  <button type="button" className="btn-close" 
+                    onClick={() => {
+                      setShowModal(false);
+                      setEventTitle('');
+                      setSelectEvent(null);
+                    }}
+                  />
                 </div>
                 <div className="modal-body">
                   <label htmlFor="eventTitle" className='form-label'>Event Title:</label>
