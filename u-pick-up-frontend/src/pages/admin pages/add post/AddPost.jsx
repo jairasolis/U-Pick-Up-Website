@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AddPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -7,52 +8,78 @@ const AddPost = () => {
   const [inputValue, setInputValue] = useState('');
   const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts');
+      const postsWithLikes = response.data.map(post => ({
+        ...post,
+        likes: post.likes ||
+      }));
+      setPosts(postsWithLikes);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
+  
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const handlePostSubmit = () => {
+  const handlePostSubmit = async () => {
     if (inputValue.trim() !== '') {
-      const newPost = {
-        id: Date.now(),
-        content: inputValue,
-        likes: 0, // Initial likes count
-        likedByUser: false // Whether the current user has liked the post
-      };
-      setPosts([...posts, newPost]);
-      setInputValue('');
+      try {
+        const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts', { content: inputValue });
+        setPosts([...posts, response.data]);
+        setInputValue('');
+      } catch (error) {
+        console.error('Error creating post:', error);
+      }
     }
   };
 
-  const handleLike = (postId) => {
-    // Check if the current user has already liked the post
-    const postIndex = posts.findIndex(post => post.id === postId);
-    if (postIndex !== -1 && !posts[postIndex].likedByUser) {
-      // Update the likes count and set likedByUser to true
-      const updatedPosts = [...posts];
-      updatedPosts[postIndex].likes++;
-      updatedPosts[postIndex].likedByUser = true;
-      setPosts(updatedPosts);
-      // Send a request to the backend to save the like
-    }
-  };
-  const handleEdit = (postId, newContent) => {
-    // Check if the new content is not empty
-    if (newContent.trim() !== '') {
+  const handleEdit = async (postId, newContent) => {
+    try {
+      await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`, { content: newContent });
       const updatedPosts = posts.map(post =>
         post.id === postId ? { ...post, content: newContent } : post
       );
       setPosts(updatedPosts);
-    } else {
-      // Alert the user if the input is empty
-      alert('Please enter something to edit the post.');
+    } catch (error) {
+      console.error('Error updating post:', error);
     }
   };
 
-  const handleDelete = (postId) => {
-    const updatedPosts = posts.filter(post => post.id !== postId);
-    setPosts(updatedPosts);
+  const handleDelete = async (postId) => {
+    try {
+      await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`);
+      const updatedPosts = posts.filter(post => post.id !== postId);
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
   };
+
+  const handleLike = async (postId) => {
+    try {
+      const postIndex = posts.findIndex(post => post.id === postId);
+      if (postIndex !== -1 && !posts[postIndex].likedByUser) {
+        await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
+        
+        // Update the likes count and set likedByUser to true
+        const updatedPosts = [...posts];
+        updatedPosts[postIndex].likes++;
+        updatedPosts[postIndex].likedByUser = true;
+        setPosts(updatedPosts);
+      }
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
+  }; 
 
   return (
     <div className='add-post'>
@@ -75,7 +102,7 @@ const AddPost = () => {
               <div className="post-content">
                 <p className='mins'>
                   <img src="adminprofile.png" alt="" className="admin-profile" />
-                  {new Date().toLocaleString()}
+                  {new Date(post.createdAt).toLocaleString()}
                 </p>
                 <p>{post.content}</p>
                 <div className="reactions">

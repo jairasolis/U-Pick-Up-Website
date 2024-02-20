@@ -13,5 +13,13 @@ class Post extends Model
         'post_content',
         'likes_count',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
     use HasFactory;
 }
