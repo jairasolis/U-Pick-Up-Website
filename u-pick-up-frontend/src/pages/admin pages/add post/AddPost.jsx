@@ -33,7 +33,7 @@ const AddPost = () => {
   const handlePostSubmit = async () => {
     if (inputValue.trim() !== '') {
       try {
-        const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts', { content: inputValue });
+        const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts', { post_content: inputValue });
         setPosts([...posts, response.data]);
         setInputValue('');
       } catch (error) {
@@ -44,9 +44,9 @@ const AddPost = () => {
 
   const handleEdit = async (postId, newContent) => {
     try {
-      await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`, { content: newContent });
+      await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`, { post_content: newContent });
       const updatedPosts = posts.map(post =>
-        post.id === postId ? { ...post, content: newContent } : post
+        post.id === postId ? { ...post, post_content: newContent } : post
       );
       setPosts(updatedPosts);
     } catch (error) {
@@ -66,18 +66,13 @@ const AddPost = () => {
 
   const handleLike = async (postId) => {
     try {
-      const postIndex = posts.findIndex(post => post.id === postId);
-      if (postIndex !== -1 && !posts[postIndex].likedByUser) {
-        await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
-        
-        // Update the likes count and set likedByUser to true
-        const updatedPosts = [...posts];
-        updatedPosts[postIndex].likes++;
-        updatedPosts[postIndex].likedByUser = true;
-        setPosts(updatedPosts);
-      }
+      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/likes`);
+      const updatedPosts = posts.map(post =>
+        post.id === postId ? { ...post, likes: response.data.totalLikes } : post
+      );
+      setPosts(updatedPosts);
     } catch (error) {
-      console.error('Error liking post:', error);
+      console.error('Error fetching total likes count:', error);
     }
   }; 
 
@@ -102,9 +97,9 @@ const AddPost = () => {
               <div className="post-content">
                 <p className='mins'>
                   <img src="adminprofile.png" alt="" className="admin-profile" />
-                  {new Date(post.createdAt).toLocaleString()}
+                  {new Date(post.created_at).toLocaleString()}
                 </p>
-                <p>{post.content}</p>
+                <p>{post.post_content}</p>
                 <div className="reactions">
                   <button className="edit-button" onClick={() => handleEdit(post.id, prompt("Enter new content:"))}>
                     <FontAwesomeIcon icon={faPenToSquare} />
