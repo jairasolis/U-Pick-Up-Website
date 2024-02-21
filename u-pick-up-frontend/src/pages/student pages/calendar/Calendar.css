@@ -3,12 +3,25 @@
     top: 70px;
     display: flex;
     flex-direction: column;
-    background-color: #EEEEEE;
+    background-color: #EEEEEE; 
     align-items: center;
-    padding-top: 80px;
+    padding-top: 30px;
+    gap: 30px;
 }
 
-.calendar-container {
+.events-container {
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+.events-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+  
+
+
+/* .calendar-container {
     display: flex;
 }
 
@@ -67,4 +80,4 @@
     border-radius: 10px;
     background: #D9D9D9;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 27px 0px;
-}
+} */

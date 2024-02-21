@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const localizer = momentLocalizer(moment);
 
-export default function AddEvent() {
+const AddEvent = () => {
   const [events, setEvents] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -56,7 +56,6 @@ export default function AddEvent() {
   
         // Refetch events after saving/updating
         fetchEvents();
-  
         setShowModal(false);
         setEventTitle('');
         setSelectEvent(null);
@@ -180,3 +179,4 @@ export default function AddEvent() {
     </div>
   );
 }
+export default AddEvent
