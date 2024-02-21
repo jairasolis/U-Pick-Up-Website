@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './AddEvent.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from 'moment';
 import axios from 'axios';
+
 
 const localizer = momentLocalizer(moment);
 
@@ -65,27 +66,6 @@ const AddEvent = () => {
     }
   };
 
-  // const handleAddEvent = async () => {
-  //   try {
-
-  //     if (eventTitle && selectedDate) {
-  //       const formattedDate = moment(selectedDate).format("YYYY-MM-DD HH:mm:ss");
-
-  //       const newEvent = {
-  //         event_title: eventTitle,
-  //         event_date: formattedDate,
-  //       };
-  //       console.log(newEvent)
-
-  //       const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/events", newEvent);
-  //       setEvents([...events, newEvent]);
-  //       console.log(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error adding event:", error);
-  //   }
-  // };
-
   const deleteEvent = async () => {
     try {
       if (selectEvent) {
@@ -121,20 +101,20 @@ const AddEvent = () => {
 
   return (
     <div className='calendar-page'>
-      <div style={{height:'500px'}}> 
+      <div className='calendar-container'>
         <Calendar
           localizer={localizer}
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ margin: '50px'}}
+          style={{ width: '100%', height: '100%' }}
           selectable={true}
           onSelectSlot={handleSelectedSlot}
           onSelectEvent={handleSelectedEvent}
         />
 
 {showModal && (
-          <div className="modal" style={{display:'block', backgroundColor:'rgba(0,0,0,0,5', position:'fixed',top:0, bottom:0,left:0,right:0}}>  
+          <div className="modal">  
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
@@ -150,7 +130,7 @@ const AddEvent = () => {
                   />
                 </div>
                 <div className="modal-body">
-                  <label htmlFor="eventTitle" className='form-label'>Event Title:</label>
+                  <label htmlFor="eventTitle" className='form-label'>Set Announcements:</label>
                   <input
                     type='text'
                     className='form-control'
@@ -166,7 +146,7 @@ const AddEvent = () => {
                       className="btn btn-danger me-2"
                       onClick={deleteEvent}
                     >
-                      Delete Event
+                    Delete Event
                     </button>
                   )}
                   <button type="button" onClick={saveEvent} className='btn btn-primary'>Save changes</button>

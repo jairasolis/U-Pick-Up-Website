@@ -16,9 +16,14 @@ const StudentCalendar = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/events'); // Replace with the admin's API endpoint
+      const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/events');
       console.log(response.data);
-      setEvents(response.data);
+      setEvents(response.data.map(event => ({
+        id: event.id,
+        title: event.event_title,
+        start: new Date(event.event_date),
+        end: new Date(event.event_date),
+      })));
     } catch (error) {
       console.error('Error fetching events:', error);
     }
@@ -26,26 +31,18 @@ const StudentCalendar = () => {
 
   return (
     <div className='calendar-page'>
-      <div style={{height:'500px'}}> 
+      <div className='calendar-container'>
         <Calendar
           localizer={localizer}
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ margin: '50px'}}
+          style={{ width: '100%', height: '100%' }}
           selectable={false}
         />
       </div>
-      <div className='events-container'>
-        <h2>Announcements</h2>
-        <ul>
-          {events.map(event => (
-            <li key={event.id}>{event.event_title} - {moment(event.event_date).format('MMMM Do YYYY, h:mm a')}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
-}
+};
 
 export default StudentCalendar;
