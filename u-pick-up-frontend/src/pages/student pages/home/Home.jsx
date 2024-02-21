@@ -14,9 +14,10 @@ const Home = () => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts');
+      console.log(response.data)
       const postsWithLikes = response.data.map(post => ({
         ...post,
-        likes: post.likes || 0,
+        likes_count: post.likes_count || 0,
       }));
       setPosts(postsWithLikes.reverse());
     } catch (error) {
@@ -47,7 +48,7 @@ const Home = () => {
         await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
         
         const updatedPosts = [...posts];
-        updatedPosts[postIndex].likes++;
+        updatedPosts[postIndex].likes_count++;
         updatedPosts[postIndex].likedByUser = true;
         setPosts(updatedPosts);
       }
@@ -74,7 +75,7 @@ const Home = () => {
                 <p>{post.post_content}</p>
                 <div className="reactions">
                   <button className="heart-button" onClick={() => handleLike(post.id)}>
-                    <FontAwesomeIcon icon={faHeart} /> {post.likes}
+                    <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
                   </button>
                 </div>
               </div>
