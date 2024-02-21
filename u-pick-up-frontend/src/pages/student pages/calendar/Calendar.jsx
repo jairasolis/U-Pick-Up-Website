@@ -16,7 +16,7 @@ const StudentCalendar = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('https://admin-api.example.com/api/events'); // Replace with the admin's API endpoint
+      const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/events'); // Replace with the admin's API endpoint
       console.log(response.data);
       setEvents(response.data);
     } catch (error) {
