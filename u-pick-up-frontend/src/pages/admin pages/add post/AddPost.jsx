@@ -19,12 +19,26 @@ const AddPost = () => {
         ...post,
         likes: post.likes || 0,
       }));
-      setPosts(postsWithLikes);
+      setPosts(postsWithLikes.reverse());
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
   };
   
+  const getTimeDifference = (date) => {
+    const currentTime = new Date();
+    const postTime = new Date(date);
+    const difference = currentTime - postTime;
+    const minutes = Math.floor(difference / 60000); 
+    if (minutes < 1) {
+      return 'Just now';
+    } else if (minutes < 60) {
+      return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+    } else {
+      const hours = Math.floor(minutes / 60);
+      return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+    }
+  };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -34,7 +48,7 @@ const AddPost = () => {
     if (inputValue.trim() !== '') {
       try {
         const response = await axios.post('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts', { post_content: inputValue });
-        setPosts([...posts, response.data]);
+        setPosts([response.data, ...posts]); 
         setInputValue('');
       } catch (error) {
         console.error('Error creating post:', error);
@@ -97,7 +111,7 @@ const AddPost = () => {
               <div className="post-content">
                 <p className='mins'>
                   <img src="adminprofile.png" alt="" className="admin-profile" />
-                  {new Date(post.created_at).toLocaleString()}
+                  {getTimeDifference(post.created_at)}
                 </p>
                 <p>{post.post_content}</p>
                 <div className="reactions">
