@@ -27,9 +27,9 @@ const StudentsByDepartment = () => {
 
   const departments = Object.keys(regStudentsPerDeptCount);
 
-  return (
-    <Container fluid>
-      <div className='by-department'>
+  return (      
+    <div className='by-department'>
+      <Container fluid>
         <Row className='dash-nav'>
           <ul>
             <Link to="/admin/dashboard" className='dash-navig'> <li> Dashboard </li> </Link>
@@ -56,8 +56,8 @@ const StudentsByDepartment = () => {
             </Col>
           ))}
         </Row>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
 
