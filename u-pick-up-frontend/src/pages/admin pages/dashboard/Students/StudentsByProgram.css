@@ -1,7 +1,8 @@
 .by-program {
     flex: 5;
     top: 70px;
-    padding-top: 100px;
+    padding: 100px 0 100px 0;
+    background-color: #EEEEEE;
 }
 
 .dash-navig {
@@ -20,4 +21,8 @@
 
 .card-header p{
     font-weight: 600;
+}
+
+.card-program-text {
+    text-align: center;
 }

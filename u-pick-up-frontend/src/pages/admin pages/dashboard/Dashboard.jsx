@@ -166,8 +166,8 @@ const Dashboard = () => {
                     datasets: [
                       {
                         label: 'Login Per Day',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: '#96BAB3',
+                        borderColor: '#96BAB3',
                         data: loginCounts
                       },
                     ],

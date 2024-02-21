@@ -30,8 +30,8 @@ const StudentsByProgram = () => {
   const programs = Object.keys(regStudentsPerProgCount);
 
   return (
-    <Container fluid>
-      <div className='by-program'>
+    <div className='by-program'>
+      <Container fluid>
         <Row className='dash-nav'>
           <ul>
             <Link to="/admin/dashboard" className='dash-navig'> <li> Dashboard </li> </Link>
@@ -45,18 +45,18 @@ const StudentsByProgram = () => {
           {programs.map((program, index) => (
             <Col key={index}>
               <Card className="student-card">
-                <Card.Header className='card-header'> <p>{program}</p> </Card.Header>
                 <Card.Body>
-                  <Card.Text>
-                      {regStudentsPerProgCount[program]}
+                  <Card.Text className='card-program-text'>
+                      <h5>{regStudentsPerProgCount[program]}</h5>
+                      <p>{program}</p>
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
-      </div>
-    </Container>
+      </Container>
+    </div>
   )
 }
 
