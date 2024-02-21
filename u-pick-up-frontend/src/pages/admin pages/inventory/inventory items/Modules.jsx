@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Modules.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faPenToSquare, faTrash, faL } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Card, CardBody } from 'react-bootstrap';
+import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddModulePage from './AddModulePage';
 
 const Modules = () => {
@@ -18,6 +18,7 @@ const Modules = () => {
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
   const [showAddModulePage, setShowAddModulePage] = useState(false);
+  const [showAddModuleModal, setShowAddModuleModal] = useState(false);
 
   useEffect(() => {
       fetchData();
@@ -90,17 +91,17 @@ const Modules = () => {
       const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-update/${id}`);
       setEditFormData(response.data);
       setEditModuleId(id);
-      setShowAddModulePage(true);
     } catch (error) {
       console.error("Error fetching module details for edit:", error);
     }
   };
 
   const handleDelete = async (id) => {
+    console.log(id);
     try {
       await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-delete/${id}`);
-      const updatedModulesData = modulesData.filter(module => module.id !== id);
-      setModulesData(updatedModulesData);
+      const newModulesData = modulesData.filter(module => module.id !== id);
+      setModulesData(newModulesData);
       console.log("Module deleted with id:", id);
     } catch (error) {
       console.error("Error deleting module:", error);
@@ -110,14 +111,26 @@ const Modules = () => {
   const handleAddModule = async (addModuleData) => {
     try {
       const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-modules", addModuleData);
-      console.log("Module added successfully:", response.data);
+      console.log(addModuleData);
       fetchData();
+      console.log(response.data);
       setShowAddModulePage(false);
     } catch (error) {
       console.error("Error adding module:", error);
     }
   };
   
+  const handleShowAddModuleModal = () => {
+    setShowAddModuleModal(true);
+  };
+  
+  const handleCloseAddModuleModal = () => {
+    setShowAddModuleModal(false);
+  };
+  
+  const handleCloseModal = () => {
+    setShowAddModulePage(false);
+  };
 
 
   return (
@@ -166,6 +179,15 @@ const Modules = () => {
               </button>
             </Col>
           </Row>  
+          
+          <Modal show={showAddModuleModal} onHide={handleCloseModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Add New Module</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <AddModulePage onSubmit={handleAddModule} onCancel={handleCloseModal} />
+            </Modal.Body>
+          </Modal>
 
           <div className="modules-container">
             <table>

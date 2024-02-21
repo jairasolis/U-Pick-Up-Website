@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const AddModulePage = ({ onSubmit, onCancel }) => {
     const [subjectName, setSubjectName] = useState('');
@@ -18,62 +18,46 @@ const AddModulePage = ({ onSubmit, onCancel }) => {
         quantity: quantity
       };
       onSubmit(addModuleData);
+      setShowModal(false);
     };
   
     return (
-      <div>
-        <h2>Add New Module</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="row mb-3">
-            <label className="col-sm-3 col-form-label">Subject Name</label>
-            <div className="col-sm-6">
-              <input type="text" className="form-control" value={subjectName} onChange={(e) => setSubjectName(e.target.value)} />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <label className="col-sm-3 col-form-label">Year level</label>
-            <div className="col-sm-6">
-              <input type="text" className="form-control" value={yearLevel} onChange={(e) => setYearLevel(e.target.value)} />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <label className="col-sm-3 col-form-label">Course</label>
-            <div className="col-sm-6">
-              <input type="text" className="form-control" value={course} onChange={(e) => setCourse(e.target.value)} />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <label className="col-sm-3 col-form-label">Available</label>
-            <div className="col-sm-6">
-              <input type="text" className="form-control" value={available} onChange={(e) => setAvailable(e.target.value)} />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <label className="col-sm-3 col-form-label">Quantity</label>
-            <div className="col-sm-6">
-              <input type="text" className="form-control" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-sm-9 offset-sm-3">
-              <button type="submit" className="btn btn-primary m-2">Add Book</button>
-              <button type="button" className="btn btn-secondary" onClick={onCancel}>Cancel</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    );
-  };
-  
+      <Modal show={true} onHide={onCancel}>
+      <Modal.Header closeButton>
+        <Modal.Title>Add New Module</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="subjectName">
+            <Form.Label>Subject Name</Form.Label>
+            <Form.Control type="text" value={subjectName} onChange={(e) => setSubjectName(e.target.value)} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="yearLevel">
+            <Form.Label>Year Level</Form.Label>
+            <Form.Control type="text" value={yearLevel} onChange={(e) => setYearLevel(e.target.value)} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="course">
+            <Form.Label>Course</Form.Label>
+            <Form.Control type="text" value={course} onChange={(e) => setCourse(e.target.value)} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="available">
+            <Form.Label>Available</Form.Label>
+            <Form.Control type="text" value={available} onChange={(e) => setAvailable(e.target.value)} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="quantity">
+            <Form.Label>Quantity</Form.Label>
+            <Form.Control type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Add 
+          </Button>
+          <Button variant="secondary" onClick={onCancel}>
+            Cancel
+          </Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+
+};
   export default AddModulePage;
-  
-
-
-
-
-
-
-
-
-
-

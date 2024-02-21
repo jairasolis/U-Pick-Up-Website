@@ -49,7 +49,7 @@ const AddBookPage = ({ onSubmit, onCancel, setShowModal }) => {
             <Form.Control type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Add Book
+            Add 
           </Button>
           <Button variant="secondary" onClick={onCancel}>
             Cancel

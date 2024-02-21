@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Card, CardBody } from 'react-bootstrap';
+import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddUniformPage from './AddUniformPage';
 
 const Uniforms = () => {
@@ -18,6 +18,7 @@ const Uniforms = () => {
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
   const [showAddUniformPage, setShowAddUniformPage] = useState(false);
+  const [showAddUniformModal, setShowAddUniformModal] = useState(false);
 
   useEffect(() => {
       fetchData();
@@ -71,9 +72,8 @@ const Uniforms = () => {
     }
   }
 
-  
   const handleReset = () => {
-    
+
     fetchData();
     console.log("Uniform data reset");
   };
@@ -91,17 +91,17 @@ const Uniforms = () => {
       const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-update/${id}`);
       setEditFormData(response.data);
       setEditUniformId(id);
-      setShowAddUniformPage(true);
     } catch (error) {
       console.error("Error fetching uniform details for edit:", error);
     }
   };
 
   const handleDelete = async (id) => {
+    console.log(id);
     try {
       await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-delete/${id}`);
-      const updatedUniformsData = uniformsData.filter(uniform => uniform.id !== id);
-      setUniformsData(updatedUniformsData);
+      const newUniformsData = uniformsData.filter(uniform => uniform.id !== id);
+      setUniformsData(newUniformsData);
       console.log("Uniform deleted with id:", id);
     } catch (error) {
       console.error("Error deleting uniform:", error);
@@ -110,14 +110,29 @@ const Uniforms = () => {
 
   const handleAddUniform = async (addUniformData) => {
     try {
-      const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-uniform", addUniformData);
-      console.log("Uniform added successfully:", response.data);
+      const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-uniforms", addUniformData);
+      console.log(addUniformData);
       fetchData();
+      console.log(response.data);
       setShowAddUniformPage(false);
     } catch (error) {
       console.error("Error adding uniform:", error);
     }
   };
+
+  const handleShowAddUniformModal = () => {
+    setShowAddUniformModal(true);
+    };
+
+  const handleCloseAddUniformModal = () => {
+    setShowAddUniformModal(false);
+  };
+
+  const handleCloseModal = () => {
+    setShowAddniformPage(false);
+  };
+
+
 
 
 
@@ -160,13 +175,23 @@ const Uniforms = () => {
         </Container>
 
 
-        <Row className="justify-content-end mb-3">
+          <Row className="justify-content-end mb-3">
             <Col md={2} className='text-right'>
               <button className="btn btn-add btn-lg" onClick={handleAdd}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </Col>
           </Row> 
+
+          <Modal show={showAddUniformModal} onHide={handleCloseModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Add New Uniform</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <AddUniformPage onSubmit={handleAddUniform} onCancel={handleCloseModal} />
+            </Modal.Body>
+          </Modal>
+
 
           <div className="uniforms-container">
             <table>

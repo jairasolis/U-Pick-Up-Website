@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddBookPage from './AddBookPage';
+import EditBookPage from './EditBookPage'; 
 
 const Books = () => {
 
@@ -19,6 +20,9 @@ const Books = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
   const [showAddBookPage, setShowAddBookPage] = useState(false);
   const [showAddBookModal, setShowAddBookModal] = useState(false);
+  const [showEditBookModal, setShowEditBookModal] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
+  const [editBookId, setEditBookId] = useState(null);
 
   useEffect(() => {
       fetchData();
@@ -78,27 +82,29 @@ const Books = () => {
     console.log("Book data reset");
   };
 
-  const handleAdd = () => {
-    setShowAddBookPage(true);
-  };
-
-  const handleCancelAdd = () => {
-    setShowAddBookPage(false);
-  };
-
-  const handleEdit = async (id) => {
+  const handleEditBook = async (editedBookData) => {
     try {
-      // Fetch the details of the book to be edited
-      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${id}`);
-      // Populate a form with the retrieved book details
-      setEditFormData(response.data);
-      // Set the ID of the book to be edited in state
-      setEditBookId(id);
-      // Open the edit modal or navigate to the edit page
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${editedBookData.id}`, editedBookData);
+      console.log(response.data);
+      fetchData(); // Fetch updated data after editing
+      setShowEditBookModal(false); // Close the edit modal after editing
     } catch (error) {
-      console.error("Error fetching book details for edit:", error);
+      console.error("Error editing book:", error);
     }
   };
+  
+
+  
+  /*const handleShowEditBookModal = () => {
+    setShowEditBookModal(true);
+  };*/
+  
+  const handleCloseEditBookModal = () => {
+    setShowEditBookModal(false);
+    setEditBookId(null);
+    setEditFormData({});
+  };
+  
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -110,40 +116,48 @@ const Books = () => {
     } catch (error) {
         console.error("Error deleting book:", error);
     }
-};
+  };
 
-const handleAddBook = async (addBookData) => {
-  try {
-    const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-books", addBookData);
-    console.log(addBookData)
-    fetchData();
-    console.log(response.data);
+  const handleAddBook = async (addBookData) => {
+    try {
+      const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-books", addBookData);
+      console.log(addBookData)
+      fetchData();
+      console.log(response.data);
+      setShowAddBookPage(false);
+    } catch (error) {
+      console.error("Error adding book:", error);
+    }
+  };  
+
+  const handleAdd = () => {
+    setShowAddBookPage(true);
+  };
+
+  const handleCancelAdd = () => {
     setShowAddBookPage(false);
-  } catch (error) {
-    console.error("Error adding book:", error);
-  }
-};
+  };
 
-const handleShowAddBookModal = () => {
-  setShowAddBookModal(true);
-};
+  const handleShowAddBookModal = () => {
+    setShowAddBookModal(true);
+    };
 
-const handleCloseAddBookModal = () => {
-  setShowAddBookModal(false);
-};
+  const handleCloseAddBookModal = () => {
+    setShowAddBookModal(false);
+  };
 
-const handleCloseModal = () => {
-  setShowAddBookPage(false);
-};
+  const handleCloseModal = () => {
+    setShowAddBookPage(false);
+  };
 
 
 
 
 
-return (
-  <div className='books-page'>
-    <Card className='custom-card'>
-      <CardBody>
+  return (
+    <div className='books-page'>
+      <Card className='custom-card'>
+        <CardBody>
          {showAddBookPage && <AddBookPage onSubmit={handleAddBook} onCancel={handleCancelAdd} />}
         
         <Container>
@@ -188,7 +202,7 @@ return (
           </Col>
         </Row>
 
-        <Modal show={showAddBookPage} onHide={handleCloseModal}>
+        <Modal show={showAddBookModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
             <Modal.Title>Add New Book</Modal.Title>
           </Modal.Header>
@@ -241,6 +255,21 @@ return (
               </tbody>
             </table>
           </div>
+
+          <Modal show={showEditBookModal} onHide={handleCloseEditBookModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Book</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Pass editFormData, editBookId, and onSubmit function for editing */}
+              <EditBookPage
+                editFormData={editFormData}
+                editBookId={editBookId}
+                onSubmit={handleEditBook}
+                onCancel={handleCloseEditBookModal}
+                />
+            </Modal.Body>
+          </Modal>
         </CardBody>
       </Card>
     </div>
