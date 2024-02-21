@@ -137,6 +137,10 @@ const Books = () => {
   const handleCancelAdd = () => {
     setShowAddBookPage(false);
   };
+  
+  const handleEdit = () => {
+    setShowEditBookModal(true);
+  };
 
   const handleShowAddBookModal = () => {
     setShowAddBookModal(true);
