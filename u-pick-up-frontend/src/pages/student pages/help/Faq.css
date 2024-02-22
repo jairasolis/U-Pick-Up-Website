@@ -7,6 +7,7 @@
     align-items: center;
 }
 
+
 .header {
     background-color: #516E53;
     height: 300px;
@@ -36,3 +37,25 @@
     transition: transform 250ms;
 
 }
+
+.cards {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+.question-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+  
+.icon {
+    color: #516E53;
+}
+  
+.answer {
+    margin-top: 5px;
+}
+
