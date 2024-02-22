@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddUniformPage from './AddUniformPage';
+import EditUniformPage from './EditUniformPage'; 
 
 const Uniforms = () => {
 
@@ -19,6 +20,9 @@ const Uniforms = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
   const [showAddUniformPage, setShowAddUniformPage] = useState(false);
   const [showAddUniformModal, setShowAddUniformModal] = useState(false);
+  const [showEditUniformModal, setShowEditUniformModal] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
+  const [editUniformId, setEditUniformId] = useState(null);
 
   useEffect(() => {
       fetchData();
@@ -78,22 +82,25 @@ const Uniforms = () => {
     console.log("Uniform data reset");
   };
 
-  const handleAdd = () => {
-    setShowAddUniformPage(true);
-  };
-
-  const handleCancelAdd = () => {
-    setShowAddUniformPage(false);
-  };
-
-  const handleEdit = async (id) => {
+  const handleEditUniform = async (editedUniformData) => {
     try {
-      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-update/${id}`);
-      setEditFormData(response.data);
-      setEditUniformId(id);
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniforms-update/${editedUniformData.id}`, editedUniformData);
+      console.log(response.data);
+      fetchData(); // Fetch updated data after editing
+      setShowEditUniformModal(false); // Close the edit modal after editing
     } catch (error) {
-      console.error("Error fetching uniform details for edit:", error);
+      console.error("Error editing uniform:", error);
     }
+  };
+
+  const handleEdit = () => {
+    setShowEditUniformModal(true); // Set state to true when the edit button is clicked
+  };
+
+  const handleCloseEditUniformModal = () => {
+    setShowEditUniformModal(false);
+    setEditUniformId(null);
+    setEditFormData({});
   };
 
   const handleDelete = async (id) => {
@@ -120,18 +127,24 @@ const Uniforms = () => {
     }
   };
 
-  const handleShowAddUniformModal = () => {
+  const handleAdd = () => {
+    setShowAddUniformPage(true);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddUniformPage(false);
+  };
+  
+  /*const handleShowAddUniformModal = () => {
     setShowAddUniformModal(true);
     };
-
   const handleCloseAddUniformModal = () => {
     setShowAddUniformModal(false);
-  };
+  };*/
 
   const handleCloseModal = () => {
     setShowAddniformPage(false);
   };
-
 
 
 
@@ -141,6 +154,15 @@ const Uniforms = () => {
       <Card className='custom-card'>
         <CardBody>
           {showAddUniformPage && <AddUniformPage onSubmit={handleAddUniform} onCancel={handleCancelAdd} />}
+
+          {showEditUniformModal && (
+            <EditUniformPage
+              editFormData={editFormData}
+              setEditFormData={setEditFormData}
+              handleSubmitEdit={handleEditUniform}
+              handleCloseEditUniformModal={handleCloseEditUniformModal}
+            />
+          )}
 
           <Container>
             <Row className='align-items-center justify-content-center'>
@@ -221,11 +243,11 @@ const Uniforms = () => {
                             {/* <NavLink to={`/view/${book.id}`} className="btn btn-success mx-2">View</NavLink>
                             <NavLink to={`/edit/${book.id}`} className="btn btn-info mx-2">Edit</NavLink>
                             <button onClick={()=>handleDelete(user.id)} className="btn btn-danger">Delete</button> */}
-                            <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(modules.id)}>
+                            <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(uniform.id)}>
                               <FontAwesomeIcon icon={faPenToSquare} />
                             </button>
                             <span className="mx-2"></span> {/* Adds a wider space */}
-                            <button className="btn btn-delete btn-sm" onClick={() => handleDelete(modules.id)}>
+                            <button className="btn btn-delete btn-sm" onClick={() => handleDelete(uniform.id)}>
                               <FontAwesomeIcon icon={faTrash} />
                               </button>
                           </td>
@@ -235,6 +257,21 @@ const Uniforms = () => {
               </tbody>
             </table>
           </div>
+
+           <Modal show={showEditUniformModal} onHide={handleCloseEditUniformModal} backdrop="static">
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Uniform</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* Pass editFormData, editUniformId, and onSubmit function for editing */}
+              <EditUniformPage
+                editFormData={editFormData}
+                editUniformId={editUniformId}
+                onSubmit={handleEditUniform}
+                onCancel={handleCloseEditUniformModal}
+                />
+            </Modal.Body>
+          </Modal>
         </CardBody>
       </Card>
     </div>

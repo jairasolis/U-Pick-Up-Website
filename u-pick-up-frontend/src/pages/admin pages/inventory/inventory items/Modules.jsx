@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddModulePage from './AddModulePage';
+import EditModulePage from './EditModulePage'; 
 
 const Modules = () => {
 
@@ -19,6 +20,9 @@ const Modules = () => {
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
   const [showAddModulePage, setShowAddModulePage] = useState(false);
   const [showAddModuleModal, setShowAddModuleModal] = useState(false);
+  const [showEditModuleModal, setShowEditModuleModal] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
+  const [editModuleId, setEditModuleId] = useState(null);
 
   useEffect(() => {
       fetchData();
@@ -78,22 +82,25 @@ const Modules = () => {
     console.log("Module data reset");
   };
 
-  const handleAdd = () => {
-    setShowAddModulePage(true);
-  };
-
-  const handleCancelAdd = () => {
-    setShowAddModulePage(false);
-  };
-
-  const handleEdit = async (id) => {
+  const handleEditModule = async (editedModuleData) => {
     try {
-      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-update/${id}`);
-      setEditFormData(response.data);
-      setEditModuleId(id);
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-update/${editedModuleData.id}`, editedModuleData);
+      console.log(response.data);
+      fetchData(); // Fetch updated data after editing
+      setShowEditModuleModal(false); // Close the edit modal after editing
     } catch (error) {
-      console.error("Error fetching module details for edit:", error);
+      console.error("Error editing module:", error);
     }
+  };
+
+  const handleEdit = () => {
+    setShowEditModuleModal(true); 
+  }
+
+  const handleCloseEditModuleModal = () => {
+    setShowEditModuleModal(false);
+    setEditModuleId(null);
+    setEditFormData({});
   };
 
   const handleDelete = async (id) => {
@@ -119,13 +126,13 @@ const Modules = () => {
       console.error("Error adding module:", error);
     }
   };
-  
-  const handleShowAddModuleModal = () => {
-    setShowAddModuleModal(true);
+
+  const handleAdd = () => {
+    setShowAddModulePage(true);
   };
-  
-  const handleCloseAddModuleModal = () => {
-    setShowAddModuleModal(false);
+
+  const handleCancelAdd = () => {
+    setShowAddModulePage(false);
   };
   
   const handleCloseModal = () => {
@@ -133,11 +140,21 @@ const Modules = () => {
   };
 
 
+
   return (
     <div className='modules-page'>
       <Card className='custom-card'>
         <CardBody>
           {showAddModulePage && <AddModulePage onSubmit={handleAddModule} onCancel={handleCancelAdd} />}
+
+          {showEditModuleModal && (
+            <EditModulePage
+              editFormData={editFormData}
+              setEditFormData={setEditFormData}
+              handleSubmitEdit={handleEditModule}
+              handleCloseEditModuleModal={handleCloseEditModuleModal}
+            />
+          )}
 
           <Container>
             <Row className='align-items-center justify-content-center'>
@@ -233,6 +250,21 @@ const Modules = () => {
               </tbody>
             </table>
           </div>
+
+          <Modal show={showEditModuleModal} onHide={handleCloseEditModuleModal} backdrop="static">
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Module</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            
+              <EditModulePage
+                editFormData={editFormData}
+                editModuleId={editModuleId}
+                onSubmit={handleEditModule}
+                onCancel={handleCloseEditModuleModal}
+                />
+            </Modal.Body>
+          </Modal>
         </CardBody>
       </Card>
     </div>

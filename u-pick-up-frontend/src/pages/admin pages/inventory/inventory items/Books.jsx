@@ -92,12 +92,10 @@ const Books = () => {
       console.error("Error editing book:", error);
     }
   };
-  
 
-  
-  /*const handleShowEditBookModal = () => {
-    setShowEditBookModal(true);
-  };*/
+  const handleEdit = () => {
+    setShowEditBookModal(true); // Set state to true when the edit button is clicked
+  };
   
   const handleCloseEditBookModal = () => {
     setShowEditBookModal(false);
@@ -105,7 +103,6 @@ const Books = () => {
     setEditFormData({});
   };
   
-
   const handleDelete = async (id) => {
     console.log(id);
     try {
@@ -137,18 +134,14 @@ const Books = () => {
   const handleCancelAdd = () => {
     setShowAddBookPage(false);
   };
-  
-  const handleEdit = () => {
-    setShowEditBookModal(true);
-  };
 
-  const handleShowAddBookModal = () => {
+  /*const handleShowAddBookModal = () => {
     setShowAddBookModal(true);
     };
 
   const handleCloseAddBookModal = () => {
     setShowAddBookModal(false);
-  };
+  };*/
 
   const handleCloseModal = () => {
     setShowAddBookPage(false);
@@ -156,21 +149,27 @@ const Books = () => {
 
 
 
-
-
   return (
     <div className='books-page'>
       <Card className='custom-card'>
         <CardBody>
-         {showAddBookPage && <AddBookPage onSubmit={handleAddBook} onCancel={handleCancelAdd} />}
-        
+          {showAddBookPage && <AddBookPage onSubmit={handleAddBook} onCancel={handleCancelAdd} />}
+
+          {showEditBookModal && (
+            <EditBookPage
+              editFormData={editFormData}
+              setEditFormData={setEditFormData}
+              handleSubmitEdit={handleEditBook}
+              handleCloseEditBookModal={handleCloseEditBookModal}
+            />
+          )}
+
         <Container>
           <Row className='align-items-center justify-content-center'>
             <Col md={3} style={{ height: '65px', width: '300px'}}> 
               <label htmlFor="courseSelect">Choose a course:</label>
               <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
                 <option value="">Select a course</option>
-
                 {courses.map(course => (
                   <option key={course} value={course}>{course}</option>
                 ))}
@@ -215,8 +214,6 @@ const Books = () => {
           </Modal.Body>
         </Modal>
 
-                   
-
         <div className="books-container">
           <table>
             <thead className='table-header'>
@@ -242,9 +239,6 @@ const Books = () => {
                       <td>{book.available} </td>
                       <td>{book.quantity} </td>
                       <td>
-                      {/* <NavLink to={`/view/${book.id}`} className="btn btn-success mx-2">View</NavLink>
-                      <NavLink to={`/edit/${book.id}`} className="btn btn-info mx-2">Edit</NavLink>
-                      <button onClick={()=>handleDelete(user.id)} className="btn btn-danger">Delete</button> */}
                       <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(book.id)}>
                         <FontAwesomeIcon icon={faPenToSquare} />
                       </button>
@@ -260,7 +254,7 @@ const Books = () => {
             </table>
           </div>
 
-          <Modal show={showEditBookModal} onHide={handleCloseEditBookModal}>
+          <Modal show={showEditBookModal} onHide={handleCloseEditBookModal} backdrop="static">
             <Modal.Header closeButton>
               <Modal.Title>Edit Book</Modal.Title>
             </Modal.Header>

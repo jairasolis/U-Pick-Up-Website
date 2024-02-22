@@ -1,18 +1,17 @@
 import React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
-const EditBookPage = ({ editFormData, setEditFormData, handleSubmitEdit, handleCloseEditBookModal }) => {
+const EditModulePage = ({ editFormData, setEditFormData, handleSubmitEdit, handleCloseEditModuleModal }) => {
   const handleClickInsideModal = (event) => {
-    // Only stop event propagation if the click target is not the "Update" button
     if (!event.target.closest('.btn-primary')) {
       event.stopPropagation();
     }
   };
 
   return (
-    <Modal show={true} onHide={handleCloseEditBookModal} onClick={handleClickInsideModal}>
+    <Modal show={true} onHide={handleCloseEditModuleModal} onClick={handleClickInsideModal}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Book</Modal.Title>
+        <Modal.Title>Edit Module</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmitEdit}>
@@ -39,7 +38,7 @@ const EditBookPage = ({ editFormData, setEditFormData, handleSubmitEdit, handleC
           <Button variant="primary" type="submit">
             Update
           </Button>
-          <Button variant="secondary" onClick={handleCloseEditBookModal} style={{ marginLeft: '10px' }}>
+          <Button variant="secondary" onClick={handleCloseEditModuleModal} style={{ marginLeft: '10px' }}>
             Cancel
           </Button>
         </Form>
@@ -48,4 +47,4 @@ const EditBookPage = ({ editFormData, setEditFormData, handleSubmitEdit, handleC
   );
 };
 
-export default EditBookPage;
+export default EditModulePage;

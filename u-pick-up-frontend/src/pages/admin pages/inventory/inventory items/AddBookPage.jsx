@@ -51,7 +51,7 @@ const AddBookPage = ({ onSubmit, onCancel, setShowModal }) => {
           <Button variant="primary" type="submit">
             Add 
           </Button>
-          <Button variant="secondary" onClick={onCancel}>
+          <Button variant="secondary" onClick={onCancel} style={{ marginLeft: '10px' }} >
             Cancel
           </Button>
         </Form>
