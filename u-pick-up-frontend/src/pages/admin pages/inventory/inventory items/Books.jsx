@@ -82,9 +82,10 @@ const Books = () => {
     console.log("Book data reset");
   };
 
-  const handleEditBook = async (editedBookData) => {
+  const handleEditBook = async (editBookData) => {
     try {
-      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${editedBookData.id}`, editedBookData);
+      console.log(editBookData)
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${editBookData.id}`, editBookData);
       console.log(response.data);
       fetchData(); // Fetch updated data after editing
       setShowEditBookModal(false); // Close the edit modal after editing
@@ -262,10 +263,10 @@ const Books = () => {
               {/* Pass editFormData, editBookId, and onSubmit function for editing */}
               <EditBookPage
                 editFormData={editFormData}
-                editBookId={editBookId}
-                onSubmit={handleEditBook}
-                onCancel={handleCloseEditBookModal}
-                />
+                setEditFormData={setEditFormData}
+                handleSubmitEdit={handleEditBook} 
+                handleCloseEditBookModal={handleCloseEditBookModal}
+              />
             </Modal.Body>
           </Modal>
         </CardBody>

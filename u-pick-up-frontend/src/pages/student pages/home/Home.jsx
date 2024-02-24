@@ -60,10 +60,10 @@ const Home = () => {
   return (
     <div className='home'> 
       <div className="home-container">
-        <div className="filter">
+        {/* <div className="filter">
           <FontAwesomeIcon icon={faFilter} style={{color:'#D9D9D9', margin: '5px 2px '}}/>
           <h4> Filter </h4>
-        </div>
+        </div> */}
         <div className="post-wrapper">
           {posts.map(post => (
             <div key={post.id} className="posts"> 
