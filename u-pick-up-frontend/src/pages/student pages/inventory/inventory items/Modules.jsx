@@ -109,8 +109,6 @@ const Modules = () => {
             </Col>
             <Col>
                 <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
-              </Col>
-              <Col>
                 <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
               </Col>
             </Row>

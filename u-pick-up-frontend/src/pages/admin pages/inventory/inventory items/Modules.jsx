@@ -179,10 +179,8 @@ const Modules = () => {
                 </div>
               </Col>
               <Col md={2}>
-                <button type="submit" className="btn display-button btn-lg" onClick={handleSubmit} style={{ height: '60px', width: '200px' }}> Display </button>
-              </Col>
-              <Col md={2}>
-                <button type="button" className="btn reset-button btn-lg" onClick={handleReset} style={{ height: '60px', width: '150px' }}> Reset </button>
+                <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+                <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
               </Col>
             </Row>
             <hr className='inventory-line' />

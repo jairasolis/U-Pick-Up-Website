@@ -3,7 +3,7 @@
     top: 70px;
     display: flex;
     flex-direction: column;
-    background-color: #8c8c8c50;
+    background-color: #EEEEEE;
     align-items: center;
     padding-top: 120px;
     height: 800px;
@@ -57,7 +57,7 @@ th, td {
 } */
 
 .custom-card {
-    background-color: #CBCBCC;
+    background-color: #FFFFFF;
     margin-bottom: 70px;
   }
   
