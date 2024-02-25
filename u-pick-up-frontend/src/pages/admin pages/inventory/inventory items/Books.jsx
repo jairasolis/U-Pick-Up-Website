@@ -21,7 +21,7 @@ const Books = () => {
   const [showAddBookPage, setShowAddBookPage] = useState(false);
   const [showAddBookModal, setShowAddBookModal] = useState(false);
   const [showEditBookModal, setShowEditBookModal] = useState(false);
-  const [editFormData, setEditFormData] = useState({});
+  const [editFormData, setEditFormData] = useState([]);
   const [editBookId, setEditBookId] = useState(null);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const Books = () => {
   const handleEditBook = async (editBookData) => {
     try {
       console.log(editBookData)
-      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${editBookData.id}`, editBookData);
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/books-update/${editBookId}`, editBookData);
       console.log(response.data);
       fetchData(); // Fetch updated data after editing
       setShowEditBookModal(false); // Close the edit modal after editing
@@ -94,9 +94,12 @@ const Books = () => {
     }
   };
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
+    console.log(id)
+    setEditBookId(id); // Set the editBookId state with the id of the book to be edited
     setShowEditBookModal(true); // Set state to true when the edit button is clicked
   };
+  
   
   const handleCloseEditBookModal = () => {
     setShowEditBookModal(false);
@@ -228,7 +231,7 @@ const Books = () => {
             </thead>
             <tbody className='books'>
               {bookData.map((book, i) => {
-                console.log("Book data:", bookData);
+                // console.log("Book data:", bookData);
                 return (
                     <tr key={i}>
                       <td>{i + 1}</td>
