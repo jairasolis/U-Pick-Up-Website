@@ -3,6 +3,8 @@ import axios from 'axios';
 import './AddPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+  import Swal from 'sweetalert2';
+
 
 const AddPost = () => {
   const [inputValue, setInputValue] = useState('');
@@ -69,15 +71,37 @@ const AddPost = () => {
   };
 
   const handleDelete = async (postId) => {
-    try {
-      await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`);
-      const updatedPosts = posts.filter(post => post.id !== postId);
-      setPosts(updatedPosts);
-    } catch (error) {
-      console.error('Error deleting post:', error);
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this post?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`);
+          const updatedPosts = posts.filter(post => post.id !== postId);
+          setPosts(updatedPosts);
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your post has been deleted.',
+            icon: 'success'
+          });
+        } catch (error) {
+          console.error('Error deleting post:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong while deleting the post.',
+            icon: 'error'
+          });
+        }
+      }
+    });
   };
-
+  
   const handleLike = async (postId) => {
     try {
       const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/likes`);
