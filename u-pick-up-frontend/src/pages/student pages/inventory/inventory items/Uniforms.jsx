@@ -84,6 +84,7 @@ const Uniforms = () => {
 
   const handleReset = () => {
     // Fetch all books again to reset the bookData state
+    setSelectedYearLevel('');
     fetchData(studentsData);
     console.log("Uniform data reset");
   };
@@ -99,7 +100,7 @@ const Uniforms = () => {
               </Col>
               <Col md={3}>
                 <label htmlFor="yearLevelSelect">Choose a year level:</label>
-                <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                <select className="form-control" id="yearLevelSelect" value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
                   <option value="">Select a year level</option>
                   {yearLevels[studentsData]?.map(yearLevel => (
                     <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
