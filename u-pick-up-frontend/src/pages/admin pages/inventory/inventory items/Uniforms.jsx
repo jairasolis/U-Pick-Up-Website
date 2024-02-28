@@ -85,7 +85,8 @@ const Uniforms = () => {
 
   const handleEditUniform = async (editedUniformData) => {
     try {
-      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniforms-update/${editedUniformData.id}`, editedUniformData);
+
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-update/${editUniformId}`, editedUniformData);
       console.log(response.data);
       fetchData(); // Fetch updated data after editing
       setShowEditUniformModal(false); // Close the edit modal after editing
@@ -94,7 +95,8 @@ const Uniforms = () => {
     }
   };
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
+    setEditUniformId(id);
     setShowEditUniformModal(true); // Set state to true when the edit button is clicked
   };
 
@@ -108,8 +110,8 @@ const Uniforms = () => {
     console.log(id);
     try {
       await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-delete/${id}`);
-      const newUniformsData = uniformsData.filter(uniform => uniform.id !== id);
-      setUniformsData(newUniformsData);
+      const newUniformsData = uniformData.filter(uniform => uniform.id !== id);
+      setUniformData(newUniformsData);
       console.log("Uniform deleted with id:", id);
     } catch (error) {
       console.error("Error deleting uniform:", error);
@@ -152,7 +154,7 @@ const Uniforms = () => {
 
   return (
     <div className='uniforms-page'>
-      <Card className='custom-card'>
+      <Card className='uniform-custom-card'>
         <CardBody>
           {showAddUniformPage && <AddUniformPage onSubmit={handleAddUniform} onCancel={handleCancelAdd} />}
 
@@ -264,8 +266,8 @@ const Uniforms = () => {
               <EditUniformPage
                 editFormData={editFormData}
                 editUniformId={editUniformId}
-                onSubmit={handleEditUniform}
-                onCancel={handleCloseEditUniformModal}
+                handleSubmitEdit={handleEditUniform}
+                handleCloseEditUniformModal={handleCloseEditUniformModal}
                 />
             </Modal.Body>
           </Modal>

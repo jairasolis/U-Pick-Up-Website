@@ -19,7 +19,6 @@ const Books = () => {
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
   const [showAddBookPage, setShowAddBookPage] = useState(false);
-  const [showAddBookModal, setShowAddBookModal] = useState(false);
   const [showEditBookModal, setShowEditBookModal] = useState(false);
   const [editFormData, setEditFormData] = useState([]);
   const [editBookId, setEditBookId] = useState(null);
@@ -142,13 +141,6 @@ const Books = () => {
     setShowAddBookPage(false);
   };
 
-  /*const handleShowAddBookModal = () => {
-    setShowAddBookModal(true);
-    };
-
-  const handleCloseAddBookModal = () => {
-    setShowAddBookModal(false);
-  };*/
 
   const handleCloseModal = () => {
     setShowAddBookPage(false);
@@ -158,18 +150,18 @@ const Books = () => {
 
   return (
     <div className='books-page'>
-      <Card className='custom-card'>
+      <Card className='books-custom-card'>
         <CardBody>
           {showAddBookPage && <AddBookPage onSubmit={handleAddBook} onCancel={handleCancelAdd} />}
 
-          {showEditBookModal && (
+          {/* {showEditBookModal && (
             <EditBookPage
               editFormData={editFormData}
               setEditFormData={setEditFormData}
               handleSubmitEdit={handleEditBook}
               handleCloseEditBookModal={handleCloseEditBookModal}
             />
-          )}
+          )} */}
 
         <Container>
           <Row className='align-items-center justify-content-center'>
@@ -210,14 +202,14 @@ const Books = () => {
           </Col>
         </Row>
 
-        <Modal show={showAddBookModal} onHide={handleCloseModal}>
+        {/* <Modal show={showAddBookModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
             <Modal.Title>Add New Book</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <AddBookPage onSubmit={handleAddBook} onCancel={handleCloseModal} />
           </Modal.Body>
-        </Modal>
+        </Modal> */}
 
         <div className="books-container">
           <table>

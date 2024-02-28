@@ -6,8 +6,6 @@
     background-color: #EEEEEE;
     align-items: center;
     padding-top: 120px;
-    height: 800px;
-
 }
 
 /* .modules-container {
@@ -56,7 +54,7 @@ th, td {
     background-color: #4545453c;
 } */
 
-.custom-card {
+.modules-custom-card {
     background-color: #FFFFFF;
     margin-bottom: 70px;
   }

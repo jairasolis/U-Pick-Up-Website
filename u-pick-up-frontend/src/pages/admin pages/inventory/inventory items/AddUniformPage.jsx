@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 const AddUniformPage = ({ onSubmit, onCancel }) => {
-  const [subjectName, setSubjectName] = useState('');
+  const [uniformType, setUniformType] = useState('');
   const [yearLevel, setYearLevel] = useState('');
   const [course, setCourse] = useState('');
   const [available, setAvailable] = useState('');
@@ -11,14 +11,13 @@ const AddUniformPage = ({ onSubmit, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const addBookData = {
-      subject_name: subjectName,
+      uniform_type: uniformType,
       year_level: yearLevel,
       course: course,
       available: available,
       quantity: quantity
     };
     onSubmit(addBookData);
-    setShowModal(false);
   };
 
   return (
@@ -28,9 +27,9 @@ const AddUniformPage = ({ onSubmit, onCancel }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="subjectName">
-            <Form.Label>Subject Name</Form.Label>
-            <Form.Control type="text" value={subjectName} onChange={(e) => setSubjectName(e.target.value)} />
+          <Form.Group className="mb-3" controlId="UniformType">
+            <Form.Label>Uniform Type</Form.Label>
+            <Form.Control type="text" value={uniformType} onChange={(e) => setUniformType(e.target.value)} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="yearLevel">
             <Form.Label>Year Level</Form.Label>

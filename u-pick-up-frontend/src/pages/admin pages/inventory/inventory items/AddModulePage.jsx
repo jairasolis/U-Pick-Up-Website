@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const AddModulePage = ({ onSubmit, onCancel }) => {
+const AddModulePage = ({ onSubmit, onCancel, setShowAddModuleModal }) => {
+    const [subjectCode, setSubjectCode] = useState('');
     const [subjectName, setSubjectName] = useState('');
     const [yearLevel, setYearLevel] = useState('');
     const [course, setCourse] = useState('');
@@ -11,6 +12,7 @@ const AddModulePage = ({ onSubmit, onCancel }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       const addModuleData = {
+        subject_code: subjectCode,
         subject_name: subjectName,
         year_level: yearLevel,
         course: course,
@@ -18,7 +20,6 @@ const AddModulePage = ({ onSubmit, onCancel }) => {
         quantity: quantity
       };
       onSubmit(addModuleData);
-      setShowModal(false);
     };
   
     return (
@@ -28,6 +29,10 @@ const AddModulePage = ({ onSubmit, onCancel }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="subjectCode">
+            <Form.Label>Subject Code</Form.Label>
+            <Form.Control type="text" value={subjectCode} onChange={(e) => setSubjectCode(e.target.value)} />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="subjectName">
             <Form.Label>Subject Name</Form.Label>
             <Form.Control type="text" value={subjectName} onChange={(e) => setSubjectName(e.target.value)} />

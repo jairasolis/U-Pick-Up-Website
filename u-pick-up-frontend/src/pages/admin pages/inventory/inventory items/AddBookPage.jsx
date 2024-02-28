@@ -18,7 +18,6 @@ const AddBookPage = ({ onSubmit, onCancel, setShowModal }) => {
       quantity: quantity
     };
     onSubmit(addBookData);
-    setShowModal(false);
   };
 
   return (

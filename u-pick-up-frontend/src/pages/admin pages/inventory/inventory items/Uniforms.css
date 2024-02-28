@@ -6,10 +6,9 @@
     background-color: #EEEEEE;
     align-items: center;
     padding-top: 120px;
-    height: 800px;
 }
 
-.custom-card {
+.uniform-custom-card {
   background-color: #FFFFFF;
   margin-bottom: 70px;
 }

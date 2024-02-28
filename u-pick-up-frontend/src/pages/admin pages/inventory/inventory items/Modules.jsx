@@ -85,7 +85,7 @@ const Modules = () => {
 
   const handleEditModule = async (editedModuleData) => {
     try {
-      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-update/${editedModuleData.id}`, editedModuleData);
+      const response = await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-update/${editModuleId}`, editedModuleData);
       console.log(response.data);
       fetchData(); // Fetch updated data after editing
       setShowEditModuleModal(false); // Close the edit modal after editing
@@ -94,7 +94,9 @@ const Modules = () => {
     }
   };
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
+    console.log(id)
+    setEditModuleId(id);
     setShowEditModuleModal(true); 
   }
 
@@ -118,6 +120,7 @@ const Modules = () => {
 
   const handleAddModule = async (addModuleData) => {
     try {
+      console.log(addModuleData);
       const response = await axios.post("https://u-pick-up-y7qnw.ondigitalocean.app/api/addnew-modules", addModuleData);
       console.log(addModuleData);
       fetchData();
@@ -144,7 +147,7 @@ const Modules = () => {
 
   return (
     <div className='modules-page'>
-      <Card className='custom-card'>
+      <Card className='modules-custom-card'>
         <CardBody>
           {showAddModulePage && <AddModulePage onSubmit={handleAddModule} onCancel={handleCancelAdd} />}
 
@@ -259,8 +262,8 @@ const Modules = () => {
               <EditModulePage
                 editFormData={editFormData}
                 editModuleId={editModuleId}
-                onSubmit={handleEditModule}
-                onCancel={handleCloseEditModuleModal}
+                handleSubmitEdit={handleEditModule}
+                handleCloseEditModuleModal={handleCloseEditModuleModal}
                 />
             </Modal.Body>
           </Modal>
