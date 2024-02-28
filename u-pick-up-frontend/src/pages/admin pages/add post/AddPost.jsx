@@ -3,12 +3,16 @@ import axios from 'axios';
 import './AddPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-  import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import { BeatLoader } from 'react-spinners';
+import { Spinner } from 'react-bootstrap';
 
 
 const AddPost = () => {
   const [inputValue, setInputValue] = useState('');
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     fetchPosts();
@@ -17,15 +21,17 @@ const AddPost = () => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts');
+      console.log(response.data)
       const postsWithLikes = response.data.map(post => ({
         ...post,
-        likes: post.likes || 0,
+        likes_count: post.likes_count || 0,
       }));
       setPosts(postsWithLikes.reverse());
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
   };
+
   
   const getTimeDifference = (date) => {
     const currentTime = new Date();
@@ -102,17 +108,6 @@ const AddPost = () => {
     });
   };
   
-  const handleLike = async (postId) => {
-    try {
-      const response = await axios.get(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/likes`);
-      const updatedPosts = posts.map(post =>
-        post.id === postId ? { ...post, likes: response.data.totalLikes } : post
-      );
-      setPosts(updatedPosts);
-    } catch (error) {
-      console.error('Error fetching total likes count:', error);
-    }
-  }; 
 
   return (
     <div className='add-post'>
@@ -130,28 +125,37 @@ const AddPost = () => {
           </button>
         </div>
         <div className="post-wrapper">
-          {posts.map(post => (
-            <div key={post.id} className="posts"> 
-              <div className="post-content">
-                <p className='mins'>
-                  <img src="../images/phinma_logo.png" alt="" className="admin-profile" />
-                  {getTimeDifference(post.created_at)}
-                </p>
-                <p>{post.post_content}</p>
-                <div className="reactions">
-                  <button className="edit-button" onClick={() => handleEdit(post.id, prompt("Enter new content:"))}>
-                    <FontAwesomeIcon icon={faPenToSquare} />
-                  </button>
-                  <button className="delete-button" onClick={() => handleDelete(post.id)}>
-                    <FontAwesomeIcon icon={faTrashAlt} />
-                  </button>
-                  <button className="heart-button" onClick={() => handleLike(post.id)}>
-                    <FontAwesomeIcon icon={faHeart} /> {post.likes}
-                  </button>
+          {posts.length === 0 ? (
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
+              {/* <Spinner animation="border" role="status"  variant="success">
+                <span className="sr-only">Loading...</span>
+              </Spinner> */}
+              <BeatLoader color="#3B5534" size={15} />
+            </div>
+          ) : (
+            posts.map(post => (
+              <div key={post.id} className="posts"> 
+                <div className="post-content">
+                  <p className='mins'>
+                    <img src="../images/phinma_logo.png" alt="" className="admin-profile" />
+                    {getTimeDifference(post.created_at)}
+                  </p>
+                  <p>{post.post_content}</p>
+                  <div className="reactions">
+                    <button className="edit-button" onClick={() => handleEdit(post.id, prompt("Enter new content:"))}>
+                      <FontAwesomeIcon icon={faPenToSquare} />
+                    </button>
+                    <button className="delete-button" onClick={() => handleDelete(post.id)}>
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </button>
+                    <button className="heart-button">
+                      <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
