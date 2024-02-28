@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddBookPage from './AddBookPage';
 import EditBookPage from './EditBookPage'; 
+import Swal from 'sweetalert2'
 
 const Books = () => {
 
@@ -109,16 +110,50 @@ const Books = () => {
     setEditFormData({});
   };
   
+  // const handleDelete = async (id) => {
+  //   console.log(id);
+  //   try {
+  //       await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/booksdelete/${id}`);
+  //       const newBookData = bookData.filter(item => item.id !== id);
+  //       setBookData(newBookData);
+  //       console.log("Book deleted with id:", id);
+  //   } catch (error) {
+  //       console.error("Error deleting book:", error);
+  //   }
+  // };
+
   const handleDelete = async (id) => {
-    console.log(id);
-    try {
-        await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/booksdelete/${id}`);
-        const newBookData = bookData.filter(item => item.id !== id);
-        setBookData(newBookData);
-        console.log("Book deleted with id:", id);
-    } catch (error) {
-        console.error("Error deleting book:", error);
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // If user confirms deletion, the book item will be deleted hoho
+          await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/booksdelete/${id}`);
+          const newBookData = bookData.filter(item => item.id !== id);
+          setBookData(newBookData);
+          console.log('Book deleted with id:', id);
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Book item has been deleted.',
+            icon: 'success'
+          });
+        } catch (error) {
+          console.error('Error deleting book:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to delete the book.',
+            icon: 'error'
+          });
+        }
+      }
+    });
   };
 
   const handleAddBook = async (addBookData) => {
@@ -225,28 +260,31 @@ const Books = () => {
               </tr>
             </thead>
             <tbody className='books'>
-              {bookData.map((book, i) => {
-                // console.log("Book data:", bookData);
-                return (
-                    <tr key={i}>
-                      <td>{i + 1}</td>
-                      <td>{book.subject_name} </td>
-                      <td>{book.year_level} </td>
-                      <td>{book.course} </td>
-                      <td>{book.available} </td>
-                      <td>{book.quantity} </td>
-                      <td>
+              {bookData.length === 0 ? (
+                <tr>
+                  <td colSpan="7">No books available</td>
+                </tr>
+              ) : (
+                bookData.map((book, i) => (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{book.subject_name}</td>
+                    <td>{book.year_level}</td>
+                    <td>{book.course}</td>
+                    <td>{book.available}</td>
+                    <td>{book.quantity}</td>
+                    <td>
                       <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(book.id)}>
                         <FontAwesomeIcon icon={faPenToSquare} />
                       </button>
-                      <span className="mx-2"></span> {/* Adds a wider space */}
+                      <span className="mx-2"></span>
                       <button className="btn btn-delete btn-sm" onClick={() => handleDelete(book.id)}>
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
-                      </td>
-                    </tr>
-                  );
-                })}
+                    </td>
+                  </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

@@ -10,6 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddUniformPage from './AddUniformPage';
 import EditUniformPage from './EditUniformPage'; 
+import Swal from 'sweetalert2';
+
 
 const Uniforms = () => {
 
@@ -107,16 +109,39 @@ const Uniforms = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log(id);
-    try {
-      await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-delete/${id}`);
-      const newUniformsData = uniformData.filter(uniform => uniform.id !== id);
-      setUniformData(newUniformsData);
-      console.log("Uniform deleted with id:", id);
-    } catch (error) {
-      console.error("Error deleting uniform:", error);
-    }
-  };  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this uniform?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        console.log(id);
+        try {
+          await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/uniform-delete/${id}`);
+          const newUniformsData = uniformData.filter(uniform => uniform.id !== id);
+          setUniformData(newUniformsData);
+          console.log("Uniform deleted with id:", id);
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Uniform item has been deleted.',
+            icon: 'success'
+          });
+        } catch (error) {
+          console.error("Error deleting uniform:", error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong while deleting the uniform.',
+            icon: 'error'
+          });
+        }
+      }
+    });
+  };
+  
 
   const handleAddUniform = async (addUniformData) => {
     try {
@@ -228,31 +253,31 @@ const Uniforms = () => {
                 </tr>
               </thead>
               <tbody className='uniforms'>
-            {uniformData.map((uniform, i) => {
-              console.log("Uniform data:", uniformData)
-                return (
+                {uniformData.length === 0 ? (
+                  <tr>
+                    <td colSpan="6"> No uniform items available </td>
+                  </tr>
+                ) : (
+                  uniformData.map((uniform, i) => (
                     <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{uniform.uniform_type} </td>
-                        <td>{uniform.year_level} </td>
-                        <td>{uniform.course} </td>
-                        <td>{uniform.available} </td>
-                        <td>{uniform.quantity} </td>
-                        <td>
-                            {/* <NavLink to={`/view/${book.id}`} className="btn btn-success mx-2">View</NavLink>
-                            <NavLink to={`/edit/${book.id}`} className="btn btn-info mx-2">Edit</NavLink>
-                            <button onClick={()=>handleDelete(user.id)} className="btn btn-danger">Delete</button> */}
-                            <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(uniform.id)}>
-                              <FontAwesomeIcon icon={faPenToSquare} />
-                            </button>
-                            <span className="mx-2"></span> {/* Adds a wider space */}
-                            <button className="btn btn-delete btn-sm" onClick={() => handleDelete(uniform.id)}>
-                              <FontAwesomeIcon icon={faTrash} />
-                              </button>
-                          </td>
+                      <td>{i + 1}</td>
+                      <td>{uniform.uniform_type}</td>
+                      <td>{uniform.year_level}</td>
+                      <td>{uniform.course}</td>
+                      <td>{uniform.available}</td>
+                      <td>{uniform.quantity}</td>
+                      <td>
+                        <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(uniform.id)}>
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                        <span className="mx-2"></span>
+                        <button className="btn btn-delete btn-sm" onClick={() => handleDelete(uniform.id)}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
                     </tr>
-                  );
-                })}
+                  ))
+                )}
               </tbody>
             </table>
           </div>

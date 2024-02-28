@@ -10,6 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, CardBody, Modal } from 'react-bootstrap';
 import AddModulePage from './AddModulePage';
 import EditModulePage from './EditModulePage'; 
+import Swal from 'sweetalert2';
+
 
 const Modules = () => {
 
@@ -107,16 +109,39 @@ const Modules = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log(id);
-    try {
-      await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-delete/${id}`);
-      const newModulesData = modulesData.filter(module => module.id !== id);
-      setModulesData(newModulesData);
-      console.log("Module deleted with id:", id);
-    } catch (error) {
-      console.error("Error deleting module:", error);
-    }
-  };  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this module?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        console.log(id);
+        try {
+          await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/modules-delete/${id}`);
+          const newModulesData = modulesData.filter(module => module.id !== id);
+          setModulesData(newModulesData);
+          console.log("Module deleted with id:", id);
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Module item has been deleted.',
+            icon: 'success'
+          });
+        } catch (error) {
+          console.error("Error deleting module:", error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong while deleting the module.',
+            icon: 'error'
+          });
+        }
+      }
+    });
+  };
+  
 
   const handleAddModule = async (addModuleData) => {
     try {
@@ -223,32 +248,32 @@ const Modules = () => {
                 </tr>
               </thead>
               <tbody className='modules'>
-                {modulesData.map((modules, i) => {
-                  console.log("Module data:", modulesData);
-                  return (
+                {modulesData.length === 0 ? (
+                  <tr>
+                    <td colSpan="8">No modules available</td>
+                  </tr>
+                ) : (
+                  modulesData.map((modules, i) => (
                     <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{modules.subject_code} </td>
-                        <td>{modules.subject_name} </td>
-                        <td>{modules.year_level} </td>
-                        <td>{modules.course} </td>
-                        <td>{modules.available} </td>
-                        <td>{modules.quantity} </td>
-                        <td>
-                            {/* <NavLink to={`/view/${book.id}`} className="btn btn-success mx-2">View</NavLink>
-                            <NavLink to={`/edit/${book.id}`} className="btn btn-info mx-2">Edit</NavLink>
-                            <button onClick={()=>handleDelete(user.id)} className="btn btn-danger">Delete</button> */}
-                          <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(modules.id)}>
-                            <FontAwesomeIcon icon={faPenToSquare} />
-                          </button>
-                          <span className="mx-2"></span> {/* Adds a wider space */}
-                          <button className="btn btn-delete btn-sm" onClick={() => handleDelete(modules.id)}>
-                            <FontAwesomeIcon icon={faTrash} />
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                })}
+                      <td>{i + 1}</td>
+                      <td>{modules.subject_code}</td>
+                      <td>{modules.subject_name}</td>
+                      <td>{modules.year_level}</td>
+                      <td>{modules.course}</td>
+                      <td>{modules.available}</td>
+                      <td>{modules.quantity}</td>
+                      <td>
+                        <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(modules.id)}>
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                        <span className="mx-2"></span>
+                        <button className="btn btn-delete btn-sm" onClick={() => handleDelete(modules.id)}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
