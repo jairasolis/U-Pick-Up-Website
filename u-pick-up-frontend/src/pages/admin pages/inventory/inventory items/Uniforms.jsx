@@ -77,7 +77,8 @@ const Uniforms = () => {
   }
 
   const handleReset = () => {
-
+    setSelectedCourse('');
+    setSelectedYearLevel('');
     fetchData();
     console.log("Uniform data reset");
   };
@@ -168,7 +169,7 @@ const Uniforms = () => {
             <Row className='align-items-center justify-content-center'>
               <Col md={3} style={{ height: '65px', width: '300px'}}> 
             <label htmlFor="courseSelect">Choose a course:</label>
-            <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
+            <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
               <option value="">Select a course</option>
               {courses.map(course => (
                 <option key={course} value={course}>{course}</option>
@@ -178,7 +179,7 @@ const Uniforms = () => {
           <Col md={3} style={{ height: '65px', width: '250px'}}>
               <div>
                 <label htmlFor="yearLevelSelect">Choose a year level:</label>
-                <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
                   <option value="">Select a year level</option>
                   {yearLevels[selectedCourse]?.map(yearLevel => (
                     <option key={yearLevel} value={yearLevel}>{yearLevel}</option>

@@ -77,6 +77,9 @@ const Books = () => {
   }
 
   const handleReset = () => {
+
+    setSelectedCourse('');
+    setSelectedYearLevel('');
     // Fetch all books again to show all the bookData state
     fetchData();
     console.log("Book data reset");
@@ -172,7 +175,7 @@ const Books = () => {
           <Row className='align-items-center justify-content-center'>
             <Col md={3} style={{ height: '65px', width: '300px'}}> 
               <label htmlFor="courseSelect">Choose a course:</label>
-              <select className="form-control" id="courseSelect" onChange={(e) => setSelectedCourse(e.target.value)}>
+              <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
                 <option value="">Select a course</option>
                 {courses.map(course => (
                   <option key={course} value={course}>{course}</option>
@@ -182,7 +185,7 @@ const Books = () => {
             <Col md={3} style={{ height: '65px', width: '250px'}}>
               <div>
                 <label htmlFor="yearLevelSelect">Choose a year level:</label>
-                <select className="form-control" id="yearLevelSelect" onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
                   <option value="">Select a year level</option>
                   {yearLevels[selectedCourse]?.map(yearLevel => (
                     <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
@@ -192,7 +195,7 @@ const Books = () => {
             </Col>
             <Col md={2}>
               <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
-              <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
+              <button type="button" className="btn reset-button"  onClick={handleReset}> Reset </button>
             </Col>
           </Row>
           <hr className='inventory-line' />
