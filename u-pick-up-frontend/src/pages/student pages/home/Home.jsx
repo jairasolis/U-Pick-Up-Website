@@ -3,9 +3,11 @@ import axios from 'axios';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { BeatLoader } from 'react-spinners';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     fetchPosts();
@@ -20,6 +22,7 @@ const Home = () => {
         likes_count: post.likes_count || 0,
       }));
       setPosts(postsWithLikes.reverse());
+      setLoading(false); // Set loading state to false after posts are fetched
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
@@ -60,27 +63,29 @@ const Home = () => {
   return (
     <div className='home'> 
       <div className="home-container">
-        {/* <div className="filter">
-          <FontAwesomeIcon icon={faFilter} style={{color:'#D9D9D9', margin: '5px 2px '}}/>
-          <h4> Filter </h4>
-        </div> */}
         <div className="post-wrapper">
-          {posts.map(post => (
-            <div key={post.id} className="posts"> 
-              <div className="post-content">
-                <p className='mins'>
-                  <img src="../images/phinma_logo.png" alt="" className="admin-profile" />
-                  {getTimeDifference(post.created_at)}
-                </p>
-                <p>{post.post_content}</p>
-                <div className="reactions">
-                  <button className="heart-button" onClick={() => handleLike(post.id)}>
-                    <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
-                  </button>
+          {loading ? ( // Show spinner while loading
+            <div className="spinner">
+              <BeatLoader color="#3B5534" size={15} />
+            </div>
+          ) : (
+            posts.map(post => (
+              <div key={post.id} className="posts"> 
+                <div className="post-content">
+                  <p className='mins'>
+                    <img src="../images/phinma_logo.png" alt="" className="admin-profile" />
+                    {getTimeDifference(post.created_at)}
+                  </p>
+                  <p>{post.post_content}</p>
+                  <div className="reactions">
+                    <button className="heart-button" onClick={() => handleLike(post.id)}>
+                      <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
