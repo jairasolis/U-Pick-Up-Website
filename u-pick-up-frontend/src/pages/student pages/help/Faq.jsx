@@ -43,34 +43,34 @@ const Faq = () => {
 
 const quest = [
   {
-    question: 'Where is the claiming area for modules?',
+    question: 'Who sells the school textbooks and/or uniform?',
     answer: 
-    'You can find it on shs building first floor'
+    'Typically, these items are available through the school administration and are often included in your matriculation fees or semester expenses.'
+  },
+  {
+    question: 'What are the requirements for obtaining the required textbooks and/or Uniforms?',
+    answer: 
+    'You simply need to present your Certificate of Matriculation (COM) at the designated counter.'
+  },
+  {
+    question: 'Where can I get the textbooks and/or uniform?',
+    answer: 
+    'The textbooks and uniforms are obtainable at FDV building, situated across the Basic Ed Building'
   },
   {
     question: 'Where is the claiming area for modules?',
     answer: 
-    'You can find it on shs building first floor'
+    'The modules are available at Basic Education, Ground Floor, in the designated room allocated for each department.'
   },
   {
-    question: 'Where is the claiming area for modules?',
+    question: 'Where can I find digital versions of the modules? ',
     answer: 
-    'You can find it on shs building first floor'
+    'If the module is not yet available, your instructor will provide it. ',
   },
   {
-    question: 'Where is the claiming area for modules?',
+    question: 'When should I acquire the textbooks and/or uniforms?',
     answer: 
-    'You can find it on shs building first floor'
-  },
-  {
-    question: 'Where is the claiming area for modules?',
-    answer: 
-    'You can find it on shs building first floor'
-  },
-  {
-    question: 'Where is the claiming area for modules?',
-    answer: 
-    'You can find it on shs building first floor'
+    'Textbooks and/or can be acquired once registration is complete and, if available, are accessible immediately thereafter.'
   },
 
 ]
