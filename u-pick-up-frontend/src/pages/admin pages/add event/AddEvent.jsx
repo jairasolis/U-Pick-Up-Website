@@ -93,11 +93,11 @@ const AddEvent = () => {
     setEventTitle(event.title);
   };
 
-  const handleModalClose = () => {
-    setShowModal(false);
-    setEventTitle('');
-    setSelectEvent(null);
-  };
+  // const handleModalClose = () => {
+  //   setShowModal(false);
+  //   setEventTitle('');
+  //   setSelectEvent(null);
+  // };
 
   return (
     <div className='calendar-page'>
