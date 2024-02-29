@@ -66,6 +66,7 @@
     flex-direction: column;
     background-color: #EEEEEE;
     align-items: center;
+    padding-bottom: 80px;
  }
 
  .header {
@@ -90,13 +91,12 @@
 
 .items {
     background: #ffffff;
-    margin-bottom: 5px;
-    padding: 10px 20px;
+    margin-bottom: 10px;
+    padding: 15px 15px;
 
 }
 
 .title {
-    color:#7C7C7C;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -104,7 +104,9 @@
 }
 
 .title h2 {
-    font-size: 20px;
+    font-size: 17px;
+    color:#454545;
+
 }
 
 .title span {
@@ -113,15 +115,16 @@
 }
 
 .content {
-    font-size: 17px;
-    color: #7C7C7C;    
+    font-size: 16px;
+    color: #505050;    
     max-height: 0;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(1,0,1,0);
+    transition: all 0.3s ease-in-out;
 }
 
 .content.show {
     height:auto;
     max-height: 9999px;
-    transition: all 0.1s cubic-bezier(1,0,1,0);
+    transition: all 0.1s ease-in-out;
+    margin-top: 20px;
 }

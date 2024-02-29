@@ -21,22 +21,20 @@ const Faq = () => {
           <h1>FAQs</h1>
         </div>
       </div>
-
-  <div className='wrapper'>
-    <div className='accordion'>
-      {quest.map((items, i )=> (
-        <div className='items'>
-          <div className='title' onClick={()=> toggle(i)}>
-            <h2>{items.question}</h2>
-            <span>{selected === i ? '-' : '+'}</span>
-          </div>
-          <div className={selected === i ? 'content show' : 'content'}>{items.answer}</div>
+      <div className='wrapper'>
+        <div className='accordion'>
+          {quest.map((items, i )=> (
+            <div className='items'>
+              <div className='title' onClick={()=> toggle(i)}>
+                <h2>{items.question}</h2>
+                <span>{selected === i ? '-' : '+'}</span>
+              </div>
+              <div className={selected === i ? 'content show' : 'content'}>{items.answer}</div>
+            </div>
+          ))}
         </div>
-      ))}
-
+      </div>
     </div>
-  </div>
-  </div>
   </div>
   )
 }
