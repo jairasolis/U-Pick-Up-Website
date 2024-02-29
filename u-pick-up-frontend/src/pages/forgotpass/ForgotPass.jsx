@@ -23,35 +23,39 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div>
-            <h2>Forgot Password</h2>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={ForgotPassValidation}
-                onSubmit={handleSubmit}
-            >
-                {({ isSubmitting }) => (
-                    <Form>
-                        <div>
-                            <label htmlFor="email">Email</label>
-                            <Field 
-                                type="email" 
-                                name="email" 
-                                id="email" 
-                                placeholder="Enter your email" 
-                            />
-                            <ErrorMessage 
-                                name="email" 
-                                component="p" 
-                                className="error" 
-                            />
-                        </div>
-                        <button type="submit" disabled={isSubmitting}>
-                            {isSubmitting ? 'Submitting...' : 'Submit'}
-                        </button>
-                    </Form>
-                )}
-            </Formik>
+        <div className="forgot-pass-page">
+            <div className="forgot-password-container">
+                <h2 className="forgot-password-heading">Forgot Password</h2>
+                <div className="line"></div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={ForgotPassValidation}
+                    onSubmit={handleSubmit}
+                >
+                    {({ isSubmitting }) => (
+                        <Form className="forgot-password-form">
+                            <div className="form-group">
+                                <label htmlFor="email" className="form-label">Email</label>
+                                <Field 
+                                    type="email" 
+                                    name="email" 
+                                    id="email" 
+                                    placeholder="Enter your email" 
+                                    className="form-input" 
+                                />
+                                <ErrorMessage 
+                                    name="email" 
+                                    component="p" 
+                                    className="error-message" 
+                                />
+                            </div>
+                            <button type="submit" disabled={isSubmitting} className="submit-button">
+                                {isSubmitting ? 'Submitting...' : 'Submit'}
+                            </button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
         </div>
     );
 };
