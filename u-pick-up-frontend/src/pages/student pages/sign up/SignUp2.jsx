@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import "./SignUp2.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,15 @@ const SignUp2 = () => {
   const navigate = useNavigate();
   const [idAvailable, setIdAvailable] = useState(true);
   const [emailAvailable, setEmailAvailable] = useState(true);
+
+  const [formData, setFormData] = useState(null);
+
+  // Effect to retrieve form values from localStorage on component mount
+  useEffect(() => {
+    // Retrieve form values from localStorage
+    const storedData = JSON.parse(localStorage.getItem("formData"));
+    setFormData(storedData);
+  }, []);
 
   const initialValues = {
     email: "",
@@ -31,14 +40,14 @@ const SignUp2 = () => {
   
       if (isIdAvailable && isEmailAvailable) {
         const response = await registerStudent({
-          first_name: "test",
-          middle_name: "test",
-          last_name: "test",
+          first_name: formData.firstName,
+          middle_name: formData.middleName,
+          last_name: formData.lastName,
           student_id: values.idNumber,
-          program: "it",
-          department: "cite",
-          age: 21,
-          gender: "df",
+          program: formData.program,
+          department: formData.department,
+          age: 20,
+          gender: formData.gender,
           email_ad: values.email,
           password: values.password,
           password_confirmation: values.confirmPassword
@@ -47,6 +56,7 @@ const SignUp2 = () => {
         console.log("Response:", response.data);
 
         if (response.status === 200) {
+          localStorage.removeItem("formData")
           navigate("/student/sign-in");
         } else {
           setFieldError("submit", "An error occurred");

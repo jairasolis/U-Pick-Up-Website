@@ -1,60 +1,35 @@
 import React, { useState } from "react";
 import "./SignUp1.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignUpStudentValidation } from "../../../yup validation/SignUpStudentValidation";
-import { checkEmailAvailability } from "../../../api/checkStudentEmail";
-import { checkIdAvailability } from "../../../api/checkStudentId";
-import { registerStudent } from "../../../api/registerStudent";
+
 
 const SignUp1 = () => {
   const navigate = useNavigate();
-  const [idAvailable, setIdAvailable] = useState(true);
-  const [emailAvailable, setEmailAvailable] = useState(true);
 
-  const initialValues = {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    program: "",
-    department: "",
-    gender: "",
-    password: "",
-    confirmPassword: "",
-  };
+  // Retrieve muna yung data from localStorage or set initial values
+  const [formData, setFormData] = useState(() => {
+    const storedData = JSON.parse(localStorage.getItem("formData"));
+    return storedData || {
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      program: "",
+      department: "",
+      gender: "",
+    };
+  });
 
-  const handleSubmit = async (
-    values,
-    { setSubmitting, setFieldError }
-  ) => {
+  const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
+    console.log("submit has clicked!")
+
     try {
-      const isEmailAvailable = await checkEmailAvailability(values.email);
-      const isIdAvailable = await checkIdAvailability(values.idNumber);
+      console.log(values)
 
-      if (isIdAvailable && isEmailAvailable) {
-        const response = await registerStudent({
-          first_name: values.firstName,
-          middle_name: values.middleName,
-          last_name: values.lastName,
-          student_id: values.middleName,
-          program: values.program,
-          department: values.department,
-          age: 21,
-          gender: values.gender,
-          email_ad: values.email,
-          password: values.password,
-          password_confirmation: values.confirmPassword,
-        });
-
-        if (response.status === 200) {
-          navigate("/student/sign-in");
-        } else {
-          setFieldError("submit", "An error occurred");
-        }
-      } else {
-        setFieldError("submit", "An error occurred");
-      }
+      setFormData(values);
+      localStorage.setItem("formData", JSON.stringify(values));
+      navigate("/student/sign-up-2"); 
     } catch (error) {
       setFieldError("submit", "An error occurred");
     } finally {
@@ -73,86 +48,83 @@ const SignUp1 = () => {
         </div>
 
         <Formik
-          initialValues={initialValues}
-          validationSchema={SignUpStudentValidation}
+          initialValues={formData}
+          // validationSchema={SignUpStudentValidation}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting, errors, touched }) => (
+          {({ isSubmitting }) => (
             <Form className="form-wrapper-two">
-            <div className="input-field">
-              <label htmlFor="firstName"> First Name </label>
-              <Field type="text" name="firstName" id="firstName" placeholder="Your First Name" />
-              <ErrorMessage name="firstName" component="p" className="error-message" />
-            </div>
-            <div className="input-field">
-              <label htmlFor="middleName"> Middle Name </label>
-              <Field type="text" name="middleName" id="middleName" placeholder="Your Middle Name" />
-              <ErrorMessage name="middleName" component="p" className="error-message" />
-            </div>
-            <div className="input-field">
-              <label htmlFor="lastName"> Last Name </label>
-              <Field type="text" name="lastName" id="lastName" placeholder="Your Last Name" />
-              <ErrorMessage name="lastName" component="p" className="error-message" />
-            </div>
-            <div className="input-field">
-              <label htmlFor="course">Course/Program</label>
-              <Field as="select" name="course" id="course">
-                <option value=""></option>
-                <option value="course1">AB COMM</option>
-                <option value="course2">AB POLSCI</option>
-                <option value="course3">BEED</option>
-                <option value="course4">BSA</option>
-                <option value="course5">BSAIS</option>
-                <option value="course6">BSARCH</option>
-                <option value="course7">BSCE</option>
-                <option value="course8">BSCPE</option>
-                <option value="course9">BSCRIM</option>
-                <option value="course10">BSEE</option>
-                <option value="course11">BSECE</option>
-                <option value="course12">BSHM</option>
-                <option value="course13">BSIT</option>
-                <option value="course14">BSMA</option>
-                <option value="course15">BSME</option>
-                <option value="course16">BSMLS</option>
-                <option value="course17">BSN</option>
-                <option value="course18">BSPHARMA</option>
-                <option value="course19">BSPSYCH</option>
-                <option value="course20">BSTM</option>
-                <option value="course21">BSBA-FM</option>
-                <option value="course22">BSBA-MM</option>
-                <option value="course23">BSED-ENGLISH</option>
-                <option value="course24">BSED-MATH</option>
-                <option value="course25">BSED-SCIENCE</option>
-                <option value="course26">BSED-SOCIAL STUDIES</option>
-              </Field>
-              <ErrorMessage name="course" component="p" className="error-message" />
+              <div className="input-field">
+                <label htmlFor="firstName"> First Name </label>
+                <Field type="text" name="firstName" id="firstName" placeholder="Your First Name" />
+                <ErrorMessage name="firstName" component="p" className="error-message" />
+              </div>
+              <div className="input-field">
+                <label htmlFor="middleName"> Middle Name </label>
+                <Field type="text" name="middleName" id="middleName" placeholder="Your Middle Name" />
+                <ErrorMessage name="middleName" component="p" className="error-message" />
+              </div>
+              <div className="input-field">
+                <label htmlFor="lastName"> Last Name </label>
+                <Field type="text" name="lastName" id="lastName" placeholder="Your Last Name" />
+                <ErrorMessage name="lastName" component="p" className="error-message" />
+              </div>
+              <div className="input-field">
+                <label htmlFor="program">Course/Program</label>
+                <Field as="select" name="program" id="program">
+                  <option value=""></option>
+                  <option value="AB COMM">AB COMM</option>
+                  <option value="AB POLSCI">AB POLSCI</option>
+                  <option value="BEED">BEED</option>
+                  <option value="BSA">BSA</option>
+                  <option value="BSAIS">BSAIS</option>
+                  <option value="BSARCH">BSARCH</option>
+                  <option value="BSCE">BSCE</option>
+                  <option value="BSCPE">BSCPE</option>
+                  <option value="BSCRIM">BSCRIM</option>
+                  <option value="BSEE">BSEE</option>
+                  <option value="BSECE">BSECE</option>
+                  <option value="BSHM">BSHM</option>
+                  <option value="BSIT">BSIT</option>
+                  <option value="BSMA">BSMA</option>
+                  <option value="BSME">BSME</option>
+                  <option value="BSMLS">BSMLS</option>
+                  <option value="BSN">BSN</option>
+                  <option value="BSPHARMA">BSPHARMA</option>
+                  <option value="BSPSYCH">BSPSYCH</option>
+                  <option value="BSTM">BSTM</option>
+                  <option value="BSBA-FM">BSBA-FM</option>
+                  <option value="BSBA-MM">BSBA-MM</option>
+                  <option value="BSED-ENGLISH">BSED-ENGLISH</option>
+                  <option value="BSED-MATH">BSED-MATH</option>
+                  <option value="BSED-SCIENCE">BSED-SCIENCE</option>
+                  <option value="BSED-SOCIAL STUDIES">BSED-SOCIAL STUDIES</option>                
+                </Field>
+                <ErrorMessage name="program" component="p" className="error-message" />
               </div>
               <div className="input-field">
                 <label htmlFor="department">Department</label>
                 <Field as="select" name="department" id="department">
                   <option value=""></option>
-                  <option value="department1">CAS</option>
-                  <option value="department2">CAHS</option>
-                  <option value="department">CEA</option>
-                  <option value="department">CELA</option>
-                  <option value="department">CITE</option>
-                  <option value="department">CMA</option>
-                  <option value="department">CCJE</option>
-                </Field>
+                  <option value="CAS">CAS</option>
+                  <option value="CAHS">CAHS</option>
+                  <option value="CEA">CEA</option>
+                  <option value="CELA">CELA</option>
+                  <option value="CITE">CITE</option>
+                  <option value="CMA">CMA</option>
+                  <option value="CCJE">CCJE</option>                </Field>
                 <ErrorMessage name="department" component="p" className="error-message" />
               </div>
               <div className="input-field">
                 <label htmlFor="gender">Gender</label>
                 <Field as="select" name="gender" id="gender">
                   <option value=""></option>
-                  <option value="gender1">Female</option>
-                  <option value="gender2">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
                 </Field>
                 <ErrorMessage name="gender" component="p" className="error-message" />
               </div>
-              <Link to="/student/sign-up-2" style={{ textDecoration: 'none' }}>
-                <button type="submit" className="next-btn" disabled={isSubmitting}> Next </button>
-              </Link>
+              <button type="submit" className="next-btn" disabled={isSubmitting}> Next </button>
               <ErrorMessage name="submit" component="p" className="error-message" />
             </Form>
           )}
