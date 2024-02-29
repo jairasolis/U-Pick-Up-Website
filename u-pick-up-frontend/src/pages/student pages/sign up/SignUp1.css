@@ -71,11 +71,20 @@
     width: 217px;
     height: 44px;
     text-align: center;
-    color: #516e53;
+    color: #fff;
     border-radius: 10px;
     margin: 30px 0 20px 0;
     transition: .3s;
     border: none;
+    background-color: #516e53; 
+    border: 1px solid #516e53; 
+}
+
+.next-btn:hover {
+    border: 1px solid #9c9c9c;
+    background: #D5D5D5; 
+    color: #9c9c9c;
+    cursor: pointer; 
 }
 
 .have-account-two {
