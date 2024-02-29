@@ -11,6 +11,9 @@ import { Spinner } from 'react-bootstrap';
 const AddPost = () => {
   const [inputValue, setInputValue] = useState('');
   const [posts, setPosts] = useState([]);
+  const [editContent, setEditContent] = useState('');
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editPostId, setEditPostId] = useState(null);
   const [loading, setLoading] = useState(true);
 
 
@@ -64,15 +67,32 @@ const AddPost = () => {
     }
   };
 
-  const handleEdit = async (postId, newContent) => {
-    try {
-      await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}`, { post_content: newContent });
-      const updatedPosts = posts.map(post =>
-        post.id === postId ? { ...post, post_content: newContent } : post
-      );
-      setPosts(updatedPosts);
-    } catch (error) {
-      console.error('Error updating post:', error);
+  const handleEditClick = (postId, content) => {
+    setEditPostId(postId);
+    setEditContent(content);
+    setShowEditModal(true);
+  };
+
+  const handleEditCancel = () => {
+    setShowEditModal(false);
+    setEditContent('');
+    setEditPostId(null);
+  };
+
+  const handleEditSave = async () => {
+    if (window.confirm('Are you sure you want to save changes?')) {
+      try {
+        await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${editPostId}`, { post_content: editContent });
+        const updatedPosts = posts.map(post =>
+          post.id === editPostId ? { ...post, post_content: editContent } : post
+        );
+        setPosts(updatedPosts);
+        setShowEditModal(false);
+        setEditContent('');
+        setEditPostId(null);
+      } catch (error) {
+        console.error('Error updating post:', error);
+      }
     }
   };
 
@@ -142,7 +162,7 @@ const AddPost = () => {
                   </p>
                   <p>{post.post_content}</p>
                   <div className="reactions">
-                    <button className="edit-button" onClick={() => handleEdit(post.id, prompt("Enter new content:"))}>
+                  <button className="edit-button" onClick={() => handleEditClick(post.id, post.post_content)}>
                       <FontAwesomeIcon icon={faPenToSquare} />
                     </button>
                     <button className="delete-button" onClick={() => handleDelete(post.id)}>
@@ -158,6 +178,20 @@ const AddPost = () => {
           )}
         </div>
       </div>
+      {showEditModal && (
+        <div className="edit-modal">
+          <textarea
+            className='post-form'
+            value={editContent}
+            onChange={(e) => setEditContent(e.target.value)}
+            required
+          ></textarea>
+          <div className="edit-modal-buttons">
+            <button className="edit-modal-cancel" onClick={handleEditCancel}>Cancel</button>
+            <button className="edit-modal-save" onClick={handleEditSave}>Save</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
