@@ -95,6 +95,11 @@ const SignIn2 = () => {
                   name="password" 
                   required />
                 <ErrorMessage name="password" component="p" className="error-message" />
+                <Link to="/forgot-password" style={{ textDecoration: 'none' }}>
+                  <div className="forgot-pass">
+                    <p> Forgot password? </p>
+                  </div>
+                </Link>
               </div>
               <button type="submit" className="sign-up-btn" disabled={isSubmitting || loading}>
                 {loading ? 'Loading...' : 'Sign In'}

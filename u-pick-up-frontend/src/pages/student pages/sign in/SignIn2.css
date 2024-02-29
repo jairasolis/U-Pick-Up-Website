@@ -97,3 +97,13 @@
 .input-field-two.error input {
     border: 1px solid #dd3535;
 }
+
+.forgot-pass {
+    text-align: right;
+    font-size: 13px;
+}
+
+.forgot-pass:hover {
+    color: #3B5534;
+    text-decoration: underline;
+}
