@@ -1,0 +1,83 @@
+/* ResetPass.css */
+
+.reset-pass-page {
+    display: flex;
+    background-color: #EEEEEE;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.line {
+    height: 1px;
+    background-color: #8c8c8c5c;
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.reset-password-heading {
+    font-size: 24px;
+    color: #494949;
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #007bff;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+.submit-button {
+    padding: 8px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
