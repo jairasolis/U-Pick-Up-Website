@@ -15,8 +15,13 @@ import useAuth from "./auth/useAuth";
 import Login from "./pages/login/login";
 
 // student pages
+// Signup1 component (First signup page)
+import SignUp1 from "./pages/student pages/sign up/SignUp1"; // Sign Up 1 component
+
+// Signup2 component (Second signup page)
+import SignUp2 from "./pages/student pages/sign up/SignUp2"; // Sign Up 2 component
+
 import LandingPage from "./pages/student pages/landing page/LandingPage";
-import StudentSignUp2 from "./pages/student pages/sign up/SignUp2";
 import StudentSignIn2 from "./pages/student pages/sign in/SignIn2";
 import Home from "./pages/student pages/home/Home";
 import Profile from "./pages/student pages/profile/Profile";
@@ -70,8 +75,13 @@ const App = () => {
           {/*  public routes */}
           <Route
             path="/student/sign-up"
-            element={auth ? <Navigate to="/student/home" /> : <StudentSignUp2 />}
+            element={auth ? <Navigate to="/student/home" /> : <SignUp1 />}
           />
+          <Route
+            path="/student/sign-up-2" 
+            element={auth ? <Navigate to="/student/home" /> : <SignUp2 />} 
+          />
+
           <Route
             path="/student/sign-in"
             element={auth ? <Navigate to="/student/home" /> : <StudentSignIn2 />}
