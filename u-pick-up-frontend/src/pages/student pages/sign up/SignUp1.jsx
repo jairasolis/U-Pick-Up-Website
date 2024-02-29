@@ -150,7 +150,9 @@ const SignUp1 = () => {
                 </Field>
                 <ErrorMessage name="gender" component="p" className="error-message" />
               </div>
-              <button type="submit" className="next-btn" disabled={isSubmitting}> Next </button>
+              <Link to="/student/sign-up-2" style={{ textDecoration: 'none' }}>
+                <button type="submit" className="next-btn" disabled={isSubmitting}> Next </button>
+              </Link>
               <ErrorMessage name="submit" component="p" className="error-message" />
             </Form>
           )}

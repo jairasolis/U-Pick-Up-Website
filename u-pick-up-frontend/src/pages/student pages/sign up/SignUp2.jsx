@@ -43,9 +43,9 @@ const SignUp2 = () => {
           password: values.password,
           password_confirmation: values.confirmPassword
         });
-            
+
         console.log("Response:", response.data);
-  
+
         if (response.status === 200) {
           navigate("/student/sign-in");
         } else {
