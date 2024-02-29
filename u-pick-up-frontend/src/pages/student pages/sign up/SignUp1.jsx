@@ -128,7 +128,7 @@ const SignUp1 = () => {
               <ErrorMessage name="course" component="p" className="error-message" />
               </div>
               <div className="input-field">
-                <label htmlFor="department">DEPARTMENT</label>
+                <label htmlFor="department">Department</label>
                 <Field as="select" name="department" id="department">
                   <option value=""></option>
                   <option value="department1">CAS</option>
@@ -142,11 +142,11 @@ const SignUp1 = () => {
                 <ErrorMessage name="department" component="p" className="error-message" />
               </div>
               <div className="input-field">
-                <label htmlFor="gender">GENDER</label>
+                <label htmlFor="gender">Gender</label>
                 <Field as="select" name="gender" id="gender">
                   <option value=""></option>
-                  <option value="gender1">FEMALE</option>
-                  <option value="gender2">MALE</option>
+                  <option value="gender1">Female</option>
+                  <option value="gender2">Male</option>
                 </Field>
                 <ErrorMessage name="gender" component="p" className="error-message" />
               </div>
