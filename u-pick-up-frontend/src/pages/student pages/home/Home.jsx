@@ -78,9 +78,10 @@ const Home = () => {
                   </p>
                   <p>{post.post_content}</p>
                   <div className="reactions">
-                    <button className="heart-button" onClick={() => handleLike(post.id)}>
-                      <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
+                    <button className={`heart-buttons ${post.likedByUser ? 'heart-pulse' : ''}`} onClick={() => handleLike(post.id)}>
+                      <FontAwesomeIcon icon={faHeart} className="heart-icon" />
                     </button>
+                    <span className="heart-count">{post.likes_count}</span>
                   </div>
                 </div>
               </div>
