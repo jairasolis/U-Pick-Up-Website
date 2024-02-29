@@ -41,13 +41,17 @@ const AddPost = () => {
     const postTime = new Date(date);
     const difference = currentTime - postTime;
     const minutes = Math.floor(difference / 60000); 
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+  
     if (minutes < 1) {
       return 'Just now';
     } else if (minutes < 60) {
       return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
-    } else {
-      const hours = Math.floor(minutes / 60);
+    } else if (hours < 24) {
       return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+    } else {
+      return `${days} day${days !== 1 ? 's' : ''} ago`;
     }
   };
 
