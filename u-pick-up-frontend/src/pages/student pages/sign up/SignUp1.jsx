@@ -18,6 +18,7 @@ const SignUp1 = () => {
       program: "",
       department: "",
       gender: "",
+      age: 0,
     };
   });
 
@@ -53,7 +54,7 @@ const SignUp1 = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
-            <Form className="form-wrapper-two">
+            <Form className="form-wrapper-one">
               <div className="input-field">
                 <label htmlFor="firstName"> First Name </label>
                 <Field type="text" name="firstName" id="firstName" placeholder="Your First Name" />
@@ -115,7 +116,7 @@ const SignUp1 = () => {
                   <option value="CCJE">CCJE</option>                </Field>
                 <ErrorMessage name="department" component="p" className="error-message" />
               </div>
-              <div className="input-field">
+              <div className="input-field if-sm">
                 <label htmlFor="gender">Gender</label>
                 <Field as="select" name="gender" id="gender">
                   <option value=""></option>
@@ -123,6 +124,9 @@ const SignUp1 = () => {
                   <option value="Male">Male</option>
                 </Field>
                 <ErrorMessage name="gender" component="p" className="error-message" />
+                <label htmlFor="age">Age</label>
+                <Field type="number" name="age" id="age" placeholder="Your Age" />
+                <ErrorMessage name="age" component="p" className="error-message" />
               </div>
               <button type="submit" className="next-btn" disabled={isSubmitting}> Next </button>
               <ErrorMessage name="submit" component="p" className="error-message" />

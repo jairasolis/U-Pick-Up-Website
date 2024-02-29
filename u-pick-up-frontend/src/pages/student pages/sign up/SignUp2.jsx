@@ -46,7 +46,7 @@ const SignUp2 = () => {
           student_id: values.idNumber,
           program: formData.program,
           department: formData.department,
-          age: 20,
+          age: formData.age,
           gender: formData.gender,
           email_ad: values.email,
           password: values.password,
