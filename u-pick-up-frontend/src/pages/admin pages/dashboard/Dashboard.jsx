@@ -56,9 +56,10 @@ const Dashboard = () => {
             setFemaleCount(response.data.femaleCount);
             setNonBinaryCount(response.data.nbCount);
             setOtherCount(response.data.otherCount);
-            setNonBinaryCount(response.data.prefNotCount);
+            setPrefNotToSayCount(response.data.prefNotCount);
             console.log(response.data.femaleCount)
             console.log(response.data.maleCount)
+            console.log(response.data.nbCount)
         } catch (error) {
             console.error('Error fetching student gender counts:', error);
         }
