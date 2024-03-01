@@ -55,7 +55,7 @@
 }
 
 .if-sm select, .if-sm input{
-    width: 130px;
+    width: 150px;
 }
 
 .input-field input:focus, .input-field select:focus {

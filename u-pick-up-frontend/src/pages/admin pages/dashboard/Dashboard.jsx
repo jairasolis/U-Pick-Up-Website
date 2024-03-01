@@ -28,6 +28,10 @@ const Dashboard = () => {
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
+  const [nonBinaryCount, setNonBinaryCount] = useState(0);
+  const [otherCount, setOtherCount] = useState(0);
+  const [prefNotToSayCount, setPrefNotToSayCount] = useState(0);
+
   const [under18Count, setUnder18Count] = useState(0);
   const [age18to25Count, setAge18to25Count] = useState(0);
   const [age26to35Count, setAge26to35Count] = useState(0);
@@ -50,6 +54,9 @@ const Dashboard = () => {
             const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/gender-students-count');
             setMaleCount(response.data.maleCount);
             setFemaleCount(response.data.femaleCount);
+            setNonBinaryCount(response.data.nbCount);
+            setOtherCount(response.data.otherCount);
+            setNonBinaryCount(response.data.prefNotCount);
             console.log(response.data.femaleCount)
             console.log(response.data.maleCount)
         } catch (error) {
@@ -135,12 +142,12 @@ const Dashboard = () => {
               <Card style={{ height: '200px', padding: '20px', display: 'flex'  }}>
               <Doughnut
                 data={{
-                  labels: ["Male", "Female", "Others"],
+                  labels: ["Male", "Female", "Non Binary", "Other", "Prefer not to say"],
                   datasets: [
                     {
                       label: "Students",
-                      data: [maleCount, femaleCount, 0],
-                      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], 
+                      data: [maleCount, femaleCount, nonBinaryCount, otherCount, prefNotToSayCount],
+                      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#96BAB3", "#7C7C7C"], 
                     },
                   ],
                 }}

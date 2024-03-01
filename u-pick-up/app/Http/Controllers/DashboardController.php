@@ -55,12 +55,21 @@ class DashboardController extends Controller
     {
         $maleCount = 0;
         $femaleCount = 0;
+        $nbCount = 0;
+        $otherCount = 0;
+        $prefNotCount = 0;
 
         $maleCount = Student::where('gender', 'male')->count();
         $femaleCount = Student::where('gender', 'female')->count();
+        $nbCount = Student::where('gender', 'non binary')->count();
+        $otherCount = Student::where('gender', 'other')->count();
+        $prefNotCount = Student::where('gender', 'prefer not to say')->count();
         return response()->json([
             'maleCount' => $maleCount,
-            'femaleCount' => $femaleCount
+            'femaleCount' => $femaleCount,
+            'nbCount' => $nbCount,
+            'otherCount' => $otherCount,
+            'prefNotCount' => $prefNotCount,
         ]);
     }
 
