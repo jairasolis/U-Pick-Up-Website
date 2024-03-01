@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SignUp1.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { SignUpStudentValidation } from "../../../yup validation/SignUpStudentValidation";
+import { SignUp1StudentValidation } from "../../../yup validation/SignUp1StudentValidation";
 
 
 const SignUp1 = () => {
@@ -50,7 +50,7 @@ const SignUp1 = () => {
 
         <Formik
           initialValues={formData}
-          // validationSchema={SignUpStudentValidation}
+          validationSchema={SignUp1StudentValidation}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
