@@ -183,19 +183,8 @@ const Uniforms = () => {
         <CardBody>
           {showAddUniformPage && <AddUniformPage onSubmit={handleAddUniform} onCancel={handleCancelAdd} />}
 
-          {showEditUniformModal && (
-            <EditUniformPage
-              editFormData={editFormData}
-              setEditFormData={setEditFormData}
-              handleSubmitEdit={handleEditUniform}
-              handleCloseEditUniformModal={handleCloseEditUniformModal}
-            />
-          )}
-
-          <Container>
             <Row className='align-items-center justify-content-center'>
-              <Col md={3} style={{ height: '65px', width: '300px'}}> 
-            <label htmlFor="courseSelect">Choose a course:</label>
+              <Col md={3} style={{ height: '40px', width: '300px'}}> 
             <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
               <option value="">Select a course</option>
               {courses.map(course => (
@@ -203,9 +192,8 @@ const Uniforms = () => {
               ))}
             </select>
           </Col>
-          <Col md={3} style={{ height: '65px', width: '250px'}}>
+          <Col md={3} style={{ height: '40px', width: '250px'}}>
               <div>
-                <label htmlFor="yearLevelSelect">Choose a year level:</label>
                 <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
                   <option value="">Select a year level</option>
                   {yearLevels[selectedCourse]?.map(yearLevel => (
@@ -218,16 +206,21 @@ const Uniforms = () => {
             <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
             <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
           </Col>
+          <Col md={2} className='text-right'>
+              <button className="btn btn-add btn" onClick={handleAdd}>
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </Col>
         </Row>
         <hr className='inventory-line' />
-        </Container>
-          <Row className="justify-content-end mb-3">
+
+          {/* <Row className="justify-content-end mb-3">
             <Col md={2} className='text-right'>
               <button className="btn btn-add btn-lg" onClick={handleAdd}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </Col>
-          </Row> 
+          </Row>  */}
 
           <Modal show={showAddUniformModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>

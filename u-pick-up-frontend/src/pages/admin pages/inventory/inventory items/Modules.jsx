@@ -204,10 +204,9 @@ const Modules = () => {
             />
           )} */}
 
-          <Container>
             <Row className="align-items-center justify-content-center">
-              <Col md={3} style={{ height: "65px", width: "300px" }}>
-                <label htmlFor="courseSelect">Choose a course:</label>
+              <Col md={3} style={{ height: "40px", width: "300px" }}>
+                {/* <label htmlFor="courseSelect">Choose a course:</label> */}
                 <select
                   className="form-control"
                   id="courseSelect"
@@ -222,9 +221,9 @@ const Modules = () => {
                   ))}
                 </select>
               </Col>
-              <Col md={3} style={{ height: "65px", width: "250px" }}>
+              <Col md={3} style={{ height: "40px", width: "250px" }}>
                 <div>
-                  <label htmlFor="yearLevelSelect">Choose a year level:</label>
+                  {/* <label htmlFor="yearLevelSelect">Choose a year level:</label> */}
                   <select
                     className="form-control"
                     id="yearLevelSelect"
@@ -258,17 +257,21 @@ const Modules = () => {
                   Reset{" "}
                 </button>
               </Col>
-            </Row>
-            <hr className="inventory-line" />
-          </Container>
-
-          <Row className="justify-content-end mb-3">
-            <Col md={2} className="text-right">
-              <button className="btn btn-add btn-lg" onClick={handleAdd}>
+              <Col md={2} className="text-right">
+              <button className="btn btn-add btn" onClick={handleAdd}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </Col>
-          </Row>
+            </Row>
+            <hr className="inventory-line" />
+{/* 
+          <Row className="justify-content-end mb-3">
+            <Col md={2} className="text-right">
+              <button className="btn btn-add btn" onClick={handleAdd}>
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </Col>
+          </Row> */}
 
           <Modal show={showAddModuleModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>
