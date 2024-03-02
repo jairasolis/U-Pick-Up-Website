@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import './SignUp2.css'
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import {SignUpAdminValidation} from '../../../yup validation/SignUpAdminValidation';
+import React, { useState } from "react";
+import "./SignUp2.css";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { SignUpAdminValidation } from "../../../yup validation/SignUpAdminValidation";
 import { checkEmailAvailability } from "../../../api/checkAdminEmail";
 import { checkUsernameAvailability } from "../../../api/checkAdminUsername";
 import { registerAdmin } from "../../../api/registerAdmin";
@@ -15,33 +15,31 @@ const SignUp2 = () => {
   const [emailAvailable, setEmailAvailable] = useState(true);
 
   const initialValues = {
-    email: '',
-    username: '',
-    department: '',
-    password: '',
-    confirmPassword: ''
+    email: "",
+    username: "",
+    department: "",
+    password: "",
+    confirmPassword: "",
   };
 
- 
-  const handleSubmit = async (
-    values,
-    { setSubmitting, setFieldError }
-  ) => {
+  const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
       const isEmailAvailable = await checkEmailAvailability(values.email);
-      const isUsernameAvailable = await checkUsernameAvailability(values.username);
-  
+      const isUsernameAvailable = await checkUsernameAvailability(
+        values.username
+      );
+
       if (isUsernameAvailable && isEmailAvailable) {
         const response = await registerAdmin({
           email_ad: values.email,
           username: values.username,
           department: values.department,
           password: values.password,
-          password_confirmation: values.confirmPassword
+          password_confirmation: values.confirmPassword,
         });
-            
+
         console.log("Response:", response.data);
-  
+
         if (response.status === 200) {
           navigate("/admin/sign-in");
         } else {
@@ -72,30 +70,35 @@ const SignUp2 = () => {
     }
   };
 
-
   return (
-    <div className='sign-up-two'>
+    <div className="sign-up-two">
       <div className="sign-up-wrap">
         <div className="sign-up-header">
-            <img src="../images/upup.png" alt="" />
-            <p> receive on ease </p>
-            <h3> Claim your materials with precision, no more wasted trips! </h3>
-            <p>It’s simple to join</p>
+          <img src="../images/upup.png" alt="" />
+          <p> receive on ease </p>
+          <h3> Claim your materials with precision, no more wasted trips! </h3>
+          <p>It’s simple to join</p>
         </div>
 
         <Formik
           initialValues={initialValues}
           validationSchema={SignUpAdminValidation}
-          onSubmit={handleSubmit}>
+          onSubmit={handleSubmit}
+        >
           {({ isSubmitting, errors, touched }) => (
             <Form className="form-wrapper-two">
-              <div className={`input-field-two ${errors.email && touched.email ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.email && touched.email ? "error" : ""
+                }`}
+              >
                 <label htmlFor="email"> Email Address </label>
-                <Field 
-                  type="text" 
-                  name="email" 
+                <Field
+                  type="text"
+                  name="email"
                   id="email"
-                  placeholder='abc.up@phinmaed.com'/>
+                  placeholder="abc.up@phinmaed.com"
+                />
                 <ErrorMessage
                   name="email"
                   component="p"
@@ -107,74 +110,114 @@ const SignUp2 = () => {
                   </p>
                 )}
               </div>
-              <div className={`input-field-two ${errors.username && touched.username ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.username && touched.username ? "error" : ""
+                }`}
+              >
                 <label htmlFor="username"> Username </label>
-                <Field 
-                  type="text" 
-                  name="username" 
+                <Field
+                  type="text"
+                  name="username"
                   id="username"
-                  placeholder='Username' />
-                <ErrorMessage 
-                  name="username" 
-                  component="p" 
-                  className="error-message" />
-                {!usernameAvailable && !(errors.username && touched.username) && (
-                  <p className="error-message">
-                    This Username is not available.
-                  </p>
-                )}
+                  placeholder="Username"
+                />
+                <ErrorMessage
+                  name="username"
+                  component="p"
+                  className="error-message"
+                />
+                {!usernameAvailable &&
+                  !(errors.username && touched.username) && (
+                    <p className="error-message">
+                      This Username is not available.
+                    </p>
+                  )}
               </div>
-              <div className={`input-field-two ${errors.department && touched.department ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.department && touched.department ? "error" : ""
+                }`}
+              >
                 <label htmlFor="department"> Department </label>
-                <Field 
-                  type="text"  
-                  name="department" 
+                <Field
+                  type="text"
+                  name="department"
                   id="department"
-                  placeholder='Department' />
-                <ErrorMessage 
-                  name="department" 
-                  component="p" 
-                  className="error-message" />
-              </div>       
-              <div className={`input-field-two ${errors.password && touched.password ? 'error' : ''}`}>
+                  placeholder="Department"
+                />
+                <ErrorMessage
+                  name="department"
+                  component="p"
+                  className="error-message"
+                />
+              </div>
+              <div
+                className={`input-field-two ${
+                  errors.password && touched.password ? "error" : ""
+                }`}
+              >
                 <label htmlFor="password"> Password </label>
-                <Field 
-                  type="password"  
-                  name="password" 
+                <Field
+                  type="password"
+                  name="password"
                   id="password"
-                  placeholder='Enter password' />
-                <ErrorMessage 
-                  name="password" 
-                  component="p" 
-                  className="error-message" />
+                  placeholder="Enter password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="p"
+                  className="error-message"
+                />
               </div>
-              <div className={`input-field-two ${errors.confirmPassword && touched.confirmPassword ? 'error' : ''}`}>
+              <div
+                className={`input-field-two ${
+                  errors.confirmPassword && touched.confirmPassword
+                    ? "error"
+                    : ""
+                }`}
+              >
                 <label htmlFor="confirmPassword"> Confirm Password </label>
-                <Field 
-                  type="password" 
-                  name="confirmPassword" 
+                <Field
+                  type="password"
+                  name="confirmPassword"
                   id="confirmPassword"
-                  placeholder='Confirm password' />
-                <ErrorMessage 
-                  name="confirmPassword" 
-                  component="p" 
-                  className="error-message" />
+                  placeholder="Confirm password"
+                />
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="p"
+                  className="error-message"
+                />
               </div>
-              <button type="submit" className="sign-up-btn" disabled={isSubmitting}>Sign Up</button>
-              <ErrorMessage 
-                name="submit" 
-                component="p" 
-                className="error-message" />
+              <button
+                type="submit"
+                className="sign-up-btn"
+                disabled={isSubmitting}
+              >
+                Sign Up
+              </button>
+              <ErrorMessage
+                name="submit"
+                component="p"
+                className="error-message"
+              />
             </Form>
           )}
         </Formik>
 
         <div className="have-account-two">
-          <p>Already have an account? <Link to="/admin/sign-in"> <span> SIGN IN! </span> </Link> </p>
+          <p>
+            Already have an account?{" "}
+            <Link to="/admin/sign-in" style={{ textDecoration: "none" }}>
+              {" "}
+              <span> SIGN IN! </span>{" "}
+            </Link>{" "}
+          </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp2
+export default SignUp2;

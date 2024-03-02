@@ -1,6 +1,6 @@
 :root {
     --text-color: #3B5534;
-} 
+}
 
 .sign-in-wrap {
     margin: 70px 100px;
@@ -10,7 +10,7 @@
 .sign-in-header img {
     width: 150px;
     height: auto;
-    
+
 }
 
 .sign-in-header p {
@@ -101,6 +101,7 @@
 .forgot-pass {
     text-align: right;
     font-size: 13px;
+    color: black;
 }
 
 .forgot-pass:hover {

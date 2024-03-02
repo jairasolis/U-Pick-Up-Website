@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import "./Books.css";
 
 const EditBookPage = ({ editFormData, setEditFormData, handleCloseEditBookModal, handleSubmitEdit }) => {
 
@@ -30,8 +31,8 @@ const EditBookPage = ({ editFormData, setEditFormData, handleCloseEditBookModal,
   };
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
+    <div className="modal-books">
+      <Form onSubmit={handleSubmit} >
         <Form.Group className="mb-3" controlId="subjectName">
           <Form.Label>Subject Name</Form.Label>
           <Form.Control type="text" value={subject_name} onChange={(e) => setSubjectName(e.target.value)} />

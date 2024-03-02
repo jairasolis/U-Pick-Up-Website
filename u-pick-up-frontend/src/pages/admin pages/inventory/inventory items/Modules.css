@@ -1,11 +1,11 @@
 .modules-page {
-    flex: 5;
-    top: 70px;
-    display: flex;
-    flex-direction: column;
-    background-color: #EEEEEE;
-    align-items: center;
-    padding-top: 40px;
+  flex: 5;
+  top: 70px;
+  display: flex;
+  flex-direction: column;
+  background-color: #EEEEEE;
+  align-items: center;
+  padding-top: 40px;
 }
 
 /* .modules-container {
@@ -16,38 +16,39 @@
 } */
 
 table {
-    width: 1100px;
-    height: auto;
-    border-radius: 10px;
-    padding: 5px 10px;
-    border-collapse: collapse;
-    
+  width: 1100px;
+  height: auto;
+  border-radius: 10px;
+  padding: 5px 10px;
+  border-collapse: collapse;
+
 }
 
 .books tr td:nth-child(2),
 .modules tr td:nth-child(2),
-.uniforms tr td:nth-child(1)  {
-    text-align: left;
-    padding-left: 20px;
+.uniforms tr td:nth-child(2) {
+  text-align: left;
+  padding-left: 20px;
 }
 
 tr {
-    height: 50px;
+  height: 50px;
 }
 
 
 th {
-    color: #454545d2;
+  color: #454545d2;
 
 }
 
 td {
-    text-align: center;
-    color: #454545d2;
+  text-align: center;
+  color: #454545d2;
 }
 
-th, td {
-    border-right: 1px solid #4545453c;
+th,
+td {
+  border-right: 1px solid #4545453c;
 }
 
 /* thead {
@@ -55,81 +56,83 @@ th, td {
 } */
 
 .modules-container table {
-  text-align: center; 
+  text-align: center;
 }
 
 
 .modules-custom-card {
-    background-color: #FFFFFF;
-    margin-bottom: 70px;
-  }
-  
-  .inventory-line {
-    width: 100%;
-    border-bottom: 2px solid black; /* This creates a solid black line */
-  }
-  
+  background-color: #FFFFFF;
+  margin-bottom: 70px;
+}
 
-  .table-header {
-    text-align: center;
-  }
-  
-  .del-icon {
-      padding-left: 10px;
-      color: #6D0606;
-  }
-  
-  /*buttons*/
-  .display-button {
-    background-color: #3B5534; 
-    color: #fff; 
-    transition: background-color 0.3s ease;
-  }
-    
-  .display-button:hover {
-    background-color: #28a745;
-  }
-  
-  .reset-button {
-    background-color: #6D0606; 
-    color: #fff; 
-    transition: background-color 0.3s ease;
-  }
-  
-  .reset-button:hover {
-    background-color: #842d26;
-  }
-  
-  .btn-add {
-    background-color: #020E2D; 
-    color: #fff; 
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-add:hover {
-    background-color: #25127d;
-  }
-  
-  .btn-edit {
-    background-color: #3B5534; 
-    color: #fff; 
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-edit:hover {
-    background-color: #28a745;
-  }
-  
-  .btn-delete {
-    background-color: #6D0606; 
-    color: #fff;
-    transition: background-color 0.3s ease; 
-  }
-  
-  .btn-delete:hover {
-    background-color: #702714;
-  }
-  
-.mods{
+.inventory-line {
+  width: 100%;
+  border-bottom: 2px solid black;
+  /* This creates a solid black line */
+}
+
+
+.table-header {
+  text-align: center;
+}
+
+.del-icon {
+  padding-left: 10px;
+  color: #6D0606;
+}
+
+/*buttons*/
+.display-button {
+  background-color: #3B5534;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.display-button:hover {
+  background-color: #28a745;
+}
+
+.reset-button {
+  background-color: #6D0606;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #842d26;
+}
+
+.btn-add {
+  background-color: #020E2D;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: #25127d;
+}
+
+.btn-edit {
+  background-color: #3B5534;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #28a745;
+}
+
+.btn-delete {
+  background-color: #6D0606;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #702714;
+}
+
+.mods {
+  top: 0;
   margin: auto;
 }

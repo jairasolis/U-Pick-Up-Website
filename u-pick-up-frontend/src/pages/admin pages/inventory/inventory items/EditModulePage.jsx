@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
+import "./Modules.css";
 
 const EditModulePage = ({ editFormData, setEditFormData, handleSubmitEdit, handleCloseEditModuleModal }) => {
 
@@ -26,7 +27,7 @@ const EditModulePage = ({ editFormData, setEditFormData, handleSubmitEdit, handl
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="mods">
         <Form.Group className="mb-3" controlId="subjectCode">
           <Form.Label>Subject Code</Form.Label>
           <Form.Control type="text" value={subject_code} onChange={(e) => setSubjectCode(e.target.value)} />

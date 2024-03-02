@@ -4,33 +4,34 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignUp1StudentValidation } from "../../../yup validation/SignUp1StudentValidation";
 
-
 const SignUp1 = () => {
   const navigate = useNavigate();
 
   // Retrieve muna yung data from localStorage or set initial values
   const [formData, setFormData] = useState(() => {
     const storedData = JSON.parse(localStorage.getItem("formData"));
-    return storedData || {
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      program: "",
-      department: "",
-      gender: "",
-      age: 0,
-    };
+    return (
+      storedData || {
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        program: "",
+        department: "",
+        gender: "",
+        age: 0,
+      }
+    );
   });
 
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
-    console.log("submit has clicked!")
+    console.log("submit has clicked!");
 
     try {
-      console.log(values)
+      console.log(values);
 
       setFormData(values);
       localStorage.setItem("formData", JSON.stringify(values));
-      navigate("/student/sign-up-2"); 
+      navigate("/student/sign-up-2");
     } catch (error) {
       setFieldError("submit", "An error occurred");
     } finally {
@@ -57,18 +58,45 @@ const SignUp1 = () => {
             <Form className="form-wrapper-one">
               <div className="input-field">
                 <label htmlFor="firstName"> First Name </label>
-                <Field type="text" name="firstName" id="firstName" placeholder="Your First Name" />
-                <ErrorMessage name="firstName" component="p" className="error-message" />
+                <Field
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="Your First Name"
+                />
+                <ErrorMessage
+                  name="firstName"
+                  component="p"
+                  className="error-message"
+                />
               </div>
               <div className="input-field">
                 <label htmlFor="middleName"> Middle Name </label>
-                <Field type="text" name="middleName" id="middleName" placeholder="Your Middle Name" />
-                <ErrorMessage name="middleName" component="p" className="error-message" />
+                <Field
+                  type="text"
+                  name="middleName"
+                  id="middleName"
+                  placeholder="Your Middle Name"
+                />
+                <ErrorMessage
+                  name="middleName"
+                  component="p"
+                  className="error-message"
+                />
               </div>
               <div className="input-field">
                 <label htmlFor="lastName"> Last Name </label>
-                <Field type="text" name="lastName" id="lastName" placeholder="Your Last Name" />
-                <ErrorMessage name="lastName" component="p" className="error-message" />
+                <Field
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Your Last Name"
+                />
+                <ErrorMessage
+                  name="lastName"
+                  component="p"
+                  className="error-message"
+                />
               </div>
               <div className="input-field">
                 <label htmlFor="program">Course/Program</label>
@@ -99,9 +127,15 @@ const SignUp1 = () => {
                   <option value="BSED-ENGLISH">BSED-ENGLISH</option>
                   <option value="BSED-MATH">BSED-MATH</option>
                   <option value="BSED-SCIENCE">BSED-SCIENCE</option>
-                  <option value="BSED-SOCIAL STUDIES">BSED-SOCIAL STUDIES</option>                
+                  <option value="BSED-SOCIAL STUDIES">
+                    BSED-SOCIAL STUDIES
+                  </option>
                 </Field>
-                <ErrorMessage name="program" component="p" className="error-message" />
+                <ErrorMessage
+                  name="program"
+                  component="p"
+                  className="error-message"
+                />
               </div>
               <div className="input-field">
                 <label htmlFor="department">Department</label>
@@ -113,8 +147,13 @@ const SignUp1 = () => {
                   <option value="CELA">CELA</option>
                   <option value="CITE">CITE</option>
                   <option value="CMA">CMA</option>
-                  <option value="CCJE">CCJE</option>                </Field>
-                <ErrorMessage name="department" component="p" className="error-message" />
+                  <option value="CCJE">CCJE</option>{" "}
+                </Field>
+                <ErrorMessage
+                  name="department"
+                  component="p"
+                  className="error-message"
+                />
               </div>
               <div className="input-field if-sm">
                 <label htmlFor="gender">Gender</label>
@@ -125,22 +164,45 @@ const SignUp1 = () => {
                   <option value="Non Binary">Non Binary</option>
                   <option value="Other">Other</option>
                   <option value="Prefer not to say">Prefer not to say</option>
-
                 </Field>
-                <ErrorMessage name="gender" component="p" className="error-message" />
+                <ErrorMessage
+                  name="gender"
+                  component="p"
+                  className="error-message"
+                />
                 <label htmlFor="age">Age</label>
-                <Field type="number" name="age" id="age" placeholder="Your Age" />
-                <ErrorMessage name="age" component="p" className="error-message" />
+                <Field
+                  type="number"
+                  name="age"
+                  id="age"
+                  placeholder="Your Age"
+                />
+                <ErrorMessage
+                  name="age"
+                  component="p"
+                  className="error-message"
+                />
               </div>
-              <button type="submit" className="next-btn" disabled={isSubmitting}> Next </button>
-              <ErrorMessage name="submit" component="p" className="error-message" />
+              <button
+                type="submit"
+                className="next-btn"
+                disabled={isSubmitting}
+              >
+                {" "}
+                Next{" "}
+              </button>
+              <ErrorMessage
+                name="submit"
+                component="p"
+                className="error-message"
+              />
             </Form>
           )}
         </Formik>
         <div className="have-account-two">
           <p>
             Already have an account?{" "}
-            <Link to="/student/sign-in">
+            <Link to="/student/sign-in" style={{ textDecoration: "none" }}>
               <span> SIGN IN! </span>{" "}
             </Link>{" "}
           </p>

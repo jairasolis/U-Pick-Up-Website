@@ -4,10 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import useAuth from "../../../auth/useAuth";
-import {SignInStudentValidation} from '../../../yup validation/SignInStudentValidation';
+import { SignInStudentValidation } from "../../../yup validation/SignInStudentValidation";
 import { loginStudent } from "../../../api/loginStudent";
 import { insertLoginActivity } from "../../../api/loginPerDay";
-
 
 const SignIn2 = () => {
   const navigate = useNavigate();
@@ -20,11 +19,10 @@ const SignIn2 = () => {
     password: "",
   };
 
-
   const onSubmit = async (values, { setSubmitting }) => {
     try {
       setLoading(true);
-      
+
       const response = await loginStudent({
         student_id: values.student_id,
         password: values.password,
@@ -54,19 +52,16 @@ const SignIn2 = () => {
   };
 
   useEffect(() => {
-
     console.log("auth:", auth);
 
     if (auth) {
       navigate("/student/home");
-      const Id = localStorage.getItem('studentId');
-      console.log(Id)
+      const Id = localStorage.getItem("studentId");
+      console.log(Id);
 
       insertLoginActivity(Id);
-
     }
   }, [auth, navigate]);
-
 
   return (
     <div className="sign-in-two">
@@ -118,7 +113,7 @@ const SignIn2 = () => {
                   component="p"
                   className="error-message"
                 />
-                <Link to="/forgot-password" style={{ textDecoration: 'none' }}>
+                <Link to="/forgot-password" style={{ textDecoration: "none" }}>
                   <div className="forgot-pass">
                     <p> Forgot password? </p>
                   </div>
@@ -139,7 +134,7 @@ const SignIn2 = () => {
         <div className="dhave-account-two">
           <p>
             Don’t have an account?
-            <Link to="/student/sign-up">
+            <Link to="/student/sign-up" style={{ textDecoration: "none" }}>
               {" "}
               <span> SIGN UP! </span>{" "}
             </Link>{" "}
