@@ -99,7 +99,7 @@ const Dashboard = () => {
   return (
     <div className='dashboard'>
       <div className="chart-wrapper">  
-        <Container>
+        <Container fluid className='dash-container'>
           <Row>
             <Col>
               <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> 
@@ -137,6 +137,7 @@ const Dashboard = () => {
                     
                   }}
                 />
+                <p className='dash-label'> Students by Age </p>
               </Card>
             </Col>
             <Col>
@@ -161,6 +162,8 @@ const Dashboard = () => {
                   maintainAspectRatio: false,
                 }}
               />
+              <p className='dash-label'> Students by Gender </p>
+
               </Card>
             
             </Col>

@@ -6,13 +6,24 @@
 
 .dashboard-wrapper {
     gap: 50px;
-    padding-top: 80px;
+    padding-top: 40px;
     padding-left: 100px;
 }
 
-.dash-icon, h4, p {
-    color: #454545;
+.dash-container {
+    margin-top: 40px;
 }
+
+.dash-icon, h4, .data-text p, .dash-label {
+    color: #454545;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* .dash-label {
+    margin: 20px;
+} */
 
 .totalStudents {
     height: 200px;
