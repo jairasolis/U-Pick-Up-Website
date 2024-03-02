@@ -54,6 +54,11 @@ th, td {
     background-color: #4545453c;
 } */
 
+.modules-container table {
+  text-align: center; 
+}
+
+
 .modules-custom-card {
     background-color: #FFFFFF;
     margin-bottom: 70px;
@@ -125,3 +130,6 @@ th, td {
     background-color: #702714;
   }
   
+.mods{
+  margin: auto;
+}

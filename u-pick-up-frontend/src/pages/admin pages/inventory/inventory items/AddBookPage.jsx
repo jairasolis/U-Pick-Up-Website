@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './Books.css'
 
 const AddBookPage = ({ onSubmit, onCancel, setShowModal }) => {
   const [subjectName, setSubjectName] = useState('');
@@ -21,7 +22,7 @@ const AddBookPage = ({ onSubmit, onCancel, setShowModal }) => {
   };
 
   return (
-    <Modal show={true} onHide={onCancel}>
+    <Modal show={true} onHide={onCancel} className="modal-books">
       <Modal.Header closeButton>
         <Modal.Title>Add New Book</Modal.Title>
       </Modal.Header>

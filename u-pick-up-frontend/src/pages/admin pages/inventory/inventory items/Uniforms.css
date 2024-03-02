@@ -1,11 +1,11 @@
 .uniforms-page {
-    flex: 5;
-    top: 70px;
-    display: flex;
-    flex-direction: column;
-    background-color: #EEEEEE;
-    align-items: center;
-    padding-top: 40px;
+  flex: 5;
+  top: 70px;
+  display: flex;
+  flex-direction: column;
+  background-color: #EEEEEE;
+  align-items: center;
+  padding-top: 40px;
 }
 
 .uniform-custom-card {
@@ -15,7 +15,8 @@
 
 .inventory-line {
   width: 100%;
-  border-bottom: 2px solid black; /* This creates a solid black line */
+  border-bottom: 2px solid black;
+  /* This creates a solid black line */
 }
 
 
@@ -24,24 +25,24 @@
 }
 
 .del-icon {
-    padding-left: 10px;
-    color: #6D0606;
+  padding-left: 10px;
+  color: #6D0606;
 }
 
 /*buttons*/
 .display-button {
-  background-color: #3B5534; 
-  color: #fff; 
+  background-color: #3B5534;
+  color: #fff;
   transition: background-color 0.3s ease;
 }
-  
+
 .display-button:hover {
   background-color: #28a745;
 }
 
 .reset-button {
-  background-color: #6D0606; 
-  color: #fff; 
+  background-color: #6D0606;
+  color: #fff;
   transition: background-color 0.3s ease;
 }
 
@@ -50,8 +51,8 @@
 }
 
 .btn-add {
-  background-color: #020E2D; 
-  color: #fff; 
+  background-color: #020E2D;
+  color: #fff;
   transition: background-color 0.3s ease;
 }
 
@@ -60,8 +61,8 @@
 }
 
 .btn-edit {
-  background-color: #3B5534; 
-  color: #fff; 
+  background-color: #3B5534;
+  color: #fff;
   transition: background-color 0.3s ease;
 }
 
@@ -70,12 +71,20 @@
 }
 
 .btn-delete {
-  background-color: #6D0606; 
+  background-color: #6D0606;
   color: #fff;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 .btn-delete:hover {
   background-color: #702714;
 }
 
+.uniforms-container table {
+  text-align: center;
+}
+
+
+.modal-unif {
+  margin: auto;
+}

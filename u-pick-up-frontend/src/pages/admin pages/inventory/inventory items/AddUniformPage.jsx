@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './Uniforms.css'
 
 const AddUniformPage = ({ onSubmit, onCancel }) => {
   const [uniformType, setUniformType] = useState('');
@@ -21,7 +22,7 @@ const AddUniformPage = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <Modal show={true} onHide={onCancel}>
+    <Modal show={true} onHide={onCancel} className="modal-unif">
       <Modal.Header closeButton>
         <Modal.Title>Add New Uniform</Modal.Title>
       </Modal.Header>
