@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faHeart, faTrashAlt, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { BeatLoader } from 'react-spinners';
 import { Spinner } from 'react-bootstrap';
@@ -145,7 +145,8 @@ const AddPost = () => {
             required
           ></textarea>
           <button className="add-button" onClick={handlePostSubmit}>
-            <FontAwesomeIcon icon={faPenToSquare} />
+            <FontAwesomeIcon icon={faPaperPlane} />
+            <p>Post</p>
           </button>
         </div>
         <div className="post-wrapper">

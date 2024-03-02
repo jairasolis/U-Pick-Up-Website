@@ -23,6 +23,15 @@
   border: none;
 }
 
+.add-button {
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.add-button p {
+  font-size: 12px;
+}
+
 .post-form {
   flex: 1;
   margin: 10px;
@@ -132,9 +141,12 @@
   padding: 50px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 60%; /* Adjust the width as needed */
-  max-width: 500px; /* Set a maximum width to ensure it doesn't get too wide */
-  height: auto; /* Let the height adjust based on content */
+  width: 60%;
+  /* Adjust the width as needed */
+  max-width: 500px;
+  /* Set a maximum width to ensure it doesn't get too wide */
+  height: auto;
+  /* Let the height adjust based on content */
 }
 
 .edit-modal textarea {
@@ -142,8 +154,10 @@
   height: 100px;
   margin-bottom: 10px;
   resize: none;
-  height: 200px; /* Increased height for more space */
-  margin-bottom: 20px; /* Increased margin for better spacing */
+  height: 200px;
+  /* Increased height for more space */
+  margin-bottom: 20px;
+  /* Increased margin for better spacing */
 }
 
 .edit-modal-buttons {
@@ -169,13 +183,16 @@
 }
 
 .post-form {
-  border: 1px solid #cecece; /* Normal border */
+  border: 1px solid #cecece;
+  /* Normal border */
   border-radius: 5px;
   padding: 10px;
-  outline: none; /* Remove default focus outline */
+  outline: none;
+  /* Remove default focus outline */
 }
 
 .post-form:focus {
-  border-color: #9c9c9c; /* Border color when focused */
+  border-color: #9c9c9c;
+  /* Border color when focused */
   /* box-shadow: 0 0 5px rgba(57, 56, 56, 0.5);  */
 }

@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
-import './AdminLeftBar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChalkboardUser, faCaretDown, faSquarePen, faCalendarDays, faBook, faUser, faCaretRight, faBookOpen, faShirt, faChartColumn } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./AdminLeftBar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChalkboardUser,
+  faCaretDown,
+  faSquarePen,
+  faCalendarDays,
+  faBook,
+  faUser,
+  faCaretRight,
+  faBookOpen,
+  faShirt,
+  faChartColumn,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const AdminLeftBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -13,7 +24,7 @@ const AdminLeftBar = () => {
 
   return (
     <div className="leftBar">
-      <div className="leftbar-container">
+      <div className="leftbar-containers">
         <div className="menu">
           {/* <div className="dashboard-dropdown">
             <div className="dashboard-menu" onClick={toggleDropdown}>
@@ -50,48 +61,54 @@ const AdminLeftBar = () => {
               </div>
             )}
           </div> */}
-          <Link to="/admin/dashboard" style={{ textDecoration: 'none' }}>
-            <div className="profile-left">
-              <FontAwesomeIcon icon={faChartColumn} className='icon' />
+          <Link to="/admin/dashboard" style={{ textDecoration: "none" }}>
+            <div className="dashboard-menu">
+              <FontAwesomeIcon icon={faChartColumn} className="icon" />
               <p> Dashboard </p>
             </div>
           </Link>
-          <Link to="/admin/add-post" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/add-post" style={{ textDecoration: "none" }}>
             <div className="profile-left">
-              <FontAwesomeIcon icon={faSquarePen} className='icon' />
+              <FontAwesomeIcon icon={faSquarePen} className="icon" />
               <p> Create Post </p>
             </div>
           </Link>
-          <Link to="/admin/add-event" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/add-event" style={{ textDecoration: "none" }}>
             <div className="profile-left">
-              <FontAwesomeIcon icon={faCalendarDays} className='icon' />
+              <FontAwesomeIcon icon={faCalendarDays} className="icon" />
               <p> Add event </p>
             </div>
           </Link>
           <hr />
           <p> Inventory </p>
-          <Link to="/admin/inventory-books" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/inventory-books" style={{ textDecoration: "none" }}>
             <div className="profile-left">
-              <FontAwesomeIcon icon={faBook} className='icon' />
+              <FontAwesomeIcon icon={faBook} className="icon" />
               <p> Books </p>
             </div>
           </Link>
-          <Link to="/admin/inventory-modules" style={{ textDecoration: 'none' }}>
+          <Link
+            to="/admin/inventory-modules"
+            style={{ textDecoration: "none" }}
+          >
             <div className="profile-left">
-              <FontAwesomeIcon icon={faBookOpen} className='icon' />
+              <FontAwesomeIcon icon={faBookOpen} className="icon" />
               <p> Modules </p>
             </div>
           </Link>
-          <Link to="/admin/inventory-uniforms" style={{ textDecoration: 'none' }}>
+          <Link
+            to="/admin/inventory-uniforms"
+            style={{ textDecoration: "none" }}
+          >
             <div className="profile-left">
-              <FontAwesomeIcon icon={faShirt} className='icon' />
+              <FontAwesomeIcon icon={faShirt} className="icon" />
               <p> Uniforms </p>
             </div>
           </Link>
           <hr />
-          <Link to="/admin/profile" style={{ textDecoration: 'none' }}>
+          <Link to="/admin/profile" style={{ textDecoration: "none" }}>
             <div className="profile-left">
-              <FontAwesomeIcon icon={faUser} className='icon' />
+              <FontAwesomeIcon icon={faUser} className="icon" />
               <p> Profile </p>
             </div>
           </Link>
