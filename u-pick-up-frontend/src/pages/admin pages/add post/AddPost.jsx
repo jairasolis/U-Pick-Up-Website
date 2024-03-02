@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faHeart, faTrashAlt, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faHeart, faTrashAlt, faPaperPlane, faCircleXmark, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { BeatLoader } from 'react-spinners';
 import { Spinner } from 'react-bootstrap';
@@ -13,6 +13,7 @@ const AddPost = () => {
   const [posts, setPosts] = useState([]);
   const [editContent, setEditContent] = useState('');
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddPostModal, setShowAddPostModal] = useState(false);
   const [editPostId, setEditPostId] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -69,12 +70,21 @@ const AddPost = () => {
         console.error('Error creating post:', error);
       }
     }
+    handleClosePostModal();
   };
 
   const handleEditClick = (postId, content) => {
     setEditPostId(postId);
     setEditContent(content);
     setShowEditModal(true);
+  };
+
+  const handlePostClick = () => {
+    setShowAddPostModal(true);
+  };
+
+  const handleClosePostModal = () => {
+    setShowAddPostModal(false);
   };
 
   const handleEditCancel = () => {
@@ -131,23 +141,30 @@ const AddPost = () => {
       }
     });
   };
+
+  const handleEllipsisClick = (postId) => {
+    setEditPostId(postId === editPostId ? null : postId);
+  };
   
 
   return (
     <div className='add-post'>
       <div className="add-post-container">
         <div className="addP-header">
-          <textarea
+          {/* <textarea
             className='post-form'
             placeholder='Write something..'
             value={inputValue}
             onChange={handleInputChange}
             required
-          ></textarea>
-          <button className="add-button" onClick={handlePostSubmit}>
+          ></textarea> */}
+          <div className="nav-post" onClick={handlePostClick}>
+            <p> Write an announcement.. </p>
+          </div>
+          {/* <button className="add-button" onClick={handlePostClick}>
             <FontAwesomeIcon icon={faPaperPlane} />
             <p>Post</p>
-          </button>
+          </button> */}
         </div>
         <div className="post-wrapper">
           {posts.length === 0 ? (
@@ -166,13 +183,33 @@ const AddPost = () => {
                     {getTimeDifference(post.created_at)}
                   </p>
                   <p>{post.post_content}</p>
+                  
                   <div className="reactions">
-                  <button className="edit-button" onClick={() => handleEditClick(post.id, post.post_content)}>
+                    <button className="ellipsis"onClick={() => handleEllipsisClick(post.id)}>
+                      <FontAwesomeIcon icon={faEllipsisVertical} />
+                    </button>
+
+                    {/* dropdown items */}
+                    {editPostId === post.id && (
+                      <div className="dropdown-items">
+                        <button className="edit-button" onClick={() => handleEditClick(post.id, post.post_content)}>
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+
+                        <button className="delete-button" onClick={() => handleDelete(post.id)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
+                      </div>
+                    )}
+
+                    {/* <button className="edit-button" onClick={() => handleEditClick(post.id, post.post_content)}>
                       <FontAwesomeIcon icon={faPenToSquare} />
                     </button>
+
                     <button className="delete-button" onClick={() => handleDelete(post.id)}>
                       <FontAwesomeIcon icon={faTrashAlt} />
-                    </button>
+                    </button> */}
+                    
                     <button className="heart-button">
                       <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
                     </button>
@@ -185,6 +222,7 @@ const AddPost = () => {
       </div>
       {showEditModal && (
         <div className="edit-modal">
+          <h4> Edit post </h4>
           <textarea
             className='post-form'
             value={editContent}
@@ -194,6 +232,27 @@ const AddPost = () => {
           <div className="edit-modal-buttons">
             <button className="edit-modal-cancel" onClick={handleEditCancel}>Cancel</button>
             <button className="edit-modal-save" onClick={handleEditSave}>Save</button>
+          </div>
+        </div>
+      )}
+      {showAddPostModal && (
+        <div className="edit-modal">
+          <div className="header-addpost">
+            <h4> Create post </h4>
+            <button className="post-exit" onClick={handleClosePostModal}>
+              <FontAwesomeIcon icon={faCircleXmark} className='exit-icon'/>
+            </button>
+          </div>
+      
+          <textarea
+            className='post-form'
+            placeholder='Write something..'
+            value={inputValue}
+            onChange={handleInputChange}
+            required
+          ></textarea>
+          <div className="edit-modal-buttons">
+            <button className="add-post-modal-save" onClick={handlePostSubmit}> Post </button>
           </div>
         </div>
       )}
