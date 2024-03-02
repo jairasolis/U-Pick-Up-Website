@@ -10,25 +10,25 @@ const LeftBar = () => {
       <div className="leftbar-container">
           <div className="menu"> 
             <Link to="/student/home" style={{ textDecoration: 'none' }}>
-              <div className="house">
+              <div className="admin-leftnav">
                 <FontAwesomeIcon icon={ faHouse } className='icon'/>
                 <p> Home </p>
               </div>
             </Link>
             <Link to="/student/calendar" style={{ textDecoration: 'none' }}>
-              <div className="calendar">
+              <div className="admin-leftnav">
                 <FontAwesomeIcon icon={faCalendar} className='icon'/>
                 <p> Calendar </p> 
               </div>
             </Link>
             <Link to="/student/inventory" style={{ textDecoration: 'none' }}>
-              <div className="inventory-left">
+              <div className="admin-leftnav">
                 <FontAwesomeIcon icon={faBook} className='icon' />
                 <p> Inventory </p>
               </div>
             </Link>
             <Link to="/student/profile" style={{ textDecoration: 'none' }}>
-              <div className="profile-left">
+              <div className="admin-leftnav">
                 <FontAwesomeIcon icon={faUser} className='icon'/>
                 <p> Profile </p> 
               </div>
