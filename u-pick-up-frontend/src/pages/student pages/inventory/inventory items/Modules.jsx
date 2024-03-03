@@ -94,13 +94,12 @@ const Modules = () => {
     <div className='modules-page'>
       <Card className='custom-cards'>
         <CardBody>
-        <Container>
           <Row className="align-items-center justify-content-center">
             <Col md={3}>
-              <p>Program: {studentsData}</p>
+              <p className='program-text'>Program: {studentsData}</p>
             </Col>
             <Col md={3}>
-              <label htmlFor="yearLevelSelect">Choose a year level:</label>
+              {/* <label htmlFor="yearLevelSelect">Choose a year level:</label> */}
               <select className="form-control" id="yearLevelSelect" value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
                 <option value="">Select a year level</option>
                 {yearLevels[studentsData]?.map(yearLevel => (
@@ -114,7 +113,6 @@ const Modules = () => {
               </Col>
             </Row>
             <hr className="inventory-line" />
-          </Container>
           <div className="modules-container">
             <table>
               <thead className='table-header'>

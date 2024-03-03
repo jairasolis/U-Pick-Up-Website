@@ -95,28 +95,25 @@ const Books = () => {
     <div className="books-page">
       <Card className="custom-cards">
         <Card.Body>
-          <Container>
-            <Row className="align-items-center justify-content-center">
-              <Col md={3}>
-                <p>Program: {studentsData}</p>
+          <Row className="align-items-center justify-content-center">
+            <Col md={3}>
+              <p className='program-text'>Program: {studentsData}</p>
+            </Col>
+            <Col md={3}>
+              {/* <label htmlFor="yearLevelSelect">Choose a year level:</label> */}
+              <select className="form-control" id="yearLevelSelect" value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                <option value="">Select a year level</option>
+                {yearLevels[studentsData]?.map(yearLevel => (
+                  <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
+                ))}
+              </select>
+            </Col>
+            <Col>
+                <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+                <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
               </Col>
-              <Col md={3}>
-                <label htmlFor="yearLevelSelect">Choose a year level:</label>
-                <select className="form-control" id="yearLevelSelect" value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
-                  <option value="">Select a year level</option>
-                  {yearLevels[studentsData]?.map(yearLevel => (
-                    <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
-                  ))}
-                </select>
-              </Col>
-              <Col>
-                  <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
-                  <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
-                </Col>
-            </Row>
-            <hr className="inventory-line" />
-          </Container>
-
+          </Row>
+          <hr className="inventory-line" />
           <div className="books-container">
             <table>
               <thead className="table-header">

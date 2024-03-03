@@ -49,3 +49,7 @@
 .reset-button:hover {
   background-color: #842d26;
 }
+
+.program-text{
+  margin: 20px;
+}
