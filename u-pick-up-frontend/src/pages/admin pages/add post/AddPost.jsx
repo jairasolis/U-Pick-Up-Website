@@ -204,25 +204,25 @@ const AddPost = () => {
                   </p>
                   <p>{post.post_content}</p>
 
-                  <div className="reactions">
-                    {/* <button className="ellipsis"onClick={() => handleEllipsisClick(post.id)}>
+                    <button className="ellipsis"onClick={() => handleEllipsisClick(post.id)}>
                       <FontAwesomeIcon icon={faEllipsisVertical} />
-                    </button> */}
+                    </button>
 
                     {/* dropdown items */}
-                    {/* {editPostId === post.id && (
+                     {editPostId === post.id && (
                       <div className="dropdown-items">
-                        <button className="edit-button" onClick={() => handleEditClick(post.id, post.post_content)}>
+                        {/* <button className="edit-button" onClick={() => handleEditClick(post.id, post.post_content)}>
                           <FontAwesomeIcon icon={faPenToSquare} />
-                        </button>
-
-                        <button className="delete-button" onClick={() => handleDelete(post.id)}>
+                        </button> */}
+                        {/* <button className="delete-button" onClick={() => handleDelete(post.id)}>
                           <FontAwesomeIcon icon={faTrashAlt} />
-                        </button>
+                        </button> */}
+                          <li onClick={() => handleEditClick(post.id, post.post_content)}> Edit </li>
+                          <li onClick={() => handleDelete(post.id)}> Delete </li>
                       </div>
-                    )} */}
+                    )}
 
-                    <button
+                    {/* <button
                       className="edit-button"
                       onClick={() =>
                         handleEditClick(post.id, post.post_content)
@@ -236,7 +236,8 @@ const AddPost = () => {
                       onClick={() => handleDelete(post.id)}
                     >
                       <FontAwesomeIcon icon={faTrashAlt} />
-                    </button>
+                    </button> */}
+                  <div className="reactions">
 
                     <button className="heart-button">
                       <FontAwesomeIcon icon={faHeart} /> {post.likes_count}
