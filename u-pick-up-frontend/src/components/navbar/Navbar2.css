@@ -3,6 +3,7 @@
     margin: 0;
     list-style: none;
     text-decoration: none;
+    padding: 0;
 }
 
 .navbar-2 {
@@ -17,6 +18,12 @@
     background-color: #ffffff;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
     padding: 15px;
+    align-items: center;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
@@ -81,23 +88,17 @@
     display: flex;
     align-items: center;
     transition: 0.3s ease-in-out;
-}
-
-.sub-menu-link p {
-    width: 500px;
+    /* margin: 10px 10 0px 10px; */
 }
 
 .sub-menu-link p {
     color: #585858;
-    font-style: normal;
-    padding-bottom: 20px;
     transition: transform 0.5s;
+    padding: 20px 0 0 20px;
 }
 
 .sub-menu-link .arrow {
     font-size: 12px;
-    width: 100%;
-    margin-bottom: 20px;
     transition: transform 0.5s;
 }
 
