@@ -113,6 +113,7 @@
   top: 5px;
   right: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;  
+  /* border-radius: 5px; */
   width: 100px;
   height: auto;
 }
@@ -242,6 +243,12 @@
 .add-post-modal-save {
   background-color: #62735D;
   color: white;
+}
+
+.add-post-modal-post{
+  background-color: #62735D;
+  color: white;
+  width: 100%;
 }
 
 .nav-post {

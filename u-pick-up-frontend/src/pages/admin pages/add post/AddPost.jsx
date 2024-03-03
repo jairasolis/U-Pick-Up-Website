@@ -285,7 +285,7 @@ const AddPost = () => {
             required
           ></textarea>
           <div className="edit-modal-buttons">
-            <button className="add-post-modal-save" onClick={handlePostSubmit}>
+            <button className="add-post-modal-post" onClick={handlePostSubmit}>
               {" "}
               Post{" "}
             </button>
