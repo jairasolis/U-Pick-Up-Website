@@ -123,7 +123,7 @@ const Books = () => {
                   <th>Year Level</th>
                   <th>Program</th>
                   <th>Available</th>
-                  <th>Quantity</th>
+                  <th className='no-border-right'>Quantity</th>
                 </tr>
               </thead>
               <tbody className="books">
@@ -139,7 +139,7 @@ const Books = () => {
                       <td>{book.year_level}</td>
                       <td>{book.course}</td>
                       <td>{book.available}</td>
-                      <td>{book.quantity}</td>
+                      <td className='no-border-right'>{book.quantity}</td>
                     </tr>
                   ))
                 )}

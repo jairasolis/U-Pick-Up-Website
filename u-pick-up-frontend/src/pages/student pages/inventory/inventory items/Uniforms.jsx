@@ -121,7 +121,7 @@ const Uniforms = () => {
                   <th> Year Level </th>
                   <th> Course </th>
                   <th> Available </th>
-                  <th> Quantity </th>
+                  <th className='no-border-right'> Quantity </th>
                 </tr>
               </thead>
               <tbody className='uniforms'>
@@ -137,7 +137,7 @@ const Uniforms = () => {
                       <td>{uniform.year_level}</td>
                       <td>{uniform.course}</td>
                       <td>{uniform.available}</td>
-                      <td>{uniform.quantity}</td>
+                      <td className='no-border-right'>{uniform.quantity}</td>
                     </tr>
                   ))
                 )}

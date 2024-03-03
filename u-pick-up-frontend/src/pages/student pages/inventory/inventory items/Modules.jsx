@@ -123,7 +123,7 @@ const Modules = () => {
                   <th> Year Level </th>
                   <th> Course </th>
                   <th> Available </th>
-                  <th> Quantity </th>
+                  <th className='no-border-right'> Quantity </th>
                 </tr>
               </thead>
               <tbody className='modules'>
@@ -140,7 +140,7 @@ const Modules = () => {
                       <td>{module.year_level}</td>
                       <td>{module.course}</td>
                       <td>{module.available}</td>
-                      <td>{module.quantity}</td>
+                      <td className='no-border-right'>{module.quantity}</td>
                     </tr>
                   ))
                 )}

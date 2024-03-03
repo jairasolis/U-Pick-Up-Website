@@ -242,7 +242,7 @@ const Uniforms = () => {
                   <th> Course </th>
                   <th> Available </th>
                   <th> Quantity </th>
-                  <th> Action </th>
+                  <th className='no-border-right'> Action </th>
                 </tr>
               </thead>
               <tbody className='uniforms'>
@@ -259,7 +259,7 @@ const Uniforms = () => {
                       <td>{uniform.course}</td>
                       <td>{uniform.available}</td>
                       <td>{uniform.quantity}</td>
-                      <td>
+                      <td className='no-border-right'>
                         <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(uniform.id)}>
                           <FontAwesomeIcon icon={faPenToSquare} />
                         </button>

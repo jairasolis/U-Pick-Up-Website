@@ -296,7 +296,7 @@ const Modules = () => {
                   <th> Course </th>
                   <th> Available </th>
                   <th> Quantity </th>
-                  <th> Action </th>
+                  <th className='no-border-right'> Action </th>
                 </tr>
               </thead>
               <tbody className="modules">
@@ -314,7 +314,7 @@ const Modules = () => {
                       <td>{modules.course}</td>
                       <td>{modules.available}</td>
                       <td>{modules.quantity}</td>
-                      <td>
+                      <td className='no-border-right'>
                         <button
                           className="btn btn-edit btn-sm mr-2"
                           onClick={() => handleEdit(modules.id)}

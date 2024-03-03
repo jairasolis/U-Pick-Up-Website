@@ -53,3 +53,7 @@
 .program-text{
   margin: 20px;
 }
+
+.no-border-right {
+  border: none;
+}
