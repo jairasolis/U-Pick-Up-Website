@@ -14,11 +14,12 @@ const Faq = () => {
   }
 
   return ( 
-  <div className='faq' style={{display:'flex'}}>
+    <div className='faq'>
     <div className='faq-content'>
       <div className='header'>
         <div className='faq-header'>
-          <h1>FAQs</h1>
+          <h1 className="faqs-h1">FAQs</h1>
+          <h1 className="faq-h1">Frequently Asked Questions</h1>
         </div>
       </div>
       <div className='wrapper'>
