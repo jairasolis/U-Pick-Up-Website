@@ -203,13 +203,22 @@
 }
 
 .edit-modal-buttons button.edit-modal-cancel {
-  background-color: #591414;
+  background-color: #842424;
   color: white;
 }
 
+.edit-modal-buttons button.edit-modal-cancel:hover {
+  background-color: #b53d3d;
+}
+
 .edit-modal-buttons button.edit-modal-save {
-  background-color: #15542a;
+  background-color: #62735D;
   color: white;
+  transition: 0.2s ease;
+}
+
+.edit-modal-buttons button.edit-modal-save:hover {
+  background-color: #90a18a;
 }
 
 .post-form {
@@ -238,18 +247,35 @@
   color: #878787;
   width: 30px;
   height: auto;
+  transition: 0.2s ease;
+
+}
+
+.exit-icon:hover {
+  color: #737373;
 }
 
 .add-post-modal-save {
   background-color: #62735D;
   color: white;
+  transition: 0.2s ease;
+}
+
+.add-post-modal-save:hover {
+  background-color: #000;
 }
 
 .add-post-modal-post{
   background-color: #62735D;
   color: white;
   width: 100%;
+  transition: 0.2s ease;
 }
+
+.add-post-modal-post:hover {
+  background-color: #90a18a;
+}
+
 
 .nav-post {
   background-color: white;
