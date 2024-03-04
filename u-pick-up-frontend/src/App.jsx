@@ -43,6 +43,7 @@ import AddPost from "./pages/admin pages/add post/AddPost";
 import AddEvent from "./pages/admin pages/add event/AddEvent";
 import AdminProfile from "./pages/admin pages/profile/Profile";
 import Inventory from "./pages/admin pages/inventory/Inventory";
+import BarcodeScanner from "./pages/admin pages/inventory/BarcodeScanner";
 import Students from "./pages/admin pages/students/Students";
 import Uniforms from "./pages/admin pages/inventory/inventory items/Uniforms";
 import Books from "./pages/admin pages/inventory/inventory items/Books";
@@ -120,6 +121,7 @@ const App = () => {
               <Route path="/admin/add-post" element={<AddPost />} />
               <Route path="/admin/add-event" element={<AddEvent />} />
               <Route path="/admin/inventory" element={<Inventory />} />
+              <Route path="/admin/scan-item" element={<BarcodeScanner />} />
               <Route path="/admin/inventory-books" element={<Books />} />
               <Route path="/admin/inventory-uniforms" element={<Uniforms />} />
               <Route path="/admin/inventory-modules" element={<Modules />} />

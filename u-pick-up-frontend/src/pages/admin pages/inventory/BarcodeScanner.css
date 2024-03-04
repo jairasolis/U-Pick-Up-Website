@@ -1,0 +1,100 @@
+.barcode-scanner-page {
+    flex: 5;
+    top: 70px;
+    display: flex;
+    flex-direction: column;
+    background-color: #EEEEEE;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.scan-box-container {
+    width: 250px;
+    height: 260px;
+    background-color: #CCCCCC;
+}
+
+.button-scan {
+    width: 120px;
+    height: 40px;
+    background-color: #7C7C7C;
+    color: #EEEEEE;
+    border: none;
+    border-radius: 10px;
+    margin: 20px;
+    transition: 0.2s ease;
+}
+
+.button-scan:hover {
+    background-color: #aaaaaa;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 430px;
+    height: 420px;
+    background-color: #FFF;
+}
+
+.update-header-text {
+    text-align: center;
+    margin: 20px;
+}
+
+.scan-close {
+    right: 20px;
+    top: 20px;
+    position: absolute;
+    border: none;
+    background-color: #fff;
+}
+
+.scanned-material-deets {
+    color: #5C5C5C;
+}
+
+.scanned-material-deets p {
+    margin: 20px 30px;
+}
+
+.new-quantity-input {
+    width: 230px;
+    height: 40px;
+    margin-left: 20px;
+    background-color: #f7f7f7;
+    color: #3c3c3c;
+    border-radius: 5px;
+    border: 1px solid #a6a6a6;
+}
+
+.new-quantity-input:focus {
+    outline: none;
+    border: 2px solid #a6a6a6;
+}
+
+.scann-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 30px;
+}
+
+.scann-buttons button {
+    width: 140px;
+    height: 40px;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+}
+
+.retry-scan-button {
+    background-color: #9A3737;
+}
+
+.update-scan-button {
+    background-color: #516E53;
+}
