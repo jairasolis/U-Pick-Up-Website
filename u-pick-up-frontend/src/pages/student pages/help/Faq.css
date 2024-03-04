@@ -77,14 +77,14 @@
     color: #505050;    
     max-height: 0;
     overflow: hidden;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .content.show {
-    height:auto;
+    /* height:auto; */
     max-height: 9999px;
-    transition: all 0.1s ease-in-out;
-    margin-top: 20px;
+    /* transition: all 0.1s ease-in-out; */
+    margin-top: 10px;
 }
 
 @media (max-width: 768px) {

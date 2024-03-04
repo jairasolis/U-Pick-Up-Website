@@ -81,3 +81,19 @@
     animation-iteration-count: 1; /* Set to 'infinite' for continuous pulsing */
     color: #8ab88c;
 }
+
+@media only screen and (max-width: 480px) {
+    .home {
+      padding-top: 30px; 
+    }
+  
+    .post img {
+      height: 25px; 
+      width: 25px; 
+      margin: 10px; 
+    }
+  
+    .home-container .post {
+      width: 90%;
+    }
+  }
