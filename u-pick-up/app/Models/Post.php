@@ -25,7 +25,7 @@ class Post extends Model
 
     use HasFactory;
 
-    public function likes()
+    public function likedByStudents()
     {
         return $this->belongsToMany(Student::class, 'likes', 'post_id', 'student_id');
     }
