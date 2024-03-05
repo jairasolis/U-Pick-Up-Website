@@ -86,6 +86,11 @@ public function like(Request $request, $id)
     $user = Auth::user();
     $post = Post::find($id);
 
+    // kunin mo id nubayan
+    if (!$user) {
+        return response()->json(['error' => 'Unauthenticated.'], 401);
+    }
+
     // Check if the post exists
     if (!$post) {
         return response()->json(['error' => 'Post not found.'], 404);
