@@ -46,15 +46,15 @@ class PostController extends Controller
         return response()->json(['message' => 'Post deleted successfully']);
     }
 
-    // public function like(Request $request, $id)
-    // {
-    //     $post = Post::findOrFail($id);
-    //     $post->likes_count++;
+    public function like(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->likes_count++;
 
-    //     // Save the updated post
-    //     $post->save();
-    //     return response()->json($post);
-    // }
+        // Save the updated post
+        $post->save();
+        return response()->json($post);
+    }
 
 
 //     public function like(Request $request, $id)
@@ -81,35 +81,35 @@ class PostController extends Controller
 //     return response()->json($post);
 // }
 
-public function like(Request $request, $id)
-{
-    $post = Post::find($id);
+// public function like(Request $request, $id)
+// {
+//     $post = Post::find($id);
 
-    $userId = $request->input('Id'); 
-    $user = Student::find($userId); 
+//     $userId = $request->input('Id'); 
+//     $user = Student::find($userId); 
 
-    if (!$user) {
-        return response()->json(['error' => 'User not found.'], 404);
-    }
+//     if (!$user) {
+//         return response()->json(['error' => 'User not found.'], 404);
+//     }
 
-    if (!$post) {
-        return response()->json(['error' => 'Post not found.'], 404);
-    }
+//     if (!$post) {
+//         return response()->json(['error' => 'Post not found.'], 404);
+//     }
     
-    if ($post->likes()->where('student_id', $user->id)->exists()) {
-        return response()->json(['error' => 'You have already liked this post.'], 400);
-    }
+//     if ($post->likes()->where('student_id', $user->id)->exists()) {
+//         return response()->json(['error' => 'You have already liked this post.'], 400);
+//     }
 
-    $like = new Likes(); 
-    $like->user_id = $user->id;
-    $post->likes()->save($like);
+//     $like = new Likes(); 
+//     $like->user_id = $user->id;
+//     $post->likes()->save($like);
 
-    $post->likes_count++;
+//     $post->likes_count++;
 
-    $post->save();
+//     $post->save();
 
-    return response()->json($post);
-}
+//     return response()->json($post);
+// }
 
 
 }
