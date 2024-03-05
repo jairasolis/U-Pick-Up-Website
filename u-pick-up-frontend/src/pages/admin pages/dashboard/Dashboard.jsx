@@ -186,9 +186,9 @@ const Dashboard = () => {
                 />
               </Card >
             </Col>
-            <Col>
+            {/* <Col>
 
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

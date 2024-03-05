@@ -68,3 +68,35 @@
     flex-direction: column;
     gap: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .profile-page { 
+        height: 100vh;
+
+    }
+    .profile-container {
+        width: 100%; 
+        max-width: 375px; 
+
+    }
+
+    .name h4 {
+        font-size: 18px; 
+    }
+
+    .personal-details,
+    .class-details {
+        margin: 20px; 
+    }
+
+    .personal-details h4,
+    .class-details h4 {
+        font-size: 18px;
+
+    }
+
+    .profile-icon {
+        margin-top: 20px; 
+    }
+
+}
