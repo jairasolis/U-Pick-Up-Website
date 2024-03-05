@@ -34,4 +34,31 @@
 }
 
 .totalStudents:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;}
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+/* @media (max-width: 768px) {
+    .dashboard-wrapper {
+        padding-left: 20px;
+    }
+} */
+
+@media (max-width: 576px) {
+    .dashboard-wrapper {
+        padding-left: 10px;
+    }
+
+    .totalStudents {
+        height: auto;
+        padding: 10px;
+    }
+
+    .dash-container {
+        margin-top: 20px;
+        padding-left: 30px;
+        padding-top: 40px;
+
+    }
+}
+
+
