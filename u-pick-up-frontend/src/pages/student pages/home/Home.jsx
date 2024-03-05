@@ -66,7 +66,8 @@ const Home = () => {
 
   const handleLike = async (postId) => {
     try {
-        const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
+        const Id = localStorage.getItem("studentId");
+        const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`, { Id });
         console.log(response.data)
         const updatedPosts = posts.map(post => {
             if (post.id === postId) {
