@@ -79,7 +79,7 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 78px;
+    width: 240px; /* Increase width for large screens */
     background: #516E53;
     padding: 6px 14px;
     transition: all 0.5s ease;
@@ -155,11 +155,6 @@ body {
     pointer-events: none;
 }
 
-.sidebar ul li:hover .tooltip{
-    opacity: 1;
-    top: 15%;
-}
-
 .sidebar ul li a {
     color: #FFF4F4;
     display: flex;
@@ -181,24 +176,28 @@ body {
     border-radius: 12px;
     line-height: 50px;
     text-align: center;
+    margin-right: 10px;
 }
 
+
 .sidebar .links_name{
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.5s ease;
+    opacity: 1; /* Make links_name visible */
+    pointer-events: auto; /* Enable click events */
+    transition: opacity 0.5s ease; /* Transition for opacity change */
+    text-align: left;
+    flex-grow: 1;
+    padding-left: 10px;
 }
 
 .sidebar.active .links_name{
-    opacity: 1;
-    pointer-events: auto;
+    opacity: 0; /* Hide links_name when sidebar is collapsed */
+    pointer-events: auto; /* Disable click events */
 }
-
 .home_content{
     position: absolute;
     height: 100%;
-    width: calc(100% - 78px);
-    left: 78px;
+    width: calc(100% - 240px); /* Adjust width accordingly */
+    left: 240px; /* Adjust left accordingly */
     transition: all 0.5s ease;
 }
 
@@ -214,6 +213,33 @@ body {
     left: 240px;
 }
 
+
+@media (max-width: 1200px) {
+    .sidebar {
+        width: 150px;
+    }
+
+    .sidebar ul li:hover .tooltip{
+        opacity: 1;
+        top: 15%;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 78px;
+    }
+    .sidebar ul li:hover .tooltip{
+        opacity: 1;
+        top: 15%;
+    }
+    .sidebar ul li .links_name {
+        display: none;
+      }
+}
 
 /*Link {
     text-decoration: none;
