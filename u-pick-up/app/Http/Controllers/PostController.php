@@ -82,14 +82,20 @@ public function like(Request $request, $postId)
     $studentId = $request->input('Id'); 
 
     // Check if the student has already liked the post
-    if (!$post->students()->where('post_student.student_id', $studentId)->exists()) {
+    if ($post->students()->where('post_student.student_id', $studentId)->exists()) {
+        // If the student has already liked the post, unlike it
+        $post->students()->detach($studentId);
+        $post->likes_count--;
+        $post->save();
+
+        return response()->json(['message' => 'Post unliked successfully']);
+    } else {
+        // If the student hasn't liked the post yet, like it
         $post->students()->attach($studentId);
         $post->likes_count++;
         $post->save();
 
         return response()->json(['message' => 'Post liked successfully']);
-    } else {
-        return response()->json(['message' => 'Post already liked by this student'], 400);
     }
 }
 
