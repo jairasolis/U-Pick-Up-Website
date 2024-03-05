@@ -15,3 +15,24 @@
     margin: 50px;
     margin-top: 2px;
 }
+
+@media screen and (max-width: 768px) {
+  .calendar-container {
+      width: 90%; 
+      margin: 20px; 
+  }
+
+  .modal-dialog {
+      max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .calendar-container {
+      width: 95%;
+  }
+
+  .modal-dialog {
+      max-width: 95%; 
+  }
+}

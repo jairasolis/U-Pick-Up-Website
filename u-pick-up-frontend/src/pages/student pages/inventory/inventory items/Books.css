@@ -6,6 +6,7 @@
     background-color: #eeeeee;
     align-items: center;
     padding-top: 120px;
+    height: 700px;
 }
 
 .custom-cards {
@@ -56,4 +57,27 @@
 
 .no-border-right {
   border: none;
+}
+
+@media (max-width: 576px) {
+  .books-page {
+    padding-top: 60px; /* Adjust top padding for smaller screens */
+    height: 100vh;
+  }
+
+  .custom-cards {
+    margin-bottom: 30px; /* Adjust margin for smaller screens */
+  }
+
+  .program-text {
+    margin: 5px; /* Adjust margin for smaller screens */
+    font-size: 15px; /* Adjust font size for smaller screens */
+  }
+
+  .display-button,
+  .reset-button {
+    font-size: 15px; /* Adjust font size for smaller screens */
+    padding: 8px 12px; /* Adjust padding for smaller screens */
+    margin-top: 10px;
+  }
 }
