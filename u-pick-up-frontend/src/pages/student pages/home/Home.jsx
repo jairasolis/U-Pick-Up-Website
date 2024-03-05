@@ -72,20 +72,19 @@ const Home = () => {
         const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`, { Id });
         console.log(response.data)
         const updatedLikesCount = response.data.likes_count;
-
-        // Update the likes_count for the specific post in the state
+        const action = response.data.action;
+        
         const updatedPosts = posts.map(post => {
             if (post.id === postId) {
                 return {
                     ...post,
                     likes_count: updatedLikesCount,
-                    likedByUser: true
+                    likedByUser: action === 'like' ? true : false
                 };
             }
             return post;
         });
 
-        // Update the state with the updated posts
         setPosts(updatedPosts);
     } catch (error) {
         console.error('Error liking post:', error);
@@ -111,8 +110,8 @@ const Home = () => {
                   </p>
                   <p>{post.post_content}</p>
                   <div className="reactions">
-                    <button className={`heart-buttons ${post.likedByUser ? 'heart-pulse' : ''}`} onClick={() => handleLike(post.id)}>
-                      <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+                    <button className="heart-buttons" onClick={() => handleLike(post.id)}>
+                      <FontAwesomeIcon icon={faHeart} className={`heart-icon ${post.likedByUser ? 'liked' : ''}`} />
                     </button>
                     <span className="heart-count">{post.likes_count}</span>
                   </div>
