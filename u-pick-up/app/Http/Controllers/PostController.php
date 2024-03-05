@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Likes;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -78,23 +80,35 @@ class PostController extends Controller
 
 public function like(Request $request, $postId)
 {
-    $post = Post::findOrFail($postId);
-    $studentId = $request->input('Id'); 
+    try {
+        DB::beginTransaction();
 
-    // Check if the student has already liked the post
-    if ($post->students()->where('post_student.student_id', $studentId)->exists()) {
-        // If the student has already liked the post, unlike it
-        $post->students()->detach($studentId);
-        $post->likes_count--;
-        // irereturn whether unlike ba yung done by user
-        return response()->json(['message' => 'Post unliked successfully', 'action' => 'unlike', 'likes_count' => $post->likes_count]);
-    } else {
-        // If the student hasn't liked the post yet, like it
-        $post->students()->attach($studentId);
-        $post->likes_count++;
-        return response()->json(['message' => 'Post liked successfully', 'action' => 'like', 'likes_count' => $post->likes_count]);
+        $post = Post::findOrFail($postId);
+        $studentId = $request->input('Id'); 
+
+        // Check if the student has already liked the post
+        if ($post->students()->where('post_student.student_id', $studentId)->exists()) {
+            // If the student has already liked the post, unlike it
+            $post->students()->detach($studentId);
+            $post->decrement('likes_count'); // Decrement likes_count
+            // Return response indicating unlike action
+            DB::commit();
+            return response()->json(['message' => 'Post unliked successfully', 'action' => 'unlike', 'likes_count' => $post->likes_count]);
+        } else {
+            // If the student hasn't liked the post yet, like it
+            $post->students()->attach($studentId);
+            $post->increment('likes_count'); // Increment likes_count
+            // Return response indicating like action
+            DB::commit();
+            return response()->json(['message' => 'Post liked successfully', 'action' => 'like', 'likes_count' => $post->likes_count]);
+        }
+    } catch (ModelNotFoundException $e) {
+        DB::rollBack();
+        return response()->json(['message' => 'Post not found'], 404);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['message' => 'Error occurred while processing the request'], 500);
     }
-
 }
 
 
