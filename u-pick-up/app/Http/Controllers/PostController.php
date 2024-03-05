@@ -86,17 +86,15 @@ public function like(Request $request, $postId)
         // If the student has already liked the post, unlike it
         $post->students()->detach($studentId);
         $post->likes_count--;
-        $post->save();
+        // irereturn whether unlike ba yung done by user
+        return response()->json(['message' => 'Post unliked successfully', 'action' => 'unlike', 'likes_count' => $post->likes_count]);
     } else {
         // If the student hasn't liked the post yet, like it
         $post->students()->attach($studentId);
         $post->likes_count++;
-        $post->save();
+        return response()->json(['message' => 'Post liked successfully', 'action' => 'like', 'likes_count' => $post->likes_count]);
     }
 
-    $updatedPost = Post::findOrFail($postId);
-
-    return response()->json(['message' => 'Post updated successfully', 'likes_count' => $updatedPost->likes_count]);
 }
 
 
