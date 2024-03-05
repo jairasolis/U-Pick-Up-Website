@@ -57,10 +57,39 @@ class PostController extends Controller
     // }
 
 
-    public function like(Request $request, $id)
+//     public function like(Request $request, $id)
+// {
+//     $user = Auth::user();
+//     $post = Post::findOrFail($id);
+    
+//     // Check if the user has already liked the post
+//     if ($post->likes()->where('user_id', $user->id)->exists()) {
+//         return response()->json(['error' => 'You have already liked this post.'], 400);
+//     }
+
+//     // Create a new like record
+//     $like = new Likes();
+//     $like->user_id = $user->id;
+//     $post->likes()->save($like);
+
+//     // Increment the likes count for the post
+//     $post->likes_count++;
+
+//     // Save the updated post
+//     $post->save();
+
+//     return response()->json($post);
+// }
+
+public function like(Request $request, $id)
 {
     $user = Auth::user();
-    $post = Post::findOrFail($id);
+    $post = Post::find($id);
+
+    // Check if the post exists
+    if (!$post) {
+        return response()->json(['error' => 'Post not found.'], 404);
+    }
     
     // Check if the user has already liked the post
     if ($post->likes()->where('user_id', $user->id)->exists()) {
@@ -80,5 +109,6 @@ class PostController extends Controller
 
     return response()->json($post);
 }
+
 }
 
