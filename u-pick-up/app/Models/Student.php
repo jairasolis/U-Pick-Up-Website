@@ -35,8 +35,8 @@ class Student extends Authenticatable implements CanResetPassword
     {
         return $this->attributes['email_ad'];
     }
-    public function likedPosts()
+    public function posts()
     {
-        return $this->belongsToMany(Post::class, 'likes', 'student_id', 'post_id');
+        return $this->belongsToMany(Post::class)->withTimestamps();
     }
 }

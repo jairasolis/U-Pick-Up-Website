@@ -46,15 +46,35 @@ class PostController extends Controller
         return response()->json(['message' => 'Post deleted successfully']);
     }
 
-    public function like(Request $request, $id)
-    {
-        $post = Post::findOrFail($id);
-        $post->likes_count++;
+    // public function like(Request $request, $id)
+    // {
+    //     $post = Post::findOrFail($id);
+    //     $post->likes_count++;
 
-        // Save the updated post
+    //     // Save the updated post
+    //     $post->save();
+    //     return response()->json($post);
+    // }
+
+    public function like(Request $request, $postId)
+{
+    $post = Post::findOrFail($postId);
+
+    $studentId = $request->input('Id'); 
+
+
+    // Check if the student has already liked the post
+    if (!$post->students()->where('student_id', $studentId)->exists()) {
+        $post->students()->attach($studentId);
+        $post->likes_count++;
         $post->save();
-        return response()->json($post);
+
+        return response()->json(['message' => 'Post liked successfully']);
+    } else {
+        return response()->json(['message' => 'Post already liked by this student'], 400);
     }
+}
+
 
 
 //     public function like(Request $request, $id)

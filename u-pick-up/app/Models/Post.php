@@ -25,8 +25,8 @@ class Post extends Model
 
     use HasFactory;
 
-    public function likes()
+    public function students()
     {
-        return $this->belongsToMany(Student::class, 'likes', 'post_id', 'student_id');
+        return $this->belongsToMany(Student::class)->withTimestamps();
     }
 }
