@@ -12,11 +12,28 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function index()
-    {
-        $posts = Post::all();
-        return response()->json($posts);
-    }
+    // public function index()
+    // {
+    //     $posts = Post::all();
+    //     return response()->json($posts);
+    // }
+
+    public function index(Request $request)
+{
+    // Get the current user
+    $studentId = $request->input('Id'); 
+
+    // Fetch posts with information about whether they have been liked by the current user
+    $posts = Post::select('posts.*', DB::raw('IFNULL(l.student_id, 0) AS liked_by_user'))
+        ->leftJoin('likes as l', function($join) use ($studentId) {
+            $join->on('posts.id', '=', 'l.post_id')
+                ->where('l.student_id', '=', $studentId->id);
+        })
+        ->get();
+
+    return response()->json($posts);
+}
+
 
 
     public function store(Request $request)
