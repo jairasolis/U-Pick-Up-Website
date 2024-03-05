@@ -25,7 +25,7 @@ class PostController extends Controller
     
         // Fetch posts with information about whether they have been liked by the current user
         $posts = Post::select('posts.*', DB::raw('IFNULL(l.student_id, 0) AS liked_by_user'))
-            ->leftJoin('likes as l', function($join) use ($studentId) {
+            ->leftJoin('post_student as l', function($join) use ($studentId) {
                 $join->on('posts.id', '=', 'l.post_id')
                     ->where('l.student_id', '=', $studentId);
             })
