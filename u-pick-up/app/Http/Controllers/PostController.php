@@ -96,7 +96,7 @@ public function like(Request $request, $id)
         return response()->json(['error' => 'Post not found.'], 404);
     }
     
-    if ($post->likes()->where('user_id', $user->id)->exists()) {
+    if ($post->likes()->where('student_id', $user->id)->exists()) {
         return response()->json(['error' => 'You have already liked this post.'], 400);
     }
 
