@@ -87,16 +87,16 @@ public function like(Request $request, $postId)
         $post->students()->detach($studentId);
         $post->likes_count--;
         $post->save();
-
-        return response()->json(['message' => 'Post unliked successfully']);
     } else {
         // If the student hasn't liked the post yet, like it
         $post->students()->attach($studentId);
         $post->likes_count++;
         $post->save();
-
-        return response()->json(['message' => 'Post liked successfully']);
     }
+
+    $updatedPost = Post::findOrFail($postId);
+
+    return response()->json(['message' => 'Post updated successfully', 'likes_count' => $updatedPost->likes_count]);
 }
 
 

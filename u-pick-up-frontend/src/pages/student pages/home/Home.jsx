@@ -71,18 +71,18 @@ const Home = () => {
         console.log(Id)
         const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`, { Id });
         console.log(response.data)
-        const updatedPosts = posts.map(post => {
-            if (post.id === postId) {
-                return {
-                    ...post,
-                    likes_count: post.likes_count + 1,
-                    likedByUser: true
-                };
-            }
-            return post;
-        });
+        // const updatedPosts = posts.map(post => {
+        //     if (post.id === postId) {
+        //         return {
+        //             ...post,
+        //             likes_count: post.likes_count + 1,
+        //             likedByUser: true
+        //         };
+        //     }
+        //     return post;
+        // });
 
-        setPosts(updatedPosts);
+        // setPosts(updatedPosts);
     } catch (error) {
         console.error('Error liking post:', error);
     }
