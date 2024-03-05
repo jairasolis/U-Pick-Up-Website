@@ -48,21 +48,43 @@ const Home = () => {
     }
   };
 
+  // const handleLike = async (postId) => {
+  //   try {
+  //     const postIndex = posts.findIndex(post => post.id === postId);
+  //     if (postIndex !== -1 && !posts[postIndex].likedByUser) {
+  //       await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
+        
+  //       const updatedPosts = [...posts];
+  //       updatedPosts[postIndex].likes_count++;
+  //       updatedPosts[postIndex].likedByUser = true;
+  //       setPosts(updatedPosts);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error liking post:', error);
+  //   }
+  // };
+
   const handleLike = async (postId) => {
     try {
-      const postIndex = posts.findIndex(post => post.id === postId);
-      if (postIndex !== -1 && !posts[postIndex].likedByUser) {
-        await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
-        
-        const updatedPosts = [...posts];
-        updatedPosts[postIndex].likes_count++;
-        updatedPosts[postIndex].likedByUser = true;
+        const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`);
+        console.log(response.data)
+        const updatedPosts = posts.map(post => {
+            if (post.id === postId) {
+                return {
+                    ...post,
+                    likes_count: post.likes_count + 1,
+                    likedByUser: true
+                };
+            }
+            return post;
+        });
+
         setPosts(updatedPosts);
-      }
     } catch (error) {
-      console.error('Error liking post:', error);
+        console.error('Error liking post:', error);
     }
-  };
+};
+
   
   return (
     <div className='home'> 
