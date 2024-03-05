@@ -27,6 +27,11 @@ class PostController extends Controller
                     ->where('l.student_id', '=', $studentId);
             })
             ->get();
+
+        $posts->transform(function ($post) {
+            $post->liked_by_user = $post->liked_by_user ? 'like' : 'unlike';
+            return $post;
+        });
     
         return response()->json($posts);
     }
