@@ -61,23 +61,23 @@
 
 @media (max-width: 576px) {
   .books-page {
-    padding-top: 60px; /* Adjust top padding for smaller screens */
+    padding-top: 80px; 
     height: 100vh;
   }
 
   .custom-cards {
-    margin-bottom: 30px; /* Adjust margin for smaller screens */
+    margin-bottom: 30px; 
   }
 
   .program-text {
-    margin: 5px; /* Adjust margin for smaller screens */
-    font-size: 15px; /* Adjust font size for smaller screens */
+    margin: 5px; 
+    font-size: 15px; 
   }
 
   .display-button,
   .reset-button {
-    font-size: 15px; /* Adjust font size for smaller screens */
-    padding: 8px 12px; /* Adjust padding for smaller screens */
+    font-size: 15px; 
+    padding: 8px 12px; 
     margin-top: 10px;
   }
 }
