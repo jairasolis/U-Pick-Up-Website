@@ -8,6 +8,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
+use App\Models\Post;
+
 
 class Student extends Authenticatable implements CanResetPassword
 {
@@ -32,5 +34,10 @@ class Student extends Authenticatable implements CanResetPassword
     public function getEmailAttribute()
     {
         return $this->attributes['email_ad'];
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Post::class, 'likes', 'student_id', 'post_id');
     }
 }

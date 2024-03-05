@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Student;
+
 
 class Post extends Model
 {
@@ -22,4 +24,9 @@ class Post extends Model
     public $timestamps = true;
 
     use HasFactory;
+
+    public function likes()
+    {
+        return $this->belongsToMany(Student::class, 'likes', 'post_id', 'student_id');
+    }
 }
