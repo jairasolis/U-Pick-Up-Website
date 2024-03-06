@@ -3,7 +3,7 @@
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
-    border-right: 1px solid #3b55343b;
+    border-right: 1px solid #FFF4F4;
 }
 
 
@@ -25,7 +25,7 @@ hr {
     margin: 20px 0px;
     border: none;
     height: 0.5px;
-    background-color: #3b55343b;
+    background-color: #FFF4F4;
 }
 
 .house, 
@@ -38,7 +38,7 @@ hr {
 }
 
 .icon {
-    color: #516E53;
+    color: #FFF4F4;
     margin-top: 3px;
 }
 
@@ -46,7 +46,7 @@ hr {
 .calendar:hover,
 .inventory-left:hover,
 .profile-left:hover  {
-    background-color: #516E53;
+    background-color: #FFF4F4;
     border-radius: 10px;
 }
 
@@ -58,7 +58,7 @@ hr {
 .inventory-left:hover h4,
 .profile-left:hover .icon,
 .profile-left:hover h4 {
-    color: #D9D9D9;
+    color: #516E53;
 
 }*/
 * {
@@ -76,11 +76,11 @@ body {
 
 .sidebar {
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
     height: 100%;
-    width: 240px; /* Increase width for large screens */
-    background: #516E53;
+    width: 240px;
+    background: #fff;
     padding: 6px 14px;
     transition: all 0.5s ease;
 }
@@ -89,27 +89,27 @@ body {
     width: 240px;
 }
 
-.sidebar .logo_content .logo{
-    color: #FFF4F4;
+.sidebar .logo_content {
+    color: #516E53;
     display: flex;
     height: 50px;
     width: 100%;
     align-items: center;
 }
 
-.sidebar .logo_content .logo i {
+.sidebar .logo_content i {
     font-size: 28px;
     margin-right: 5px;
 }
 
-.sidebar .logo_content .logo .logo_name {
+.sidebar .logo_content  {
     font-size: 20px;
     font-weight: 400;
 }
 
 .sidebar #btn {
     position: absolute;
-    color: #FFF4F4;
+    color: #516E53;
     top: 6px;
     left: 50%;
     font-size: 20px;
@@ -146,7 +146,7 @@ body {
     border-radius: 6px;
     height: auto;
     min-width: 100px;
-    background: #FFF4F4;
+    background: #516E53;
     padding: 8px;
     text-align: center;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -156,7 +156,7 @@ body {
 }
 
 .sidebar ul li a {
-    color: #FFF4F4;
+    color: #516E53;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -166,8 +166,8 @@ body {
 }
 
 .sidebar ul li a:hover {
-    color: #516E53;
-    background: #FFF4F4;
+    color: #FFF4F4;
+    background: #516E53;
 }
 
 .sidebar ul li i {
@@ -193,25 +193,31 @@ body {
     opacity: 0; /* Hide links_name when sidebar is collapsed */
     pointer-events: auto; /* Disable click events */
 }
-.home_content{
+/*.home_content{
     position: absolute;
     height: 100%;
-    width: calc(100% - 240px); /* Adjust width accordingly */
-    left: 240px; /* Adjust left accordingly */
+    width: calc(100% - 240px); /* Adjust width accordingly 
+    left: 240px; /* Adjust left accordingly 
     transition: all 0.5s ease;
 }
 
 .home_content .text{
     font-size: 25px;
     font-weight: 500;
-    color: #516E53;
+    color: #FFF4F4;
     margin: 12px;
 }
 
 .sidebar.active ~ .home_content{
     width: calc(100% - 240px);
     left: 240px;
-}
+}*/
+
+
+/*Link {
+    text-decoration: none;
+}*/
+
 
 
 @media (max-width: 1200px) {
@@ -226,6 +232,8 @@ body {
 
 }
 
+
+
 @media (max-width: 768px) {
     .sidebar {
         width: 78px;
@@ -237,9 +245,5 @@ body {
     .sidebar ul li .links_name {
         display: none;
       }
-}
-
-/*Link {
-    text-decoration: none;
 }
 

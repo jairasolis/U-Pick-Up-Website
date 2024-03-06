@@ -51,10 +51,6 @@ const LeftBar = () => {
   return (
     <div className="sidebar">
       <div className="logo_content">
-        <div className="logo">
-          <i className="fas fa-u"></i>
-          <div className="logo_name">UpickUp</div>
-        </div>
         <i className="fa fa-arrow-right" id="btn" onClick={toggleSidebar}></i>
       </div>
       <ul className="nav_list">

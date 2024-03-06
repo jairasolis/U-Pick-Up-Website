@@ -1,21 +1,22 @@
-.leftBar {
+
+/*.leftBar {
     flex: 1;
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
     border-right: 1px solid #3b55343b;
-}
+}*/
 
-.menu {
+/*.menu {
     /* width: 200px;
     height: 100%;
-    border-right: 1px solid rgb(81, 81, 81); */
+    border-right: 1px solid rgb(81, 81, 81); //
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-}
+}*/
 
-.menu h4 {
+/*.menu h4 {
     color: var(--text-color);
 }
 
@@ -45,10 +46,9 @@ hr {
 .admin-leftnav:hover,
 .admin-leftnav:focus {
     background-color: #59775de3;
-    /* border-radius: 5px; */
+    /* border-radius: 5px; /
     transition: background-color 0.1s ease-out;
-
-}
+}/*
 
 
 .admin-leftnav p {
@@ -64,10 +64,10 @@ hr {
 
 
 .dropdown-content {
-    /* display: none; */
+    /* display: none; 
     position: relative;
     transition: opacity 0.3s ease;
-}
+}/*
 
 .dropdown-item {
     display: flex;
@@ -120,3 +120,195 @@ hr {
     display: block;
 }
  */
+
+
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    /*overflow: hidden;*/
+}
+
+.leftbar {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    height: calc(100% - 70px);
+    width: 240px;
+    background: #fff;
+    padding: 6px 14px;
+    transition: all 0.5s ease;
+    z-index: 1000;
+}
+
+.leftbar.active {
+    width: 240px;
+}
+
+.leftbar .content {
+    color: #516E53;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+}
+
+.leftbar .content i {
+    font-size: 28px;
+    margin-right: 5px;
+}
+
+.leftbar .content  {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.leftbar #btn {
+    position: absolute;
+    color: #516E53;
+    top: 6px;
+    left: 50%;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+}
+
+.leftbar.active #btn{
+    left: 90%;
+}
+
+.leftbar ul {
+    margin-top: 20px;
+}
+
+.leftbar ul li {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+    border-radius: 12px;
+}
+
+.leftbar ul li .tooltip{
+    position: absolute;
+    left: 122px;
+    top: 50%;
+    transform: translateY(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    min-width: 100px;
+    background:  #516E53;
+    padding: 8px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.leftbar ul li a {
+    color: #516E53;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.leftbar ul li a:hover {
+    color: #FFF4F4;
+    background: #516E53;
+}
+
+.leftbar ul li i {
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.leftbar .links_name{
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
+    text-align: left;
+    flex-grow: 1;
+    padding-left: 10px;
+}
+
+.leftbar.active .links_name{
+    opacity: 0;
+    pointer-events: auto;
+}
+
+/*.home_content{
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text{
+    font-size: 25px;
+    font-weight: 500;
+    color: #516E53;
+    margin: 12px;
+}
+
+.leftbar.active ~ .home_content{
+    width: calc(100% - 240px);
+    left: 240px;
+}*/
+
+/*Link {
+    text-decoration: none;
+}*/
+
+
+@media (max-width: 1200px) {
+    .leftbar {
+        width: 78px;
+    }
+
+    .leftbar ul li:hover .tooltip{
+        opacity: 1;
+        top: 15%;
+    }
+
+    .leftbar ul li .links_name {
+        display: none;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+    .leftbar {
+        width: 78px;
+    }
+    .leftbar ul li:hover .tooltip{
+        opacity: 1;
+        top: 15%;
+    }
+    .leftbar ul li .links_name {
+        display: none;
+      }
+}
+

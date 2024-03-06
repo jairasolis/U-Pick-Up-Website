@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./AdminLeftBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,7 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const AdminLeftBar = () => {
+/*const AdminLeftBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -60,7 +61,7 @@ const AdminLeftBar = () => {
                 </Link>
               </div>
             )}
-          </div> */}
+          </div> 
           <Link to="/admin/dashboard" style={{ textDecoration: "none" }}>
             <div className="admin-leftnav">
               <FontAwesomeIcon icon={faChartColumn} className="icon" />
@@ -115,6 +116,76 @@ const AdminLeftBar = () => {
           <hr />
         </div>
       </div>
+    </div>
+  );
+};*/
+
+const AdminLeftBar = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsActive(!isActive);
+  };
+
+  return (
+    <div className="leftbar">
+      <div className="content">
+        <i className="fa fa-arrow-right" id="btn" onClick={toggleSidebar}></i>
+      </div>
+      <ul className="adminNav_list">
+        <li>
+          <Link to="/admin/dashboard">
+            <FontAwesomeIcon icon={faChartColumn} />
+            <span className="links_name">Dashboard</span>
+          </Link>
+          <span className="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <Link to="/admin/add-post">
+            <FontAwesomeIcon icon={faSquarePen} />
+            <span className="links_name">Add Post</span>
+          </Link>
+          <span className="tooltip">Add Post</span>
+        </li>
+        <li>
+          <Link to="/admin/add-event">
+            <FontAwesomeIcon icon={faCalendarDays} />
+            <span className="links_name">Add Event</span>
+          </Link>
+          <span className="tooltip">Add Event</span>
+        </li>
+        <hr /> 
+        <p className="inventory-p"> Inventory </p>
+        <li>
+          <Link to="/admin/inventory-books">
+            <FontAwesomeIcon icon={faBook} />
+            <span className="links_name">Books</span>
+          </Link>
+          <span className="tooltip">Books</span>
+        </li>
+        <li>
+          <Link to="/admin/inventory-modules">
+            <FontAwesomeIcon icon={faBookOpen} />
+            <span className="links_name">Modules</span>
+          </Link>
+          <span className="tooltip">Modules</span>
+        </li>
+        <li>
+          <Link to="/admin/inventory-uniforms">
+            <FontAwesomeIcon icon={faShirt} />
+            <span className="links_name">Uniforms</span>
+          </Link>
+          <span className="tooltip">Uniforms</span>
+        </li>
+        <hr /> 
+        <li>
+          <Link to="/admin/profile">
+            <FontAwesomeIcon icon={faUser} />
+            <span className="links_name">Profile</span>
+          </Link>
+          <span className="tooltip">Profile</span>
+        </li>
+      </ul>
     </div>
   );
 };
