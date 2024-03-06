@@ -54,3 +54,17 @@
 .reset-button:hover {
   background-color: #842d26;
 }
+
+@media screen and (max-width: 768px) {
+  .uniforms-page {
+      padding-top: 80px;
+  }
+
+  .custom-cards {
+      width: 100%;
+  }
+
+  .table-header {
+    font-size: 15px;
+  }
+}

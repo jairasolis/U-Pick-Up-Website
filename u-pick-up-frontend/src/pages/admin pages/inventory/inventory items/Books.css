@@ -81,3 +81,41 @@
 .modal-books {
   margin: auto;
 }
+
+@media screen and (max-width: 576px) {
+  .books-page {
+    padding-top: 80px;
+  }
+
+  .books-custom-card {
+    margin-bottom: 10px;
+  }
+
+  .inventory-line {
+    margin-bottom: 5px;
+  }
+
+  .table-header th {
+    font-size: 12px;
+  }
+
+  .btn-add,
+  .btn-edit,
+  .btn-delete {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .display-button,
+  .reset-button { 
+    padding: 3px;
+    align-items: center;
+
+  }
+
+  .btn-add {
+    padding: 10px;
+    
+  } 
+
+}

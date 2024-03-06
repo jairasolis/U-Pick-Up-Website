@@ -99,7 +99,7 @@ const Dashboard = () => {
   return (
     <div className='dashboard'>
       <div className="chart-wrapper">  
-        <Container fluid className='dash-container'>
+        <Container className='dash-container'>
           <Row>
             <Col>
               <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> 
@@ -186,9 +186,9 @@ const Dashboard = () => {
                 />
               </Card >
             </Col>
-            <Col>
+            {/* <Col>
 
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

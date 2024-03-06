@@ -13,20 +13,43 @@ const Home = () => {
     fetchPosts();
   }, []);
 
+  // const fetchPosts = async () => {
+  //   try {
+  //     const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts');
+  //     console.log(response.data)
+  //     console.log(response.posts)
+  //     const postsWithLikes = response.data.map(post => ({
+  //       ...post,
+  //       likes_count: post.likes_count || 0,
+  //     }));
+  //     setPosts(postsWithLikes.reverse());
+  //     setLoading(false); // Set loading state to false after posts are fetched
+  //   } catch (error) {
+  //     console.error('Error fetching posts:', error);
+  //   }
+  // };
+
+
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts');
-      console.log(response.data)
-      const postsWithLikes = response.data.map(post => ({
-        ...post,
-        likes_count: post.likes_count || 0,
-      }));
-      setPosts(postsWithLikes.reverse());
-      setLoading(false); // Set loading state to false after posts are fetched
+        const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/posts', {
+            params: {
+                Id: localStorage.getItem("studentId")
+            }
+        });
+
+        const postsWithLikes = response.data.map(post => ({
+            ...post,
+            likes_count: post.likes_count || 0,
+            likedByUser: post.liked_by_user
+        }));
+
+        setPosts(postsWithLikes.reverse());
+        setLoading(false);
     } catch (error) {
-      console.error('Error fetching posts:', error);
+        console.error('Error fetching posts:', error);
     }
-  };
+};
 
 
   const getTimeDifference = (date) => {
@@ -68,6 +91,7 @@ const Home = () => {
   const handleLike = async (postId) => {
     try {
         const Id = localStorage.getItem("studentId");
+        console.log(postId)
         console.log(Id)
         const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`, { Id });
         console.log(response.data)
@@ -111,7 +135,10 @@ const Home = () => {
                   <p>{post.post_content}</p>
                   <div className="reactions">
                     <button className="heart-buttons" onClick={() => handleLike(post.id)}>
-                      <FontAwesomeIcon icon={faHeart} className={`heart-icon ${post.likedByUser ? 'liked' : ''}`} />
+                      <FontAwesomeIcon 
+                          icon={faHeart} 
+                          className={`heart-icon ${post.likedByUser ? 'liked' : ''}`} 
+                      />
                     </button>
                     <span className="heart-count">{post.likes_count}</span>
                   </div>

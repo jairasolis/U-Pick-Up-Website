@@ -94,7 +94,7 @@
 
 @media only screen and (max-width: 480px) {
     .home {
-      padding-top: 30px; 
+      padding-top: 80px; 
     }
   
     .post img {
@@ -106,4 +106,4 @@
     .home-container .post {
       width: 90%;
     }
-  }
+}

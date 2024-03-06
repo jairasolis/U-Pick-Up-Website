@@ -51,21 +51,26 @@
 
 @media screen and (max-width: 768px) {
     .calendar-container {
-        width: 90%; /* Adjust width for smaller screens */
-        margin: 20px; /* Adjust margin for smaller screens */
+      width: 90%; 
+      margin: 20px; 
     }
-
+  
     .modal-dialog {
-        max-width: 100%; /* Adjust max-width for smaller screens */
+      max-width: 90%;
     }
-}
-
+  }
+  
 @media screen and (max-width: 480px) {
     .calendar-container {
-        width: 95%; /* Further adjust width for even smaller screens */
+      width: 95%;
     }
-
+  
     .modal-dialog {
-        max-width: 100%; /* Further adjust max-width for even smaller screens */
+      max-width: 95%; 
+    }
+  
+    .modal {
+      padding: 40px;
     }
 }
+  
