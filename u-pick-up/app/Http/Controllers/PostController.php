@@ -15,28 +15,51 @@ class PostController extends Controller
     //     return response()->json($posts);
     // }
 
+    // public function index(Request $request)
+    // {
+    //     // Get the student ID from the request
+    //     $studentId = $request->input('Id'); 
+    
+    //     // Fetch posts with information about whether they have been liked by the current user
+    //     $posts = Post::select('posts.*', DB::raw('IFNULL(l.student_id, 0) AS liked_by_user'))
+    //         ->leftJoin('post_student as l', function($join) use ($studentId) {
+    //             $join->on('posts.id', '=', 'l.post_id')
+    //                 ->where('l.student_id', '=', $studentId);
+    //         })
+    //         ->get();
+
+    //     $posts->transform(function ($post) {
+    //         $post->liked_by_user = $post->liked_by_user ? 'like' : 'unlike';
+    //         return $post;
+    //     });
+    
+    //     return response()->json($posts);
+    // }
+    
+
     public function index(Request $request)
     {
-        // Get the student ID from the request
-        $studentId = $request->input('Id'); 
+        try {
+            $studentId = $request->input('Id'); 
+        
+            $posts = Post::select('posts.*', DB::raw('IFNULL(l.student_id, 0) AS liked_by_user'))
+                ->leftJoin('post_student as l', function($join) use ($studentId) {
+                    $join->on('posts.id', '=', 'l.post_id')
+                        ->where('l.student_id', '=', $studentId);
+                })
+                ->get();
     
-        // Fetch posts with information about whether they have been liked by the current user
-        $posts = Post::select('posts.*', DB::raw('IFNULL(l.student_id, 0) AS liked_by_user'))
-            ->leftJoin('post_student as l', function($join) use ($studentId) {
-                $join->on('posts.id', '=', 'l.post_id')
-                    ->where('l.student_id', '=', $studentId);
-            })
-            ->get();
-
-        $posts->transform(function ($post) {
-            $post->liked_by_user = $post->liked_by_user ? 'like' : 'unlike';
-            return $post;
-        });
-    
-        return response()->json($posts);
+            $posts->transform(function ($post) {
+                $post->liked_by_user = $post->liked_by_user ? true : false;
+                return $post;
+            });
+        
+            return response()->json($posts);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error occurred while fetching posts'], 500);
+        }
     }
     
-
 
 
     public function store(Request $request)
