@@ -196,7 +196,8 @@ body {
 /*.home_content{
     position: absolute;
     height: 100%;
-    width: calc(100% - 240px); /* Adjust width accordingly 
+    width: calc(100% - 240px);
+     /* Adjust width accordingly 
     left: 240px; /* Adjust left accordingly 
     transition: all 0.5s ease;
 }

@@ -256,6 +256,10 @@ body {
     pointer-events: auto;
 }
 
+.leftbar hr {
+    width: 80%; 
+}
+
 /*.home_content{
     position: absolute;
     height: 100%;
