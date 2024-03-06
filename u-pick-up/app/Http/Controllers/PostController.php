@@ -40,8 +40,10 @@ class PostController extends Controller
     public function index(Request $request)
     {
         try {
+            // Get the student ID from the request
             $studentId = $request->input('Id'); 
         
+            // Fetch posts with information about whether they have been liked by the current user
             $posts = Post::select('posts.*', DB::raw('IFNULL(l.student_id, 0) AS liked_by_user'))
                 ->leftJoin('post_student as l', function($join) use ($studentId) {
                     $join->on('posts.id', '=', 'l.post_id')
@@ -106,14 +108,14 @@ public function like(Request $request, $postId)
             $post->decrement('likes_count'); // Decrement likes_count
             // Return response indicating unlike action
             DB::commit();
-            // return response()->json(['message' => 'Post unliked successfully', 'action' => 'unlike', 'likes_count' => $post->likes_count]);
+            return response()->json(['message' => 'Post unliked successfully', 'action' => 'unlike', 'likes_count' => $post->likes_count]);
         } else {
             // If the student hasn't liked the post yet, like it ayii
             $post->students()->attach($studentId);
             $post->increment('likes_count'); // Increment likes_count
             // Return response indicating like action
             DB::commit();
-            // return response()->json(['message' => 'Post liked successfully', 'action' => 'like', 'likes_count' => $post->likes_count]);
+            return response()->json(['message' => 'Post liked successfully', 'action' => 'like', 'likes_count' => $post->likes_count]);
         }
     } catch (ModelNotFoundException $e) {
         DB::rollBack();

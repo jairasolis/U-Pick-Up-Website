@@ -110,8 +110,6 @@ const Home = () => {
         });
 
         setPosts(updatedPosts);
-
-        fetchPosts();
     } catch (error) {
         console.error('Error liking post:', error);
     }
