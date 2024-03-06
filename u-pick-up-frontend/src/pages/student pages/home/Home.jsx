@@ -91,6 +91,7 @@ const Home = () => {
   const handleLike = async (postId) => {
     try {
         const Id = localStorage.getItem("studentId");
+        console.log(postId)
         console.log(Id)
         const response = await axios.post(`https://u-pick-up-y7qnw.ondigitalocean.app/api/posts/${postId}/like`, { Id });
         console.log(response.data)
@@ -109,6 +110,8 @@ const Home = () => {
         });
 
         setPosts(updatedPosts);
+
+        fetchPosts();
     } catch (error) {
         console.error('Error liking post:', error);
     }
