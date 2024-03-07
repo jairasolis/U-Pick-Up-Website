@@ -129,9 +129,9 @@ const AdminLeftBar = () => {
 
   return (
     <div className="leftbar">
-      <div className="content">
+{/*       <div className="content">
         <i className="fa fa-arrow-right" id="btn" onClick={toggleSidebar}></i>
-      </div>
+      </div> */}
       <ul className="adminNav_list">
         <li>
           <Link to="/admin/dashboard">

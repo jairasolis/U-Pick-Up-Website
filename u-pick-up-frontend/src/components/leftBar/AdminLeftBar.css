@@ -138,10 +138,10 @@ body {
 
 .leftbar {
     flex: 1;
-    position: sticky;
+    position: fixed;
     top: 72px;
     left: 0;
-    height: calc(100vh - 70px);
+    height: calc(100% - 70px);
     width: 270px;
     border-right: 1px solid #3b55343b;
     background: #fff;
@@ -150,7 +150,13 @@ body {
     z-index: 1000;
 }
 
-.leftbar.active {
+/* flex: 1;
+position: sticky;
+top: 70px;
+height: calc(100vh - 70px);
+border-right: 1px solid #3b55343b; */
+
+/* .leftbar.active {
     width: 240px;
 }
 
@@ -187,7 +193,7 @@ body {
 
 .leftbar.active #btn{
     left: 90%;
-}
+} */
 
 .leftbar ul {
     margin-top: 20px;
@@ -259,6 +265,10 @@ body {
 
 .leftbar hr {
     width: 80%; 
+}
+
+.inventory-p {
+    color: #516E53;
 }
 
 /*.home_content{
