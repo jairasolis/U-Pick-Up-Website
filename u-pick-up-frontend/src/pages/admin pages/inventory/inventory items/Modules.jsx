@@ -204,65 +204,35 @@ const Modules = () => {
             />
           )} */}
 
-            <Row className="align-items-center justify-content-center">
-              <Col md={3} style={{ height: "40px", width: "300px" }}>
-                {/* <label htmlFor="courseSelect">Choose a course:</label> */}
-                <select
-                  className="form-control"
-                  id="courseSelect"
-                  value={selectedCourse}
-                  onChange={(e) => setSelectedCourse(e.target.value)}
-                >
-                  <option value="">Select a course</option>
-                  {courses.map((course) => (
-                    <option key={course} value={course}>
-                      {course}
-                    </option>
-                  ))}
-                </select>
-              </Col>
-              <Col md={3} style={{ height: "40px", width: "250px" }}>
-                <div>
-                  {/* <label htmlFor="yearLevelSelect">Choose a year level:</label> */}
-                  <select
-                    className="form-control"
-                    id="yearLevelSelect"
-                    value={selectedYearLevel}
-                    onChange={(e) => setSelectedYearLevel(e.target.value)}
-                  >
-                    <option value="">Select a year level</option>
-                    {yearLevels[selectedCourse]?.map((yearLevel) => (
-                      <option key={yearLevel} value={yearLevel}>
-                        {yearLevel}
-                      </option>
+<Row className='align-items-center justify-content-center'>
+            <Col xs={10} sm={6} md={3} style={{ height: '40px',  width: '300px'}}> 
+                <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
+                    <option value="">Select a course</option>
+                    {courses.map(course => (
+                        <option key={course} value={course}>{course}</option>
                     ))}
-                  </select>
-                </div>
-              </Col>
-              <Col md={2}>
-                <button
-                  type="submit"
-                  className="btn display-button"
-                  onClick={handleSubmit}
-                >
-                  {" "}
-                  Display{" "}
-                </button>
-                <button
-                  type="button"
-                  className="btn reset-button"
-                  onClick={handleReset}
-                >
-                  {" "}
-                  Reset{" "}
-                </button>
-              </Col>
-              <Col md={2} className="text-right">
-              <button className="btn btn-add btn" onClick={handleAdd}>
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
+                </select>
             </Col>
-            </Row>
+            <Col xs={10} sm={6} md={3} style={{ height: '40px', width: '300px'}}> 
+                <div>
+                    <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                        <option value="">Select a year level</option>
+                        {yearLevels[selectedCourse]?.map(yearLevel => (
+                            <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
+                        ))}
+                    </select>
+                </div>
+            </Col>
+            <Col xs={12} sm={12} md={2} style={{ textAlign: 'center' }}>
+                <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+                <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
+            </Col>
+            <Col xs={12} sm={12} md={2} style={{ textAlign: 'center' }}>
+                <button className="btn btn-add btn" onClick={handleAdd}>
+                    <FontAwesomeIcon icon={faPlus} />
+                </button>
+            </Col>
+        </Row>
             <hr className="inventory-line" />
 {/* 
           <Row className="justify-content-end mb-3">
@@ -286,56 +256,58 @@ const Modules = () => {
           </Modal>
 
           <div className="modules-container">
-            <table>
-              <thead>
-                <tr>
-                  <th> ID </th>
-                  <th> Subject code </th>
-                  <th> Subject name </th>
-                  <th> Year Level </th>
-                  <th> Course </th>
-                  <th> Available </th>
-                  <th> Quantity </th>
-                  <th className='no-border-right'> Action </th>
-                </tr>
-              </thead>
-              <tbody className="modules">
-                {modulesData.length === 0 ? (
-                  <tr>
-                    <td colSpan="8">No modules available</td>
-                  </tr>
-                ) : (
-                  modulesData.map((modules, i) => (
-                    <tr key={i}>
-                      <td>{i + 1}</td>
-                      <td>{modules.subject_code}</td>
-                      <td>{modules.subject_name}</td>
-                      <td>{modules.year_level}</td>
-                      <td>{modules.course}</td>
-                      <td>{modules.available}</td>
-                      <td>{modules.quantity}</td>
-                      <td className='no-border-right'>
-                        <button
-                          className="btn btn-edit btn-sm mr-2"
-                          onClick={() => handleEdit(modules.id)}
-                        >
-                          <FontAwesomeIcon icon={faPenToSquare} />
-                        </button>
-                        <span className="mx-2"></span>
-                        <button
-                          className="btn btn-delete btn-sm"
-                          onClick={() => handleDelete(modules.id)}
-                        >
-                          <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+            <div className="table-container">
 
+              <table>
+                <thead>
+                  <tr>
+                    <th> ID </th>
+                    <th> Subject code </th>
+                    <th> Subject name </th>
+                    <th> Year Level </th>
+                    <th> Course </th>
+                    <th> Available </th>
+                    <th> Quantity </th>
+                    <th className='no-border-right'> Action </th>
+                  </tr>
+                </thead>
+                <tbody className="modules">
+                  {modulesData.length === 0 ? (
+                    <tr>
+                      <td colSpan="8">No modules available</td>
+                    </tr>
+                  ) : (
+                    modulesData.map((modules, i) => (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{modules.subject_code}</td>
+                        <td>{modules.subject_name}</td>
+                        <td>{modules.year_level}</td>
+                        <td>{modules.course}</td>
+                        <td>{modules.available}</td>
+                        <td>{modules.quantity}</td>
+                        <td className='no-border-right'>
+                          <button
+                            className="btn btn-edit btn-sm mr-2"
+                            onClick={() => handleEdit(modules.id)}
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
+                          <span className="mx-2"></span>
+                          <button
+                            className="btn btn-delete btn-sm"
+                            onClick={() => handleDelete(modules.id)}
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
           <Modal
             show={showEditModuleModal}
             onHide={handleCloseEditModuleModal}

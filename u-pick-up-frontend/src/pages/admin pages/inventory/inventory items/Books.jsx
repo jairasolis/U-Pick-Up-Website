@@ -189,19 +189,8 @@ const Books = () => {
         <CardBody>
           {showAddBookPage && <AddBookPage onSubmit={handleAddBook} onCancel={handleCancelAdd} />}
 
-          {/* {showEditBookModal && (
-            <EditBookPage
-              editFormData={editFormData}
-              setEditFormData={setEditFormData}
-              handleSubmitEdit={handleEditBook}
-              handleCloseEditBookModal={handleCloseEditBookModal}
-            />
-          )} */}
-
-        {/* <Container> */}
           <Row className='align-items-center justify-content-center'>
-            <Col md={3} style={{ height: '40px', width: '300px'}}> 
-              {/* <label htmlFor="courseSelect">Choose a course:</label> */}
+            <Col xs={10} sm={6} md={3} style={{ height: '40px',  width: '300px'}}> 
               <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
                 <option value="">Select a course</option>
                 {courses.map(course => (
@@ -209,9 +198,8 @@ const Books = () => {
                 ))}
               </select>
             </Col>
-            <Col md={3} style={{ height: '40px', width: '250px'}}>
+            <Col xs={10} sm={6} md={3} style={{ height: '40px', width: '300px'}}> 
               <div>
-                {/* <label htmlFor="yearLevelSelect">Choose a year level:</label> */}
                 <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
                   <option value="">Select a year level</option>
                   {yearLevels[selectedCourse]?.map(yearLevel => (
@@ -220,83 +208,63 @@ const Books = () => {
                 </select>
               </div>
             </Col>
-            <Col md={2}>
+            <Col xs={12} sm={12} md={2} style={{ textAlign: 'center' }}>
               <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
               <button type="button" className="btn reset-button"  onClick={handleReset}> Reset </button>
-              {/* <button className="btn btn-add btn-lg" onClick={handleAdd}>
-                <FontAwesomeIcon icon={faPlus} />
-              </button> */}
             </Col>
-            <Col>
-            <button className="btn btn-add btn" onClick={handleAdd}>
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
+            <Col xs={12} sm={12} md={2} style={{ textAlign: 'center' }}>
+              <button className="btn btn-add btn" onClick={handleAdd}>
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
             </Col>
           </Row>
           <hr className='inventory-line' />
-        {/* </Container> */}
-
-
-        {/* <Row className="justify-content-end mb-3">
-          <Col md={2} className='text-right'>
-            <button className="btn btn-add btn-lg" onClick={handleAdd}>
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
-          </Col>
-        </Row> */}
-
-        {/* <Modal show={showAddBookModal} onHide={handleCloseModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add New Book</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <AddBookPage onSubmit={handleAddBook} onCancel={handleCloseModal} />
-          </Modal.Body>
-        </Modal> */}
-
+  
         <div className="books-container">
-          <table>
-            <thead className='table-header'>
-              <tr>
-                <th> ID </th>
-                <th> Subject name </th>
-                <th> Year Level </th>
-                <th> Course </th>
-                <th> Available </th>
-                <th> Quantity </th>
-                <th className='no-border-right'> Action </th>
-              </tr>
-            </thead>
-            <tbody className='books'>
-              {bookData.length === 0 ? (
-                <tr>
-                  <td colSpan="7">No books available</td>
-                </tr>
-              ) : (
-                bookData.map((book, i) => (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{book.subject_name}</td>
-                    <td>{book.year_level}</td>
-                    <td>{book.course}</td>
-                    <td>{book.available}</td>
-                    <td>{book.quantity}</td>
-                    <td className='no-border-right'>
-                      <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(book.id)}>
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                      </button>
-                      <span className="mx-2"></span>
-                      <button className="btn btn-delete btn-sm" onClick={() => handleDelete(book.id)}>
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </td>
-                  </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+          <div className="table-container">
 
+            <table>
+              <thead className='table-header'>
+                <tr>
+                  <th> ID </th>
+                  <th> Subject name </th>
+                  <th> Year Level </th>
+                  <th> Course </th>
+                  <th> Available </th>
+                  <th> Quantity </th>
+                  <th className='no-border-right'> Action </th>
+                </tr>
+              </thead>
+              <tbody className='books'>
+                {bookData.length === 0 ? (
+                  <tr>
+                    <td colSpan="7">No books available</td>
+                  </tr>
+                ) : (
+                  bookData.map((book, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{book.subject_name}</td>
+                      <td>{book.year_level}</td>
+                      <td>{book.course}</td>
+                      <td>{book.available}</td>
+                      <td>{book.quantity}</td>
+                      <td className='no-border-right'>
+                        <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(book.id)}>
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                        <span className="mx-2"></span>
+                        <button className="btn btn-delete btn-sm" onClick={() => handleDelete(book.id)}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
           <Modal show={showEditBookModal} onHide={handleCloseEditBookModal} backdrop="static">
             <Modal.Header closeButton>
               <Modal.Title>Edit Book</Modal.Title>
