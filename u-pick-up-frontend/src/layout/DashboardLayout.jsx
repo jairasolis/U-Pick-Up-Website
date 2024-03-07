@@ -10,7 +10,7 @@ const DashboardLayout = () => {
     <div className="div">
       <AdminNavbar/>
       <div style={{display:'flex'}}> 
-          <AdminLeftBar/>  
+          {/* <AdminLeftBar/>   */}
           <Outlet />
           {/* <RightBar/> */}
       </div>
