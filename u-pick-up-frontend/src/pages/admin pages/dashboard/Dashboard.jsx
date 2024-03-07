@@ -25,6 +25,8 @@ const Dashboard = () => {
   //     dateLabels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
   // }
 
+  const [adminName, setAdminName] = useState("");
+
   const [registeredStudentsCount, setRegisteredStudentsCount] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
@@ -77,11 +79,27 @@ const Dashboard = () => {
         }
       };
 
+      // const fetchLoginData = async () => {
+      //   try {
+      //     const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data');
+      //     setLoginData(response.data);
+      //     console.log(response.data)
+      //   } catch (error) {
+      //     console.error('Error fetching login data:', error);
+      //   }
+      // };
+
       const fetchLoginData = async () => {
         try {
           const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data');
-          setLoginData(response.data);
-          console.log(response.data)
+          const modifiedLoginData = response.data.map(item => {
+            const dateParts = item.date.split('-');
+            const newDate = new Date(dateParts[0], parseInt(dateParts[1]) - 1, dateParts[2]);
+            const monthName = newDate.toLocaleString('default', { month: 'long' });
+            return { ...item, date: `${monthName} ${dateParts[2]}` };
+          });
+          setLoginData(modifiedLoginData);
+          console.log(modifiedLoginData);
         } catch (error) {
           console.error('Error fetching login data:', error);
         }
@@ -93,97 +111,166 @@ const Dashboard = () => {
       fetchLoginData();
     }, []);
 
+    useEffect(() => {
+      const adminName = localStorage.getItem('admin_name');
+      setAdminName(adminName);
+    }, []);
+
   const dateLabels = loginData.map(data => data.date);
   const loginCounts = loginData.map(data => data.count);
 
   return (
     <div className='dashboard'>
+      <Card className='dashboard-header' style={{ height: '60px', display: 'flex' }}>
+        <h2> Dashboard </h2>
+      </Card>
+      <h5 className='hi-text'> Hi, {adminName}! </h5>
       <div className="chart-wrapper">  
         <Container className='dash-container'>
           <Row>
             <Col>
               <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> 
-                <Card className='totalStudents' style={{ height: '200px', padding: '20px', display: 'flex' }}>
+                <Card className='totalStudents' style={{ height: '220px', padding: '20px', display: 'flex', flexDirection: 'row' }}>
                   <Col>
-                    <FontAwesomeIcon icon={faUser} className='dash-icon' />
+                    <FontAwesomeIcon icon={faUser} className='dash-icon students-icon-dashboard' />
                   </Col>
                   <Col className='data-text'>
-                    <h4> {registeredStudentsCount} </h4>
                     <p> Total Students Registered </p>
+                    <h4> {registeredStudentsCount} </h4>
                   </Col>
                 </Card>
               </Link>
             </Col>
             <Col> 
-              <Card style={{ height: '200px', padding: '20px', display: 'flex' }}>
-                <Doughnut 
+            <Card style={{ height: '220px', padding: '20px', display: 'flex', alignItems: 'center' }}>
+              <div style={{ maxWidth: '100%', maxHeight: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div>
+                  <p className='dash-label'> Students by Age </p>
+                </div>
+                <Doughnut style={{margin: '5px'}}
                   data={{
                     labels: ["Under 18", "19-25", "26-35", "36 and over"],
                     datasets: [
                       {
                         label: "Age",
                         data: [under18Count, age18to25Count, age26to35Count, above35Count],
+                        backgroundColor: [ '#163020', '#304D30', '#B6C4B6', '#EEF0E5'],
                       },
                     ],
                   }}
                   options={{
                     plugins: {
                       legend: {
-                        position: "right", // Set legend position
+                        position: "right",
                       },
-                      
                     },
-                    maintainAspectRatio: false, // for aligning
-                    
+                    maintainAspectRatio: false, 
                   }}
                 />
-                <p className='dash-label'> Students by Age </p>
-              </Card>
+              </div>
+            </Card>
             </Col>
             <Col>
-              <Card style={{ height: '200px', padding: '20px', display: 'flex'  }}>
-              <Doughnut
-                data={{
-                  labels: ["Male", "Female", "Non Binary", "Other", "Prefer not to say"],
-                  datasets: [
-                    {
-                      label: "Students",
-                      data: [maleCount, femaleCount, nonBinaryCount, otherCount, prefNotToSayCount],
-                      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#96BAB3", "#7C7C7C"], 
+            <Card style={{ height: '220px', padding: '20px', display: 'flex', alignItems: 'center' }}>
+              <div style={{ maxWidth: '100%', maxHeight: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div>
+                  <p className='dash-label'> Students by Gender </p>
+                </div>
+                <Doughnut style={{margin: '5px'}}
+                  data={{
+                    labels: ["Male", "Female", "Non Binary", "Other", "Prefer not to say"],
+                    datasets: [
+                      {
+                        label: "Students",
+                        data: [maleCount, femaleCount, nonBinaryCount, otherCount, prefNotToSayCount],
+                        backgroundColor: [
+                          '#5F6F52',
+                          '#A9B388', 
+                          '#FEFAE0', 
+                          '#B99470', 
+                          '#50574b',
+                        ]
+                      },
+                    ],
+                  }}
+                  options={{
+                    plugins: {
+                      legend: {
+                        position: "right",
+                      },
                     },
-                  ],
-                }}
-                options={{
-                  plugins: {
-                    legend: {
-                      position: "right", 
-                    },
-                  },
-                  maintainAspectRatio: false,
-                }}
-              />
-              <p className='dash-label'> Students by Gender </p>
+                    maintainAspectRatio: false, 
+                  }}
+                />
+              </div>
+            </Card>
 
-              </Card>
             
             </Col>
           </Row>
           <Row>
             <Col>
               <Card style={{ height: '300px', marginTop: '20px', padding: '20px 40px'}}>
-                <Line
-                  data={{
-                    labels: dateLabels,
-                    datasets: [
-                      {
-                        label: 'Login Per Day',
-                        backgroundColor: '#96BAB3',
-                        borderColor: '#96BAB3',
-                        data: loginCounts
+                {/* <p className='week-text'> Week </p> */}
+              <Line className='login-chart'
+                data={{
+                  labels: dateLabels,
+                  datasets: [
+                    {
+                      label: 'Login Per Day',
+                      backgroundColor: 'transparent',
+                      borderColor: '#96BAB3',
+                      data: loginCounts,
+                      tension: 0.5
+                    },
+                  ],
+                }}
+                options={{
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: 'Login Per Day',
+                      font: {
+                        size: 16,
+                        weight: 'normal'
+                      }
+                    },
+                    legend: false,
+                  },
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: 'Date',
+                        font: {
+                          size: 14,
+                          weight: 'bold' 
+                        },
                       },
-                    ],
-                  }}
-                />
+                      grid: {
+                        display: false
+                      }
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: 'Number of Students',
+                        font: {
+                          size: 14, // Change font size
+                          weight: 'bold' 
+                        },
+                      },
+                      min: 0,
+                      ticks: {
+                        stepSize: 2,
+                      },
+                      border: { dash: [10] }
+                    }
+                  },
+                  maintainAspectRatio: false,
+                }}
+              />
+
               </Card >
             </Col>
             {/* <Col>

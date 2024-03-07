@@ -1,7 +1,7 @@
 .dashboard {
     flex: 5;
     top: 70px;
-    background-color: #eeeeee;
+    background-color: #F7FAFB;
 }
 
 .dashboard-wrapper {
@@ -11,19 +11,62 @@
 }
 
 .dash-container {
-    margin-top: 40px;
+    margin-top: 0;
 }
 
-.dash-icon, h4, .data-text p, .dash-label {
+.dashboard-header {
+    justify-content: center;
+    margin: 10px;
+}
+
+.dashboard-header h2 {
+    margin-left: 15px;
+    text-align: left;
+}
+
+.hi-text {
+    color: #454545;
+    margin: 30px 20px;
+    text-align: left;
+}
+
+.dash-icon, h4, .dash-label {
     color: #454545;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-/* .dash-label {
-    margin: 20px;
-} */
+.dash-label {
+    margin: 10px;
+    position: relative;
+}
+
+.data-text p, .data-text h4 {
+    text-align: left;
+}
+
+.students-icon-dashboard {
+    padding: 30px;
+    background-color: #454545b9;
+    color: white;
+    border-radius: 5px;
+}
+
+.week-text {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #7b9792;
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.login-chart {
+    padding: 20px 10px;
+}
+
 
 .totalStudents {
     height: 200px;
@@ -43,9 +86,31 @@
     }
 } */
 
+/* @media screen and (max-width: 768px) {
+    .totalStudents {
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+  } */
+
 @media (max-width: 576px) {
     .dashboard-wrapper {
         padding-left: 10px;
+    }
+
+    .totalStudents {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .students-icon-dashboard {
+        padding: 10px;
+    }
+
+    .data-text p, .data-text h4 {
+        text-align: justify;
     }
 
     .totalStudents {

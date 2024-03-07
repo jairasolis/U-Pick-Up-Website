@@ -19,6 +19,7 @@ const SignIn2 = () => {
   };
 
   const onSubmit = async (values, { setSubmitting }) => {
+    const { username } = values;
     try {
       setLoading(true);
       const response = await loginAdmin({
@@ -30,11 +31,13 @@ const SignIn2 = () => {
         const { token, data } = response.data;
         const id = data.id;
 
+        localStorage.setItem("admin_name", username);
         localStorage.setItem("adminId", id);
         localStorage.setItem("authToken", token);
         localStorage.setItem("user", JSON.stringify({ role: "admin" }));
         auth(true);
 
+        console.log
         console.log("authhhhhh:", auth);
       } else {
         setErrorMessage("An error occurred");
