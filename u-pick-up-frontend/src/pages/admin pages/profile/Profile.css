@@ -9,14 +9,20 @@
     flex-direction: column;
     background-color: #eeeeee;
     align-items: center;
+    padding: 20px;
 }
 
 .profile-container {
-    width: 630px;
-    height: 500px;
+    max-width: 630px;
+    width: 100%;
+    height: auto;
     border-radius: 15px;
     background: #ffffff;
     border: 1px solid #CDCDCD;
+    padding: 50px 50px; 
+    margin-left: auto; 
+    margin-right: auto;
+    
 }
 
 .profile-icon {
@@ -54,26 +60,37 @@
     height: 2px;
 }
 
-.personal-details h4,
 .class-details h4 {
     color: #606060;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
+    text-align: left;
 }
 
-.personal-details,
 .class-details {
-    margin: 40px 40px 40px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin: 20px 0;
 }
 
 .deets {
     text-align: left;
 }
 
-.name {
+/*.name {
     text-align: center;
+}*/
+
+
+@media only screen and (max-width: 768px) {
+    .profile-container {
+        max-width: 350px;
+    }
+
+    .class-details {
+        margin: 10px 0; 
+    }
+    
+    .profile-page {
+        padding: 10px; 
+    }
 }
