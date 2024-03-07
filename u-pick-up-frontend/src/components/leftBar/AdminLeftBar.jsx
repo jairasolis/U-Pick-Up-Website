@@ -134,21 +134,21 @@ const AdminLeftBar = () => {
       </div> */}
       <ul className="adminNav_list">
         <li>
-          <Link to="/admin/dashboard">
+          <Link to="/admin/dashboard" className="list-leftbar">
             <FontAwesomeIcon icon={faChartColumn} />
             <span className="links_name">Dashboard</span>
           </Link>
           <span className="tooltip">Dashboard</span>
         </li>
         <li>
-          <Link to="/admin/add-post">
+          <Link to="/admin/add-post" className="list-leftbar">
             <FontAwesomeIcon icon={faSquarePen} />
             <span className="links_name">Add Post</span>
           </Link>
           <span className="tooltip">Add Post</span>
         </li>
         <li>
-          <Link to="/admin/add-event">
+          <Link to="/admin/add-event" className="list-leftbar">
             <FontAwesomeIcon icon={faCalendarDays} />
             <span className="links_name">Add Event</span>
           </Link>
@@ -157,21 +157,21 @@ const AdminLeftBar = () => {
         <hr /> 
         <p className="inventory-p"> Inventory </p>
         <li>
-          <Link to="/admin/inventory-books">
+          <Link to="/admin/inventory-books" className="list-leftbar">
             <FontAwesomeIcon icon={faBook} />
             <span className="links_name">Books</span>
           </Link>
           <span className="tooltip">Books</span>
         </li>
         <li>
-          <Link to="/admin/inventory-modules">
+          <Link to="/admin/inventory-modules" className="list-leftbar">
             <FontAwesomeIcon icon={faBookOpen} />
             <span className="links_name">Modules</span>
           </Link>
           <span className="tooltip">Modules</span>
         </li>
         <li>
-          <Link to="/admin/inventory-uniforms">
+          <Link to="/admin/inventory-uniforms" className="list-leftbar">
             <FontAwesomeIcon icon={faShirt} />
             <span className="links_name">Uniforms</span>
           </Link>
@@ -179,8 +179,8 @@ const AdminLeftBar = () => {
         </li>
         <hr /> 
         <li>
-          <Link to="/admin/profile">
-            <FontAwesomeIcon icon={faUser} />
+          <Link to="/admin/profile" className="list-leftbar">
+            <FontAwesomeIcon icon={faUser} className="leftbar-icon"/>
             <span className="links_name">Profile</span>
           </Link>
           <span className="tooltip">Profile</span>

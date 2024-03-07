@@ -209,6 +209,10 @@ border-right: 1px solid #3b55343b; */
     border-radius: 12px;
 }
 
+.list-leftbar {
+    padding-left: 10px;
+}
+
 .leftbar ul li .tooltip{
     position: absolute;
     left: 80px;
@@ -235,6 +239,10 @@ border-right: 1px solid #3b55343b; */
     white-space: nowrap;
 }
 
+.adminNav_list {
+    padding: 0;
+}
+
 .leftbar ul li a:hover {
     color: #FFF4F4;
     background: #59775de3;
@@ -255,7 +263,7 @@ border-right: 1px solid #3b55343b; */
     transition: opacity 0.5s ease;
     text-align: left;
     flex-grow: 1;
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
 .leftbar.active .links_name{
@@ -309,6 +317,9 @@ border-right: 1px solid #3b55343b; */
     .leftbar ul li .links_name {
         display: none;
     }
+    .leftbar ul li i{
+        height: 20px;
+    }
 
 }
 
@@ -316,7 +327,7 @@ border-right: 1px solid #3b55343b; */
 
 @media (max-width: 768px) {
     .leftbar {
-        width: 78px;
+        width: 60px;
     }
     .leftbar ul li:hover .tooltip{
         opacity: 1;
@@ -328,6 +339,10 @@ border-right: 1px solid #3b55343b; */
 
     .inventory-p {
         display: none;
+    }
+
+    .leftbar-icon{
+        font: 20px;
     }
 }
 
