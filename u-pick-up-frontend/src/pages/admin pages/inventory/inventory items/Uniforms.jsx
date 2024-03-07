@@ -183,33 +183,33 @@ const Uniforms = () => {
         <CardBody>
           {showAddUniformPage && <AddUniformPage onSubmit={handleAddUniform} onCancel={handleCancelAdd} />}
 
-            <Row className='align-items-center justify-content-center'>
-              <Col md={3} style={{ height: '40px', width: '300px'}}> 
-            <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
-              <option value="">Select a course</option>
-              {courses.map(course => (
-                <option key={course} value={course}>{course}</option>
-              ))}
-            </select>
-          </Col>
-          <Col md={3} style={{ height: '40px', width: '250px'}}>
-              <div>
-                <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
-                  <option value="">Select a year level</option>
-                  {yearLevels[selectedCourse]?.map(yearLevel => (
-                    <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
-                  ))}
+          <Row className='align-items-center justify-content-center'>
+            <Col xs={10} sm={6} md={3} style={{ height: '40px',  width: '300px'}}> 
+                <select className="form-control" id="courseSelect" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
+                    <option value="">Select a course</option>
+                    {courses.map(course => (
+                        <option key={course} value={course}>{course}</option>
+                    ))}
                 </select>
-              </div>
-          </Col>
-          <Col md={2}>
-            <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
-            <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
-          </Col>
-          <Col md={2} className='text-right'>
-              <button className="btn btn-add btn" onClick={handleAdd}>
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
+            </Col>
+            <Col xs={10} sm={6} md={3} style={{ height: '40px', width: '300px'}}> 
+                <div>
+                    <select className="form-control" id="yearLevelSelect"  value={selectedYearLevel} onChange={(e) => setSelectedYearLevel(e.target.value)}>
+                        <option value="">Select a year level</option>
+                        {yearLevels[selectedCourse]?.map(yearLevel => (
+                            <option key={yearLevel} value={yearLevel}>{yearLevel}</option>
+                        ))}
+                    </select>
+                </div>
+            </Col>
+            <Col xs={12} sm={12} md={2} style={{ textAlign: 'center' }}>
+                <button type="submit" className="btn display-button" onClick={handleSubmit}> Display </button>
+                <button type="button" className="btn reset-button" onClick={handleReset}> Reset </button>
+            </Col>
+            <Col xs={12} sm={12} md={2} style={{ textAlign: 'center' }}>
+                <button className="btn btn-add btn" onClick={handleAdd}>
+                    <FontAwesomeIcon icon={faPlus} />
+                </button>
             </Col>
         </Row>
         <hr className='inventory-line' />
@@ -233,46 +233,48 @@ const Uniforms = () => {
 
 
           <div className="uniforms-container">
-            <table>
-              <thead>
-                <tr>
-                  <th> ID </th>
-                  <th> Uniform Type </th>
-                  <th> Year Level </th>
-                  <th> Course </th>
-                  <th> Available </th>
-                  <th> Quantity </th>
-                  <th className='no-border-right'> Action </th>
-                </tr>
-              </thead>
-              <tbody className='uniforms'>
-                {uniformData.length === 0 ? (
+            <div className="table-container">
+              <table>
+                <thead>
                   <tr>
-                    <td colSpan="6"> No uniform items available </td>
+                    <th> ID </th>
+                    <th> Uniform Type </th>
+                    <th> Year Level </th>
+                    <th> Course </th>
+                    <th> Available </th>
+                    <th> Quantity </th>
+                    <th className='no-border-right'> Action </th>
                   </tr>
-                ) : (
-                  uniformData.map((uniform, i) => (
-                    <tr key={i}>
-                      <td>{i + 1}</td>
-                      <td>{uniform.uniform_type}</td>
-                      <td>{uniform.year_level}</td>
-                      <td>{uniform.course}</td>
-                      <td>{uniform.available}</td>
-                      <td>{uniform.quantity}</td>
-                      <td className='no-border-right'>
-                        <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(uniform.id)}>
-                          <FontAwesomeIcon icon={faPenToSquare} />
-                        </button>
-                        <span className="mx-2"></span>
-                        <button className="btn btn-delete btn-sm" onClick={() => handleDelete(uniform.id)}>
-                          <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                      </td>
+                </thead>
+                <tbody className='uniforms'>
+                  {uniformData.length === 0 ? (
+                    <tr>
+                      <td colSpan="6"> No uniform items available </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : (
+                    uniformData.map((uniform, i) => (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{uniform.uniform_type}</td>
+                        <td>{uniform.year_level}</td>
+                        <td>{uniform.course}</td>
+                        <td>{uniform.available}</td>
+                        <td>{uniform.quantity}</td>
+                        <td className='no-border-right'>
+                          <button className="btn btn-edit btn-sm mr-2" onClick={() => handleEdit(uniform.id)}>
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
+                          <span className="mx-2"></span>
+                          <button className="btn btn-delete btn-sm" onClick={() => handleDelete(uniform.id)}>
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
 
            <Modal show={showEditUniformModal} onHide={handleCloseEditUniformModal} backdrop="static">
