@@ -1,4 +1,4 @@
-
+/*admin*/
 /*.leftBar {
     flex: 1;
     position: sticky;
@@ -137,11 +137,13 @@ body {
 }
 
 .leftbar {
-    position: fixed;
+    flex: 1;
+    position: sticky;
     top: 72px;
     left: 0;
-    height: calc(100% - 70px);
-    width: 240px;
+    height: calc(100vh - 70px);
+    width: 270px;
+    border-right: 1px solid #3b55343b;
     background: #fff;
     padding: 6px 14px;
     transition: all 0.5s ease;
@@ -203,13 +205,13 @@ body {
 
 .leftbar ul li .tooltip{
     position: absolute;
-    left: 122px;
+    left: 80px;
     top: 50%;
     transform: translateY(-50%, -50%);
     border-radius: 6px;
     height: 35px;
     min-width: 100px;
-    background:  #516E53;
+    background: #FFF4F4;
     padding: 8px;
     text-align: center;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -224,13 +226,12 @@ body {
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
-    border-radius: 12px;
     white-space: nowrap;
 }
 
 .leftbar ul li a:hover {
     color: #FFF4F4;
-    background: #516E53;
+    background: #59775de3;
 }
 
 .leftbar ul li i {
@@ -287,7 +288,7 @@ body {
 
 @media (max-width: 1200px) {
     .leftbar {
-        width: 78px;
+        width: 180px;
     }
 
     .leftbar ul li:hover .tooltip{
@@ -313,6 +314,10 @@ body {
     }
     .leftbar ul li .links_name {
         display: none;
-      }
+    }
+
+    .inventory-p {
+        display: none;
+    }
 }
 
