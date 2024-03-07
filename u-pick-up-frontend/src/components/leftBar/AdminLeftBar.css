@@ -138,7 +138,7 @@ body {
 
 .leftbar {
     flex: 1;
-    position: fixed;
+    position: sticky;
     top: 72px;
     left: 0;
     height: calc(100% - 70px);
