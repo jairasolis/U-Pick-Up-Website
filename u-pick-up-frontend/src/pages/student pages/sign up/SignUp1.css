@@ -52,6 +52,8 @@
 
 .input-field .if-sm {
     display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .if-sm select, .if-sm input{
@@ -69,9 +71,9 @@
     margin-top: 80px;
 }
 
-.input-field.error input, .input-field.error select {
+/*.input-field.error input, .input-field.error select {
     border: 1px solid #dd3535;
-}
+}*/
 
 
 .next-btn {
@@ -113,7 +115,7 @@
 
 .error-message {
     color: #dd3535;
-    font-size: .8rem;
+    font-size: 0.8rem;
     position: absolute;
     margin-top: 80px;
 }

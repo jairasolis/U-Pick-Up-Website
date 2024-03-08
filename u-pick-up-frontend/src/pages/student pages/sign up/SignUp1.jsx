@@ -156,21 +156,7 @@ const SignUp1 = () => {
                 />
               </div>
               <div className="input-field if-sm">
-                <label htmlFor="gender">Gender</label>
-                <Field as="select" name="gender" id="gender">
-                  <option value=""></option>
-                  <option value="Female">Female</option>
-                  <option value="Male">Male</option>
-                  <option value="Non Binary">Non Binary</option>
-                  <option value="Other">Other</option>
-                  <option value="Prefer not to say">Prefer not to say</option>
-                </Field>
-                <ErrorMessage
-                  name="gender"
-                  component="p"
-                  className="error-message"
-                />
-                <label htmlFor="age">Age</label>
+              <label htmlFor="age">Age</label>
                 <Field
                   type="number"
                   name="age"
@@ -179,6 +165,20 @@ const SignUp1 = () => {
                 />
                 <ErrorMessage
                   name="age"
+                  component="p"
+                  className="error-message"
+                />
+                <label htmlFor="gender">Gender</label>
+                <Field as="select" name="gender" id="gender">
+                  <option value=""></option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Non Binary">Non Binary</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                  <option value="Other">Other</option>
+                </Field>
+                <ErrorMessage
+                  name="gender"
                   component="p"
                   className="error-message"
                 />
