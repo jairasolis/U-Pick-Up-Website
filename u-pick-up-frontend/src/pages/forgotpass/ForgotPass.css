@@ -21,7 +21,7 @@
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #eeeeee;;
+    background-color: #eeeeee;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -87,7 +87,7 @@
 }
 
 .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #394e3a;
 }
 
 .submit-button:disabled {
