@@ -138,21 +138,18 @@ const AdminLeftBar = () => {
             <FontAwesomeIcon icon={faChartColumn} />
             <span className="links_name">Dashboard</span>
           </Link>
-          <span className="tooltip">Dashboard</span>
         </li>
         <li>
           <Link to="/admin/add-post" className="list-leftbar">
             <FontAwesomeIcon icon={faSquarePen} />
             <span className="links_name">Add Post</span>
           </Link>
-          <span className="tooltip">Add Post</span>
         </li>
         <li>
           <Link to="/admin/add-event" className="list-leftbar">
             <FontAwesomeIcon icon={faCalendarDays} />
             <span className="links_name">Add Event</span>
           </Link>
-          <span className="tooltip">Add Event</span>
         </li>
         <hr /> 
         <p className="inventory-p"> Inventory </p>
@@ -161,21 +158,18 @@ const AdminLeftBar = () => {
             <FontAwesomeIcon icon={faBook} />
             <span className="links_name">Books</span>
           </Link>
-          <span className="tooltip">Books</span>
         </li>
         <li>
           <Link to="/admin/inventory-modules" className="list-leftbar">
             <FontAwesomeIcon icon={faBookOpen} />
             <span className="links_name">Modules</span>
           </Link>
-          <span className="tooltip">Modules</span>
         </li>
         <li>
           <Link to="/admin/inventory-uniforms" className="list-leftbar">
             <FontAwesomeIcon icon={faShirt} />
             <span className="links_name">Uniforms</span>
           </Link>
-          <span className="tooltip">Uniforms</span>
         </li>
         <hr /> 
         <li>
@@ -183,7 +177,6 @@ const AdminLeftBar = () => {
             <FontAwesomeIcon icon={faUser} className="leftbar-icon"/>
             <span className="links_name">Profile</span>
           </Link>
-          <span className="tooltip">Profile</span>
         </li>
       </ul>
     </div>

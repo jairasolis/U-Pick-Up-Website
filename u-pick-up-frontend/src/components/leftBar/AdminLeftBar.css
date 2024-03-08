@@ -122,30 +122,15 @@ hr {
  */
 
 
- 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-}
-
-body {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    /*overflow: hidden;*/
-}
-
 .leftbar {
     flex: 1;
     position: sticky;
     top: 72px;
     left: 0;
     height: calc(100% - 70px);
-    width: 270px;
     border-right: 1px solid #3b55343b;
     background: #fff;
-    padding: 6px 14px;
+    padding: 6px 10px;
     transition: all 0.5s ease;
     z-index: 1000;
 }
@@ -203,7 +188,7 @@ border-right: 1px solid #3b55343b; */
     position: relative;
     height: 50px;
     width: 100%;
-    margin: 0 5px;
+    margin: 0 5px 0 0;
     list-style: none;
     line-height: 50px;
     border-radius: 12px;
@@ -213,7 +198,7 @@ border-right: 1px solid #3b55343b; */
     padding-left: 10px;
 }
 
-.leftbar ul li .tooltip{
+/* .leftbar ul li .tooltip{
     position: absolute;
     left: 80px;
     top: 50%;
@@ -228,7 +213,7 @@ border-right: 1px solid #3b55343b; */
     transition: 0;
     opacity: 0;
     pointer-events: none;
-}
+} */
 
 .leftbar ul li a {
     color: #516E53;
