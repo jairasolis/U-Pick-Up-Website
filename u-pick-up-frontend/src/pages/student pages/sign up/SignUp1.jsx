@@ -3,6 +3,8 @@ import "./SignUp1.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignUp1StudentValidation } from "../../../yup validation/SignUp1StudentValidation";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SignUp1 = () => {
   const navigate = useNavigate();
@@ -42,6 +44,9 @@ const SignUp1 = () => {
   return (
     <div className="sign-up-two">
       <div className="sign-up-wrap">
+        <Link to="/student/sign-in">
+            <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+        </Link>
         <div className="sign-up-header">
           <img src="../images/upup.png" alt="" />
           <p> Receive on ease </p>

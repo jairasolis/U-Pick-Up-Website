@@ -7,6 +7,8 @@ import {SignUpStudentValidation} from '../../../yup validation/SignUpStudentVali
 import { checkEmailAvailability } from "../../../api/checkStudentEmail";
 import { checkIdAvailability } from "../../../api/checkStudentId";
 import { registerStudent } from "../../../api/registerStudent";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SignUp2 = () => {
   const navigate = useNavigate();
@@ -89,6 +91,9 @@ const SignUp2 = () => {
   return (
     <div className="sign-up-two">
       <div className="sign-up-wrap">
+        <Link to="/student/sign-up">
+            <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+        </Link>
         <div className="sign-up-header">
           <img src="../images/upup.png" alt="" />
           <p> receive on ease </p>
