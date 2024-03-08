@@ -3,7 +3,7 @@
     top: 70px;
     display: flex;
     flex-direction: column;
-    background-color: #EEEEEE;
+    background-color: #F7FAFB;;
     align-items: center;
     padding-top: 80px;
 }
@@ -13,7 +13,9 @@
     flex-direction: column;
     gap: 20px;
 }
-
+.admin-profile{
+    background-color: #516E53;
+}
 .home-container .filter {
     width: 80px;
     height: 30px;

@@ -129,7 +129,7 @@ const Home = () => {
               <div key={post.id} className="posts"> 
                 <div className="post-content">
                   <p className='mins'>
-                    <img src="../images/phinma_logo.png" alt="" className="admin-profile" />
+                    <img src="../images/logo/2.png" alt="" className="admin-profile" />
                     {getTimeDifference(post.created_at)}
                   </p>
                   <p>{post.post_content}</p>
