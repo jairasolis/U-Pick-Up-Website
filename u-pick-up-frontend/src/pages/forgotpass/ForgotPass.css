@@ -20,6 +20,14 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.forgot-pass-back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;
+    color: #494949;
+}
+
 .line {
     height: 1px;
     background-color: #8c8c8c5c;
@@ -55,15 +63,15 @@
     border-color: #007bff;
 }
 
-.error {
+.error-message {
     color: #dc3545;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-.submit-button {
+.forgot-submit-button {
     padding: 8px 15px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #516E53;
     color: #fff;
     border: none;
     border-radius: 4px;
