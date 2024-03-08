@@ -5,6 +5,8 @@ import './ForgotPass.css';
 import sendResetPassEmail from '../../api/sendResetPassEmail'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+
 
 const ForgotPassword = () => {
     const initialValues = {
@@ -26,7 +28,10 @@ const ForgotPassword = () => {
 
     return (
         <div className="forgot-pass-page">
-            <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+            <Link to="/" className="list-leftbar">
+                <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+            </Link>
+            
             <div className="forgot-password-container">
                 <h2 className="forgot-password-heading">Forgot Password</h2>
                 <div className="line"></div>
