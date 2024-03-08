@@ -195,7 +195,7 @@ border-right: 1px solid #3b55343b; */
 }
 
 .list-leftbar {
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 /* .leftbar ul li .tooltip{
@@ -257,11 +257,13 @@ border-right: 1px solid #3b55343b; */
 }
 
 .leftbar hr {
-    width: 80%; 
+    width: 90%; 
+    margin-left: 10px;
 }
 
 .inventory-p {
     color: #516E53;
+    margin-left: 25px;
 }
 
 /*.home_content{
