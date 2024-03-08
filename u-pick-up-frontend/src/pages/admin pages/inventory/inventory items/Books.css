@@ -77,11 +77,36 @@
 .btn-delete:hover {
   background-color: #702714;
 }
+.button-add{
+  background-color: #3B5534;
+
+}
+.button-add:hover{
+  background-color: #34462f;
+
+}
 
 .modal-books {
   margin: auto;
+
+}
+.modal-books .modal-dialog {
+  max-height: 80%; 
 }
 
+.modal-books .modal-content {
+  height: 100%;
+}
+.modal-edit{
+  margin: auto;
+}
+.modal-edit .modal-dialog {
+  max-height: 80%; 
+}
+
+.modal-edit .modal-content {
+  height: 100%;
+}
 @media screen and (max-width: 576px) {
   .books-page {
     padding-top: 80px;

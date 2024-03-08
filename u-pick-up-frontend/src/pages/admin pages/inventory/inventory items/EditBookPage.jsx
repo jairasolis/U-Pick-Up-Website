@@ -53,7 +53,7 @@ const EditBookPage = ({ editFormData, setEditFormData, handleCloseEditBookModal,
           <Form.Label>Quantity</Form.Label>
           <Form.Control type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="button-add">
           Update
         </Button>
         <Button variant="secondary" onClick={handleCloseEditBookModal} style={{ marginLeft: '10px' }}>
