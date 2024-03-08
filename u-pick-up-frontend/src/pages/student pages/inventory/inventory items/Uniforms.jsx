@@ -113,6 +113,7 @@ const Uniforms = () => {
             </Row>
             <hr className="inventory-line" />
           <div className="uniforms-container">
+          <div className="table-container">
             <table>
               <thead className='table-header'>
                 <tr>
@@ -143,6 +144,7 @@ const Uniforms = () => {
                 )}
               </tbody>
             </table>
+          </div>
           </div>
         </Card.Body>
       </Card>

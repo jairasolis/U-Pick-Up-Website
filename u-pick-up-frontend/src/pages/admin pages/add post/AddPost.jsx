@@ -196,7 +196,7 @@ const AddPost = () => {
                 <div className="post-content">
                   <p className="mins">
                     <img
-                      src="../images/phinma_logo.png"
+                      src="../images/logo/2.png"
                       alt=""
                       className="admin-profile"
                     />

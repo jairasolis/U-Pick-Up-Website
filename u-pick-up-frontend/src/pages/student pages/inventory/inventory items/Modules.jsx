@@ -114,6 +114,7 @@ const Modules = () => {
             </Row>
             <hr className="inventory-line" />
           <div className="modules-container">
+          <div className="table-container">
             <table>
               <thead className='table-header'>
                 <tr>
@@ -147,6 +148,7 @@ const Modules = () => {
               </tbody>
 
             </table>
+          </div>
           </div>
         </CardBody>
       </Card>
