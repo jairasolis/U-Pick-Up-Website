@@ -54,29 +54,29 @@ const LeftBar = () => {
         <i className="fa fa-arrow-right" id="btn" onClick={toggleSidebar}></i>
       </div>
       <ul className="nav_list">
-        <li>
-          <Link to="/student/home">
+        <li className="list">
+          <Link to="/student/home"  className="list-leftbar">
             <FontAwesomeIcon icon={faHouse} />
             <span className="links_name">Home</span>
           </Link>
           <span className="tooltip">Home</span>
         </li>
-        <li>
-          <Link to="/student/calendar">
+        <li className="list">
+          <Link to="/student/calendar"  className="list-leftbar">
             <FontAwesomeIcon icon={faCalendar} />
             <span className="links_name">Calendar</span>
           </Link>
           <span className="tooltip">Calendar</span>
         </li>
-        <li>
-          <Link to="/student/inventory">
+        <li className="list">
+          <Link to="/student/inventory"  className="list-leftbar">
             <FontAwesomeIcon icon={faBook} />
             <span className="links_name">Inventory</span>
           </Link>
           <span className="tooltip">Inventory</span>
         </li>
-        <li>
-          <Link to="/student/profile">
+        <li className="list">
+          <Link to="/student/profile"  className="list-leftbar">
             <FontAwesomeIcon icon={faUser} />
             <span className="links_name">Profile</span>
           </Link>
