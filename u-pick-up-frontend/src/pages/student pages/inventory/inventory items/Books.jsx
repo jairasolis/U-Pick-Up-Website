@@ -115,6 +115,8 @@ const Books = () => {
           </Row>
           <hr className="inventory-line" />
           <div className="books-container">
+          <div className="table-container">
+
             <table>
               <thead className="table-header">
                 <tr>
@@ -145,6 +147,7 @@ const Books = () => {
                 )}
               </tbody>
             </table>
+          </div>
           </div>
         </Card.Body>
       </Card>
