@@ -3,7 +3,7 @@
     position: sticky;
     top: 72px;
     left: 0;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 72px);
     border-right: 1px solid #3b55343b;
     background: #fff;
     padding: 6px 10px;
