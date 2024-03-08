@@ -71,13 +71,27 @@ const Navbar = () => {
                 <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link> */}
 
+              <Link to="/student/home" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Home</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/student/calendar"  className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Calendar</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/student/inventory" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Inventory</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/student/profile" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Profile</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
               <Link to="/student/help" className="sub-menu-link" style={{ textDecoration: 'none' }}>
                 <p> FAQs </p>
                 <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>
-
               <hr />
-
               <Link onClick={handleSignOut} className="sub-menu-link" style={{ textDecoration: 'none' }}>
                 <p> Sign Out </p>
                 <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>

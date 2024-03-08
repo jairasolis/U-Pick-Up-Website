@@ -44,43 +44,39 @@ import { Link } from 'react-router-dom';
 const LeftBar = () => {
   const [isActive, setIsActive] = useState(false);
 
-  const toggleSidebar = () => {
+  {/*const toggleSidebar = () => {
     setIsActive(!isActive);
-  };
+  };*/}
 
   return (
     <div className="sidebar">
-      <div className="logo_content">
+      {/*<div className="logo_content">
         <i className="fa fa-arrow-right" id="btn" onClick={toggleSidebar}></i>
-      </div>
+  </div> */}
       <ul className="nav_list">
-        <li className="list">
+        <li>
           <Link to="/student/home"  className="list-leftbar">
             <FontAwesomeIcon icon={faHouse} />
             <span className="links_name">Home</span>
           </Link>
-          <span className="tooltip">Home</span>
         </li>
-        <li className="list">
+        <li>
           <Link to="/student/calendar"  className="list-leftbar">
             <FontAwesomeIcon icon={faCalendar} />
             <span className="links_name">Calendar</span>
           </Link>
-          <span className="tooltip">Calendar</span>
         </li>
-        <li className="list">
+        <li >
           <Link to="/student/inventory"  className="list-leftbar">
             <FontAwesomeIcon icon={faBook} />
             <span className="links_name">Inventory</span>
           </Link>
-          <span className="tooltip">Inventory</span>
         </li>
-        <li className="list">
+        <li>
           <Link to="/student/profile"  className="list-leftbar">
             <FontAwesomeIcon icon={faUser} />
             <span className="links_name">Profile</span>
           </Link>
-          <span className="tooltip">Profile</span>
         </li>
       </ul>
     </div>

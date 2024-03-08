@@ -106,3 +106,20 @@
 .sub-menu-link:hover .arrow{
     transform: translateX(5px);
 }
+
+.show-nav {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .show-nav {
+        display: flex;
+    }
+
+    .sub-menu {
+        padding: 0px;
+    }
+    .sub-menu-link p {
+        padding: 5px 10px;
+    }
+}

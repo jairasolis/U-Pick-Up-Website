@@ -62,17 +62,38 @@ const AdminNavbar = () => {
           <FontAwesomeIcon icon={faBars} className='menu-icon' onClick={toggleMenu}/>
           <div className={`sub-menu-wrap ${isMenuOpen ? 'open-menu' : ''}`} id="subMenu">
             <div className="sub-menu">
-
-              {/* <Link to="/profile" className="userinfo">
-                <h3> Profile </h3>
-                <p><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
-              </Link> */}
-
+            <Link to="/admin/dashboard" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Dashboard</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/admin/add-post"  className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Add Post</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/admin/add-event" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Add Event</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/admin/inventory-books" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Books</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/admin/inventory-modules"  className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Modules</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/admin/inventory-uniforms"  className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Uniforms</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
+              <Link to="/admin/profile" className='show-nav sub-menu-link' style={{ textDecoration: 'none' }}>
+                <p>Profile</p>
+                <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
+              </Link>
               <Link onClick={handleSignOut} className="sub-menu-link" style={{ textDecoration: 'none' }}>
                 <p> Sign Out </p>
                 <p className='arrow'><FontAwesomeIcon icon={faArrowRight} className='icon' /></p>
               </Link>
-
             </div>
           </div>
         </div>

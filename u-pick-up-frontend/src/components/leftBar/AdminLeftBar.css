@@ -294,6 +294,7 @@ border-right: 1px solid #3b55343b; */
 @media (max-width: 1200px) {
     .leftbar {
         width: 180px;
+        display: none;
     }
 
     .leftbar ul li:hover .tooltip{

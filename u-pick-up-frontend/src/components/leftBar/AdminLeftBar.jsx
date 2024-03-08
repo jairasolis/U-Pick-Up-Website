@@ -123,9 +123,9 @@ import { Link } from "react-router-dom";
 const AdminLeftBar = () => {
   const [isActive, setIsActive] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsActive(!isActive);
-  };
+  // const toggleSidebar = () => {
+  //   setIsActive(!isActive);
+  // };
 
   return (
     <div className="leftbar">
