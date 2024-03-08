@@ -23,7 +23,7 @@ const login = () => {
       <div className='login-page'>
         <div className="login-container">
           <div className="phinma-logo">
-            <img src="../images/phinma.png" alt="" />
+            <img src="../images/logo/logo.png" alt="" />
           </div>
           <div className="login-text"> Log in as</div>
           <div className="login-items">
