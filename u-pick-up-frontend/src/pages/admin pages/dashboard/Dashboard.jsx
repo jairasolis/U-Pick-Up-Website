@@ -12,18 +12,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Chart from 'chart.js/auto';
 
-// import dailyLoginChart from '../../../components/variables/chart.js'
-
 
 const Dashboard = () => {
-  // to get the one week label
-  // var dateLabels = [];
-  // var today = new Date();
-  // for (var i = 6; i >= 0; i--) { // Start from 6 and decrement to 0
-  //     // Generate the date for each label by subtracting the number of days from the current date
-  //     var date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-  //     dateLabels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
-  // }
 
   const [adminName, setAdminName] = useState("");
 
@@ -78,16 +68,6 @@ const Dashboard = () => {
             console.error('Error fetching students age counts:', error);
         }
       };
-
-      // const fetchLoginData = async () => {
-      //   try {
-      //     const response = await axios.get('https://u-pick-up-y7qnw.ondigitalocean.app/api/dashboard/login-data');
-      //     setLoginData(response.data);
-      //     console.log(response.data)
-      //   } catch (error) {
-      //     console.error('Error fetching login data:', error);
-      //   }
-      // };
 
       const fetchLoginData = async () => {
         try {

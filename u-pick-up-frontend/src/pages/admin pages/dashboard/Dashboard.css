@@ -12,6 +12,8 @@
 
 .dash-container {
     margin-top: 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .dashboard-header {
@@ -107,6 +109,7 @@
 
     .students-icon-dashboard {
         padding: 10px;
+        
     }
 
     .data-text p, .data-text h4 {
@@ -120,9 +123,7 @@
 
     .dash-container {
         margin-top: 20px;
-        padding-left: 30px;
-        padding-top: 40px;
-
+        padding: 10px 10px 10px 30px;
     }
 }
 
