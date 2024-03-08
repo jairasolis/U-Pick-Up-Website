@@ -109,7 +109,6 @@
 @media (max-width: 1200px) {
     .leftbar {
         width: 180px;
-        display: none;
     }
 
     .leftbar ul li:hover .tooltip{
@@ -131,6 +130,8 @@
 @media (max-width: 768px) {
     .leftbar {
         width: 60px;
+        display: none;
+
     }
     .leftbar ul li:hover .tooltip{
         opacity: 1;
