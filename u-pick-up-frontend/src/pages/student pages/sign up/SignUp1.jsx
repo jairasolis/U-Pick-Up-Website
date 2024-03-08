@@ -5,9 +5,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SignUp1StudentValidation } from "../../../yup validation/SignUp1StudentValidation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Col from 'react-bootstrap/Col';
+
 
 const SignUp1 = () => {
   const navigate = useNavigate();
+
 
   // Retrieve muna yung data from localStorage or set initial values
   const [formData, setFormData] = useState(() => {
@@ -25,11 +29,14 @@ const SignUp1 = () => {
     );
   });
 
+
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     console.log("submit has clicked!");
 
+
     try {
       console.log(values);
+
 
       setFormData(values);
       localStorage.setItem("formData", JSON.stringify(values));
@@ -40,6 +47,7 @@ const SignUp1 = () => {
       setSubmitting(false);
     }
   };
+
 
   return (
     <div className="sign-up-two">
@@ -53,6 +61,7 @@ const SignUp1 = () => {
           <h3> Claim your materials with precision, no more wasted trips! </h3>
           <p> It’s simple to join </p>
         </div>
+
 
         <Formik
           initialValues={formData}
@@ -161,33 +170,42 @@ const SignUp1 = () => {
                 />
               </div>
               <div className="input-field if-sm">
-              <label htmlFor="age">Age</label>
-                <Field
-                  type="number"
-                  name="age"
-                  id="age"
-                  placeholder="Your Age"
-                />
-                <ErrorMessage
-                  name="age"
-                  component="p"
-                  className="error-message"
-                />
-                <label htmlFor="gender">Gender</label>
-                <Field as="select" name="gender" id="gender">
-                  <option value=""></option>
-                  <option value="Female">Female</option>
-                  <option value="Male">Male</option>
-                  <option value="Non Binary">Non Binary</option>
-                  <option value="Prefer not to say">Prefer not to say</option>
-                  <option value="Other">Other</option>
-                </Field>
-                <ErrorMessage
-                  name="gender"
-                  component="p"
-                  className="error-message"
-                />
+              <div className="gender-age-wrapper">
+                <div className="gender-field">
+                  <label htmlFor="gender">Gender</label>
+                  <Field as="select" name="gender" id="gender">
+                    <option value=""></option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Non Binary">Non Binary</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </Field>
+                  <ErrorMessage
+                    name="gender"
+                    component="p"
+                    className="error-message"
+                  />
+                </div>
+                <div className="age-field">
+                  <label htmlFor="age">Age</label>
+                  <Field
+                    type="number"
+                    name="age"
+                    id="age"
+                    placeholder="Your Age"
+                    className="age-select"
+                  />
+                  <ErrorMessage
+                    name="age"
+                    component="p"
+                    className="error-message"
+                  />
+                </div>
               </div>
+            </div>
+
+
               <button
                 type="submit"
                 className="next-btn"
@@ -217,4 +235,7 @@ const SignUp1 = () => {
   );
 };
 
+
 export default SignUp1;
+
+

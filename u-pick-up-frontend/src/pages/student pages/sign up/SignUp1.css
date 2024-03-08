@@ -2,25 +2,30 @@
     --text-color: #3B5534;
 }
 
+
 .sign-up-wrap {
     margin: 70px 100px;
 }
+
 
 .sign-up-header img {
     width: 150px;
     height: auto;
 }
 
+
 .sign-up-header p {
     font-size: 14px;
     color: #3B5534;
 }
+
 
 .sign-up-header h3 {
     color: var(--text-color);
     font-weight: 700;
     padding: 30px 0 5px 0;
 }
+
 
 .form-wrapper-one {
     display: flex;
@@ -29,6 +34,7 @@
     margin-top: 40px;
 }
 
+
 .sign-up-wrap .input-field {
     display: flex;
     flex-direction: column;
@@ -36,10 +42,12 @@
     margin: 10px 20px 10px 0;
 }
 
+
 .input-field label {
     color: var(--text-color);
     padding: 7px 0;
 }
+
 
 .input-field input, .input-field select {
     height: 40px;
@@ -47,22 +55,53 @@
     border: 1px solid #9c9c9c;
     background: #D5D5D5;
     padding-left: 10px;
-    width: 300px; 
+    width: 300px;
 }
+
 
 .input-field .if-sm {
     display: flex;
-    flex-direction: row;
-    align-items: center;
 }
+
 
 .if-sm select, .if-sm input{
     width: 150px;
 }
 
+
+.age-select {
+    width: 30px;
+}
+
+
 .input-field input:focus, .input-field select:focus {
     outline: none;
 }
+
+
+.gender-age-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.age-field {
+    margin-right: 10px;
+}
+
+
+.gender-field {
+    margin-right: 0;
+}
+
+
+.gender-field label,
+.age-field label {
+    margin-bottom: 5px;
+}
+
+
+
 
 .error-message {
     color: #dd3535;
@@ -71,9 +110,12 @@
     margin-top: 80px;
 }
 
-/*.input-field.error input, .input-field.error select {
+
+.input-field.error input, .input-field.error select {
     border: 1px solid #dd3535;
-}*/
+}
+
+
 
 
 .next-btn {
@@ -85,16 +127,18 @@
     margin: 30px 0 20px 0;
     transition: .3s;
     border: none;
-    background-color: #516e53; 
-    border: 1px solid #516e53; 
+    background-color: #516e53;
+    border: 1px solid #516e53;
 }
+
 
 .next-btn:hover {
     border: 1px solid #9c9c9c;
-    background: #D5D5D5; 
+    background: #D5D5D5;
     color: #9c9c9c;
-    cursor: pointer; 
+    cursor: pointer;
 }
+
 
 .have-account-two {
     margin: 10px 0;
@@ -102,23 +146,28 @@
     color: var(--text-color);
 }
 
+
 .have-account-two span {
     font-weight: bold;
     color: var(--text-color);
 }
 
+
 .have-account-two span:hover {
     text-decoration: underline;
 }
 
+
 /* style for the error fields */
+
 
 .error-message {
     color: #dd3535;
-    font-size: 0.8rem;
+    font-size: .8rem;
     position: absolute;
     margin-top: 80px;
 }
+
 
 .input-field-two.error input {
     border: 1px solid #dd3535;
