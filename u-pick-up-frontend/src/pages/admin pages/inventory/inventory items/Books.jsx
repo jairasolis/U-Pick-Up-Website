@@ -265,7 +265,7 @@ const Books = () => {
               </table>
             </div>
           </div>
-          <Modal show={showEditBookModal} onHide={handleCloseEditBookModal} backdrop="static">
+          <Modal show={showEditBookModal} onHide={handleCloseEditBookModal} backdrop="static" className="modal-edit">
             <Modal.Header closeButton>
               <Modal.Title>Edit Book</Modal.Title>
             </Modal.Header>

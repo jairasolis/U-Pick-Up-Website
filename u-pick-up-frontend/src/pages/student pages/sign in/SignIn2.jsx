@@ -7,6 +7,8 @@ import useAuth from "../../../auth/useAuth";
 import { SignInStudentValidation } from "../../../yup validation/SignInStudentValidation";
 import { loginStudent } from "../../../api/loginStudent";
 import { insertLoginActivity } from "../../../api/loginPerDay";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SignIn2 = () => {
   const navigate = useNavigate();
@@ -66,6 +68,9 @@ const SignIn2 = () => {
   return (
     <div className="sign-in-two">
       <div className="sign-in-wrap">
+        <Link to="/">
+            <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+        </Link>
         <div className="sign-in-header">
           <img src="../images/upup.png" alt="" />
           <p> receive on ease </p>

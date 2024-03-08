@@ -78,7 +78,7 @@ const AddModulePage = ({ onSubmit, onCancel, setShowAddModuleModal }) => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="button-add">
             Add
           </Button>
           <Button

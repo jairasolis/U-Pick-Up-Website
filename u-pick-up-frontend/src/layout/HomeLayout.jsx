@@ -10,9 +10,8 @@ const HomeLayout = () => {
     <div className="div">
       <Navbar2/>
       <div style={{display:'flex'}}> 
-          <LeftBar/>
-          <Outlet />
-          {/* <RightBar/> */}
+        <LeftBar/>
+        <Outlet />
       </div>
     </div>
   )

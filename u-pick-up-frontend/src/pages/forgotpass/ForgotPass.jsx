@@ -3,6 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { ForgotPassValidation } from '../../yup validation/ForgotPassValidation';
 import './ForgotPass.css';
 import sendResetPassEmail from '../../api/sendResetPassEmail'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+
 
 const ForgotPassword = () => {
     const initialValues = {
@@ -24,6 +28,10 @@ const ForgotPassword = () => {
 
     return (
         <div className="forgot-pass-page">
+            <Link to="/" className="list-leftbar">
+                <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+            </Link>
+            
             <div className="forgot-password-container">
                 <h2 className="forgot-password-heading">Forgot Password</h2>
                 <div className="line"></div>
@@ -49,7 +57,7 @@ const ForgotPassword = () => {
                                     className="error-message" 
                                 />
                             </div>
-                            <button type="submit" disabled={isSubmitting} className="submit-button">
+                            <button type="submit" disabled={isSubmitting} className="forgot-submit-button">
                                 {isSubmitting ? 'Submitting...' : 'Submit'}
                             </button>
                         </Form>

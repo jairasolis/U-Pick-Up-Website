@@ -89,7 +89,31 @@
 .modal-unif {
   margin: auto;
 }
+.modal-unif .modal-dialog {
+  max-height: 80%; 
+}
 
+.modal-unif .modal-content {
+  height: 100%;
+}
+.modal-edit{
+  margin: auto;
+}
+.modal-edit .modal-dialog {
+  max-height: 80%; 
+}
+
+.modal-edit .modal-content {
+  height: 100%;
+}
+.button-add{
+  background-color: #3B5534;
+
+}
+.button-add:hover{
+  background-color: #34462f;
+
+}
 
 
 @media screen and (max-width: 768px) {
@@ -111,7 +135,7 @@
     flex-direction: column;
   }
 
-  .uniforms-page .col-md-2 {
+  .col-md-2 {
     width: 100%;
     margin-bottom: 10px;
     /* padding-left: 100px; */

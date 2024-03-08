@@ -1,9 +1,14 @@
 .forgot-pass-page{
     display: flex;
-    background-color: #EEEEEE;
     height: 100vh; 
     justify-content: center;
     align-items: center;
+    background-image: url('/images/blurry_upbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: auto;
 }
 
 .forgot-password-container {
@@ -16,8 +21,16 @@
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #eeeeee;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.forgot-pass-back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 30px;
+    color: #494949;
 }
 
 .line {
@@ -47,23 +60,25 @@
     margin-bottom: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     transition: border-color 0.3s ease;
+    background: #D5D5D5;
+
 }
 
 .form-input:focus {
     border-color: #007bff;
 }
 
-.error {
+.error-message {
     color: #dc3545;
-    font-size: 14px;
+    font-size: 13px;
 }
 
-.submit-button {
+.forgot-submit-button {
     padding: 8px 15px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #516E53;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -72,7 +87,7 @@
 }
 
 .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #394e3a;
 }
 
 .submit-button:disabled {

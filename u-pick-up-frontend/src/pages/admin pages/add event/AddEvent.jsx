@@ -14,7 +14,8 @@ const AddEvent = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [eventTitle, setEventTitle] = useState('');
   const [selectEvent, setSelectEvent] = useState(null);
-
+  
+  //Use to fetch events
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -38,6 +39,7 @@ const AddEvent = () => {
 
   const saveEvent = async () => {
     try {
+      //Para iupdate yung exiting event
       if (eventTitle && selectedDate) {
         const formattedDate = moment(selectedDate).format("YYYY-MM-DD HH:mm:ss");
   
@@ -48,6 +50,7 @@ const AddEvent = () => {
           };
           await axios.put(`https://u-pick-up-y7qnw.ondigitalocean.app/api/events/${selectEvent.id}`, updatedEvent);
         } else {
+          //Para mag add ng new event
           const newEvent = {
             event_title: eventTitle,
             event_date: formattedDate,
@@ -69,6 +72,7 @@ const AddEvent = () => {
   const deleteEvent = async () => {
     try {
       if (selectEvent) {
+        //Para mag delete ng event
         await axios.delete(`https://u-pick-up-y7qnw.ondigitalocean.app/api/events/${selectEvent.id}`);
         const updatedEvents = events.filter((event) => event !== selectEvent);
         setEvents(updatedEvents);
@@ -81,23 +85,20 @@ const AddEvent = () => {
     }
   };
 
+  //Event handlers
+  // Ang ginagawa ng function na ito ay mag set ng date if the user clicked a date in calendar
   const handleSelectedSlot = (slotInfo) => {
     setShowModal(true);
     setSelectedDate(slotInfo.start);
     setSelectEvent(null);
   };
 
+  // Ang ginagawa ng function na ito ay mag set ng event if the user clicked a event in calendar
   const handleSelectedEvent = (event) => {
     setShowModal(true);
     setSelectEvent(event);
     setEventTitle(event.title);
   };
-
-  // const handleModalClose = () => {
-  //   setShowModal(false);
-  //   setEventTitle('');
-  //   setSelectEvent(null);
-  // };
 
   return (
     <div className='calendar-page'>

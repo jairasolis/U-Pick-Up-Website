@@ -39,13 +39,15 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin: 10px 0 20px 0;
+    margin: 10px 0 20px 10px;
 }
+
 .profile-hr {
     width: 80%;
     margin: auto;
     height: 2px;
 }
+
 .personal-details h4,
 .class-details h4 {
     color: #606060;
@@ -53,6 +55,7 @@
     font-style: normal;
     font-weight: 600;
 }
+
 .personal-details,
 .class-details {
     margin: 40px 40px 40px 60px;

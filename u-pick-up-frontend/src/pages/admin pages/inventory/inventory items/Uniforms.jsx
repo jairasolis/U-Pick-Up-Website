@@ -277,7 +277,7 @@ const Uniforms = () => {
             </div>
           </div>
 
-           <Modal show={showEditUniformModal} onHide={handleCloseEditUniformModal} backdrop="static">
+           <Modal show={showEditUniformModal} onHide={handleCloseEditUniformModal} backdrop="static" className="modal-edit">
             <Modal.Header closeButton>
               <Modal.Title>Edit Uniform</Modal.Title>
             </Modal.Header>

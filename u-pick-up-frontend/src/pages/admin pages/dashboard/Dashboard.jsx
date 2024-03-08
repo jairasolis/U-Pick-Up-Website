@@ -110,7 +110,7 @@ const Dashboard = () => {
           <Row>
             <Col>
               <Link to="/admin/dashboard-department" style={{ textDecoration: 'none' }}> 
-                <Card className='totalStudents' style={{ height: '220px', padding: '20px', display: 'flex', flexDirection: 'row' }}>
+                <Card className='totalStudents dash-card' style={{ height: '220px', padding: '20px', display: 'flex', flexDirection: 'row' }}>
                   <Col>
                     <FontAwesomeIcon icon={faUser} className='dash-icon students-icon-dashboard' />
                   </Col>
@@ -122,7 +122,7 @@ const Dashboard = () => {
               </Link>
             </Col>
             <Col> 
-            <Card style={{ height: '220px', padding: '20px', display: 'flex', alignItems: 'center' }}>
+            <Card style={{ height: '220px', padding: '20px', display: 'flex', alignItems: 'center' }} className='dash-card'>
               <div style={{ maxWidth: '100%', maxHeight: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div>
                   <p className='dash-label'> Students by Age </p>
@@ -151,7 +151,7 @@ const Dashboard = () => {
             </Card>
             </Col>
             <Col>
-            <Card style={{ height: '220px', padding: '20px', display: 'flex', alignItems: 'center' }}>
+            <Card style={{ height: '220px', padding: '20px', display: 'flex', alignItems: 'center' }} className='dash-card'>
               <div style={{ maxWidth: '100%', maxHeight: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div>
                   <p className='dash-label'> Students by Gender </p>
@@ -190,7 +190,7 @@ const Dashboard = () => {
           </Row>
           <Row>
             <Col>
-              <Card style={{ height: '300px', marginTop: '20px', padding: '20px 40px'}}>
+              <Card style={{ height: '300px', marginTop: '20px', padding: '20px 40px'}} className='dash-card'>
                 {/* <p className='week-text'> Week </p> */}
               <Line className='login-chart'
                 data={{
@@ -236,7 +236,7 @@ const Dashboard = () => {
                         display: true,
                         text: 'Number of Students',
                         font: {
-                          size: 14, // Change font size
+                          size: 14, 
                           weight: 'bold' 
                         },
                       },
@@ -250,12 +250,8 @@ const Dashboard = () => {
                   maintainAspectRatio: false,
                 }}
               />
-
               </Card >
             </Col>
-            {/* <Col>
-
-            </Col> */}
           </Row>
         </Container>
       </div>

@@ -86,3 +86,11 @@
 .dhave-account-two span:hover {
     text-decoration: underline;
 }
+.sign-in-two{
+    background-image: url('/images/blurry_upbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: auto;
+}

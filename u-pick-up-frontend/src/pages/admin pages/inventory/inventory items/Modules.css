@@ -136,3 +136,30 @@ td {
   top: 0;
   margin: auto;
 }
+
+.mods .modal-dialog {
+  max-height: 80%; 
+}
+
+.mods .modal-content {
+  height: 100%;
+}
+
+.modal-edit .modal-content {
+  height: 100%;
+}
+.modal-edit{
+  top: 0;
+  margin: auto;
+}
+.modal-edit .modal-dialog {
+  max-height: 80%; 
+}
+.button-add{
+  background-color: #3B5534;
+
+}
+.button-add:hover{
+  background-color: #34462f;
+
+}

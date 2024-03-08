@@ -8,6 +8,8 @@ import { SignUpAdminValidation } from "../../../yup validation/SignUpAdminValida
 import { checkEmailAvailability } from "../../../api/checkAdminEmail";
 import { checkUsernameAvailability } from "../../../api/checkAdminUsername";
 import { registerAdmin } from "../../../api/registerAdmin";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SignUp2 = () => {
   const navigate = useNavigate();
@@ -73,6 +75,9 @@ const SignUp2 = () => {
   return (
     <div className="sign-up-two">
       <div className="sign-up-wrap">
+        <Link to="/admin/sign-in">
+            <FontAwesomeIcon icon={faCircleLeft} className='forgot-pass-back' />
+        </Link>
         <div className="sign-up-header">
           <img src="../images/upup.png" alt="" />
           <p> receive on ease </p>

@@ -312,6 +312,7 @@ const Modules = () => {
             show={showEditModuleModal}
             onHide={handleCloseEditModuleModal}
             backdrop="static"
+            className="modal-edit"
           >
             <Modal.Header closeButton>
               <Modal.Title>Edit Module</Modal.Title>

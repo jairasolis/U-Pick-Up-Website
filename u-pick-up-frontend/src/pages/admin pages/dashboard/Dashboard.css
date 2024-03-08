@@ -97,7 +97,7 @@
 
   } */
 
-@media (max-width: 576px) {
+  @media (max-width: 576px) {
     .dashboard-wrapper {
         padding-left: 10px;
     }
@@ -109,11 +109,10 @@
 
     .students-icon-dashboard {
         padding: 10px;
-        
     }
 
     .data-text p, .data-text h4 {
-        text-align: justify;
+        text-align: left;
     }
 
     .totalStudents {
@@ -123,7 +122,12 @@
 
     .dash-container {
         margin-top: 20px;
-        padding: 10px 10px 10px 30px;
+        padding: 10px 10px 10px 38px;
+    }
+
+    .dash-card {
+        width: 300px; /* Ensure each card takes up the full width */
+        margin-bottom: 10px; /* Add some spacing between cards */
     }
 }
 
