@@ -149,7 +149,7 @@ class AuthController extends Controller
             ['token' => $token, 'created_at' => now()]
         );
     
-        $resetUrl = "https://seal-app-zyofc.ondigitalocean.app/reset-password/$token";
+        $resetUrl = "http://localhost:3000/reset-password/$token";
     
         try {
             Mail::to($request->email)->send(new ResetPasswordMail($resetUrl));
