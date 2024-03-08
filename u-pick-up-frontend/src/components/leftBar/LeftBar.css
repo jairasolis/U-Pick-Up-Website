@@ -1,97 +1,14 @@
-/* student*/
-
-/*.leftBar {
-    flex: 1;
-    position: sticky;
-    top: 70px;
-    height: calc(100vh - 70px);
-    border-right: 1px solid #FFF4F4;
-}
-
-
-.menu {
-    width: 200px;
-    height: 100%;
-    border-right: 1px solid rgb(81, 81, 81); 
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    gap: 5px;
-}
-
-.menu h4 {
-    color: var(--text-color);
-}
-
-hr {
-    margin: 20px 0px;
-    border: none;
-    height: 0.5px;
-    background-color: #FFF4F4;
-}
-
-.house, 
-.calendar,
-.inventory-left,
-.profile-left {
-    display: flex;
-    padding: 10px;
-    gap: 12px;
-}
-
-.icon {
-    color: #FFF4F4;
-    margin-top: 3px;
-}
-
-.house:hover,
-.calendar:hover,
-.inventory-left:hover,
-.profile-left:hover  {
-    background-color: #FFF4F4;
-    border-radius: 10px;
-}
-
-.house:hover .icon,
-.house:hover h4,
-.calendar:hover .icon,
-.calendar:hover h4,
-.inventory-left:hover .icon,
-.inventory-left:hover h4,
-.profile-left:hover .icon,
-.profile-left:hover h4 {
-    color: #516E53;
-
-}*/
-/* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-}
-
-body {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    /* overflow: hidden; //
-}*/
-
-
-
-/*.list a{
- padding-left: 50px;
- width: 100%;
-} */ 
-
 .sidebar {
     flex: 1;
     position: sticky;
-    top: 70px;
+    top: 72px;
+    left: 0;
     height: calc(100vh - 70px);
-    border-right: 1px solid #FFF4F4;
+    border-right: 1px solid #3b55343b;
+    background: #fff;
     padding: 6px 10px;
     transition: all 0.5s ease;
-    /* z-index: 1000; */
+    z-index: 1000;
 }
 
 .sidebar ul {
