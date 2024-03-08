@@ -12,7 +12,6 @@ import Card from 'react-bootstrap/Card';
 const Inventory = () => {
   return (
     <div className='inventory-page'>
-      <Container className="inventory-wrapper">
           <Row className="justify-content-center inventory-row"> 
             <Col xs="auto">
               <Link to="/student/inventory-books" style={{ textDecoration: 'none' }}> 
@@ -51,7 +50,6 @@ const Inventory = () => {
               </Link>
             </Col>
           </Row>
-      </Container>
     </div>
   )
 }
