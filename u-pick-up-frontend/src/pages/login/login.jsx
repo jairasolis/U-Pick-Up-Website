@@ -14,11 +14,11 @@ const login = () => {
             <div className="logo"> <img src="../images/logo.png" alt="" /></div>
           </Link>        
           
-          <div>
+          {/* <div>
               <Link to="/student/sign-up"> 
                 <button className='sign-up-navbtn'>Sign Up</button>
               </Link>
-          </div>
+          </div> */}
         </nav>
       <div className='login-page'>
         <div className="login-container">
